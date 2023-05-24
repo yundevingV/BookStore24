@@ -75,7 +75,22 @@ text-align : center;
 `
 
 const Input = styled.input`
+width : 256px;
+height : 30px;
 
+margin : 10px;
+
+border : 2px solid #e2e2e2;
+
+background-color : #e2e2e2;
+
+//인풋 창 포커스
+&:focus {
+    //클릭 했을때 기본(?) 선 안나오게.
+    outline: none !important;
+
+    border: 2px solid blue;
+    }
 `
 
 const MenuContainer = styled.div`
