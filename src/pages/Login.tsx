@@ -29,7 +29,13 @@ export default function Login() {
 
                 <MenuContainer>
                     <Menu>
-                        회원 가입 아이디찾기 비밀번호찾기
+                        회원 가입 
+                    </Menu>
+                    <Menu>
+                        아이디찾기
+                    </Menu>
+                    <Menu>
+                        비밀번호찾기
                     </Menu>
                 </MenuContainer>
 
@@ -75,14 +81,12 @@ text-align : center;
 `
 
 const Input = styled.input`
-width : 256px;
+width : 350px;
 height : 30px;
 
 margin : 10px;
 
 border : 2px solid #e2e2e2;
-
-background-color : #e2e2e2;
 
 //인풋 창 포커스
 &:focus {
@@ -94,12 +98,25 @@ background-color : #e2e2e2;
 `
 
 const MenuContainer = styled.div`
+width : 350px;
+
 margin: 0 auto;
-text-align : center;
+
+margint-right : 10vw;
+
+
+
 `
 
-const Menu = styled.p`
+const Menu = styled.span`
 font-size : 8px;
+color:  #7d7874;
+margin-right : 1vw;
+&:hover {
+    color : black;    
+    cursor : pointer;
+    }
+
 `
 const ButtonContainer = styled.div`
 margin: 0 auto;
