@@ -133,6 +133,8 @@ height : 30px;
 font-size : 20px;
 color : #ffffff;
 
+margin-top : 10px;
+
 background-color: #033bfa;
 
 border : 2px solid #ffffff;
