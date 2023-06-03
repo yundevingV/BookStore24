@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './pages/Login'
 import Join from './pages/Join';
+import Main from './pages/Main';
 
 import { Route , Routes } from 'react-router';
 import styled from 'styled-components';
@@ -12,6 +13,7 @@ function App() {
     <AppContainer>
 
       <Routes>
+        <Route path='/' element={<Main />} />
         <Route path='/login' element={<Login />} />
         <Route path='/join' element={<Join />} />
       </Routes>
