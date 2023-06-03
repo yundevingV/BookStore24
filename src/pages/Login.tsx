@@ -1,16 +1,21 @@
-import React from "react";
+import React,{useState} from "react";
 import Header from "../components/Header";
+import useInput from '../hooks/useInput';
 
 import { styled } from "styled-components";
 
-interface InputType {
-    isType : boolean;
-}
-
 export default function Login() {
 
-    const isType = true;
+    const [id, idChangeHandler, idReset] = useInput("");
+    const [password, passwordChangeHandler, passwordReset] = useInput("");
 
+    const handleSubmit = (e : React.FormEvent<HTMLFormElement> ) => {
+        e.preventDefault();
+        console.log(id);
+        console.log(password);
+        idReset();
+        passwordReset();
+    };
     return(
         <Wrapper>
             <Header />
@@ -22,8 +27,23 @@ export default function Login() {
                 </Title>
 
                 <InputContainer>
-                    <InputType isType={isType}/>
-                    <InputType isType={!isType}/>
+
+                <form onSubmit={handleSubmit}>
+
+                    <Input 
+                        placeholder='아이디를 입력해주세요' 
+                        name="name" 
+                        value={id}
+                        onChange={idChangeHandler}
+                        />
+                    
+                    <Input 
+                        placeholder='비밀번호를 입력해주세요'
+                        name="password"
+                        value={password}
+                        onChange={passwordChangeHandler}
+                        />
+                </form>
 
                 </InputContainer>
 
@@ -40,7 +60,7 @@ export default function Login() {
                 </MenuContainer>
 
                 <ButtonContainer> 
-                    <SubmitButton>
+                    <SubmitButton >
                         로그인하기
                     </SubmitButton>
                 </ButtonContainer>
@@ -147,18 +167,3 @@ border : 2px solid #ffffff;
     cursor : pointer;
     }
 `
-
-//아이디 / 비밀번호에 따라 다르게 렌더링
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-const InputType: React.FC<InputType> = ({ isType }) => {
-return (
-    <div>
-    {isType ? (
-        <Input placeholder='아이디를 입력해주세요' />
-        
-    ) : (
-        <Input placeholder='비밀번호를 입력해주세요' />
-    )}
-    </div>
-);
-};
