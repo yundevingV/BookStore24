@@ -10,17 +10,13 @@ export default function Login() {
         id: '',
         password: '',
     });
-    
-    console.log(id)
-    console.log(password)
-
 
     const submit = (e : React.MouseEvent) => {
         console.log(id);
         console.log(password);
         resetInput();
-
     }
+    
     return(
         <Wrapper>
             <Header />

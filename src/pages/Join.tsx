@@ -1,17 +1,36 @@
 import React,{useState} from "react";
 import Header from "../components/Header";
+import useInput from "../hooks/useInput";
 
 import { styled } from "styled-components";
 
 export default function Join(){
 
+    //입력창 아이디 비번, 비번확인, 닉네임
+    const [ { id, password1,password2,nickname }, onInputChange, resetInput ] = useInput({
+        id: '',
+        password1: '',
+        password2: '',
+        nickname : '',
+    });
+
+    const submit = (e : React.MouseEvent) => {
+        console.log(id);
+        console.log(password1);
+        console.log(password2);
+        console.log(nickname);
+        resetInput();
+    }
+
+    
     // 거주지역 선택 더미 데이터
     const selectList = ["서울", "인천", "경기도", "부산"];
     const [selected, setSelected] = useState('');
 
     const handleSelect = (e : any) => {
         setSelected(e.target.value);
-      };
+    };
+
     return(
         <Wrapper>
             <Header />
@@ -28,7 +47,11 @@ export default function Join(){
                         </PDiv>
 
                         <Input 
-                            placeholder='아이디를 입력해주세요' />
+                            placeholder='아이디를 입력해주세요'
+                            name="id" 
+                            value={id}
+                            onChange={onInputChange} />
+
                             <OverlapButton>
                                 아이디 중복확인
                             </OverlapButton>
@@ -43,14 +66,20 @@ export default function Join(){
                         </PDiv>
 
                         <Input 
-                            placeholder='비밀번호를 입력해주세요'/>
+                            placeholder='비밀번호를 입력해주세요' 
+                            name="password1" 
+                            value={password1}
+                            onChange={onInputChange} />
 
                         <PDiv>
                             <P>비밀번호 확인</P>
                         </PDiv>
 
                         <Input 
-                            placeholder='비밀번호를 확인해주세요'/>
+                            placeholder='비밀번호를 확인해주세요'
+                            name="password2" 
+                            value={password2}
+                            onChange={onInputChange} />
                     </Form>
                 </InputContainer>
 
@@ -62,7 +91,10 @@ export default function Join(){
                         </PDiv>
 
                         <Input 
-                            placeholder='닉네임을 확인해주세요'/>
+                            placeholder='닉네임을 확인해주세요'
+                            name="nickname" 
+                            value={nickname}
+                            onChange={onInputChange} />
                             <OverlapButton>
                                 닉네임 중복확인
                             </OverlapButton>
@@ -85,7 +117,7 @@ export default function Join(){
                 </InputContainer>
 
                 <ButtonContainer>
-                    <SubmitButton>
+                    <SubmitButton onClick={submit}>
                         제출하기
                     </SubmitButton>
                 </ButtonContainer>
@@ -96,7 +128,7 @@ export default function Join(){
 }
 
 const Wrapper = styled.div`
-    
+
 `
 
 const JoinContainer = styled.div`
@@ -109,6 +141,8 @@ margin: 0 auto;
 padding : 10px;
 
 border : 2px solid #e2e2e2;
+position : relative;
+top:5vh;
 `
 
 const InputContainer = styled.div`
