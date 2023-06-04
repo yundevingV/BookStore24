@@ -6,16 +6,21 @@ import { styled } from "styled-components";
 
 export default function Login() {
 
-    const [id, idChangeHandler, idReset] = useInput("");
-    const [password, passwordChangeHandler, passwordReset] = useInput("");
+    const [ { id, password }, onInputChange, resetInput ] = useInput({
+        id: '',
+        password: '',
+    });
+    
+    console.log(id)
+    console.log(password)
 
-    const handleSubmit = (e : React.FormEvent<HTMLFormElement> ) => {
-        e.preventDefault();
+
+    const submit = (e : React.MouseEvent) => {
         console.log(id);
         console.log(password);
-        idReset();
-        passwordReset();
-    };
+        resetInput();
+
+    }
     return(
         <Wrapper>
             <Header />
@@ -28,20 +33,20 @@ export default function Login() {
 
                 <InputContainer>
 
-                <form onSubmit={handleSubmit}>
+                <form >
 
                     <Input 
                         placeholder='아이디를 입력해주세요' 
-                        name="name" 
+                        name="id" 
                         value={id}
-                        onChange={idChangeHandler}
+                        onChange={onInputChange}
                         />
                     
                     <Input 
                         placeholder='비밀번호를 입력해주세요'
                         name="password"
                         value={password}
-                        onChange={passwordChangeHandler}
+                        onChange={onInputChange}
                         />
                 </form>
 
@@ -60,7 +65,7 @@ export default function Login() {
                 </MenuContainer>
 
                 <ButtonContainer> 
-                    <SubmitButton >
+                    <SubmitButton onClick={submit} >
                         로그인하기
                     </SubmitButton>
                 </ButtonContainer>
