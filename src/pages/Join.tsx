@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import Header from "../components/Header";
+import Dropdown from "../components/Dropdown";
 import useInput from "../hooks/useInput";
 
 import { styled ,css } from "styled-components";
@@ -23,13 +24,12 @@ export default function Join(){
     }
 
     
-    // 거주지역 선택 더미 데이터
-    const selectList = ["서울", "인천", "경기도", "부산"];
-    const [selected, setSelected] = useState('');
 
-    const handleSelect = (e : any) => {
-        setSelected(e.target.value);
-    };
+
+
+
+    //드롭다운 메뉴 펼치기
+    const [view , setView] = useState(false);
 
     return(
         <Wrapper>
@@ -107,19 +107,21 @@ export default function Join(){
                             <P>거주지역</P>
                         </PDiv>
 
-                    <select onChange={handleSelect} value={selected}>
-                        {selectList.map((item) => (
-                            <option value={item} key={item}>
-                                {item}
-                            </option>
-                        ))}
-                    </select>
-                </InputContainer>
+                        <Dropdown />
 
+
+                </InputContainer>
+                
+                <DropdownContainer>
+
+                </DropdownContainer>
+                
                 <ButtonContainer>
+
                     <SubmitButton onClick={submit}>
                         제출하기
                     </SubmitButton>
+                    
                 </ButtonContainer>
             </JoinContainer>
 
@@ -227,6 +229,11 @@ font-family: tway, sans-serif, Arial;
 
 
 `    
+const DropdownContainer = styled.div`
+margin: 0 auto;
+text-align : center;
+`
+
 const ButtonContainer = styled.div`
 margin: 0 auto;
 text-align : center;
