@@ -87,6 +87,9 @@ margin: 0 auto;
 padding : 10px;
 
 border : 2px solid #e2e2e2;
+
+font-family: tway, sans-serif, Arial;
+
 `
 
 const Title = styled.div`
@@ -113,6 +116,10 @@ margin : 10px;
 border : 2px solid #e2e2e2;
 padding : 0px;
 
+&::placeholder{
+    font-family: tway, sans-serif, Arial;
+	}
+    
 //인풋 창 포커스
 &:focus {
     //클릭 했을때 기본(?) 선 안나오게.
@@ -143,6 +150,7 @@ margin-right : 1vw;
 const ButtonContainer = styled.div`
 margin: 0 auto;
 text-align : center;
+
 `
 
 const SubmitButton = styled.button`
@@ -159,6 +167,7 @@ margin-top : 10px;
 background-color: #033bfa;
 
 border : 2px solid #ffffff;
+font-family: tway, sans-serif, Arial;
 
 &:hover {
     background-color: #ffffff;
