@@ -1,6 +1,10 @@
 import React from "react";
 import Header from "../components/Header";
 import useInput from '../hooks/useInput';
+import naver from '../assets/imgs/Naver.jpg'
+import kakao from '../assets/imgs/Kakao.jpg'
+import google from '../assets/imgs/Google.png'
+
 
 import { styled } from "styled-components";
 
@@ -27,6 +31,36 @@ export default function Login() {
                     </TitleFont>
                 </Title>
 
+                <SnsContainer>
+                    <SnsButton> 
+                        <div>
+                            <Logo src={naver} alt='x'/>
+                            <SnsFont>
+                                네이버 로그인하기
+                            </SnsFont>
+                        </div>
+                    </SnsButton>
+
+                    <SnsButton> 
+                        <div>
+                            <Logo src={kakao} alt='x'/>
+                            <SnsFont>
+                                카카오 로그인하기
+                            </SnsFont>
+                        </div>
+                    </SnsButton>
+
+                    <SnsButton> 
+                        <div>
+                            <Logo src={google} alt='x'/>
+                            <SnsFont>
+                                구글 로그인하기
+                            </SnsFont>
+                        </div>
+                    </SnsButton>   
+
+                </SnsContainer>
+                
                 <InputContainer>
 
                 <form >
@@ -101,6 +135,43 @@ text-align : center;
 const TitleFont = styled.p`
 `
 
+const SnsContainer = styled.div`
+margin: 0 auto;
+text-align : center;
+`
+
+const Logo = styled.img`
+width : 20px;
+height : 20px;
+
+float : left;
+margin-left : 5px; 
+
+`
+const SnsFont = styled.span`
+    font-family: tway, sans-serif, Arial;
+    font-size : 17px; 
+    color : #6c6c71;
+`
+
+
+const SnsButton = styled.button`
+width : 350px;
+height : 40px;
+
+margin : 5px;
+
+border : 2px solid #e2e2e2;
+padding : 0px;
+background-color : #ffffff;
+
+&:hover {
+    background-color : #e2e2e2;
+    cursor : pointer;
+    }
+`
+
+
 const InputContainer = styled.div`
 margin: 0 auto;
 text-align : center;
@@ -109,7 +180,7 @@ text-align : center;
 
 const Input = styled.input`
 width : 350px;
-height : 30px;
+height : 40px;
 
 margin : 10px;
 
