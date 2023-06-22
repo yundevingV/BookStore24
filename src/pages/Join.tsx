@@ -8,11 +8,12 @@ import { styled ,css } from "styled-components";
 export default function Join(){
 
     //입력창 아이디 비번, 비번확인, 닉네임
-    const [ { id, password1,password2,nickname }, onInputChange, resetInput ] = useInput({
+    const [ { id, password1,password2,nickname,email,validNumber }, onInputChange, resetInput ] = useInput({
         id: '',
         password1: '',
         password2: '',
-        nickname : '',
+        email : '',
+        vaildNumber:'',
     });
 
     const submit = (e : React.MouseEvent) => {
@@ -20,6 +21,10 @@ export default function Join(){
         console.log(password1);
         console.log(password2);
         console.log(nickname);
+        console.log(email);
+
+        console.log(nickname);
+
         resetInput();
     }
 
@@ -42,9 +47,9 @@ export default function Join(){
 
                     <Form>
 
-                        <PDiv>
+                        <Div>
                             <P>아이디</P>
-                        </PDiv>
+                        </Div>
 
                         <Input password={false}
                             placeholder='아이디를 입력해주세요'
@@ -52,18 +57,18 @@ export default function Join(){
                             value={id}
                             onChange={onInputChange} />
 
-                            <OverlapButton>
+                            <Button>
                                 아이디 중복확인
-                            </OverlapButton>
+                            </Button>
                     </Form>
                 </InputContainer>
 
                 {/* 비밀번호 */}
                 <InputContainer >
                     <Form>
-                        <PDiv>
+                        <Div>
                             <P>비밀번호</P>
-                        </PDiv>
+                        </Div>
 
                         <Input password={true}
                             placeholder='비밀번호를 입력해주세요' 
@@ -71,9 +76,9 @@ export default function Join(){
                             value={password1}
                             onChange={onInputChange} />
 
-                        <PDiv>
+                        <Div>
                             <P>비밀번호 확인</P>
-                        </PDiv>
+                        </Div>
 
                         <Input password={true}
                             placeholder='비밀번호를 확인해주세요'
@@ -83,38 +88,77 @@ export default function Join(){
                     </Form>
                 </InputContainer>
 
-                {/* 닉네임 */}
                 <InputContainer >
+
                     <Form>
-                        <PDiv>
+
+                        <Div>
+                            <P>이메일</P>
+                        </Div>
+
+                        <Input password={false}
+                            placeholder='이메일를 입력해주세요'
+                            name="email" 
+                            value={email}
+                            onChange={onInputChange} />
+
+                            <Button>
+                                인증번호 전송
+                            </Button>
+                    </Form>
+                </InputContainer>
+                
+                <InputContainer >
+
+                    <Form>
+
+                        <Div>
+                            <P>인증번호</P>
+                        </Div>
+
+                        <Input password={false}
+                            placeholder='인증번호를 입력해주세요'
+                            name="validNumber" 
+                            value={validNumber}
+                            onChange={onInputChange} />
+
+                            <Button>
+                                인증번호 확인
+                            </Button>
+                    </Form>
+                </InputContainer>
+                {/* 닉네임 */}
+                {/* <InputContainer >
+                    <Form>
+                        <Div>
                             <P>닉네임</P>
-                        </PDiv>
+                        </Div>
 
                         <Input password={false} 
                             placeholder='닉네임을 확인해주세요'
                             name="nickname" 
                             value={nickname}
                             onChange={onInputChange} />
-                            <OverlapButton>
+                            <Button>
                                 닉네임 중복확인
-                            </OverlapButton>
+                            </Button>
                     </Form>
-                </InputContainer>
+                </InputContainer> */}
 
                 {/* 거주지역 */}
-                <InputContainer >
-                        <PDiv>
+                {/* <InputContainer >
+                        <Div>
                             <P>거주지역</P>
-                        </PDiv>
+                        </Div>
 
                         <Dropdown />
 
 
-                </InputContainer>
+                </InputContainer> */}
                 
-                <DropdownContainer>
+                {/* <DropdownContainer>
 
-                </DropdownContainer>
+                </DropdownContainer> */}
                 
                 <ButtonContainer>
 
@@ -154,7 +198,7 @@ text-align : center;
 
 `
 
-const PDiv = styled.div`
+const Div = styled.div`
 margin:0px;
 border : 0px;
 
@@ -205,7 +249,7 @@ ${(props) =>
     border: 2px solid blue;
     }
 `
-const OverlapButton = styled.button`
+const Button = styled.button`
 
 //기본 크기가 input > button
 height : 30px;
