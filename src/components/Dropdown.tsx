@@ -10,8 +10,6 @@ export default function Dropdown() {
 
     const [active, setActive] = useState(false); // 리스트가 열려있는지 확인
     const [selected, setSelected] = useState(list[0]); // 선택된 값을 selected에 담아 컴포넌트 간에 공유
-
-    console.log(active);
     return (
     // StyledSelectbox = button, ul을 담는 전체 div
     <StyledSelectbox>
@@ -54,7 +52,7 @@ export const StyledSelectbox = styled.div`
 export const StyledSelectedLabel = styled.button`
 
 // display설정
-border: none;
+border: 1px solid black;
 // 크기 설정
 
 // more 아이콘과 가까운 위치에 글자를 두기 위함.
@@ -70,6 +68,11 @@ const StyledOptionItem = styled.li`
   box-sizing: border-box;
   transition: 0.3s;
   font-size : 15px;
+  background: #ffffff;
+  margin-bottom : 5px;
+
+  text-align : center;
+
   &:hover {
     background: #e2e2e2;
   }
@@ -78,15 +81,17 @@ const StyledOptionItem = styled.li`
 
   
 const StyledOptionList = styled.ul`
+
+    background-color : #ffffff;
     box-sizing: border-box; // 테두리에 맞게 ul 크기 조절
     position: absolute; // absolute를 이용해 위치를 원하는 곳에 둘것.
-    top : 0px;
-    list-style-type: none; // ul을 커스텀할 거라면 꼭 해줘야하는 list-style-type:none
-    width: 100%; // 크기는 드롭다운 본체의 너비와 동일하게함.
+    top : 20px;
+    /* list-style-type: none; // ul을 커스텀할 거라면 꼭 해줘야하는 list-style-type:none */
+    width: 50%; // 크기는 드롭다운 본체의 너비와 동일하게함.
     border-radius: 8px; // 동글동글하게 아래부분을 만들어야해서 border-radius를 줌.
-    background: #ffffff; // 배경색
     transition: 0.2s ease-in-out; // 0.2초를 걸려서 부드럽게 ul이 보이고 사라진다.
     overflow-y: scroll; // scroll을 통해 리스트 내용들을 보겠다.
+
     &::-webkit-scrollbar { // scrollbar 자체의 설정
         // 너비를 작게 설정
         width: 6px; 

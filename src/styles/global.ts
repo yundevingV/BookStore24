@@ -1,4 +1,4 @@
-import tway from '../fonts/tway.ttf';
+import tway from '../assets/fonts/tway.ttf';
 
 import { createGlobalStyle } from 'styled-components';
 

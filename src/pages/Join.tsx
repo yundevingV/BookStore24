@@ -1,9 +1,11 @@
-import React,{useState} from "react";
+import React,{useState , useEffect} from "react";
 import Header from "../components/Header";
 import Dropdown from "../components/Dropdown";
 import useInput from "../hooks/useInput";
+import FirstLogin from "../components/FirstLogin";
 
 import { styled ,css } from "styled-components";
+
 
 export default function Join(){
 
@@ -28,14 +30,27 @@ export default function Join(){
         resetInput();
     }
 
+    // 데이터 통신 연습
+    // const [data, setData] = useState(null)
+
+    // useEffect(() => {
+    //   fetch('http://bookstore24.shop/api/v6/orders')
+    //     .then((res) => res.json())
+    //     .then((data) => setData(data))
+    // }, [])
+
+    //모달 펼치기
+    //모달은 결국 로그인 완료되면 나오게 설정할거임
+
+    const [viewModal , setViewModal] = useState(false);
+
+    const openModal = (e : React.MouseEvent) => {
+        
+        viewModal === true ? setViewModal(false) : setViewModal(true)
+    }
+
+
     
-
-
-
-
-    //드롭다운 메뉴 펼치기
-    const [view , setView] = useState(false);
-
     return(
         <Wrapper>
             <Header />
@@ -127,6 +142,8 @@ export default function Join(){
                             </Button>
                     </Form>
                 </InputContainer>
+
+                
                 {/* 닉네임 */}
                 {/* <InputContainer >
                     <Form>
@@ -168,7 +185,10 @@ export default function Join(){
                     
                 </ButtonContainer>
             </JoinContainer>
-
+            <button onClick={openModal}>
+                Test
+            </button>
+            {viewModal && <FirstLogin viewModal={viewModal} setViewModal={setViewModal}/>}
         </Wrapper>  
     )
 }
