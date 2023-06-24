@@ -1,6 +1,5 @@
 import React,{useState , useEffect} from "react";
 import Header from "../components/Header";
-import Dropdown from "../components/Dropdown";
 import useInput from "../hooks/useInput";
 import FirstLogin from "../components/FirstLogin";
 
@@ -143,40 +142,6 @@ export default function Join(){
                     </Form>
                 </InputContainer>
 
-                
-                {/* 닉네임 */}
-                {/* <InputContainer >
-                    <Form>
-                        <Div>
-                            <P>닉네임</P>
-                        </Div>
-
-                        <Input password={false} 
-                            placeholder='닉네임을 확인해주세요'
-                            name="nickname" 
-                            value={nickname}
-                            onChange={onInputChange} />
-                            <Button>
-                                닉네임 중복확인
-                            </Button>
-                    </Form>
-                </InputContainer> */}
-
-                {/* 거주지역 */}
-                {/* <InputContainer >
-                        <Div>
-                            <P>거주지역</P>
-                        </Div>
-
-                        <Dropdown />
-
-
-                </InputContainer> */}
-                
-                {/* <DropdownContainer>
-
-                </DropdownContainer> */}
-                
                 <ButtonContainer>
 
                     <SubmitButton onClick={submit}>

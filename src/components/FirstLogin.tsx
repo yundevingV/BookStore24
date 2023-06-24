@@ -1,6 +1,8 @@
 import React from "react"
-import styled from "styled-components";
+import useInput from "../hooks/useInput";
 import Dropdown from "./Dropdown";
+
+import styled from "styled-components";
 
 type ViewProps = {
     viewModal : boolean;
@@ -15,11 +17,24 @@ export default function FirstLogin({viewModal , setViewModal} : ViewProps){
         setViewModal(false);
     }
 
+    const [ { nickname}, onInputChange, resetInput ] = useInput({
+      nickname : '',
+  });
 
+  const submit = (e : React.MouseEvent) => {
+
+      console.log(nickname);
+
+      resetInput();
+  }
     return(
         <ModalBackground>
         <Container>
             <NickName>
+              <Font>
+                닉네임을 입력해주세요
+              </Font>
+
               <NickNameInput 
                 placeholder='닉네임을 입력해주세요'
                 />
@@ -31,6 +46,9 @@ export default function FirstLogin({viewModal , setViewModal} : ViewProps){
             </NickName>
 
             <Residence>
+              <Font>
+                거주지역을 선택해주세요
+              </Font>
               <DropdownContainer>
                 <Dropdown />
               </DropdownContainer>
@@ -80,18 +98,26 @@ const Container = styled.div`
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 `
 
+const Font = styled.p`
+text-align: center;
+font-family: tway, sans-serif, Arial;
+
+`
+
 const NickName = styled.div`
   position: absolute;
   top: 50px;
   
   width : 100%;
-  background : black;
 `
+
 const NickNameInput = styled.input `
-width : 220px;
+
+
+width : 240px;
 height : 30px;
 
-margin : 10px;
+margin : 20px;
 
 border : 2px solid #e2e2e2;
 padding : 0px;
@@ -110,12 +136,30 @@ padding : 0px;
 `
 
 const NickNameButton = styled.button`
+//기본 크기가 input > button
+width : 100px;
+height : 30px;
 
+background-color: #ffffff;
+border : 2px solid #033bfa;
+color : black;    
+
+
+font-family: tway, sans-serif, Arial;
+
+&:hover {
+
+  color : #ffffff;
+  background-color: #033bfa;
+  border : 2px solid #ffffff;
+
+    cursor : pointer;
+    }
 `
 
 const Residence = styled.div`
   position: absolute;
-  top: 150px;
+  top: 180px;
 
   width : 100%;
 
@@ -142,8 +186,30 @@ const SubmitButtonContainer = styled.div`
   text-align : center;  
 `
   
-
 const SubmitButton = styled.button`
+//기본 크기가 input > button
+width : 200px;
+height : 30px;
 
-  
+font-size : 12px;
+
+margin : 10px;
+padding : 5px;
+
+border-radius : 24px;
+
+background-color: #033bfa;
+border : 0px solid #ffffff;
+color : #ffffff;
+
+font-family: tway, sans-serif, Arial;
+
+&:hover {
+
+  background-color: #ffffff;
+  border : 2px solid #033bfa;
+  color : #033bfa;
+
+    cursor : pointer;
+    }
 `

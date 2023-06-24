@@ -5,11 +5,13 @@ import { styled } from "styled-components";
 export default function Dropdown() {
 
     // 거주지역 선택 더미 데이터
-    const list = ["서울", "인천", "경기도", "부산"];
+    const list = ["서울", "인천", "경기도"];
     
 
     const [active, setActive] = useState(false); // 리스트가 열려있는지 확인
     const [selected, setSelected] = useState(list[0]); // 선택된 값을 selected에 담아 컴포넌트 간에 공유
+
+
     return (
     // StyledSelectbox = button, ul을 담는 전체 div
     <StyledSelectbox>
@@ -46,20 +48,19 @@ export const StyledSelectbox = styled.div`
     position : relative;
     border-radius: 8px;
     background: transparent;
+
     cursor: pointer;
 `;
 
 export const StyledSelectedLabel = styled.button`
 
-// display설정
-border: 1px solid black;
-// 크기 설정
+border : 0px;
+padding: 2px;
 
-// more 아이콘과 가까운 위치에 글자를 두기 위함.
-justify-content: right;
 // 글자 크기 설정
-font-size: 15px;
-background: transparent;
+font-size: 20px;
+background: #ffffff;
+font-family: tway, sans-serif, Arial;
 
 // 커서가 올라오면 pointer모양으로 변경
 cursor: pointer;
@@ -67,11 +68,12 @@ cursor: pointer;
 const StyledOptionItem = styled.li`
   box-sizing: border-box;
   transition: 0.3s;
-  font-size : 15px;
+  font-size : 18px;
   background: #ffffff;
   margin-bottom : 5px;
 
   text-align : center;
+  font-family: tway, sans-serif, Arial;
 
   &:hover {
     background: #e2e2e2;
@@ -85,7 +87,7 @@ const StyledOptionList = styled.ul`
     background-color : #ffffff;
     box-sizing: border-box; // 테두리에 맞게 ul 크기 조절
     position: absolute; // absolute를 이용해 위치를 원하는 곳에 둘것.
-    top : 20px;
+    left : 100px;
     /* list-style-type: none; // ul을 커스텀할 거라면 꼭 해줘야하는 list-style-type:none */
     width: 50%; // 크기는 드롭다운 본체의 너비와 동일하게함.
     border-radius: 8px; // 동글동글하게 아래부분을 만들어야해서 border-radius를 줌.
