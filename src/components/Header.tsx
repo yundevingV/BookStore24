@@ -28,13 +28,13 @@ export default function Header() {
 //헤더 위치
 const Positioner = styled.div`
 
-  position : relative;
-  
-  padding : 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: black;
+    position : relative;
+    
+    padding : 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
 
 `
 
@@ -52,4 +52,5 @@ const Menu = styled.div`
 
 const LoginStatus: React.FC<LoginStatus> = ({ isLogin }) => {
     return <div>{isLogin ? ("login") : ("Logout")}</div>;
-  };
+
+    };

@@ -1,16 +1,26 @@
 import React from "react";
 import Header from "../components/Header";
+import useInput from '../hooks/useInput';
+import naver from '../assets/imgs/Naver.jpg'
+import kakao from '../assets/imgs/Kakao.jpg'
+import google from '../assets/imgs/Google.png'
+
 
 import { styled } from "styled-components";
 
-interface InputType {
-    isType : boolean;
-}
-
 export default function Login() {
 
-    const isType = true;
+    const [ { id, password }, onInputChange, resetInput ] = useInput({
+        id: '',
+        password: '',
+    });
 
+    const submit = (e : React.MouseEvent) => {
+        console.log(id);
+        console.log(password);
+        resetInput();
+    }
+    
     return(
         <Wrapper>
             <Header />
@@ -21,9 +31,54 @@ export default function Login() {
                     </TitleFont>
                 </Title>
 
+                <SnsContainer>
+                    <SnsButton> 
+                        <div>
+                            <Logo src={naver} alt='x'/>
+                            <SnsFont>
+                                네이버 로그인하기
+                            </SnsFont>
+                        </div>
+                    </SnsButton>
+
+                    <SnsButton> 
+                        <div>
+                            <Logo src={kakao} alt='x'/>
+                            <SnsFont>
+                                카카오 로그인하기
+                            </SnsFont>
+                        </div>
+                    </SnsButton>
+
+                    <SnsButton> 
+                        <div>
+                            <Logo src={google} alt='x'/>
+                            <SnsFont>
+                                구글 로그인하기
+                            </SnsFont>
+                        </div>
+                    </SnsButton>   
+
+                </SnsContainer>
+                
                 <InputContainer>
-                    <InputType isType={isType}/>
-                    <InputType isType={!isType}/>
+
+                <form >
+
+                    <Input 
+                        placeholder='아이디를 입력해주세요' 
+                        name="id" 
+                        value={id}
+                        onChange={onInputChange}
+                        />
+                    
+                    <Input 
+                        placeholder='비밀번호를 입력해주세요'
+                        name="password"
+                        value={password}
+                        onChange={onInputChange}
+                        />
+                </form>
 
                 </InputContainer>
 
@@ -40,7 +95,7 @@ export default function Login() {
                 </MenuContainer>
 
                 <ButtonContainer> 
-                    <SubmitButton>
+                    <SubmitButton onClick={submit} >
                         로그인하기
                     </SubmitButton>
                 </ButtonContainer>
@@ -66,6 +121,9 @@ margin: 0 auto;
 padding : 10px;
 
 border : 2px solid #e2e2e2;
+
+font-family: tway, sans-serif, Arial;
+
 `
 
 const Title = styled.div`
@@ -76,6 +134,43 @@ text-align : center;
 
 const TitleFont = styled.p`
 `
+
+const SnsContainer = styled.div`
+margin: 0 auto;
+text-align : center;
+`
+
+const Logo = styled.img`
+width : 20px;
+height : 20px;
+
+float : left;
+margin-left : 5px; 
+
+`
+const SnsFont = styled.span`
+    font-family: tway, sans-serif, Arial;
+    font-size : 17px; 
+    color : #6c6c71;
+`
+
+
+const SnsButton = styled.button`
+width : 350px;
+height : 40px;
+
+margin : 5px;
+
+border : 2px solid #e2e2e2;
+padding : 0px;
+background-color : #ffffff;
+
+&:hover {
+    background-color : #e2e2e2;
+    cursor : pointer;
+    }
+`
+
 
 const InputContainer = styled.div`
 margin: 0 auto;
@@ -92,6 +187,10 @@ margin : 10px;
 border : 2px solid #e2e2e2;
 padding : 0px;
 
+&::placeholder{
+    font-family: tway, sans-serif, Arial;
+	}
+    
 //인풋 창 포커스
 &:focus {
     //클릭 했을때 기본(?) 선 안나오게.
@@ -122,6 +221,7 @@ margin-right : 1vw;
 const ButtonContainer = styled.div`
 margin: 0 auto;
 text-align : center;
+
 `
 
 const SubmitButton = styled.button`
@@ -133,9 +233,12 @@ height : 30px;
 font-size : 20px;
 color : #ffffff;
 
+margin-top : 10px;
+
 background-color: #033bfa;
 
 border : 2px solid #ffffff;
+font-family: tway, sans-serif, Arial;
 
 &:hover {
     background-color: #ffffff;
@@ -145,18 +248,3 @@ border : 2px solid #ffffff;
     cursor : pointer;
     }
 `
-
-//아이디 / 비밀번호에 따라 다르게 렌더링
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-const InputType: React.FC<InputType> = ({ isType }) => {
-return (
-    <div>
-    {isType ? (
-        <Input placeholder='아이디를 입력해주세요' />
-        
-    ) : (
-        <Input placeholder='비밀번호를 입력해주세요' />
-    )}
-    </div>
-);
-};
