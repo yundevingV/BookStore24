@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
+import {StyledLink} from '../styles/link'
 import useInput from '../hooks/useInput';
 import naver from '../assets/imgs/Naver.jpg'
 import kakao from '../assets/imgs/Kakao.jpg'
@@ -7,6 +8,7 @@ import google from '../assets/imgs/Google.png'
 
 
 import { styled } from "styled-components";
+import {Link} from 'react-router-dom';
 
 export default function Login() {
 
@@ -84,13 +86,19 @@ export default function Login() {
 
                 <MenuContainer>
                     <Menu>
-                        회원 가입 
+                        <StyledLink to='/join'>
+                            회원 가입 
+                        </StyledLink>
                     </Menu>
                     <Menu>
-                        아이디찾기
+                        <StyledLink to='/findid'>
+                            아이디찾기
+                        </StyledLink>
                     </Menu>
                     <Menu>
-                        비밀번호찾기
+                        <StyledLink to='/findpwd'>
+                            비밀번호찾기
+                        </StyledLink>
                     </Menu>
                 </MenuContainer>
 
@@ -124,6 +132,8 @@ border : 2px solid #e2e2e2;
 
 font-family: tway, sans-serif, Arial;
 
+position : relative;
+top:5vh;
 `
 
 const Title = styled.div`
@@ -209,7 +219,6 @@ margin: 0 auto;
 
 const Menu = styled.span`
 font-size : 8px;
-color:  #7d7874;
 margin-right : 1vw;
 
 &:hover {
@@ -248,3 +257,4 @@ font-family: tway, sans-serif, Arial;
     cursor : pointer;
     }
 `
+
