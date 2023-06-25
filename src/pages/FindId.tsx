@@ -1,10 +1,25 @@
 import React from "react";
+import useInput from "../hooks/useInput";
 import Header from "../components/Header";
+
+
 import { styled } from "styled-components";
 
 export default function FindId(){
+        //입력창 이메일
+        const [ { email }, onInputChange, resetInput ] = useInput({
+            email : '',
+        });
+    
+        const submit = (e : React.MouseEvent) => {
+            console.log(email);
+            
+            resetInput();
+        }
+
     return(
         <Wrapper>
+            <Header />
             <FindContainer>
                 <Title>
                     <TitleFont>
@@ -19,12 +34,16 @@ export default function FindId(){
                         이메일을 입력해주세요.
                     </P>
                 </Div>
-                    <Input />
+                    <Input 
+                        placeholder='이메일을 입력해주세요.'
+                        name="email" 
+                        value={email}
+                        onChange={onInputChange}/>
                 </InputContainer>
 
 
                 <ButtonContainer>
-                    <Button>
+                    <Button onClick={submit}>
                         아이디 찾기
                     </Button>
                 </ButtonContainer>

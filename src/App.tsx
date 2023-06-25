@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Join from './pages/Join';
 import Main from './pages/Main';
 import FindId from './pages/FindId';
+import FindPwd from './pages/FindPwd';
 
 
 import { Route , Routes } from 'react-router';
@@ -20,7 +21,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/join' element={<Join />} />
         <Route path='/findid' element={<FindId />} />
-
+        <Route path='/findpwd' element={<FindPwd />} />
       </Routes>
 
     </AppContainer>
