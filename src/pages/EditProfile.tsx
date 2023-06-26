@@ -4,6 +4,7 @@ import Jisoo from '../assets/imgs/jisoo.jpg'
 import Header from "../components/Header";
 import Dropdown from "../components/Dropdown";
 import { Space } from "../styles/Space";
+import { StyledButtonLink } from "../styles/link";
 
 
 import { styled } from "styled-components";
@@ -30,7 +31,17 @@ export default function EditProfile() {
         <Wrapper>
             <Header />
             <Container>
-                
+                <Space height={5} />
+
+                <PwdButtonContainer>
+                    <PwdButton>
+                        <StyledButtonLink to='/editpwd'>
+                            비밀번호 수정하기
+
+                        </StyledButtonLink>
+                    </PwdButton>
+                </PwdButtonContainer>
+
                 {/* 사용자 정보 */}
                 <ProfileInfoContainer>
 
@@ -56,7 +67,7 @@ export default function EditProfile() {
                         </NickNameButton>
 
                     </NickNameContainer>      
-                                  
+
                     <Space height={20} />
 
                     <ResidenceContainer>
@@ -108,7 +119,26 @@ position : relative;
 top:5vh;
 
 `
+const PwdButtonContainer = styled.div`
 
+text-align : right;
+`
+
+const PwdButton = styled.button`
+font-family: tway, sans-serif, Arial;
+font-weight : bold;
+font-size : 15px;
+
+/* 상 오 하 왼 */
+margin : 0px 0px 0px 0px;
+
+color : #212221;
+
+background-color : transparent;
+
+border : 0.1px solid #000000;
+
+`
 const ProfileInfoContainer = styled.div`
 margin:0px;
 border : 0px;

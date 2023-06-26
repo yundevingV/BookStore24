@@ -30,7 +30,7 @@ export default function Profile(){
                     </P>
 
                     <ModifyButton>
-                        <StyledButtonLink to='editprofile'>
+                        <StyledButtonLink to='/editprofile'>
                             프로필 수정
                         </StyledButtonLink>
                     </ModifyButton>
