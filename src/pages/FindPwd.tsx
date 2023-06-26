@@ -96,6 +96,7 @@ text-align : center;
 
 const TitleFont = styled.p`
 `
+
 const Div = styled.div`
 margin:0px;
 border : 0px;

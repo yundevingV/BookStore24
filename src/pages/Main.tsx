@@ -11,6 +11,7 @@ export default function Main(){
             <Header />
             <Link to='/login' >login </Link>
             <Link to='/join' > join </Link>
+            <Link to='/profile' > profile </Link>
         </Wrapper>  
     )
 }
