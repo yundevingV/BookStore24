@@ -7,12 +7,15 @@ import ReviewList from "../components/ReviewList";
 
 
 import { styled } from "styled-components";
+import { StyledButtonLink } from "../styles/link";
 interface PProps {
     value: number;
 }
-interface DivMaringProps {
+
+interface DivMarginProps {
     value: number; 
-  } 
+}
+
 export default function Profile(){
 
     return(
@@ -27,7 +30,9 @@ export default function Profile(){
                     </P>
 
                     <ModifyButton>
-                        프로필 수정
+                        <StyledButtonLink to='editprofile'>
+                            프로필 수정
+                        </StyledButtonLink>
                     </ModifyButton>
 
                 </Div>
@@ -111,7 +116,7 @@ position : relative;
 top:5vh;
 `
 
-const Div = styled.div<DivMaringProps>`
+const Div = styled.div<DivMarginProps>`
 /* 상 우 하 좌 */
 margin : ${props => props.value}px 0px 0px 0px;
 border : 0px;
@@ -191,31 +196,4 @@ left : 110px;
 
 const Residence = styled.span`
 font-size : 22px;
-`
-
-
-
-const Button = styled.button`
-
-//기본 크기가 input > button
-width : 355px;
-height : 30px;
-
-font-size : 15px;
-color : #ffffff;
-
-margin-top : 10px;
-
-background-color: #033bfa;
-
-border : 2px solid #ffffff;
-font-family: tway, sans-serif, Arial;
-
-&:hover {
-    background-color: #ffffff;
-    border : 2px solid #033bfa;
-
-    color : black;    
-    cursor : pointer;
-    }
 `

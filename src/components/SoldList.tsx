@@ -111,6 +111,7 @@ height : 300px;
 
 background-color : #e2e2e2;
 
+
 `
 
 const ItemContainer = styled.div`
@@ -120,7 +121,10 @@ margin : 0 15px 15px;
 height : 80px;
 
 background-color : white;
-
+&:hover {
+    background-color : #aaaeac;
+    cursor : pointer;
+    }
 `
 
 const ItemImg = styled.img`

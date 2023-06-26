@@ -121,11 +121,16 @@ height : 80px;
 
 background-color : white;
 
+&:hover {
+    background-color : #aaaeac;
+    cursor : pointer;
+    }
+
 `
 
 const ItemImg = styled.img`
 
-height :75px;
+height :80px;
 
 padding: 0px 10px 10px 0px;
 margin :0px;

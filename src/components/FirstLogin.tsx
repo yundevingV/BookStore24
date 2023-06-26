@@ -37,7 +37,9 @@ export default function FirstLogin({viewModal , setViewModal} : ViewProps){
 
               <NickNameInput 
                 placeholder='닉네임을 입력해주세요'
-                />
+                name="nickname" 
+                value={nickname}
+                onChange={onInputChange}/>
               
               <NickNameButton>
                 중복확인

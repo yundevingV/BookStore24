@@ -7,3 +7,10 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   cursor: pointer;    
 `
+
+export const StyledButtonLink = styled(Link)`
+    color:  #000000;
+
+  text-decoration: none;
+  cursor: pointer;    
+`

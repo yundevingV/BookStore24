@@ -5,6 +5,7 @@ import Main from './pages/Main';
 import FindId from './pages/FindId';
 import FindPwd from './pages/FindPwd';
 import Profile from './pages/Profile';
+import EditProfile from './pages/EditProfile';
 
 import { Route , Routes } from 'react-router';
 import styled from 'styled-components';
@@ -23,6 +24,7 @@ function App() {
         <Route path='/findid' element={<FindId />} />
         <Route path='/findpwd' element={<FindPwd />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/profile/editprofile' element={<EditProfile />} />
 
       </Routes>
 

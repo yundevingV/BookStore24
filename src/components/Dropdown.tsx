@@ -59,7 +59,7 @@ padding: 2px;
 
 // 글자 크기 설정
 font-size: 20px;
-background: #ffffff;
+background: transparent;
 font-family: tway, sans-serif, Arial;
 
 // 커서가 올라오면 pointer모양으로 변경
@@ -70,7 +70,7 @@ const StyledOptionItem = styled.li`
   transition: 0.3s;
   font-size : 18px;
   background: #ffffff;
-  margin-bottom : 5px;
+  margin-bottom : 10px;
 
   text-align : center;
   font-family: tway, sans-serif, Arial;
@@ -88,6 +88,7 @@ const StyledOptionList = styled.ul`
     box-sizing: border-box; // 테두리에 맞게 ul 크기 조절
     position: absolute; // absolute를 이용해 위치를 원하는 곳에 둘것.
     left : 100px;
+    top : 5px;
     /* list-style-type: none; // ul을 커스텀할 거라면 꼭 해줘야하는 list-style-type:none */
     width: 50%; // 크기는 드롭다운 본체의 너비와 동일하게함.
     border-radius: 8px; // 동글동글하게 아래부분을 만들어야해서 border-radius를 줌.
