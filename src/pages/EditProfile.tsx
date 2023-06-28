@@ -31,7 +31,7 @@ export default function EditProfile() {
         <Wrapper>
             <Header />
             <Container>
-                <Space height={5} />
+                <Space width={0} height={5} />
 
                 <PwdButtonContainer>
                     <PwdButton>
@@ -49,7 +49,7 @@ export default function EditProfile() {
                         <P>프로필사진</P>
                         <Picture src={Jisoo} />
                     </PictureContainer>
-                    <Space height={20} />
+                    <Space width={0} height={20} />
 
                     <NickNameContainer>
                         <P>
@@ -68,20 +68,20 @@ export default function EditProfile() {
 
                     </NickNameContainer>      
 
-                    <Space height={20} />
+                    <Space width={0} height={20} />
 
                     <ResidenceContainer>
                         
                         <P>거주지역 </P>
                         
-                        <Space height={15} />
+                        <Space width={0} height={15} />
 
                             <Dropdown />
                     </ResidenceContainer>
 
                 </ProfileInfoContainer>
 
-                <Space height={20} />
+                <Space width={0} height={20} />
 
                 <SaveButtonContainer>
                     <SaveButton>

@@ -23,6 +23,34 @@ export default function Login() {
         resetInput();
     }
     
+    async function postData(id: string, password: string): Promise<void> {
+        try {
+          const response = await fetch('http://bookstore24.shop/loginForm', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              id: id,
+              password: password,
+            }),
+          });
+      
+          if (response.ok) {
+            const responseData = await response.json();
+            console.log('Response:', responseData);
+            // Process the response data as needed
+          } else {
+            throw new Error(`HTTP Error: ${response.status}`);
+          }
+        } catch (error) {
+          console.error(`Error:` );
+          // Handle the error appropriately
+        }
+      }
+      
+
+      
     return(
         <Wrapper>
             <Header />
@@ -95,7 +123,7 @@ export default function Login() {
                             아이디찾기
                         </StyledLink>
                     </Menu>
-                    <Menu>
+                    <Menu> 
                         <StyledLink to='/findpwd'>
                             비밀번호찾기
                         </StyledLink>
@@ -107,7 +135,14 @@ export default function Login() {
                         로그인하기
                     </SubmitButton>
                 </ButtonContainer>
-                
+                <ButtonContainer> 
+
+                {/* 포스트 예시코드 */}
+                {/* <SubmitButton onClick={() => postData('ssar', '1234')}>
+                    log in
+                    </SubmitButton> */}
+
+                </ButtonContainer>
             </LoginContainer>
         </Wrapper>
     )
