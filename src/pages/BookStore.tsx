@@ -1,11 +1,8 @@
 import React,{useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
-
-import SearchOption from "../components/SearchOption";
-import SearchBar from "../components/SearchBar";
-import SearchButton from "../components/SearchButton";
-import PostButton from "../components/PostButton";
+import Navbar from "../components/Navbar";
+import Item from "../components/Item";
 
 import { styled } from "styled-components";
 
@@ -15,18 +12,12 @@ export default function BookStore() {
     return(
         <Wrapper>
             <Header />
-            <Container>
-                <Form>
+            
+            <Container >
+            <Navbar />
 
-                    <SearchOption />
+                <Item />    
 
-                    <SearchBar />
-                    <SearchButton />
-
-                    <PostButton text={'책 판매하기'} />
-
-                </Form>
-                
             </Container>
         </Wrapper>
     )
@@ -50,22 +41,10 @@ font-family: tway, sans-serif, Arial;
 position : relative;
 top:5vh;
 
-display: flex;
-justify-content: flex-end; 
 
 //810px 이하면
 @media (max-width : 810px){
     width: 567px;
 }
 
-@media (max-width: 1400px) {
-  }
-
-
 `
-
-const Form = styled.form`
-  display: flex;
-  align-items: center;
-  
-`;

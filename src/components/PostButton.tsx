@@ -11,7 +11,7 @@ export default function SearchButton({text} : TextProps){
     return(
         <>
             <Button>
-                글 작성하기
+                {text}
             </Button>
         </>
     )

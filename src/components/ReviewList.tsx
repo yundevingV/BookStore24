@@ -23,6 +23,7 @@ export default function ReviewList(){
                             이것이 코딩테스트다.
 
                         </ItemName>
+                        
                         <ItemPublisher>
                             한빛 / 나동빈
 
