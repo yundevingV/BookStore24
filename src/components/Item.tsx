@@ -98,6 +98,11 @@ position : relative;
 
 }
 
+&:hover{
+    background : #e2e2e2;
+
+}
+
 `
 const Title = styled.span`
   margin-left : 20px;

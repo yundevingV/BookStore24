@@ -8,6 +8,8 @@ import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
 import EditPwd from './pages/EditPwd';
 import BookStore from './pages/BookStore';
+import BookStoreAdd from './pages/BookStoreAdd';
+
 import BookComunity from './pages/BookCommunity';
 
 import { Route , Routes } from 'react-router';
@@ -30,6 +32,8 @@ function App() {
         <Route path='/editprofile' element={<EditProfile />} />
         <Route path='/editpwd' element={<EditPwd />} />
         <Route path='/bookstore' element={<BookStore />} />
+        <Route path='/bookstoreadd' element={<BookStoreAdd />} />
+
         <Route path='/bookcommunity' element={<BookComunity />} />
 
       </Routes>
