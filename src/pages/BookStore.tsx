@@ -17,7 +17,6 @@ export default function BookStore() {
             <Navbar />
 
                 <Item />    
-
             </Container>
         </Wrapper>
     )

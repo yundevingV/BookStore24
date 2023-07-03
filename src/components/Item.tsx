@@ -1,5 +1,6 @@
 import React from "react";
 import Test from '../assets/imgs/testbookcover.jpg'
+import { StyledLink } from "../styles/link";
 
 
 import styled from "styled-components";
@@ -10,6 +11,7 @@ function ItemList(){
     return(
         <>
             
+            <StyledLink to='/bookstoredetail/1'>
             <Frame>
 
             <Top>
@@ -47,6 +49,7 @@ function ItemList(){
 
             </Middle>
             </Frame>
+            </StyledLink>
         </>
     )
 }   
@@ -56,8 +59,6 @@ export default function Item(){
     return(
         <Positioner>            
             <ItemList />
-            <ItemList />
-
         </Positioner>
     )
 }

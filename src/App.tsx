@@ -9,6 +9,7 @@ import EditProfile from './pages/EditProfile';
 import EditPwd from './pages/EditPwd';
 import BookStore from './pages/BookStore';
 import BookStoreAdd from './pages/BookStoreAdd';
+import BookStoreDetail from './pages/BookStoreDetail';
 
 import BookComunity from './pages/BookCommunity';
 
@@ -33,6 +34,8 @@ function App() {
         <Route path='/editpwd' element={<EditPwd />} />
         <Route path='/bookstore' element={<BookStore />} />
         <Route path='/bookstoreadd' element={<BookStoreAdd />} />
+        <Route path="/bookstoredetail/:id" element={<BookStoreDetail />} />
+
 
         <Route path='/bookcommunity' element={<BookComunity />} />
 

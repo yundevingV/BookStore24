@@ -127,11 +127,12 @@ const RightContainer = styled.div`
         outline: none;
         border-bottom: 2px solid #4f4f4f;
     }
+    
     }
     .content{
         height : 200px;
     }
-}
+
 `
 
 const Picture = styled.img`
