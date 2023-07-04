@@ -4,9 +4,15 @@ import SearchButton from "../components/SearchButton";
 import PostButton from "../components/PostButton";
 
 import { styled } from "styled-components";
+import { StyledButtonLink } from "../styles/link";
 
+type NavbarProps = {
+    text : string;
+    url : string;
+}
 
-export default function Navbar(){
+export default function Navbar({text,url} : NavbarProps ){
+
     return(
         <>
         <NavContainer>
@@ -16,8 +22,9 @@ export default function Navbar(){
 
                     <SearchBar />
                     <SearchButton />
-
-                    <PostButton text={'책 판매하기'} />
+                    <StyledButtonLink to={url + 'add'}>
+                        <PostButton text={text} />
+                    </StyledButtonLink>
                 
                 </Form>
                 
@@ -32,7 +39,7 @@ display: flex;
 
 justify-content: flex-end; 
 
-margin-bottom: 10px;
+margin: 30px 0px;
 `
 
 const Form = styled.form`

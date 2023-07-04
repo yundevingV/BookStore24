@@ -5,10 +5,13 @@ import Test from '../assets/imgs/testbookcover.jpg'
 
 
 import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
 
 
 export default function BookCommunityDetail() {
-    
+    //bookcommunityDetail/id <- id 가져오기
+    const {id} = useParams();
+    console.log(id)
     return(
         <Wrapper>
             <Header />

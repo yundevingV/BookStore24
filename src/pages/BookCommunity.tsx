@@ -5,16 +5,24 @@ import Navbar from "../components/Navbar";
 import Item from "../components/ReviewItem";
 
 import { styled } from "styled-components";
+import { useLocation } from 'react-router-dom';
 
 
 export default function BookStoreCommunity() {
-    
+
+    // 현재 주소
+    const location = useLocation();
+
     return(
         <Wrapper>
             <Header />
             
             <Container >
-            <Navbar />
+            <Title>
+                <PTitle>북 커뮤니티</PTitle> 
+                <PContent>책의 다양한 의견을 나눠 보세요!</PContent>
+            </Title>
+            <Navbar text='후기 작성하기' url={location.pathname} />
 
                 <Item />    
             </Container>
@@ -46,4 +54,24 @@ top:5vh;
     width: 567px;
 }
 
+`
+
+const Title = styled.div`
+width : 100%;
+
+display: flex;
+flex-direction : column;
+
+text-align : center;
+
+`
+const PTitle = styled.p`
+font-weight : 1000;
+font-size : 30px;
+
+`
+
+const PContent = styled.p`
+font-weight : 200;
+font-size : 18px;
 `
