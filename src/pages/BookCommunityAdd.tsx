@@ -7,7 +7,7 @@ import Test from '../assets/imgs/testbookcover.jpg'
 import { styled } from "styled-components";
 
 
-export default function BookStore() {
+export default function BookCommunityAdd() {
     
     return(
         <Wrapper>
@@ -39,12 +39,9 @@ export default function BookStore() {
                     
                     <BookTitle 
                         placeholder='출판사를 입력해주세요' />
-                                            
-                    <BookTitle 
-                        placeholder='오픈채팅 대화방 링크를 입력해주세요' />
 
                     <Price
-                        placeholder='희망 가격을 입력해주세요' />
+                        placeholder='후기 평점 (1~5사이)' />
 
                 
                 </RightContainer>

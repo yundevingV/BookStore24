@@ -1,30 +1,22 @@
 import React,{useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
-
-import SearchOption from "../components/SearchOption";
-import SearchBar from "../components/SearchBar";
-import SearchButton from "../components/SearchButton";
-import PostButton from "../components/PostButton";
-
+import Navbar from "../components/Navbar";
+import Item from "../components/ReviewItem";
 
 import { styled } from "styled-components";
 
 
-export default function BookComunity() {
+export default function BookStoreCommunity() {
     
     return(
         <Wrapper>
             <Header />
+            
+            <Container >
+            <Navbar />
 
-            <Container>
-                <Form>
-                <SearchOption />
-                <SearchBar />
-                <SearchButton />
-                
-                <PostButton text={'후기 작성하기'}/>
-                </Form>
+                <Item />    
             </Container>
         </Wrapper>
     )
@@ -48,16 +40,10 @@ font-family: tway, sans-serif, Arial;
 position : relative;
 top:5vh;
 
-display: flex;
-justify-content: flex-end; 
 
-@media (max-width: 1400px) {
-    width: 60vw;
-  }
+//810px 이하면
+@media (max-width : 810px){
+    width: 567px;
+}
+
 `
-
-const Form = styled.form`
-  display: flex;
-  align-items: center;
-  
-`;

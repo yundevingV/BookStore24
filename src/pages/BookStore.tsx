@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import Item from "../components/Item";
+import Item from "../components/StoreItem";
 
 import { styled } from "styled-components";
 

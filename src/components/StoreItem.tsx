@@ -54,7 +54,7 @@ function ItemList(){
     )
 }   
 
-export default function Item(){
+export default function StoreItem(){
 
     return(
         <Positioner>            
