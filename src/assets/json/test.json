@@ -1,0 +1,37 @@
+    [
+        {
+            "title" : "판매중1",
+            "content" : "asdsa",
+            "view" : 123,
+            "price" : 50000,
+            "status" : "판매중",
+            "talkUrl" : "www.a"            
+
+        },
+
+        {
+            "title" : "판매중12",
+            "content" : "asdsa",
+            "view" : 123,
+            "price" : 50000,
+            "status" : "판매중",
+            "talkUrl" : "www.a"   
+        },
+        {
+            "title" : "판매중13",
+            "content" : "asdsa",
+            "view" : 123,
+            "price" : 50000,
+            "status" : "판매중",
+            "talkUrl" : "www.a"   
+        },
+        {
+            "title" : "판매중14",
+            "content" : "asdsa",
+            "view" : 123,
+            "price" : 50000,
+            "status" : "판매중",
+            "talkUrl" : "www.a"   
+        }
+        
+    ]

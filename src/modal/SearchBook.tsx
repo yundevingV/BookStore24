@@ -17,22 +17,23 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
     }
 
     const [ { searchWord}, onInputChange, resetInput ] = useInput({
-      searchWord : '',
-  });
+    searchWord : '',
+});
 
-  const submit = (e : React.MouseEvent) => {
 
-      console.log(searchWord);
+const submit = (e : React.MouseEvent) => {
 
-      resetInput();
-  }
+    console.log(searchWord);
+
+    resetInput();
+}
     return(
         <ModalBackground>
         <Container>
             
-              <Font>
-                책 제목을 입력해주세요
-              </Font>
+            <Font>
+            책 제목을 입력해주세요
+            </Font>
 
             <SearchContainer>
                 <div >
@@ -40,27 +41,19 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
                 </div>
 
                 <div>
-                <SearchButton>
+                <SearchButton onClick={submit}>
                     검색
                 </SearchButton>
                 </div>
             </SearchContainer>
-            <Button onClick={closeModal}> X </Button>
 
             <SearchResult>
-                <SearchBox>
-                    <p className="title">
-                        title
-                    </p>
-                    <p className="publisher">
-                        저자 / 출판사
-                    </p>
-                </SearchBox>
-                <SearchBox>
-                    b
-                </SearchBox>
+
+                {}
+                
             </SearchResult>
 
+            <Button onClick={closeModal}> X </Button>
 
         </Container>
         </ModalBackground>
@@ -79,7 +72,7 @@ const ModalBackground = styled.div`
 const Container = styled.div`
 /* 모달창 크기 */
   width: 400px;
-  height: 500px;
+  height: 600px;
 
   /* 최상단 위치 */
   z-index: 999;
@@ -109,7 +102,6 @@ const SearchContainer = styled.div`
 display : flex;
 justify-content: space-evenly;
 
-
 input {
     width: 250px;
     height: 25px;
@@ -125,8 +117,24 @@ const SearchButton = styled.button`
 width: 50px;
 height: 25px;
 
-margin-right : 20px;
+font-size : 12px;
 
+padding : 5px;
+
+background-color: #ffffff;
+border : 2px solid #033bfa;
+border-radius : 2px;
+color : #033bfa;
+
+font-family: tway, sans-serif, Arial;
+
+&:hover {
+
+    background-color: #033bfa;
+    color : #ffffff;
+
+    cursor : pointer;
+    }
 `
 
 const Button = styled.button`
@@ -137,29 +145,36 @@ const Button = styled.button`
   border : 0px;
   background-color: #e2e2e2;
 
+  cursor : pointer;
 `
 
 const SearchResult = styled.div`
 width: 400px;
-height: auto;
+height : 400px;
 
 display: flex;
 flex-direction: column;
-justify-content : center;
 
+overflow : auto;
 
 `
 
 const SearchBox = styled.div`
 font-family: tway, sans-serif, Arial;
 
+height : 50px;
+
 border: 1px solid #000;
 
 margin : 10px 10px;
 
-padding: 2px;
+padding: 5px;
 
+p{
+    line-height : 1px;
+}
 .title{
+    
     font-size: 18px;
 }
 .publisher{
