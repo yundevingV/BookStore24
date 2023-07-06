@@ -20,7 +20,8 @@ export default function Navbar({text,url} : NavbarProps ){
 
                     <SearchOption />
 
-                    <SearchBar />
+                    <SearchBar 
+                        />
                     <SearchButton />
                     <StyledButtonLink to={url + 'add'}>
                         <PostButton text={text} />

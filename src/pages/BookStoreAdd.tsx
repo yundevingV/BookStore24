@@ -2,10 +2,10 @@ import React,{useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
 import Test from '../assets/imgs/testbookcover.jpg'
+import SearchBook from "../modal/SearchBook";
 
 
 import { styled } from "styled-components";
-import SearchBook from "../modal/SearchBook";
 
 
 export default function BookStore() {

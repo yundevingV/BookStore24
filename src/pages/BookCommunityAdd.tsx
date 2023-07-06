@@ -2,13 +2,18 @@ import React,{useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
 import Test from '../assets/imgs/testbookcover.jpg'
-
+import SearchBook from "../modal/SearchBook";
 
 import { styled } from "styled-components";
 
 
 export default function BookCommunityAdd() {
-    
+    const [viewModal , setViewModal] = useState(false);
+
+    const openModal = (e : React.MouseEvent) => {
+        
+        viewModal === true ? setViewModal(false) : setViewModal(true)
+    }
     return(
         <Wrapper>
             <Header />
@@ -31,8 +36,9 @@ export default function BookCommunityAdd() {
                     <Title placeholder='게시글 제목'/>
                         
 
-                    <BookTitle 
-                        placeholder='책 제목을 입력해주세요' />
+                    <BookTitle placeholder='책 제목을 입력해주세요'
+                        onClick={openModal} />
+                    {viewModal && <SearchBook viewModal={viewModal} setViewModal={setViewModal}/>}
                     
                     <BookTitle 
                         placeholder='저자를 입력해주세요' />

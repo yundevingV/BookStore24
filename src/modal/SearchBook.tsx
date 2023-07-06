@@ -32,10 +32,9 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
     
     const submit = (e : React.MouseEvent) => {
 
-        let filterList = books.filter(item => item.name.includes(searchWord))
+        let filterList = books.filter(item => item.name.includes(searchWord) && searchWord !== '')
         setSearchResultList(filterList);
 
-        resetInput();
     }
     return(
         <ModalBackground>
@@ -131,9 +130,7 @@ input {
 
 
 `
-const SearchInput = styled.input`
 
-`
 
 const SearchButton = styled.button`
 width: 50px;
