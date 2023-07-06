@@ -21,7 +21,7 @@ export default function EditProfile() {
         resetInput();
     }
 
-    const [viewModal , setViewModal] = useState(false);
+    const [viewModal , setViewModal] = useState<boolean>(false);
 
     const openModal = (e : React.MouseEvent) => {
         

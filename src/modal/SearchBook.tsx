@@ -1,4 +1,4 @@
-import React from "react"
+import React ,{useState} from "react"
 import useInput from "../hooks/useInput";
 
 import styled from "styled-components";
@@ -20,13 +20,23 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
     searchWord : '',
 });
 
+// 검색 구현
+    type Books = {name : string , publisher : string};
 
-const submit = (e : React.MouseEvent) => {
+    const [searchResultList , setSearchResultList] = useState<Books[]>([]);
 
-    console.log(searchWord);
+    let books= [
+        { name: 'scas', publisher: 'aaa'},
+        { name: 'fuhjnk', publisher: 'bd'}
+    ];
+    
+    const submit = (e : React.MouseEvent) => {
 
-    resetInput();
-}
+        let filterList = books.filter(item => item.name.includes(searchWord))
+        setSearchResultList(filterList);
+
+        resetInput();
+    }
     return(
         <ModalBackground>
         <Container>
@@ -37,7 +47,10 @@ const submit = (e : React.MouseEvent) => {
 
             <SearchContainer>
                 <div >
-                <input placeholder='검색어를 입력해주세요.' />
+                <input placeholder='검색어를 입력해주세요.'
+                name="searchWord" 
+                value={searchWord}
+                onChange={onInputChange} />
                 </div>
 
                 <div>
@@ -47,9 +60,18 @@ const submit = (e : React.MouseEvent) => {
                 </div>
             </SearchContainer>
 
+            
             <SearchResult>
 
-                {}
+            <>
+            {searchResultList.map(item=>
+                <SearchBox>
+                    <p className='title'>{item.name}</p>
+                    <p className='publisher'>{item.publisher}</p>
+                </SearchBox>
+                )}
+            </>
+                
                 
             </SearchResult>
 
@@ -122,7 +144,7 @@ font-size : 12px;
 padding : 5px;
 
 background-color: #ffffff;
-border : 2px solid #033bfa;
+border : 1px solid #033bfa;
 border-radius : 2px;
 color : #033bfa;
 
@@ -175,9 +197,9 @@ p{
 }
 .title{
     
-    font-size: 18px;
+    font-size: 20px;
 }
 .publisher{
-    font-size: 10px;
+    font-size: 12px;
 }
 `
