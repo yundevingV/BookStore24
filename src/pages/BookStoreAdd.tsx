@@ -5,10 +5,17 @@ import Test from '../assets/imgs/testbookcover.jpg'
 
 
 import { styled } from "styled-components";
+import SearchBook from "../modal/SearchBook";
 
 
 export default function BookStore() {
     
+    const [viewModal , setViewModal] = useState(false);
+
+    const openModal = (e : React.MouseEvent) => {
+        
+        viewModal === true ? setViewModal(false) : setViewModal(true)
+    }
     return(
         <Wrapper>
             <Header />
@@ -32,8 +39,10 @@ export default function BookStore() {
                         
 
                     <BookTitle 
-                        placeholder='책 제목을 입력해주세요' />
-                    
+                        placeholder='책 제목을 입력해주세요'
+                        onClick={openModal} />
+                    {viewModal && <SearchBook viewModal={viewModal} setViewModal={setViewModal}/>}
+
                     <BookTitle 
                         placeholder='저자를 입력해주세요' />
                     

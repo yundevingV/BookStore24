@@ -1,7 +1,7 @@
 import React,{useState , useEffect} from "react";
 import Header from "../components/Header";
 import useInput from "../hooks/useInput";
-import FirstLogin from "../components/FirstLogin";
+import FirstLogin from "../modal/FirstLogin";
 
 import { styled ,css } from "styled-components";
 
