@@ -36,6 +36,7 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         setSearchResultList(filterList);
 
     }
+    
     return(
         <ModalBackground>
         <Container>

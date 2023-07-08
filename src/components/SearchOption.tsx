@@ -1,17 +1,25 @@
 import React ,{useState} from "react";
+import { saveSearchOption } from "../action/search_option";
 
+import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 
 export default function SearchOption(){
+
+    const dispatch = useDispatch();
+
+
 
     const [selectValue , setSelectValue] = useState<string>('제목')
 
     const handleChange = (e: { target: { value: React.SetStateAction<string>; }; } ) => {
         setSelectValue(e.target.value)
     }
+    
+    dispatch(saveSearchOption(selectValue));
 
     console.log(selectValue)
-
+    
     return(
         <>
             <Select onChange={handleChange}>

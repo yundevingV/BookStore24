@@ -1,13 +1,29 @@
 import React from "react";
+import useInput from "../hooks/useInput";
+import { saveSearchWord } from "../action/search_word";
 
 import { styled } from "styled-components";
+import { useDispatch } from "react-redux";
+
 
 
 export default function SearchBar(){
+
+    const dispatch = useDispatch();
+    //검색창
+    const [ {searchWord}, onInputChange, resetInput ] = useInput({
+        searchWord : '',
+    });
+
+    dispatch(saveSearchWord(searchWord))
+
     return(
         <>
             <Input 
-                placeholder='검색' />
+                placeholder='검색'
+                name="searchWord" 
+                value={searchWord}
+                onChange={onInputChange} />
 
         </>
     )

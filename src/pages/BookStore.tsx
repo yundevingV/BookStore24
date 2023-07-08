@@ -17,6 +17,7 @@ export default function BookStore() {
             <Header />
             
             <Container >
+
             <Title>
                 <PTitle>북 스토어</PTitle> 
                 <PContent>개인간 자유로운 거래로 인생 책을 찾아보세요!</PContent>
@@ -24,8 +25,8 @@ export default function BookStore() {
 
             <Navbar text='책 판매하기' url={location.pathname}/>
 
-
                 <Item />    
+                
             </Container>
         </Wrapper>
     )

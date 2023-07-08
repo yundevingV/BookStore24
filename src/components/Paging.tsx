@@ -2,6 +2,8 @@ import React from 'react';
 import Pagination from 'react-js-pagination'
 import '../styles/paging.css'
 
+// yarn add react-js-pagination @types/react-js-pagination
+
 type PagingProps = {
     page : number;
     count : number;
