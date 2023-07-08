@@ -39,7 +39,7 @@ export default function BookStoreDetail() {
                         <p className="title">책 이름</p>
                         <p className="publisher">저자 : 나동빈</p>
                         <p className="publisher">출판사 : 한빛</p>
-                        <p className='price'>$ 41,000</p>
+                        <p className='price'>₩ 41,000</p>
                     </div>
 
 
