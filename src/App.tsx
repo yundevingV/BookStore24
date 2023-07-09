@@ -17,6 +17,8 @@ import BookCommunityAdd from './pages/BookCommunityAdd';
 import BookCommunityDetail from './pages/BookCommunityDetail';
 import BookCommunityEdit from './pages/BookCommunityEdit';
 
+import BookRanking from './pages/BookRanking';
+
 import { Route , Routes } from 'react-router';
 import styled from 'styled-components';
 
@@ -46,6 +48,8 @@ function App() {
         <Route path='/bookcommunityadd' element={<BookCommunityAdd />} />
         <Route path="/bookcommunitydetail/:id" element={<BookCommunityDetail />} />
         <Route path="/bookcommunitydetail/:id/edit" element={<BookCommunityEdit />} />
+
+        <Route path="/bookranking" element={<BookRanking />} />
 
       </Routes>
 
