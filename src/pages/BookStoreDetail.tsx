@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
 import Test from '../assets/imgs/testbookcover.jpg'
+import EditButton from "../components/EditButton";
 
 
 import { styled } from "styled-components";
@@ -14,7 +15,8 @@ export default function BookStoreDetail() {
             <Header />
             
             <Container >
-                
+                {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
+                <EditButton />
 
                 <InnerContainer>
 
