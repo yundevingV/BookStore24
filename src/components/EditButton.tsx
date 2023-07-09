@@ -43,7 +43,7 @@ const Form = styled.form`
 const DeleteButton = styled.button`
 
 background : #f34747;
-border : 1px solid #ffffff;
+border : 1px solid #000000;
 border-radius : 4px;
 
 margin : 10px;
