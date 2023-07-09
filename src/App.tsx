@@ -10,10 +10,12 @@ import EditPwd from './pages/EditPwd';
 import BookStore from './pages/BookStore';
 import BookStoreAdd from './pages/BookStoreAdd';
 import BookStoreDetail from './pages/BookStoreDetail';
+import BookStoreEdit from './pages/BookCommunityEdit';
 
 import BookComunity from './pages/BookCommunity';
 import BookCommunityAdd from './pages/BookCommunityAdd';
 import BookCommunityDetail from './pages/BookCommunityDetail';
+import BookCommunityEdit from './pages/BookCommunityEdit';
 
 import { Route , Routes } from 'react-router';
 import styled from 'styled-components';
@@ -37,11 +39,13 @@ function App() {
         <Route path='/bookstore' element={<BookStore />} />
         <Route path='/bookstoreadd' element={<BookStoreAdd />} />
         <Route path="/bookstoredetail/:id" element={<BookStoreDetail />} />
+        <Route path="/bookstoredetail/:id/edit" element={<BookStoreEdit />} />
 
 
         <Route path='/bookcommunity' element={<BookComunity />} />
         <Route path='/bookcommunityadd' element={<BookCommunityAdd />} />
         <Route path="/bookcommunitydetail/:id" element={<BookCommunityDetail />} />
+        <Route path="/bookcommunitydetail/:id/edit" element={<BookCommunityEdit />} />
 
       </Routes>
 

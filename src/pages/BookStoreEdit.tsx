@@ -2,13 +2,14 @@ import React,{useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
 import Test from '../assets/imgs/testbookcover.jpg'
+import EditButton from "../components/EditButton";
 import SearchBook from "../modal/SearchBook";
 
-
 import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
 
 
-export default function BookStoreAdd() {
+export default function BookStoreEdit() {
     
     const [viewModal , setViewModal] = useState(false);
 

@@ -6,7 +6,7 @@ import EditButton from "../components/EditButton";
 
 
 import { styled } from "styled-components";
-
+import { useParams ,useLocation } from "react-router";
 
 export default function BookStoreDetail() {
     

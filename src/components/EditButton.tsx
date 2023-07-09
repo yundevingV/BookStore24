@@ -1,18 +1,25 @@
 import React from "react";
 
 import { styled } from "styled-components";
+import { StyledButtonLink } from "../styles/link";
+
+
 
 export default function EditButton(){
+
     return(
         <Container>
             <Form>
+
                 <DeleteButton>
                     삭제
                 </DeleteButton>
 
+                <StyledButtonLink to='./edit'>
                 <ModifyButton>
                     수정
                 </ModifyButton>
+                </StyledButtonLink>
             </Form>
         </Container>
     )
