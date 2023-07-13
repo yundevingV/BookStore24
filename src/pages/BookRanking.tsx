@@ -42,7 +42,7 @@ const Wrapper = styled.div`
 
 `
 const Container = styled.div`
-width : 80vw;
+width : 1000px;
 
 font-family: arial;
 font-size: 24px;
@@ -60,7 +60,7 @@ top:5vh;
 
 //810px 이하면
 @media (max-width : 810px){
-    width: 567px;
+    width: 800px;
 }
 
 `
