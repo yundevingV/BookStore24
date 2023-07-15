@@ -90,7 +90,12 @@ export default function Join(){
                             value={password1}
                             onChange={onInputChange} />
 
-                        <Div>
+
+                    </Form>
+                </InputContainer>
+
+                <InputContainer>
+                <Div>
                             <P>비밀번호 확인</P>
                         </Div>
 
@@ -99,7 +104,6 @@ export default function Join(){
                             name="password2" 
                             value={password2}
                             onChange={onInputChange} />
-                    </Form>
                 </InputContainer>
 
                 <InputContainer >
@@ -163,7 +167,8 @@ const Wrapper = styled.div`
 `
 
 const JoinContainer = styled.div`
-width : 400px;
+width : 550px;
+height : 550px;
 
 font-family: arial;
 font-size: 24px;
@@ -172,8 +177,13 @@ margin: 0 auto;
 padding : 10px;
 
 border : 2px solid #e2e2e2;
+
 position : relative;
 top:5vh;
+
+display : flex;
+flex-direction : column;
+justify-content: space-around;
 `
 
 const InputContainer = styled.div `
@@ -190,11 +200,11 @@ border : 0px;
 `
 
 const P = styled.p`
-font-size : 5px;
+font-size : 12px;
 text-align : left;
 
 /* 상 오 하 왼 */
-margin : 0px 0px 0px 40px;
+margin : 0px 0px 0px 0px;
 
 color : #212221;
 
@@ -237,8 +247,8 @@ ${(props) =>
 const Button = styled.button`
 
 //기본 크기가 input > button
-height : 30px;
-
+height : 31px;
+padding : 10px;
 font-size : 10px;
 
 background-color: #ffffff;
@@ -258,10 +268,7 @@ font-family: tway, sans-serif, Arial;
 
 
 `    
-const DropdownContainer = styled.div`
-margin: 0 auto;
-text-align : center;
-`
+
 
 const ButtonContainer = styled.div`
 margin: 0 auto;
@@ -271,7 +278,7 @@ text-align : center;
 const SubmitButton = styled.button`
 //기본 크기가 input > button
 width : 200px;
-height : 30px;
+height : 35px;
 
 font-size : 12px;
 

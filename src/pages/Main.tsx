@@ -4,6 +4,7 @@ import Carousel from "../components/Carousel"
 
 import { styled } from "styled-components";
 import { Link } from 'react-router-dom';
+import { Space } from "../styles/Space";
 
 
 export default function Main(){
@@ -12,6 +13,7 @@ export default function Main(){
         <Wrapper>
             <Header />
             <Carousel />
+            <Space width={0} height={100} />
         </Wrapper>  
     )
 }
