@@ -179,12 +179,23 @@ const Publisher = styled.span`
 `
 const Rating = styled.span`
 `
+
 const ButtonDiv = styled.div`
 
+
+background : #ffffff;
+
+border-radius : 20px;
 `
 const Button = styled.button`
 
+width : 40px;
+height : 40px;
+
 background : transparent;
 border : 0px;
+
+font-size : 25px;
+font-weight : 1000;
 
 `
