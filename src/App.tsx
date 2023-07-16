@@ -20,7 +20,6 @@ import BookCommunityEdit from './pages/BookCommunityEdit';
 import BookRanking from './pages/BookRanking';
 
 import { Route , Routes } from 'react-router';
-import styled from 'styled-components';
 
 function App() {
   return (
@@ -51,15 +50,5 @@ function App() {
 
   );
 }
-
-const AppContainer = styled.div`
-  /* 상 우 하 좌 */
-  overflow:hidden;
-
-  width: 100vw;
-        height: 100vh;
-          margin: 0;
-
-`
 
 export default App;

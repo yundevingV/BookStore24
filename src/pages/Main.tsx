@@ -5,7 +5,6 @@ import MainRankingView from "../components/MainRankingView";
 import MainRankingRating from "../components/MainRankingRating";
 
 import { styled } from "styled-components";
-import { Link } from 'react-router-dom';
 import { Space } from "../styles/Space";
 
 
@@ -24,5 +23,7 @@ export default function Main(){
 }
 
 const Wrapper = styled.div`
-    overflow : hidden;
+    height  : fit-content;
+
+    margin-bottom : 500px;
 `
