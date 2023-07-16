@@ -29,7 +29,7 @@ export default function Carousel() {
 
   };
   return (
-
+    <Wrapper>
       <Slider {...settings}>
 
         <ImgCover>
@@ -41,9 +41,13 @@ export default function Carousel() {
         </ImgCover>
         
       </Slider>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+overflow : hidden;
+`
 const ImgCover = styled.div`
 /* 임시 */
 background : #e2e2e2;

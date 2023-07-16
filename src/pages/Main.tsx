@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "../components/Header";
 import Carousel from "../components/Carousel"
-import MainRanking from "../components/MainRanking";
+import MainRankingView from "../components/MainRankingView";
+import MainRankingRating from "../components/MainRankingRating";
 
 import { styled } from "styled-components";
 import { Link } from 'react-router-dom';
@@ -15,11 +16,13 @@ export default function Main(){
             <Header />
             <Carousel />
             <Space width={0} height={100} />
-            <MainRanking />
+            <MainRankingView />
+            <Space width={0} height={200} />
+            <MainRankingRating />
         </Wrapper>  
     )
 }
 
 const Wrapper = styled.div`
-    
+    overflow : hidden;
 `

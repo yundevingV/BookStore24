@@ -23,11 +23,7 @@ import { Route , Routes } from 'react-router';
 import styled from 'styled-components';
 
 function App() {
-
-
   return (
-
-    <AppContainer>
 
       <Routes>
         <Route path='/' element={<Main />} />
@@ -53,13 +49,16 @@ function App() {
 
       </Routes>
 
-    </AppContainer>
   );
 }
 
 const AppContainer = styled.div`
   /* 상 우 하 좌 */
-  margin : -1vh -1vw 0px -1vh;
+  overflow:hidden;
+
+  width: 100vw;
+        height: 100vh;
+          margin: 0;
 
 `
 
