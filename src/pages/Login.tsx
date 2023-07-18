@@ -23,6 +23,10 @@ export default function Login() {
         resetInput();
     }
     
+    const naverLoginLink : string = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=B3RGNtinEp3Va8fysxkN&redirect_uri=http://bookstore24.shop/auth/naver/callback&state='test'";
+    const kakaoLoginLink : string = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=http://bookstore24.shop/auth/kakao/callback';
+    const googleLoginLink : string = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=http://bookstore24.shop/auth/google/callback&response_type=code&scope=openid%20email%20profile';
+
     async function postData(id: string, password: string): Promise<void> {
         try {
           const response = await fetch('http://bookstore24.shop/loginForm', {
@@ -66,7 +70,7 @@ export default function Login() {
                         <div>
                             <Logo src={naver} alt='x'/>
                             <SnsFont>
-                                네이버 로그인하기
+                                <A href={naverLoginLink}>네이버 로그인하기</A>
                             </SnsFont>
                         </div>
                     </SnsButton>
@@ -75,7 +79,7 @@ export default function Login() {
                         <div>
                             <Logo src={kakao} alt='x'/>
                             <SnsFont>
-                                카카오 로그인하기
+                                <A href={kakaoLoginLink}>카카오 로그인하기</A>
                             </SnsFont>
                         </div>
                     </SnsButton>
@@ -84,7 +88,7 @@ export default function Login() {
                         <div>
                             <Logo src={google} alt='x'/>
                             <SnsFont>
-                                구글 로그인하기
+                                <A href={googleLoginLink}>구글 로그인하기</A>
                             </SnsFont>
                         </div>
                     </SnsButton>   
@@ -155,7 +159,7 @@ const Wrapper = styled.div`
 `
 
 const LoginContainer = styled.div`
-width : 500px;
+width : 600px;
 
 font-family: arial;
 font-size: 24px;
@@ -199,6 +203,11 @@ const SnsFont = styled.span`
     color : #6c6c71;
 `
 
+const A =styled.a`
+    text-decoration : none;
+    color : #6c6c71;
+
+`
 
 const SnsButton = styled.button`
 width : 350px;
