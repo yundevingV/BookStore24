@@ -1,12 +1,12 @@
 import ItemsCarousel from 'react-items-carousel';
 import React, { useState } from 'react';
-
-import { styled } from 'styled-components';
-
 import Slide1 from '../assets/imgs/Slide1.jpg';
 
+import { styled } from 'styled-components';
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 
 
 export default function MainRanking() {

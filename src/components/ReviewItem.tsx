@@ -2,6 +2,8 @@ import React from "react";
 import Test from '../assets/imgs/testbookcover.jpg'
 import { StyledLink } from "../styles/link";
 
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styled from "styled-components";
 
@@ -16,36 +18,40 @@ function ItemList(){
 
             <Top>
                 <Title>
-                    제목
+                    후기 글 제목
                 </Title>
                 <Rating>
                     4.8
                 </Rating>
             </Top>
-            <Middle>    
-                <Img src={Test} alt='x' />
 
+            <Middle>    
+                <LContainer>
+                <Img src={Test} alt='x' />
+                </LContainer>
+
+                <RContainer>
                 <Name>
                     이름
                 </Name>
 
-                <Price>
-                    가격
-                </Price>
+                <Views>
+                <FontAwesomeIcon icon={faEye} />
+                567
+                </Views>
 
                 <ItemPublisher>
                     저자 / 출판사
                 </ItemPublisher>
 
-                    <Writter>
-                        XX 님
-                    </Writter>
-                    <Date>
-                        22.05.25
-                    </Date>
-                    <Views>
-                        567
-                    </Views>
+                <Writter>
+                    XX 님
+                </Writter>
+                <Date>
+                    22.05.25
+                </Date>
+
+                </RContainer>
 
             </Middle>
             </Frame>
@@ -88,7 +94,7 @@ font-size : 16px;
 margin : 3% 8%;
 
 border : 1px solid #e2e2e2;
-
+border-radius : 5px;
 
 position : relative;
 
@@ -105,92 +111,94 @@ position : relative;
 }
 
 `
-const Title = styled.span`
-  margin-left : 20px;
-
-  flex: 1;
-
-  font-weight : bold;
-
-`
-
-const Rating = styled.span`
-  flex: 1;
-  text-align: right;
-  margin-right : 30px;
-
-
-`
 
 const Top = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  margin-top : 20px;
+    display: flex;
+    justify-content: space-between;
+    
+    margin  : 20px 0;
+    
+    padding : 0 20px;
+
 `
 
+const Title = styled.div`
+    font-weight : bold;
+
+`
+
+const Rating = styled.div`
+    
+    color : #f10000;
+`
+
+
+
 const Middle = styled.div`
-position : relative;
+display : flex;
+justify-content : space-around;
 
-margin : 7px;
+padding : 0 20px;
 
-height: 250px;
+`
+const LContainer = styled.div`
+
+display : flex;
+flex-direction : column;
+justify-content : center;
+
+margin : 0px;
+padding : 0px;
+
+background : black;
+
 
 `
 
 const Img = styled.img`
+width : 150px;
+height : 220px;
 
-width: 40%;
-height: 90%;
+margin : 0 auto;
+
+`
+const RContainer = styled.div`
+display : flex;
+flex-direction : column;
+justify-content : space-around;
+
 
 `
 
 const Name = styled.span`
-position : absolute;
 
-top : 0px;
-margin-left : 30px;
 
 `
 
-const Price = styled.span`
-position : absolute;
-top : 30px;
-margin-left : 30px;
 
-`
 
 const ItemPublisher = styled.span`
-position : absolute;
-top : 50px;
-margin-left : 30px;
+
 
 
 `
 
 
 const Writter = styled.span`
-position : absolute;
-margin-left : 30px;
 
 
-bottom : 60px;
+
 
 `
 
 const Date = styled.span`
-position : absolute;
-margin-left : 30px;
 
-bottom : 10px;
+
 
 `
 
 const Views = styled.span`
-position : absolute;
-margin-left : 100px;
 
-bottom : 10px;
-
+color : #000000;
 
 `
