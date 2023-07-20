@@ -6,12 +6,17 @@ export const StyledLink = styled(Link)`
 
   text-decoration: none;
   cursor: pointer;    
+
+  font-size : 17px;
 `
 export const StyledLinkBlack = styled(Link)`
   color:  #000000;
 
   text-decoration: none;
-  cursor: pointer;    
+  cursor: pointer;   
+  font-size : 17px;
+
+
 `
 
 export const CurrentLink = styled(Link)`
@@ -19,10 +24,16 @@ export const CurrentLink = styled(Link)`
   border-bottom : 1px solid #000000;
   text-decoration: none;
   cursor: pointer;    
+  font-size : 17px;
+
 `
 export const StyledButtonLink = styled(Link)`
-    color:  #000000;
+  color:  #000000;
 
   text-decoration: none;
   cursor: pointer;    
+
+  font-size : 17px;
+
+  
 `

@@ -8,18 +8,24 @@ import Login from "./Login";
 
 import { styled } from "styled-components";
 import { useLocation } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { RootState } from "../reducer/index";
 
 export default function BookStoreDetail() {
     // 현재 주소
     const location = useLocation();
 
     // 로그인
-    const [login,setLogin] = useState<boolean>(false);
+    const loginStateData = useSelector(
+        (state: RootState) => state.LoginStatusReducer.loginStatusData
+    );
+
+    const [login,setLogin] = useState<boolean>(loginStateData);
 
     useEffect(() => {
-        setLogin(false)
-        console.log('로그인 실패')
-    }, [location]);
+        setLogin(loginStateData)
+    }, [loginStateData]);
+
     return(
         <Wrapper>
             {/* b   로그인 실패시 & 비로그인 */}

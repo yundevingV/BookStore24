@@ -1,16 +1,37 @@
 //내부
-import React from "react";
+import React,{useState,useEffect} from "react";
+import { saveloginStatus } from "../action/login_status";
 
 //외부
 import styled from "styled-components";
 import { CurrentLink, StyledLink, StyledLinkBlack } from "../styles/link";
 import { Space } from "../styles/Space";
 import { useLocation } from "react-router";
+import { useSelector,useDispatch } from "react-redux";
+import { RootState } from "../reducer/index";
 
 export default function Header() {
-    const isLogin = true;
+
     const { pathname } = useLocation();
-    console.log(pathname)
+
+    const loginStateData = useSelector(
+        (state: RootState) => state.LoginStatusReducer.loginStatusData
+    );
+
+    const [login,setLogin] = useState<boolean>(loginStateData);
+
+    useEffect(() => {
+        setLogin(loginStateData)
+    }, [loginStateData]);
+
+    const dispatch = useDispatch();
+
+    const logout = () =>{
+        dispatch(saveloginStatus(false));
+
+        console.log(loginStateData)
+    }
+    
     return (
         <Positioner>
             <Space width={50} height={0} />
@@ -64,7 +85,7 @@ export default function Header() {
             </Ranking>
 
             <Menu>
-                {isLogin ? 
+                {!login ? 
                 <>
                 <Join>
                     <StyledLinkBlack to='/join'>
@@ -85,9 +106,9 @@ export default function Header() {
                     </StyledLinkBlack>
                 </Profile>
                 <Logout>
-                    <StyledLinkBlack to='/'>
-                    로그아웃
-                    </StyledLinkBlack>
+                        <LogoutButton onClick={()=>logout()}>
+                            로그아웃
+                        </LogoutButton>
                 </Logout>
                 </>
             }
@@ -183,4 +204,11 @@ const Join = styled.div`
   margin-left: 20px;
   padding : 5px; 
   cursor : pointer;
+`
+
+const LogoutButton = styled.button`
+    border : 0px;
+    background : transparent;
+    cursor : pointer;
+    font-size : 17px;
 `

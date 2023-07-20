@@ -8,7 +8,7 @@ import google from '../assets/imgs/Google.png'
 import { saveloginStatus } from "../action/login_status";
 
 import { styled } from "styled-components";
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { useSelector , useDispatch} from "react-redux";
 import { RootState } from "../reducer/index";
 
@@ -23,6 +23,7 @@ export default function Login() {
         console.log(id);
         console.log(password);
         resetInput();
+        navigate(-1);
     }
 
     
@@ -32,10 +33,11 @@ export default function Login() {
     
     // 로그인 상태.
 
-    
     const loginStateData = useSelector(
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
+
+    const navigate = useNavigate();
     
     console.log(`login status : ${loginStateData}`);
 
@@ -48,11 +50,13 @@ export default function Login() {
 
     const testLogin : loginTypes = (id,pwd ) => {
         if (id === 'www' && pwd === 'aaa'){
-            console.log(`id : ${id} , pwd : ${pwd}`)
-            dispatch(saveloginStatus(true))
-            
+            console.log(`id : ${id} , pwd : ${pwd}`);
+            dispatch(saveloginStatus(true));
+            console.log(loginStateData);
+            navigate(-1);
         }
     }
+
     return(
         <Wrapper>
             <Header />
