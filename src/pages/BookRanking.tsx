@@ -1,16 +1,38 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Header from "../components/Header";
 import RankingContent from "../components/RankingContent";
 import RankingTitle from "../components/RankingTitle";
 import { Space } from "../styles/Space";
+import Login from "./Login";
 
 import { styled } from "styled-components";
+import { useLocation } from 'react-router-dom';
 
 
 export default function BookRanking(){
+        // 현재 주소
+        const location = useLocation();
+
+        // 로그인
+        const [login,setLogin] = useState<boolean>(false);
+
+        useEffect(() => {
+            setLogin(false)
+            console.log('로그인 실패')
+          }, [location]);
+
     return(
         <Wrapper>
-
+            {/* 로그인 실패시 & 비로그인 */}
+            {!login && (
+                <>
+                <Login />
+                </>
+            )}
+            
+            {/* 로그인 성공시 */}
+            {login && (
+            <>
             <Header />
             
             <Container>
@@ -32,7 +54,8 @@ export default function BookRanking(){
                 <RankingContent type={'rate'} />
 
             </Container>
-            
+            </>
+            )}
         </Wrapper>
         
     )

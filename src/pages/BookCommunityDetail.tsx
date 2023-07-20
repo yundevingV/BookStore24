@@ -1,17 +1,39 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
 import Test from '../assets/imgs/testbookcover.jpg'
 import EditButton from "../components/EditButton";
+import Login from "./Login";
 
 
 import { styled } from "styled-components";
+import { useLocation } from 'react-router-dom';
 
 
 export default function BookCommunityDetail() {
+    // 현재 주소
+    const location = useLocation();
+
+    // 로그인
+    const [login,setLogin] = useState<boolean>(false);
+
+    useEffect(() => {
+        setLogin(false)
+        console.log('로그인 실패')
+    }, [location]);
 
     return(
         <Wrapper>
+            {/* 로그인 실패시 & 비로그인 */}
+            {!login && (
+                <>
+                <Login />
+                </>
+            )}
+            
+            {/* 로그인 성공시 */}
+            {login && (
+            <>
             <Header />
             
             <Container >
@@ -71,6 +93,8 @@ export default function BookCommunityDetail() {
                     </OpenChatButton>
                 </ButtonContainer>
             </Container>
+            </>
+            )}
         </Wrapper>
     )
 }

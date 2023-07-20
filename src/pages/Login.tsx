@@ -1,11 +1,10 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Header from "../components/Header";
 import {StyledLink} from '../styles/link'
 import useInput from '../hooks/useInput';
 import naver from '../assets/imgs/Naver.jpg'
 import kakao from '../assets/imgs/Kakao.jpg'
 import google from '../assets/imgs/Google.png'
-
 
 import { styled } from "styled-components";
 import {Link} from 'react-router-dom';
@@ -22,39 +21,14 @@ export default function Login() {
         console.log(password);
         resetInput();
     }
+
     
     const naverLoginLink : string = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=B3RGNtinEp3Va8fysxkN&redirect_uri=http://bookstore24.shop/auth/naver/callback&state='test'";
     const kakaoLoginLink : string = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=http://bookstore24.shop/auth/kakao/callback';
     const googleLoginLink : string = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=http://bookstore24.shop/auth/google/callback&response_type=code&scope=openid%20email%20profile';
 
-    async function postData(id: string, password: string): Promise<void> {
-        try {
-          const response = await fetch('http://bookstore24.shop/loginForm', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              id: id,
-              password: password,
-            }),
-          });
-      
-          if (response.ok) {
-            const responseData = await response.json();
-            console.log('Response:', responseData);
-            // Process the response data as needed
-          } else {
-            throw new Error(`HTTP Error: ${response.status}`);
-          }
-        } catch (error) {
-          console.error(`Error:` );
-          // Handle the error appropriately
-        }
-      }
-      
 
-      
+
     return(
         <Wrapper>
             <Header />

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
@@ -6,6 +6,7 @@ import Item from "../components/ReviewItem";
 
 import { styled } from "styled-components";
 import { useLocation } from 'react-router-dom';
+import Login from "./Login";
 
 
 export default function BookStoreCommunity() {
@@ -13,8 +14,27 @@ export default function BookStoreCommunity() {
     // 현재 주소
     const location = useLocation();
 
+    //로그인
+    const [login,setLogin] = useState<boolean>(false);
+
+    useEffect(() => {
+        setLogin(false)
+        console.log('로그인 실패')
+      }, [location]);
+
     return(
+
         <Wrapper>
+            {/* 로그인 실패시 & 비로그인 */}
+            {!login && (
+                <>
+                <Login />
+                </>
+            )}
+
+            {/* 로그인 성공시 */}
+            {login && (
+            <>
             <Header />
             
             <Container >
@@ -26,6 +46,8 @@ export default function BookStoreCommunity() {
 
                 <Item />    
             </Container>
+            </>
+            )}
         </Wrapper>
     )
 }
