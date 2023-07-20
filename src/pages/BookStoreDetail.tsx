@@ -22,7 +22,7 @@ export default function BookStoreDetail() {
     }, [location]);
     return(
         <Wrapper>
-            {/* 로그인 실패시 & 비로그인 */}
+            {/* b   로그인 실패시 & 비로그인 */}
             {!login && (
                 <>
                 <Login />

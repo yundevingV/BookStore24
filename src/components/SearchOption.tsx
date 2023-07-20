@@ -10,7 +10,7 @@ export default function SearchOption(){
 
 
 
-    const [selectValue , setSelectValue] = useState<string>('제목')
+    const [selectValue , setSelectValue] = useState('제목')
 
     const handleChange = (e: { target: { value: React.SetStateAction<string>; }; } ) => {
         setSelectValue(e.target.value)

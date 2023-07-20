@@ -5,9 +5,12 @@ import useInput from '../hooks/useInput';
 import naver from '../assets/imgs/Naver.jpg'
 import kakao from '../assets/imgs/Kakao.jpg'
 import google from '../assets/imgs/Google.png'
+import { saveloginStatus } from "../action/login_status";
 
 import { styled } from "styled-components";
 import {Link} from 'react-router-dom';
+import { useSelector , useDispatch} from "react-redux";
+import { RootState } from "../reducer/index";
 
 export default function Login() {
 
@@ -26,9 +29,30 @@ export default function Login() {
     const naverLoginLink : string = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=B3RGNtinEp3Va8fysxkN&redirect_uri=http://bookstore24.shop/auth/naver/callback&state='test'";
     const kakaoLoginLink : string = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=http://bookstore24.shop/auth/kakao/callback';
     const googleLoginLink : string = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=http://bookstore24.shop/auth/google/callback&response_type=code&scope=openid%20email%20profile';
+    
+    // 로그인 상태.
 
+    
+    const loginStateData = useSelector(
+        (state: RootState) => state.LoginStatusReducer.loginStatusData
+    );
+    
+    console.log(`login status : ${loginStateData}`);
 
+    type loginTypes =(
+        id : string,
+        pwd : string,
+    ) => void;
 
+    const dispatch = useDispatch();
+
+    const testLogin : loginTypes = (id,pwd ) => {
+        if (id === 'www' && pwd === 'aaa'){
+            console.log(`id : ${id} , pwd : ${pwd}`)
+            dispatch(saveloginStatus(true))
+            
+        }
+    }
     return(
         <Wrapper>
             <Header />
@@ -116,9 +140,9 @@ export default function Login() {
                 <ButtonContainer> 
 
                 {/* 포스트 예시코드 */}
-                {/* <SubmitButton onClick={() => postData('ssar', '1234')}>
-                    log in
-                    </SubmitButton> */}
+                <SubmitButton onClick={() => testLogin('www', 'aaa')}>
+                    테스트 로그인
+                </SubmitButton>
 
                 </ButtonContainer>
             </LoginContainer>

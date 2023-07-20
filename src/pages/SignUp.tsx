@@ -4,40 +4,50 @@ import useInput from "../hooks/useInput";
 import FirstLogin from "../modal/FirstLogin";
 
 import { styled ,css } from "styled-components";
+import axios from "axios";
 
 
-export default function Join(){
+export default function SignUp(){
 
     //입력창 아이디 비번, 비번확인, 닉네임
-    const [ { id, password1,password2,nickname,email,validNumber }, onInputChange, resetInput ] = useInput({
+    const [ { id, pwd1,password2,nickname,email,validNumber }, onInputChange, resetInput ] = useInput({
         id: '',
-        password1: '',
+        pwd1: '',
         password2: '',
         email : '',
         vaildNumber:'',
     });
 
-    const submit = (e : React.MouseEvent) => {
-        console.log(id);
-        console.log(password1);
-        console.log(password2);
-        console.log(nickname);
-        console.log(email);
+    //회원가입 post
+    type signUpDataType = (
+        id : string,
+        pwd1 : string,
+        email : string
+     ) => void
 
-        console.log(nickname);
+    const SignUp : signUpDataType = (id,pwd1,email ) => {
+        axios.post('http://bookstore24.shop/local/signup',
+        {
+            "loginId" : id,
+            "loginPassword" : pwd1,
+            "email" : email,
+        }
+        )
+        .then(function (response) {
+            console.log(response);
+            resetInput();
+        })
+        .catch(function (error) {
 
-        resetInput();
-    }
-
-    // 데이터 통신 연습
-    // const [data, setData] = useState(null)
-
-    // useEffect(() => {
-    //   fetch('http://bookstore24.shop/api/v6/orders')
-    //     .then((res) => res.json())
-    //     .then((data) => setData(data))
-    // }, [])
-
+            console.log(`error : ${error}`);
+            if(error.response){
+                console.log(error.response);
+                alert(`${error.response.data}`);
+            }
+        });
+        
+        }
+    
     //모달 펼치기
     //모달은 결국 로그인 완료되면 나오게 설정할거임
 
@@ -48,8 +58,6 @@ export default function Join(){
         viewModal === true ? setViewModal(false) : setViewModal(true)
     }
 
-
-    
     return(
         <Wrapper>
             <Header />
@@ -71,9 +79,9 @@ export default function Join(){
                             value={id}
                             onChange={onInputChange} />
 
-                            <Button>
+                            {/* <Button>
                                 아이디 중복확인
-                            </Button>
+                            </Button> */}
                     </Form>
                 </InputContainer>
 
@@ -86,8 +94,8 @@ export default function Join(){
 
                         <Input password={true}
                             placeholder='비밀번호를 입력해주세요' 
-                            name="password1" 
-                            value={password1}
+                            name="pwd1" 
+                            value={pwd1}
                             onChange={onInputChange} />
 
 
@@ -120,13 +128,13 @@ export default function Join(){
                             value={email}
                             onChange={onInputChange} />
 
-                            <Button>
+                            {/* <Button>
                                 인증번호 전송
-                            </Button>
+                            </Button> */}
                     </Form>
                 </InputContainer>
                 
-                <InputContainer >
+                {/* <InputContainer >
 
                     <Form>
 
@@ -144,11 +152,11 @@ export default function Join(){
                                 인증번호 확인
                             </Button>
                     </Form>
-                </InputContainer>
+                </InputContainer> */}
 
                 <ButtonContainer>
 
-                    <SubmitButton onClick={submit}>
+                    <SubmitButton onClick={()=>SignUp(id,pwd1,email)}>
                         제출하기
                     </SubmitButton>
                     
@@ -161,6 +169,7 @@ export default function Join(){
         </Wrapper>  
     )
 }
+
 
 const Wrapper = styled.div`
 
@@ -218,7 +227,7 @@ const Form = styled.form`
 `
 
 const Input = styled.input <{password : boolean}>`
-width : 220px;
+width : 300px;
 height : 30px;
 
 margin : 10px;
@@ -287,7 +296,7 @@ padding : 5px;
 
 background-color: #ffffff;
 border : 2px solid #033bfa;
-border-radius : 24px;
+border-radius : 5px;
 color : #033bfa;
 
 font-family: tway, sans-serif, Arial;
