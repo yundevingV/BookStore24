@@ -7,7 +7,7 @@ type LoginStatusStateType = {
 }
 
 const initalState = {
-    loginStatusData : false,
+    loginStatusData : true,
 }
 
 type LoginStatusActionType =

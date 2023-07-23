@@ -11,6 +11,7 @@ import { styled } from "styled-components";
 import {useNavigate} from 'react-router-dom';
 import { useSelector , useDispatch} from "react-redux";
 import { RootState } from "../reducer/index";
+import axios from "axios";
 
 export default function Login() {
 
@@ -30,7 +31,25 @@ export default function Login() {
     const naverLoginLink : string = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=B3RGNtinEp3Va8fysxkN&redirect_uri=http://bookstore24.shop/auth/naver/callback&state='test'";
     const kakaoLoginLink : string = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=http://bookstore24.shop/auth/kakao/callback';
     const googleLoginLink : string = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=http://bookstore24.shop/auth/google/callback&response_type=code&scope=openid%20email%20profile';
-    
+    const kakaoLogin = () =>{
+        axios.get('https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=http://bookstore24.shop/auth/kakao/callback',
+        {
+            
+        }
+        )
+        .then(function (response) {
+            console.log(response);
+            resetInput();
+        })
+        .catch(function (error) {
+
+            console.log(`error : ${error}`);
+            if(error.response){
+                console.log(error.response);
+                alert(`${error.response.data}`);
+            }
+        });
+    }
     // 로그인 상태.
 
     const loginStateData = useSelector(
@@ -55,6 +74,26 @@ export default function Login() {
             console.log(loginStateData);
             navigate(-1);
         }
+    }
+
+    const login : loginTypes = (id,pwd) => {
+        axios.post('url',
+        {
+            loginId : id,
+            loginPassword : pwd,
+        }
+        )
+        .then(function (response) {
+            console.log(response);
+        })
+        
+        .catch(function (error) {
+            console.log(`error : ${error}`);
+            if(error.response){
+                console.log(error.response);
+                alert(`${error.response.data}`);
+            }
+        });
     }
 
     return(
@@ -150,6 +189,7 @@ export default function Login() {
 
                 </ButtonContainer>
             </LoginContainer>
+            <button onClick={()=>kakaoLogin()} />
         </Wrapper>
     )
 }

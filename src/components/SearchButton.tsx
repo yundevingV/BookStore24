@@ -1,14 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-type SearchButtonProps = {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-};
 
-export default function SearchButton({ onClick }: SearchButtonProps) {
+
+export default function SearchButton() {
     return (
     <>
-        <Button onClick={onClick}>
+        <Button >
         <span role="img" aria-label="search">
             🔎
         </span>

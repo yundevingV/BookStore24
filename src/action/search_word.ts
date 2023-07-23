@@ -4,7 +4,7 @@ interface saveSearchWordPropsType {
     searchWord : string;
 }
 
-export function saveSearchWord({searchWord} : saveSearchWordPropsType){
+export function saveSearchWord(searchWord : string){
     return{
         type : SAVE_SEARCH_WORD,
         payload : searchWord,

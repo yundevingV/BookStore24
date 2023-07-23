@@ -175,35 +175,35 @@ const Menu = styled.div`
 `
 
 const Login = styled.div`
-  display: inline-block;
-  margin-left: 20px;
-  padding : 5px; 
+    display: inline-block;
+    margin-left: 20px;
+    padding : 5px; 
 
-  cursor : pointer;
+    cursor : pointer;
 
 `
 
 const Logout = styled.div`
-  display: inline-block;
-  margin-left: 20px;
-  padding : 5px; 
+    display: inline-block;
+    margin-left: 20px;
+    padding : 5px; 
 
-  cursor : pointer;
+    cursor : pointer;
 `
 
 const Profile = styled.div`
-  display: inline-block;
-  margin-left: 20px;
-  padding : 5px; 
-  cursor : pointer;
+    display: inline-block;
+    margin-left: 20px;
+    padding : 5px; 
+    cursor : pointer;
 
 `
 
 const Join = styled.div`
-  display: inline-block;
-  margin-left: 20px;
-  padding : 5px; 
-  cursor : pointer;
+    display: inline-block;
+    margin-left: 20px;
+    padding : 5px; 
+    cursor : pointer;
 `
 
 const LogoutButton = styled.button`

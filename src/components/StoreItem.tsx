@@ -32,7 +32,7 @@ function ItemList(){
 
                 <RContainer>
                 <Name>
-                    책이름
+                    이것이 코딩테스트다.
                 </Name>
 
                 <Price>

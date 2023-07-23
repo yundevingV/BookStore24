@@ -9,6 +9,7 @@ import { styled } from "styled-components";
 import { StyledButtonLink } from "../styles/link";
 import { useSelector } from "react-redux";
 import { RootState } from "../reducer/index";
+import React from "react";
 
 type NavbarProps = {
     text : string;
@@ -27,23 +28,25 @@ export default function Navbar({text,url} : NavbarProps ){
     );
 
 
-    const submit = (e : React.MouseEvent) => {
-
-        // let filterList = books.filter(item => item.name.includes(searchWord) && searchWord !== '')
-
-        console.log(searchWordData)
+    const submit = (e: React.MouseEvent,searchWordData :string) => {
+        e.preventDefault(); // Prevent the default form submission behavior
+        console.log(searchWordData);
+        console.log(searchOptionData)
     }
 
     return(
         <>
         <NavContainer>
-                <Form>
+                <Form onSubmit={(e : any) => submit(e, searchWordData)}>
 
                     <SearchOption />
 
                     <SearchBar 
                         />
-                    <SearchButton onClick={submit} />                   
+                    
+
+                    <SearchButton />     
+
                     <StyledButtonLink to={url + 'add'}>
                         <PostButton text={text} />
                     </StyledButtonLink>

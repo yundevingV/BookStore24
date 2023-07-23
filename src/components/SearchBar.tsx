@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useInput from "../hooks/useInput";
 import { saveSearchWord } from "../action/search_word";
 
 import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../reducer/index";
 
 
 export default function SearchBar(){
@@ -13,9 +14,12 @@ export default function SearchBar(){
     //검색창
     const [ {searchWord}, onInputChange, resetInput ] = useInput({
         searchWord : '',
+        
     });
 
-    dispatch(saveSearchWord(searchWord))
+    useEffect(() => {
+        dispatch(saveSearchWord(searchWord));
+        }, [dispatch,searchWord]);    
 
     return(
         <>
