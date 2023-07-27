@@ -2,14 +2,23 @@ import React from "react";
 import Test from '../assets/imgs/testbookcover.jpg'
 import { StyledLink } from "../styles/link";
 
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
+import { RootState } from "../reducer/index";
 
 import styled from "styled-components";
 
 
 function ItemList(){
-    
+
+    const searchWordData = useSelector(
+        (state: RootState) => state.searchWordReducer.searchWordData
+    );
+
+    if (searchWordData.includes('a'))
+    {
+        console.log('a');
+    }
+
     return(
         <>
             
