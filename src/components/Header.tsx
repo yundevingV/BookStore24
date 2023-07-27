@@ -88,7 +88,7 @@ export default function Header() {
                 {!login ? 
                 <>
                 <Join>
-                    <StyledLinkBlack to='/join'>
+                    <StyledLinkBlack to='/signup'>
                     회원가입
                     </StyledLinkBlack>
                 </Join>

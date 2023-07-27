@@ -31,6 +31,10 @@ export default function Login() {
     const naverLoginLink : string = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=B3RGNtinEp3Va8fysxkN&redirect_uri=http://bookstore24.shop/auth/naver/callback&state='test'";
     const kakaoLoginLink : string = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=http://bookstore24.shop/auth/kakao/callback';
     const googleLoginLink : string = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=http://bookstore24.shop/auth/google/callback&response_type=code&scope=openid%20email%20profile';
+
+    const getToken = ()=>{
+
+    }
     const kakaoLogin = () =>{
         axios.get('https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=http://bookstore24.shop/auth/kakao/callback',
         {
@@ -77,14 +81,39 @@ export default function Login() {
     }
 
     const login : loginTypes = (id,pwd) => {
-        axios.post('url',
+        axios.post('http://bookstore24.shop/login',
         {
             loginId : id,
             loginPassword : pwd,
-        }
+        },
         )
         .then(function (response) {
             console.log(response);
+
+            localStorage.setItem('token', response.headers.authorization);
+
+            // 유저인증
+            axios.get('http://bookstore24.shop/user',
+            {
+                headers : {
+            
+                authorization : response.headers.authorization
+            }
+            },
+            
+            )
+            .then(function (response) {
+                console.log(response);
+            })
+            
+            .catch(function (error) {
+                console.log(`error : ${error}`);
+                if(error.response){
+                    console.log(error.response);
+                    alert(`${error.response.data}`);
+                }
+            });
+
         })
         
         .catch(function (error) {
@@ -95,6 +124,9 @@ export default function Login() {
             }
         });
     }
+
+
+    
 
     return(
         <Wrapper>
@@ -176,7 +208,7 @@ export default function Login() {
                 </MenuContainer>
 
                 <ButtonContainer> 
-                    <SubmitButton onClick={submit} >
+                    <SubmitButton onClick={()=>login(id,password)} >
                         로그인하기
                     </SubmitButton>
                 </ButtonContainer>
@@ -189,7 +221,6 @@ export default function Login() {
 
                 </ButtonContainer>
             </LoginContainer>
-            <button onClick={()=>kakaoLogin()} />
         </Wrapper>
     )
 }
