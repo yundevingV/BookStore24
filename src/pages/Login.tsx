@@ -27,33 +27,16 @@ export default function Login() {
         navigate(-1);
     }
 
-    
-    const naverLoginLink : string = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=B3RGNtinEp3Va8fysxkN&redirect_uri=http://bookstore24.shop/auth/naver/callback&state='test'";
-    const kakaoLoginLink : string = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=http://bookstore24.shop/auth/kakao/callback';
-    const googleLoginLink : string = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=http://bookstore24.shop/auth/google/callback&response_type=code&scope=openid%20email%20profile';
+    const kakao_redirect_uri = 'http://localhost:3000/auth/kakao' //Redirect URI
+    const naver_redirect_uri = 'http://localhost:3000/auth/naver' //Redirect URI
+    const google_redirect_uri = 'http://localhost:3000/auth/google' //Redirect URI
 
-    const getToken = ()=>{
+    const naverLoginLink : string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=B3RGNtinEp3Va8fysxkN&redirect_uri=${naver_redirect_uri}`;
+    const kakaoLoginLink : string = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=${kakao_redirect_uri}`;
+    const googleLoginLink : string = `https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=${google_redirect_uri}&response_type=code&scope=openid%20email%20profile`;
 
-    }
-    const kakaoLogin = () =>{
-        axios.get('https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=http://bookstore24.shop/auth/kakao/callback',
-        {
-            
-        }
-        )
-        .then(function (response) {
-            console.log(response);
-            resetInput();
-        })
-        .catch(function (error) {
 
-            console.log(`error : ${error}`);
-            if(error.response){
-                console.log(error.response);
-                alert(`${error.response.data}`);
-            }
-        });
-    }
+
     // 로그인 상태.
 
     const loginStateData = useSelector(
@@ -124,9 +107,6 @@ export default function Login() {
             }
         });
     }
-
-
-    
 
     return(
         <Wrapper>
@@ -221,6 +201,7 @@ export default function Login() {
 
                 </ButtonContainer>
             </LoginContainer>
+
         </Wrapper>
     )
 }
