@@ -1,11 +1,13 @@
 import React,{useEffect} from "react";
 
 import axios from "axios";
+import {useNavigate} from 'react-router-dom';
 
 export default function Google(){
 
     const code : string | null = new URL(window.location.href).searchParams.get("code");
-    console.log(code)
+    const navigate = useNavigate();
+
     
     useEffect(() => {
         axios.post(
@@ -14,6 +16,7 @@ export default function Google(){
         .then(response => {
             // Handle the response
             console.log('Response:', response.data);
+            navigate(-1);
         })
         .catch(error => {
         // Handle errors

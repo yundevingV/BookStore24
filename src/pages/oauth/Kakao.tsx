@@ -1,8 +1,11 @@
 import React,{useEffect} from "react";
 
 import axios from "axios";
+import {useNavigate} from 'react-router-dom';
 
 export default function Kakao(){
+
+    const navigate = useNavigate();
 
     const code : string | null = new URL(window.location.href).searchParams.get("code");
 
@@ -13,6 +16,7 @@ export default function Kakao(){
         .then(response => {
             // Handle the response
             console.log('Response:', response.data);
+            navigate(-1);
         })
         .catch(error => {
         // Handle errors
@@ -22,7 +26,7 @@ export default function Kakao(){
 
     return(
         <>
-        카카오
+        
 
         </>
     )
