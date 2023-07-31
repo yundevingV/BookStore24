@@ -72,7 +72,7 @@ export default function Login() {
         )
         .then(function (response) {
             console.log(response);
-
+            console.log(response.headers);
             localStorage.setItem('token', response.headers.authorization);
 
             // 유저인증
@@ -86,6 +86,7 @@ export default function Login() {
             
             )
             .then(function (response) {
+                navigate(-1);
                 console.log(response);
             })
             
@@ -171,7 +172,7 @@ export default function Login() {
 
                 <MenuContainer>
                     <Menu>
-                        <StyledLink to='/join'>
+                        <StyledLink to='/signup'>
                             회원 가입 
                         </StyledLink>
                     </Menu>

@@ -9,6 +9,7 @@ import { Space } from "../styles/Space";
 import { useLocation } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
 import { RootState } from "../reducer/index";
+import { getCookie } from "./Cookie";
 
 export default function Header() {
 
@@ -17,6 +18,9 @@ export default function Header() {
     const loginStateData = useSelector(
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
+
+    const cookie = getCookie('jwt') 
+    console.log(cookie);
 
     const [login,setLogin] = useState<boolean>(loginStateData);
 
