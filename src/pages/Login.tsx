@@ -12,6 +12,7 @@ import {useNavigate} from 'react-router-dom';
 import { useSelector , useDispatch} from "react-redux";
 import { RootState } from "../reducer/index";
 import axios from "axios";
+import { setCookie } from "../components/Cookie";
 
 export default function Login() {
 
@@ -60,6 +61,7 @@ export default function Login() {
             dispatch(saveloginStatus(true));
             console.log(loginStateData);
             navigate(-1);
+            setCookie('jwt','res');
         }
     }
 
@@ -73,8 +75,9 @@ export default function Login() {
         .then(function (response) {
             console.log(response);
             console.log(response.headers);
-            localStorage.setItem('token', response.headers.authorization);
+            const token = response.headers.authorization 
 
+            setCookie('jwt',token)
             // 유저인증
             axios.get('http://bookstore24.shop/user',
             {

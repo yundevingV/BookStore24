@@ -4,6 +4,7 @@ import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 import { setCookie } from "../../components/Cookie";
 import base64 from 'base-64';
+
 export default function Google(){
 
     const code : string | null = new URL(window.location.href).searchParams.get("code");
@@ -16,6 +17,7 @@ export default function Google(){
             `http://61.79.215.100/auth/google/callback?Authorization_code=${code}`,
         )
         .then(response => {
+            console.log(response.status)
             // 토큰 획득
             const token = response.headers.authorization 
             console.log(token);
@@ -26,7 +28,10 @@ export default function Google(){
             let dec = JSON.parse(base64.decode(payload));
             console.log(dec);
 
-
+            if(dec.nickName === null){
+                navigate('/');
+            }
+            
             axios.get(`http://61.79.215.100/user`,
             
             {

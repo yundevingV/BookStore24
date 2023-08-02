@@ -2,7 +2,7 @@ import React,{useEffect, useState} from "react";
 
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
-import { setCookie } from "../../components/Cookie";
+import { getCookie, setCookie } from "../../components/Cookie";
 import base64 from 'base-64';
 
 
@@ -18,33 +18,24 @@ export default function Kakao(){
             `http://61.79.215.100/auth/kakao/callback?Authorization_code=${code}`,
         )
         .then(response => {
+
+            // 상태코드
+            console.log(response.status)
+
             // 토큰 획득
             const token = response.headers.authorization 
-            console.log(token);
+            console.log(`token : ${token}`);
             
-            setCookie('jwt', token, { path : '/'});   
+            // 토큰 쿠키 저장
+            setCookie('jwt', token);   
+            console.log(`cookie : ${getCookie('jwt')}`);
 
+            // 토큰해독
             let payload = token.substring(token.indexOf('.')+1,token.lastIndexOf('.')); 
             let dec = JSON.parse(base64.decode(payload));
+
             console.log(dec);
 
-            axios.get(`http://61.79.215.100/user`,
-            
-            {
-                
-                headers : {
-
-                    'Authorization' : token
-                }
-            }
-            )
-            .then(response =>{
-                console.log(`Response : ${response.data}`)
-                navigate(-1);
-            })
-            .catch(error => {
-                console.log('Error:', error);
-            })
         })
         .catch(error => {
         console.error('Error:', error);
@@ -54,7 +45,26 @@ export default function Kakao(){
 
         });
 
+        
+
     }, [code]);
+
+    useEffect(()=>{
+        // 유저인증
+        axios.get(`http://61.79.215.100/user`,
+            {
+                headers : {
+                    'Authorization' : getCookie('jwt')
+                }
+            }
+            )
+            .then(response =>{
+                console.log(`Response : ${response.data}`)
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            })
+    },[])
 
     return(
         <>

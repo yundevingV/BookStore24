@@ -1,16 +1,21 @@
 import React ,{useState} from "react";
 
 import { styled } from "styled-components";
+import { useDispatch } from "react-redux";
+import { saveDropDownValue } from "../action/dropdown_value";
 
 export default function Dropdown() {
 
     // 거주지역 선택 더미 데이터
     const list = ["서울", "인천", "경기도"];
-    
+    const value = ["seoul","incheon","gyeonggi"]
 
     const [active, setActive] = useState(false); // 리스트가 열려있는지 확인
     const [selected, setSelected] = useState(list[0]); // 선택된 값을 selected에 담아 컴포넌트 간에 공유
+    
+    const dispatch = useDispatch();
 
+    console.log(selected);
 
     return (
     // StyledSelectbox = button, ul을 담는 전체 div
@@ -30,6 +35,8 @@ export default function Dropdown() {
             onClick={() => { // 클릭되면 active를 끄고 element로 선택된 값을 변경함.
                 setActive(false);
                 setSelected(element);
+                let idx = list.indexOf(element)
+                dispatch(saveDropDownValue(value[idx]));
             }}
             > 
             {/* li에 들어갈 리스트들 */}

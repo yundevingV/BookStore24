@@ -1,8 +1,17 @@
 import React from "react"
 import useInput from "../hooks/useInput";
 import Dropdown from "../components/Dropdown";
+import { closeModal } from "../action/firstlogin";
 
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../reducer/index";
+import { useNavigate } from "react-router";
+
+import axios from "axios";
+import { getCookie} from "../components/Cookie";
+
+
 
 type ViewProps = {
     viewModal : boolean;
@@ -11,21 +20,49 @@ type ViewProps = {
 }
 
 export default function FirstLogin({viewModal , setViewModal} : ViewProps){
-    console.log(viewModal);
+  const dispatch = useDispatch();
 
-    const closeModal = (e : React.MouseEvent) => {
-        setViewModal(false);
-    }
+  const closeModalData = useSelector(
+      (state: RootState) => state.closeModal.closeModalData
+  );
 
     const [ { nickname}, onInputChange, resetInput ] = useInput({
       nickname : '',
   });
 
+  const dropDownValueData = useSelector(
+    (state: RootState) => state.DropDownValueReducer.dropDownValueData
+);
+
+
   const submit = (e : React.MouseEvent) => {
 
-      console.log(nickname);
+      axios.post('http://61.79.215.100/member/save/nicknameresidence'
+      ,
+      {
+  
+        "nickname" : nickname,
+        "residence" : dropDownValueData
+    
+      },
 
-      resetInput();
+      {
+      headers : {
+        "Content-Type" : "application/json; charset=utf-8",
+        'Authorization' : getCookie('jwt')
+      }
+      }
+    )
+
+      .then(response => {
+        dispatch(closeModal(false));
+        console.log(response.status);
+        
+    })
+    .catch(error => {
+    console.log(`에러 사유 : ${error}`)
+
+    });
   }
     return(
         <ModalBackground>
@@ -57,12 +94,8 @@ export default function FirstLogin({viewModal , setViewModal} : ViewProps){
             </Residence>
 
             <SubmitButtonContainer>
-              <SubmitButton > 등록하기 </SubmitButton>
+              <SubmitButton onClick={submit}> 등록하기 </SubmitButton>
             </SubmitButtonContainer>
-
-            <Button onClick={closeModal}> X </Button>
-
-
 
         </Container>
         </ModalBackground>

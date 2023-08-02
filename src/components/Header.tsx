@@ -9,7 +9,8 @@ import { Space } from "../styles/Space";
 import { useLocation } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
 import { RootState } from "../reducer/index";
-import { getCookie } from "./Cookie";
+import { getCookie,  } from "./Cookie";
+import { useCookies } from 'react-cookie'; // 리액트 쿠키 임포트 해주자
 
 export default function Header() {
 
@@ -19,8 +20,7 @@ export default function Header() {
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
 
-    const cookie = getCookie('jwt') 
-    console.log(cookie);
+    
 
     const [login,setLogin] = useState<boolean>(loginStateData);
 

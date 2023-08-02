@@ -10,6 +10,10 @@ import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../reducer/index";
 
+import { setCookie,getCookie } from "../components/Cookie";
+import { useCookies } from "react-cookie";
+
+
 export default function BookRanking(){
         // 현재 주소
         const location = useLocation();
@@ -25,8 +29,33 @@ export default function BookRanking(){
             setLogin(loginStateData)
         }, [loginStateData]);
 
+
+        // test
+
+
+        let testToken = 'abc'
+        
+        const set= () => {
+            setCookie('test', testToken, { path : '/'}); 
+            console.log(getCookie('test'))
+        }
+
+        const get = () =>{
+            getCookie('test')
+            console.log(cookie)
+
+        }
+
+        let cookie = getCookie('test')
+
+        const [, , removeCookie] = useCookies([cookie]);
+
+        
+
     return(
+        
         <Wrapper>
+
             {/* 로그인 실패시 & 비로그인 */}
             {!login && (
                 <>
@@ -37,8 +66,9 @@ export default function BookRanking(){
             {/* 로그인 성공시 */}
             {login && (
             <>
-            <Header />
             
+            <Header />
+
             <Container>
 
                 <Space width={0} height={50} />
@@ -60,6 +90,12 @@ export default function BookRanking(){
             </Container>
             </>
             )}
+            <button onClick={()=>set()}> 
+                set cookie
+            </button>
+            <button onClick={()=>get()}> 
+                gett cookie
+            </button>
         </Wrapper>
         
     )
