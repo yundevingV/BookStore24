@@ -6,8 +6,9 @@ import MainRankingRating from "../components/MainRankingRating";
 
 import { styled } from "styled-components";
 import { Space } from "../styles/Space";
-import { getCookie } from "../components/Cookie";
+import { getCookie,removeCookie } from "../components/Cookie";
 import base64 from 'base-64';
+import Cookies from "universal-cookie";
 
 
 
@@ -15,21 +16,26 @@ export default function Main(){
 
 
     // 토큰해독
-    let token = getCookie('jwt')
-    let payload = token.substring(token.indexOf('.')+1,token.lastIndexOf('.')); 
-    let dec = JSON.parse(base64.decode(payload));
+    // let token = getCookie('jwt')
+    // let payload = token.substring(token.indexOf('.')+1,token.lastIndexOf('.')); 
+    // let dec = JSON.parse(base64.decode(payload));
 
-    console.log(dec);
+    // console.log(dec);
+
+    const isAuthenticated = getCookie('jwt');
+    console.log(isAuthenticated)
+    
+
 
     return(
         <Wrapper>
+
             <Header />
             <Carousel />
             <Space width={0} height={100} />
             <MainRankingView />
             <Space width={0} height={200} />
             <MainRankingRating />
-
 
         </Wrapper>  
     )

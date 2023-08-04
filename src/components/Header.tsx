@@ -11,7 +11,7 @@ import { Space } from "../styles/Space";
 import { useLocation } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
 import { RootState } from "../reducer/index";
-import { getCookie,  } from "./Cookie";
+import { getCookie, removeCookie,  } from "./Cookie";
 import { useCookies } from 'react-cookie'; // 리액트 쿠키 임포트 해주자
 import axios from "axios";
 
@@ -33,8 +33,7 @@ export default function Header() {
 
     const logout = () =>{
         dispatch(saveloginStatus(false));
-
-        console.log(loginStateData)
+        removeCookie('jwt');
     }
 
     //모달 펼치기
@@ -57,7 +56,7 @@ export default function Header() {
             console.log(response.status);
             console.log(response);
             console.log(getCookie('jwt'));
-            
+
         })
         .catch(error => {
         console.log(`에러 사유 : ${error}`)
@@ -72,8 +71,9 @@ export default function Header() {
         
         
         <Positioner>
-            {openModalData&&
+            {openModalData&&loginStateData&&
             <FirstLogin />}
+            
             <Space width={50} height={0} />
             <Logo>
                 <StyledLink to='/'>

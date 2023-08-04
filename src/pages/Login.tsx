@@ -73,17 +73,21 @@ export default function Login() {
         },
         )
         .then(function (response) {
+
             console.log(response);
             console.log(response.headers);
+
             const token = response.headers.authorization 
 
             setCookie('jwt',token)
+            dispatch(saveloginStatus(true));
+
             // 유저인증
             axios.get('http://bookstore24.shop/user',
             {
                 headers : {
             
-                authorization : response.headers.authorization
+                authorization : token
             }
             },
             

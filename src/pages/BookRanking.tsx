@@ -29,29 +29,6 @@ export default function BookRanking(){
             setLogin(loginStateData)
         }, [loginStateData]);
 
-
-        // test
-
-
-        let testToken = 'abc'
-        
-        const set= () => {
-            setCookie('test', testToken, { path : '/'}); 
-            console.log(getCookie('test'))
-        }
-
-        const get = () =>{
-            getCookie('test')
-            console.log(cookie)
-
-        }
-
-        let cookie = getCookie('test')
-
-        const [, , removeCookie] = useCookies([cookie]);
-
-        
-
     return(
         
         <Wrapper>
@@ -90,12 +67,7 @@ export default function BookRanking(){
             </Container>
             </>
             )}
-            <button onClick={()=>set()}> 
-                set cookie
-            </button>
-            <button onClick={()=>get()}> 
-                gett cookie
-            </button>
+
         </Wrapper>
         
     )
