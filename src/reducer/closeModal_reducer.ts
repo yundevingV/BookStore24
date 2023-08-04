@@ -7,7 +7,7 @@ type closeModalType = {
 }
 
 const initalState = {
-    closeModalData : true,
+    closeModalData : false,
 }
 
 type closeModalActionType =

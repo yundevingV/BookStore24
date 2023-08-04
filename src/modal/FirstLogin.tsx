@@ -11,20 +11,9 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { getCookie} from "../components/Cookie";
 
-
-
-type ViewProps = {
-    viewModal : boolean;
-    setViewModal: React.Dispatch<React.SetStateAction<boolean>>;
-
-}
-
-export default function FirstLogin({viewModal , setViewModal} : ViewProps){
+export default function FirstLogin(){
   const dispatch = useDispatch();
 
-  const closeModalData = useSelector(
-      (state: RootState) => state.closeModal.closeModalData
-  );
 
     const [ { nickname}, onInputChange, resetInput ] = useInput({
       nickname : '',
@@ -34,10 +23,9 @@ export default function FirstLogin({viewModal , setViewModal} : ViewProps){
     (state: RootState) => state.DropDownValueReducer.dropDownValueData
 );
 
+  const save_NickNameResidence = (e : React.MouseEvent) => {
 
-  const submit = (e : React.MouseEvent) => {
-
-      axios.post('http://61.79.215.100/member/save/nicknameresidence'
+      axios.post('http://61.79.215.100/member/nicknameresidence/save'
       ,
       {
   
@@ -61,6 +49,12 @@ export default function FirstLogin({viewModal , setViewModal} : ViewProps){
     })
     .catch(error => {
     console.log(`에러 사유 : ${error}`)
+    console.log(error.response)
+    if(error.response.data === 'duplicate Nickname'){
+      alert('닉네임이 중복되었습니다!')
+    } else {
+      alert('거주지가 유효하지 않습니다!')
+    }
 
     });
   }
@@ -93,9 +87,9 @@ export default function FirstLogin({viewModal , setViewModal} : ViewProps){
               </DropdownContainer>
             </Residence>
 
-            <SubmitButtonContainer>
-              <SubmitButton onClick={submit}> 등록하기 </SubmitButton>
-            </SubmitButtonContainer>
+            <NickNameResidenceButtonContainer>
+              <NickNameResidenceButton onClick={save_NickNameResidence}> 등록하기 </NickNameResidenceButton>
+            </NickNameResidenceButtonContainer>
 
         </Container>
         </ModalBackground>
@@ -214,14 +208,14 @@ const Button = styled.button`
 
 `
 
-const SubmitButtonContainer = styled.div`
+const NickNameResidenceButtonContainer = styled.div`
   position: absolute;
   top : 400px;
   width : 100%;
   text-align : center;  
 `
   
-const SubmitButton = styled.button`
+const NickNameResidenceButton = styled.button`
 //기본 크기가 input > button
 width : 200px;
 height : 30px;

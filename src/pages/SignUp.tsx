@@ -5,6 +5,7 @@ import FirstLogin from "../modal/FirstLogin";
 
 import { styled ,css } from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 
 export default function SignUp(){
@@ -25,6 +26,8 @@ export default function SignUp(){
         email : string
      ) => void
 
+    const navigate = useNavigate();
+
     const SignUp : signUpDataType = (id,pwd1,email ) => {
         axios.post('http://bookstore24.shop/local/signup',
         {
@@ -35,6 +38,7 @@ export default function SignUp(){
         )
         .then(function (response) {
             console.log(response);
+            navigate('/login');
             resetInput();
         })
         .catch(function (error) {
@@ -47,16 +51,6 @@ export default function SignUp(){
         });
         
         }
-    
-    //모달 펼치기
-    //모달은 결국 로그인 완료되면 나오게 설정할거임
-
-    const [viewModal , setViewModal] = useState(false);
-
-    const openModal = (e : React.MouseEvent) => {
-        
-        viewModal === true ? setViewModal(false) : setViewModal(true)
-    }
 
     return(
         <Wrapper>
@@ -162,10 +156,7 @@ export default function SignUp(){
                     
                 </ButtonContainer>
             </JoinContainer>
-            <button onClick={openModal}>
-                Test
-            </button>
-            {viewModal && <FirstLogin viewModal={viewModal} setViewModal={setViewModal}/>}
+
         </Wrapper>  
     )
 }

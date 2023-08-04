@@ -1,6 +1,8 @@
 //내부
 import React,{useState,useEffect} from "react";
 import { saveloginStatus } from "../action/login_status";
+import FirstLogin from "../modal/FirstLogin";
+import { closeModal } from "../action/firstlogin";
 
 //외부
 import styled from "styled-components";
@@ -11,6 +13,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { RootState } from "../reducer/index";
 import { getCookie,  } from "./Cookie";
 import { useCookies } from 'react-cookie'; // 리액트 쿠키 임포트 해주자
+import axios from "axios";
 
 export default function Header() {
 
@@ -19,8 +22,6 @@ export default function Header() {
     const loginStateData = useSelector(
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
-
-    
 
     const [login,setLogin] = useState<boolean>(loginStateData);
 
@@ -35,9 +36,45 @@ export default function Header() {
 
         console.log(loginStateData)
     }
-    
+
+    //모달 펼치기
+    const [viewModal , setViewModal] = useState(false);
+
+    const closeModalData = useSelector(
+        (state: RootState) => state.closeModal.closeModalData
+    );
+
+    useEffect(()=>{
+        axios.get('http://61.79.215.100/member/nicknameresidence/check'
+        ,
+        {
+        
+        headers : {
+            "Content-Type" : "application/json; charset=utf-8",
+            'Authorization' : getCookie('jwt')
+        }
+        })
+
+        .then(response => {
+            console.log(response.status);
+            console.log(response)
+            
+        })
+        .catch(error => {
+        console.log(`에러 사유 : ${error}`)
+        console.log(error.response.data);
+
+        dispatch(closeModal(true));
+
+        });
+    },[dispatch])
+
     return (
+        
+        
         <Positioner>
+            {closeModalData&&
+            <FirstLogin />}
             <Space width={50} height={0} />
             <Logo>
                 <StyledLink to='/'>
