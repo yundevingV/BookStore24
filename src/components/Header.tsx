@@ -2,7 +2,7 @@
 import React,{useState,useEffect} from "react";
 import { saveloginStatus } from "../action/login_status";
 import FirstLogin from "../modal/FirstLogin";
-import { closeModal } from "../action/firstlogin";
+import { openModal } from "../action/modal";
 
 //외부
 import styled from "styled-components";
@@ -38,10 +38,8 @@ export default function Header() {
     }
 
     //모달 펼치기
-    const [viewModal , setViewModal] = useState(false);
-
-    const closeModalData = useSelector(
-        (state: RootState) => state.closeModal.closeModalData
+    const openModalData = useSelector(
+        (state: RootState) => state.openModal.openModalData
     );
 
     useEffect(()=>{
@@ -57,14 +55,15 @@ export default function Header() {
 
         .then(response => {
             console.log(response.status);
-            console.log(response)
+            console.log(response);
+            console.log(getCookie('jwt'));
             
         })
         .catch(error => {
         console.log(`에러 사유 : ${error}`)
         console.log(error.response.data);
 
-        dispatch(closeModal(true));
+        dispatch(openModal(true));
 
         });
     },[dispatch])
@@ -73,7 +72,7 @@ export default function Header() {
         
         
         <Positioner>
-            {closeModalData&&
+            {openModalData&&
             <FirstLogin />}
             <Space width={50} height={0} />
             <Logo>

@@ -1,7 +1,7 @@
 import React from "react"
 import useInput from "../hooks/useInput";
 import Dropdown from "../components/Dropdown";
-import { closeModal } from "../action/firstlogin";
+import { openModal } from "../action/modal";
 
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -43,7 +43,7 @@ export default function FirstLogin(){
     )
 
       .then(response => {
-        dispatch(closeModal(false));
+        dispatch(openModal(false));
         console.log(response.status);
         
     })

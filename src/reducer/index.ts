@@ -4,14 +4,14 @@ import searchOptionReducer from "./search_option_reducer";
 import searchWordReducer from "./search_word_reducer";
 import LoginStatusReducer from "./login_status_reducer";
 import DropDownValueReducer from "./dropdown_value_reducer";
-import closeModal  from "./closeModal_reducer";
+import openModal  from "./openModal_reducer";
 
 const rootReducer = combineReducers({
   searchOptionReducer,
   searchWordReducer,
   LoginStatusReducer,
   DropDownValueReducer,
-  closeModal
+  openModal
   
 });
 
