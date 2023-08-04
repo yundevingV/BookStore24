@@ -8,25 +8,52 @@ import { StyledButtonLink } from "../styles/link";
 
 
 import { styled } from "styled-components";
+import axios from "axios";
+import { getCookie } from "../components/Cookie";
+import { useSelector} from "react-redux";
+import { RootState } from "../reducer/index";
 
 export default function EditProfile() {
+
     //입력창 이메일
     const [ { nickname }, onInputChange, resetInput ] = useInput({
         //기존 닉네임 받아오기!
         nickname : '',
     });
 
-    const submit = (e : React.MouseEvent) => {
-        console.log('ok');
-        resetInput();
-    }
+    const dropDownValueData = useSelector(
+        (state: RootState) => state.DropDownValueReducer.dropDownValueData
+    );
+    
+    const submit = (e: React.MouseEvent) => {
+        e.preventDefault(); // Prevent the default form submission behavior.
 
-    const [viewModal , setViewModal] = useState<boolean>(false);
-
-    const openModal = (e : React.MouseEvent) => {
+        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
         
-        viewModal === true ? setViewModal(false) : setViewModal(true)
-    }
+        // Data to be sent in the request body.
+        const data = {
+            "residence":  dropDownValueData,
+
+        };
+        
+        // Axios configuration for the POST request.
+        const config = {
+            headers: {
+            Authorization: jwt,
+            },
+        };
+        
+        axios
+            .post(`http://61.79.215.100/member/profile/residence/edit/save`, data, config)
+            .then((response) => {
+            console.log(`Response : ${JSON.stringify(data)}`);
+            })
+            .catch((error) => {
+            console.log('Error:', error.response.data);
+            });
+        
+        resetInput();
+        };
     return(
         <Wrapper>
             <Header />
@@ -84,8 +111,8 @@ export default function EditProfile() {
                 <Space width={0} height={20} />
 
                 <SaveButtonContainer>
-                    <SaveButton>
-                        프로필 수정하기
+                    <SaveButton onClick={submit}>
+                        거주지 수정하기
                     </SaveButton>
                 </SaveButtonContainer>
 

@@ -36,6 +36,19 @@ export default function Kakao(){
 
             console.log(dec);
 
+            axios.get(`http://61.79.215.100/user`,
+            {
+                headers : {
+                    'Authorization' : getCookie('jwt')
+                }
+            }
+            )
+            .then(response =>{
+                console.log(`Response : ${response.data}`)
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            })
         })
         .catch(error => {
         console.error('Error:', error);
@@ -49,22 +62,6 @@ export default function Kakao(){
 
     }, [code]);
 
-    useEffect(()=>{
-        // 유저인증
-        axios.get(`http://61.79.215.100/user`,
-            {
-                headers : {
-                    'Authorization' : getCookie('jwt')
-                }
-            }
-            )
-            .then(response =>{
-                console.log(`Response : ${response.data}`)
-            })
-            .catch(error => {
-                console.log('Error:', error);
-            })
-    },[])
 
     return(
         <>

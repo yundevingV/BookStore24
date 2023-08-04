@@ -12,7 +12,7 @@ import { useLocation } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
 import { RootState } from "../reducer/index";
 import { getCookie, removeCookie,  } from "./Cookie";
-import { useCookies } from 'react-cookie'; // 리액트 쿠키 임포트 해주자
+import base64 from 'base-64';
 import axios from "axios";
 
 export default function Header() {
@@ -40,6 +40,29 @@ export default function Header() {
     const openModalData = useSelector(
         (state: RootState) => state.openModal.openModalData
     );
+
+    
+    const decodeJWTToken = (token : any) => {
+        if (!token) {
+            // Handle the case where the token is empty or not available
+            return null;
+        }
+        
+        const payload = token.substring(token.indexOf('.') + 1, token.lastIndexOf('.'));
+        try {
+            const decodedPayload = JSON.parse(base64.decode(payload));
+            return decodedPayload;
+        } catch (error) {
+            // Handle the case where decoding the payload fails
+            console.error('Error decoding JWT token payload:', error);
+            return null;
+        }
+        }
+      
+      // In your React project
+      let token = getCookie('jwt');
+      let dec = decodeJWTToken(token);
+
 
     useEffect(()=>{
         axios.get('http://61.79.215.100/member/nicknameresidence/check'
@@ -71,9 +94,13 @@ export default function Header() {
         
         
         <Positioner>
-            {openModalData&&loginStateData&&
-            <FirstLogin />}
             
+            {openModalData&&loginStateData&&dec.nickName&&
+            <FirstLogin />
+                
+                
+            }
+
             <Space width={50} height={0} />
             <Logo>
                 <StyledLink to='/'>

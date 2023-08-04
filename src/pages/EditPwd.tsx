@@ -5,24 +5,56 @@ import Header from "../components/Header"
 
 import { styled,css } from "styled-components"
 import { StyledButtonLink } from "../styles/link"
+import axios from "axios"
+import { getCookie } from "../components/Cookie"
 
 export default function EditPwd(){
 
     //입력창 아이디 비번, 비번확인, 닉네임
-    const [ { password1,password2}, onInputChange, resetInput ] = useInput({
-        
+    const [ { currentPassword, password1,password2}, onInputChange, resetInput ] = useInput({
+        currentPassword : '',
         password1: '',
         password2: '',
         
     });
 
-    const submit = (e : React.MouseEvent) => {
+    const submit = (e: React.MouseEvent) => {
+        e.preventDefault(); // Prevent the default form submission behavior.
         
-        console.log(password1);
-        console.log(password2);
-
+        // Assuming you have defined the following state variables:
+        // const currentPassword = ...;
+        // const password1 = ...;
+        // const password2 = ...;
+        
+        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+        
+        // Data to be sent in the request body.
+        const data = {
+            nowPassword: currentPassword,
+            password1: password1,
+            password2: password2,
+        };
+        
+        // Axios configuration for the POST request.
+        const config = {
+            headers: {
+            Authorization: jwt,
+            },
+        };
+        
+        axios
+            .post(`http://61.79.215.100/member/password/edit/save`, data, config)
+            .then((response) => {
+            console.log(`Response : ${response.status}`);
+            console.log(`Response : ${data}`);
+            })
+            .catch((error) => {
+            console.log('Error:', error.response.data);
+            });
+        
         resetInput();
-    }
+        };
+
     return(
         <Wrapper>
             <Header />
@@ -39,7 +71,17 @@ export default function EditPwd(){
                 <InputContainer >
                     <Form>
                         <Div>
-                            <P>비밀번호</P>
+                            <P>현재 비밀번호</P>
+                        </Div>
+
+                        <Input password={true}
+                            placeholder='비밀번호를 입력해주세요' 
+                            name="currentPassword" 
+                            value={currentPassword}
+                            onChange={onInputChange} />
+
+                        <Div>
+                            <P>변경할 비밀번호</P>
                         </Div>
 
                         <Input password={true}
@@ -49,7 +91,7 @@ export default function EditPwd(){
                             onChange={onInputChange} />
 
                         <Div>
-                            <P>비밀번호 확인</P>
+                            <P>변경할 비밀번호 확인</P>
                         </Div>
 
                         <Input password={true}
@@ -62,8 +104,8 @@ export default function EditPwd(){
 
 
                 <SaveButtonContainer>
-                    <SaveButton>
-                        프로필 수정하기
+                    <SaveButton onClick={submit} >
+                        비밀번호 수정하기
                     </SaveButton>
                 </SaveButtonContainer>
 

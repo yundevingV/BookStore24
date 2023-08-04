@@ -55,16 +55,6 @@ export default function Login() {
 
     const dispatch = useDispatch();
 
-    const testLogin : loginTypes = (id,pwd ) => {
-        if (id === 'www' && pwd === 'aaa'){
-            console.log(`id : ${id} , pwd : ${pwd}`);
-            dispatch(saveloginStatus(true));
-            console.log(loginStateData);
-            navigate(-1);
-            setCookie('jwt','res');
-        }
-    }
-
     const login : loginTypes = (id,pwd) => {
         axios.post('http://bookstore24.shop/login',
         {
@@ -200,14 +190,7 @@ export default function Login() {
                         로그인하기
                     </SubmitButton>
                 </ButtonContainer>
-                <ButtonContainer> 
 
-                {/* 포스트 예시코드 */}
-                <SubmitButton onClick={() => testLogin('www', 'aaa')}>
-                    테스트 로그인
-                </SubmitButton>
-
-                </ButtonContainer>
             </LoginContainer>
 
         </Wrapper>
