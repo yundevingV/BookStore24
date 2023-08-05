@@ -62,7 +62,7 @@ export default function Header() {
       // In your React project
       let token = getCookie('jwt');
       let dec = decodeJWTToken(token);
-
+      console.log(dec)
 
     useEffect(()=>{
         axios.get('http://61.79.215.100/member/nicknameresidence/check'
@@ -83,7 +83,6 @@ export default function Header() {
         })
         .catch(error => {
         console.log(`에러 사유 : ${error}`)
-        console.log(error.response.data);
 
         dispatch(openModal(true));
 

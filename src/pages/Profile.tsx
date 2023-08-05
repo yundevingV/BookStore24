@@ -4,10 +4,14 @@ import Jisoo from '../assets/imgs/jisoo.jpg'
 import SellingList from "../components/SellingList";
 import SoldList from "../components/SoldList";
 import ReviewList from "../components/ReviewList";
+import { StyledButtonLink } from "../styles/link";
 
 
 import { styled } from "styled-components";
-import { StyledButtonLink } from "../styles/link";
+import { getCookie  } from "../components/Cookie";
+import base64 from 'base-64';
+
+
 interface PProps {
     value: number;
 }
@@ -18,6 +22,28 @@ interface DivMarginProps {
 
 export default function Profile(){
 
+    const decodeJWTToken = (token : any) => {
+        if (!token) {
+            // Handle the case where the token is empty or not available
+            return null;
+        }
+        
+        const payload = token.substring(token.indexOf('.') + 1, token.lastIndexOf('.'));
+        try {
+            const decodedPayload = JSON.parse(base64.decode(payload));
+            return decodedPayload;
+        } catch (error) {
+            // Handle the case where decoding the payload fails
+            console.error('Error decoding JWT token payload:', error);
+            return null;
+        }
+        }
+    
+    // In your React project
+    let token = getCookie('jwt');
+    let dec = decodeJWTToken(token);
+    
+    console.log(dec);
     return(
         <Wrapper>
             <Header />
@@ -44,9 +70,10 @@ export default function Profile(){
                         <Picture src={Jisoo} />
                     </PictureContainer>
 
+
                     <NickNameContainer>
                         <NickName>
-                            이름 님
+                            {dec.nickname.toString('utf-8')} 님
                         </NickName>
                     </NickNameContainer>
 

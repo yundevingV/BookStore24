@@ -78,7 +78,18 @@ export default function EditProfile() {
                     </PictureContainer>
                     <Space width={0} height={20} />
 
-                    <NickNameContainer>
+                    <Box>
+                        <P>
+                            이메일
+                        </P>
+
+                        <NickNameInput 
+                            value='이메일'
+                            readOnly/>
+
+                    </Box> 
+
+                    <Box>
                         <P>
                             닉네임
                         </P>
@@ -88,27 +99,27 @@ export default function EditProfile() {
                             name="nickname" 
                             value={nickname}
                             onChange={onInputChange}/>
-                        
-                        <NickNameButton>
-                            중복확인
-                        </NickNameButton>
+                    </Box>      
 
-                    </NickNameContainer>      
+                    <SaveButtonContainer>
+                        <SaveButton >
+                            닉네임 수정하기
+                        </SaveButton>
+                    </SaveButtonContainer>
 
                     <Space width={0} height={20} />
 
-                    <ResidenceContainer>
+                    <Box>
                         
                         <P>거주지역 </P>
                         
                         <Space width={0} height={15} />
 
                             <Dropdown />
-                    </ResidenceContainer>
+                    </Box>
 
                 </ProfileInfoContainer>
 
-                <Space width={0} height={20} />
 
                 <SaveButtonContainer>
                     <SaveButton onClick={submit}>
@@ -187,12 +198,6 @@ padding : 15px;
 
 `
 
-const NickNameContainer = styled.div`
-
-width : 100%;
-text-align : center;
-
-`
 
 const P = styled.p`
 
@@ -213,10 +218,10 @@ font-weight : bold;
 const NickNameInput = styled.input `
 
 
-width : 240px;
+width : 280px;
 height : 30px;
 
-margin : 20px;
+margin : 10px;
 
 border : 2px solid #e2e2e2;
 padding : 0px;
@@ -233,38 +238,19 @@ padding : 0px;
     border: 2px solid blue;
     }
 `
-
-const NickNameButton = styled.button`
-//기본 크기가 input > button
-width : 100px;
-height : 30px;
-
-background-color: #ffffff;
-border : 2px solid #033bfa;
-color : black;    
-
-
-font-family: tway, sans-serif, Arial;
-
-&:hover {
-
-  color : #ffffff;
-  background-color: #033bfa;
-  border : 2px solid #ffffff;
-
-    cursor : pointer;
-    }
-`
-
-const ResidenceContainer = styled.div`
+const Box = styled.div`
 
 text-align : center;
+
+margin-bottom : 20px;
 
 `
 
 const SaveButtonContainer = styled.div`
 text-align : center;
-margin-top : 40px;
+margin-top : 20px;
+margin-bottom: 20px;
+
 `
 
 const SaveButton = styled.button`
