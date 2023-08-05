@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import useInput from "../hooks/useInput";
 import Jisoo from '../assets/imgs/jisoo.jpg'
 import Header from "../components/Header";
@@ -24,8 +24,32 @@ export default function EditProfile() {
     const dropDownValueData = useSelector(
         (state: RootState) => state.DropDownValueReducer.dropDownValueData
     );
+
+    // const [nickname,setNickname] = useState<string>('');
     
-    const submit = (e: React.MouseEvent) => {
+    // const [residence,setResidence] = useState<string>('');
+    
+    useEffect(()=>{
+        axios.get(`http://61.79.215.100/member/profile/edit`,
+            {
+                headers : {
+                    'Authorization' : getCookie('jwt')
+                }
+            }
+            )
+            .then(response =>{
+                console.log(response.data)
+
+                // setNickname(response.data.nickname);
+                // setResidence(response.data.residence);
+
+            })
+            .catch(error => {
+                console.log('Error : ', error);
+            })
+    },[])
+    
+    const modifyResidence = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
 
         const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
@@ -54,6 +78,36 @@ export default function EditProfile() {
         
         resetInput();
         };
+
+        const modifyNickname = (e: React.MouseEvent) => {
+            e.preventDefault(); // Prevent the default form submission behavior.
+    
+            const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+            
+            // Data to be sent in the request body.
+            const data = {
+                "nickname":  nickname,
+    
+            };
+            
+            // Axios configuration for the POST request.
+            const config = {
+                headers: {
+                Authorization: jwt,
+                },
+            };
+            
+            axios
+                .post(`http://61.79.215.100/member/profile/nickname/edit/save`, data, config)
+                .then((response) => {
+                console.log(`Response : ${JSON.stringify(data)}`);
+                })
+                .catch((error) => {
+                console.log('Error:', error.response.data);
+                });
+            
+            resetInput();
+            };
     return(
         <Wrapper>
             <Header />
@@ -102,7 +156,7 @@ export default function EditProfile() {
                     </Box>      
 
                     <SaveButtonContainer>
-                        <SaveButton >
+                        <SaveButton onClick={modifyNickname}>
                             닉네임 수정하기
                         </SaveButton>
                     </SaveButtonContainer>
@@ -122,7 +176,7 @@ export default function EditProfile() {
 
 
                 <SaveButtonContainer>
-                    <SaveButton onClick={submit}>
+                    <SaveButton onClick={modifyResidence}>
                         거주지 수정하기
                     </SaveButton>
                 </SaveButtonContainer>

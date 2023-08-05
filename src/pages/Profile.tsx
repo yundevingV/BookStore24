@@ -27,6 +27,7 @@ export default function Profile(){
     const [nickname,setNickname] = useState<string>('');
     
     const [residence,setResidence] = useState<string>('');
+    
 
     useEffect(()=>{
         axios.get(`http://61.79.215.100/member/profile/edit`,
