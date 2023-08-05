@@ -59,7 +59,7 @@ export default function Google(){
 
         });
 
-    }, [code]);
+    }, [code,navigate]);
 
     return(
         <>

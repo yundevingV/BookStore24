@@ -62,6 +62,7 @@ export default function Header() {
       // In your React project
       let token = getCookie('jwt');
       let dec = decodeJWTToken(token);
+
       console.log(dec)
 
     useEffect(()=>{
@@ -70,14 +71,12 @@ export default function Header() {
         {
         
         headers : {
-            "Content-Type" : "application/json; charset=utf-8",
             'Authorization' : getCookie('jwt')
         }
         })
 
         .then(response => {
             console.log(response.status);
-            console.log(response);
             console.log(getCookie('jwt'));
 
         })
@@ -94,7 +93,7 @@ export default function Header() {
         
         <Positioner>
             
-            {openModalData&&loginStateData&&dec.nickName&&
+            {openModalData&&loginStateData&&dec.nickname===null&&
             <FirstLogin />
                 
                 

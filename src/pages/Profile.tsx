@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Jisoo from '../assets/imgs/jisoo.jpg'
 import SellingList from "../components/SellingList";
@@ -10,6 +10,7 @@ import { StyledButtonLink } from "../styles/link";
 import { styled } from "styled-components";
 import { getCookie  } from "../components/Cookie";
 import base64 from 'base-64';
+import axios from "axios";
 
 
 interface PProps {
@@ -22,28 +23,32 @@ interface DivMarginProps {
 
 export default function Profile(){
 
-    const decodeJWTToken = (token : any) => {
-        if (!token) {
-            // Handle the case where the token is empty or not available
-            return null;
-        }
-        
-        const payload = token.substring(token.indexOf('.') + 1, token.lastIndexOf('.'));
-        try {
-            const decodedPayload = JSON.parse(base64.decode(payload));
-            return decodedPayload;
-        } catch (error) {
-            // Handle the case where decoding the payload fails
-            console.error('Error decoding JWT token payload:', error);
-            return null;
-        }
-        }
+
+    const [nickname,setNickname] = useState<string>('');
     
-    // In your React project
-    let token = getCookie('jwt');
-    let dec = decodeJWTToken(token);
-    
-    console.log(dec);
+    const [residence,setResidence] = useState<string>('');
+
+    useEffect(()=>{
+        axios.get(`http://61.79.215.100/member/profile/edit`,
+            {
+                headers : {
+                    'Authorization' : getCookie('jwt')
+                }
+            }
+            )
+            .then(response =>{
+                console.log(response.data)
+
+                setNickname(response.data.nickname);
+                setResidence(response.data.residence);
+
+            })
+            .catch(error => {
+                console.log('Error : ', error);
+            })
+    },[])
+
+
     return(
         <Wrapper>
             <Header />
@@ -73,13 +78,13 @@ export default function Profile(){
 
                     <NickNameContainer>
                         <NickName>
-                            {dec.nickname.toString('utf-8')} 님
+                            {nickname}
                         </NickName>
                     </NickNameContainer>
 
                     <ResidenceContainer>
                         <Residence>
-                            서울
+                            {residence}
                         </Residence>
                     </ResidenceContainer>
                 </ProfileInfoContainer>
