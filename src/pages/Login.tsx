@@ -98,10 +98,10 @@ export default function Login() {
         })
         
         .catch(function (error) {
-            console.log(`error : ${error}`);
+            console.log(`error : ${error.response}`);
             if(error.response){
-                console.log(error.response);
-                alert(`${error.response.data}`);
+                console.log(error.response.status);
+                alert(`아이디 비밀번호를 다시 입력해주세요!`);
             }
         });
     }

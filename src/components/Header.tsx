@@ -58,12 +58,12 @@ export default function Header() {
             return null;
         }
         }
-      
-      // In your React project
-      let token = getCookie('jwt');
-      let dec = decodeJWTToken(token);
+    
+    // In your React project
+    let token = getCookie('jwt');
+    let dec = decodeJWTToken(token);
 
-      console.log(dec)
+    console.log(dec)
 
     useEffect(()=>{
         axios.get('http://61.79.215.100/member/nicknameresidence/check'
@@ -82,10 +82,15 @@ export default function Header() {
         })
         .catch(error => {
         console.log(`에러 사유 : ${error}`)
+        console.log(error.status)
+        if(error === 'AxiosError: Request failed with status code 400'){
+            console.log('tt')
+        }
 
         dispatch(openModal(true));
 
         });
+        
     },[dispatch])
 
     return (

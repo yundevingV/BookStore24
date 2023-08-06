@@ -25,6 +25,15 @@ export default function EditProfile() {
         (state: RootState) => state.DropDownValueReducer.dropDownValueData
     );
 
+    interface DataType{
+        loginId : string;
+        email : string;
+        nickname : string;
+        residence : string;
+        profileImg : any;
+    }
+
+    const [data,setData] = useState<DataType | null>(null)
     // const [nickname,setNickname] = useState<string>('');
     
     // const [residence,setResidence] = useState<string>('');
@@ -39,7 +48,8 @@ export default function EditProfile() {
             )
             .then(response =>{
                 console.log(response.data)
-
+                setData(response.data);
+                console.log(data);
                 // setNickname(response.data.nickname);
                 // setResidence(response.data.residence);
 
@@ -138,7 +148,7 @@ export default function EditProfile() {
                         </P>
 
                         <NickNameInput 
-                            value='이메일'
+                            value={data?.email}
                             readOnly/>
 
                     </Box> 
@@ -151,8 +161,10 @@ export default function EditProfile() {
                         <NickNameInput 
                             placeholder='닉네임을 입력해주세요'
                             name="nickname" 
-                            value={nickname}
-                            onChange={onInputChange}/>
+                            value={data?.nickname}
+                            onChange={onInputChange}
+                            />
+ 
                     </Box>      
 
                     <SaveButtonContainer>

@@ -49,6 +49,7 @@ export default function EditPwd(){
             console.log(`Response : ${data}`);
             })
             .catch((error) => {
+                console.log(error)
             console.log('Error:', error.response.data);
             });
         
