@@ -32,14 +32,14 @@ export default function BookStoreCommunity() {
 
         <Wrapper>
             {/* 로그인 실패시 & 비로그인 */}
-            {!login && (
+            {login && (
                 <>
                 <Login />
                 </>
             )}
 
             {/* 로그인 성공시 */}
-            {login && (
+            {!login && (
             <>
             <Header />
             

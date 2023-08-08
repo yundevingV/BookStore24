@@ -2,6 +2,8 @@ import React ,{useState} from "react"
 import useInput from "../hooks/useInput";
 
 import styled from "styled-components";
+import axios from "axios";
+import { getCookie } from "../components/Cookie";
 
 type ViewProps = {
     viewModal : boolean;
@@ -27,7 +29,7 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
 
     let books= [
         { name: 'scas', publisher: 'aaa'},
-        { name: 'fuhjnk', publisher: 'bd'}
+        { name: 'sss', publisher: 'bd'}
     ];
     
     const submit = (e : React.MouseEvent) => {
@@ -36,6 +38,32 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         setSearchResultList(filterList);
 
     }
+
+    const search = (e: React.MouseEvent) => {
+        e.preventDefault(); // Prevent the default form submission behavior.
+
+        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+        
+        // Axios configuration for the POST request.
+        const config = {
+            headers: {
+            Authorization: jwt,
+            // "X-Naver-Client-Id": config.naverBook.clientID,
+            // "X-Naver-Client-Secret": config.naverBook.clientSecret,
+            },
+        };
+        
+        axios
+            .get(`https://openapi.naver.com/v1/search/book.json?query=${searchWord}`,  config)
+            .then((response) => {
+            console.log(`Response : ${response}`);
+            })
+            .catch((error) => {
+            console.log('Error:', error.response.data);
+            });
+        
+        resetInput();
+        };
     
     return(
         <ModalBackground>

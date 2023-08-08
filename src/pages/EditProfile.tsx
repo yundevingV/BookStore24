@@ -59,6 +59,8 @@ export default function EditProfile() {
             })
     },[])
     
+
+    
     const modifyResidence = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
 
