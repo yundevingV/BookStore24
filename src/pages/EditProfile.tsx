@@ -106,7 +106,7 @@ export default function EditProfile() {
                 Authorization: jwt,
                 },
             };
-            
+            if (nickname.length >= 1 ){
             axios
                 .post(`http://61.79.215.100/member/profile/nickname/edit/save`, data, config)
                 .then((response) => {
@@ -117,7 +117,7 @@ export default function EditProfile() {
                 });
             
             resetInput();
-            };
+            };}
     return(
         <Wrapper>
             <Header />
@@ -159,9 +159,9 @@ export default function EditProfile() {
                         </P>
 
                         <NickNameInput 
-                            placeholder='닉네임을 입력해주세요'
+                            placeholder={data?.nickname}
                             name="nickname" 
-                            value={data?.nickname}
+                            value={nickname}
                             onChange={onInputChange}
                             />
  
@@ -294,6 +294,7 @@ padding : 0px;
 
 &::placeholder{
     font-family: tway, sans-serif, Arial;
+    color : #000000;
 	}
 
 //인풋 창 포커스
