@@ -48,7 +48,7 @@ function App() {
 
         <Route path='/bookcommunity' element={<BookComunity />} />
         <Route path='/bookcommunityadd' element={<BookCommunityAdd />} />
-        <Route path="/bookcommunitydetail/:id" element={<BookCommunityDetail />} />
+        <Route path="/bookcommunitydetail/" element={<BookCommunityDetail />} />
         <Route path="/bookcommunitydetail/:id/edit" element={<BookCommunityEdit />} />
 
         <Route path="/bookranking/*" element={<BookRanking />} />

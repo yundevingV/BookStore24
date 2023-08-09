@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Test from '../assets/imgs/testbookcover.jpg'
 import { StyledLink } from "../styles/link";
 
@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../reducer/index";
 
 import styled from "styled-components";
+import { getCookie } from "./Cookie";
+import axios from "axios";
 
 
 function ItemList(){
@@ -16,6 +18,8 @@ function ItemList(){
     const searchWordData = useSelector(
         (state: RootState) => state.searchWordReducer.searchWordData
     );
+
+
 
     return(
         <>

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
 import Test from '../assets/imgs/testbookcover.jpg'
@@ -6,6 +6,8 @@ import SearchBook from "../modal/SearchBook";
 
 import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
+import { getCookie } from "../components/Cookie";
+import axios from "axios";
 
 
 export default function BookCommunityEdit() {
@@ -18,14 +20,75 @@ export default function BookCommunityEdit() {
         viewModal === true ? setViewModal(false) : setViewModal(true)
     }
 
+    useEffect(()=>{
+        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+        
+
+        // Axios configuration for the POST request.
+        const config = {
+            headers: {
+            Authorization: jwt,
+
+            },
+            params : {
+                "loginId" : "kakao_12345145",
+                "title" : "카카오 오어스가 읽은, 도서 리뷰입니다."
+            }
+        };
+        
+        axios
+            .get(`http://61.79.215.100/review/post/edit`, config)
+            .then((response) => {
+            console.log(`Response : ${response}`);
+            })
+            .catch((error) => {
+            console.log('Error:', error.response.data);
+            });
+        
+    },[])
+
+    const save =() => {
     
+            const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+            
+            // Data to be sent in the request body.
+            const data = {
+                "title" : "카카오 오어스가 읽은, 도서 리뷰입니다.",
+                "bookTitle" : "김민교 자서전",
+                "author" : "김민교",
+                "publisher" : "교출판사",
+                "coverImg" : "https://shopping-phinf.pstatic.net/main_3729966/37299668618.20230119064022.jpg",
+                "isbn" : "123456789",
+                "content" : "이 책을 읽고 주체적인 삶을 살았더니, 결국 제가 원하는 삶을 살게 되었습니다.수정테스트합니다. 데이터베이스에서 수정이 되었나요?",
+                "score" : "4"
+    
+            };
+            
+            // Axios configuration for the POST request.
+            const config = {
+                headers: {
+                Authorization: jwt,
+                },
+            };
+            if (true ){
+            axios
+                .post(`http://61.79.215.100/review/post/edit/save`, data, config)
+                .then((response) => {
+                console.log(`Response : ${JSON.stringify(data)}`);
+                })
+                .catch((error) => {
+                console.log('Error:', error.response.data);
+                });
+            
+    }
+}
     return(
         <Wrapper>
             <Header />
             
             <Container >
                 <H3>
-                    판매하기
+                    수정하기
                 </H3>
                 <Hr />
 

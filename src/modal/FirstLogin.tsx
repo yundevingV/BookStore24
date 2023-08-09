@@ -66,25 +66,22 @@ export default function FirstLogin(){
                 닉네임을 입력해주세요
               </Font>
 
-              <NickNameInput 
-                placeholder='닉네임을 입력해주세요'
-                name="nickname" 
-                value={nickname}
-                onChange={onInputChange}/>
-              
-              <NickNameButton>
-                중복확인
-              </NickNameButton>
-
+              <CenterContainer>
+                <NickNameInput 
+                  placeholder='닉네임을 입력해주세요'
+                  name="nickname" 
+                  value={nickname}
+                  onChange={onInputChange}/>
+              </CenterContainer>
             </NickName>
 
             <Residence>
               <Font>
                 거주지역을 선택해주세요
               </Font>
-              <DropdownContainer>
+              <CenterContainer>
                 <Dropdown />
-              </DropdownContainer>
+              </CenterContainer>
             </Residence>
 
             <NickNameResidenceButtonContainer>
@@ -138,15 +135,13 @@ const NickName = styled.div`
   top: 50px;
   
   width : 100%;
+
 `
-
-const NickNameInput = styled.input `
-
+const NickNameInput = styled.input`
 
 width : 240px;
 height : 30px;
 
-margin : 20px;
 
 border : 2px solid #e2e2e2;
 padding : 0px;
@@ -164,28 +159,6 @@ padding : 0px;
     }
 `
 
-const NickNameButton = styled.button`
-//기본 크기가 input > button
-width : 100px;
-height : 30px;
-
-background-color: #ffffff;
-border : 2px solid #033bfa;
-color : black;    
-
-
-font-family: tway, sans-serif, Arial;
-
-&:hover {
-
-  color : #ffffff;
-  background-color: #033bfa;
-  border : 2px solid #ffffff;
-
-    cursor : pointer;
-    }
-`
-
 const Residence = styled.div`
   position: absolute;
   top: 180px;
@@ -194,7 +167,7 @@ const Residence = styled.div`
 
 `
 
-const DropdownContainer = styled.div`
+const CenterContainer = styled.div`
 text-align : center;
 `
 

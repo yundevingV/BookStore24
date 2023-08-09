@@ -14,6 +14,7 @@ import { RootState } from "../reducer/index";
 import { getCookie, removeCookie,  } from "./Cookie";
 import base64 from 'base-64';
 import axios from "axios";
+import useDecodedJWT from "../hooks/useDecodedJWT";
 
 export default function Header() {
 
@@ -41,27 +42,9 @@ export default function Header() {
         (state: RootState) => state.openModal.openModalData
     );
 
-    
-    const decodeJWTToken = (token : any) => {
-        if (!token) {
-            // Handle the case where the token is empty or not available
-            return null;
-        }
-        
-        const payload = token.substring(token.indexOf('.') + 1, token.lastIndexOf('.'));
-        try {
-            const decodedPayload = JSON.parse(base64.decode(payload));
-            return decodedPayload;
-        } catch (error) {
-            // Handle the case where decoding the payload fails
-            console.error('Error decoding JWT token payload:', error);
-            return null;
-        }
-        }
-    
     // In your React project
     let token = getCookie('jwt');
-    let dec = decodeJWTToken(token);
+    let dec = useDecodedJWT(token);
 
     console.log(dec)
 
@@ -98,7 +81,8 @@ export default function Header() {
         
         <Positioner>
             
-            {openModalData&&loginStateData&&dec.nickname===null&&
+            {/* {openModalData&&loginStateData&&dec.nickname===null&& */}
+            {
             <FirstLogin />
                 
                 

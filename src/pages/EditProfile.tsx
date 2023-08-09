@@ -60,7 +60,7 @@ export default function EditProfile() {
     },[])
     
 
-    
+
     const modifyResidence = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
 
@@ -161,9 +161,8 @@ export default function EditProfile() {
                         </P>
 
                         <NickNameInput 
-                            placeholder={data?.nickname}
                             name="nickname" 
-                            value={nickname}
+                            defaultValue={data?.nickname}
                             onChange={onInputChange}
                             />
  

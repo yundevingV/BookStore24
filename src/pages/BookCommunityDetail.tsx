@@ -10,7 +10,9 @@ import { styled } from "styled-components";
 import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../reducer/index";
-
+import { getCookie } from "../components/Cookie";
+import axios from "axios";
+import useDecodedJWT from "../hooks/useDecodedJWT";
 
 export default function BookCommunityDetail() {
     // 현재 주소
@@ -26,6 +28,33 @@ export default function BookCommunityDetail() {
     useEffect(() => {
         setLogin(loginStateData)
     }, [loginStateData]);
+
+    const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+    let token = getCookie('jwt');
+    let dec = useDecodedJWT(token);
+        
+    useEffect(() => {        
+        axios
+            .get(`http://61.79.215.100/review/post/detail`,{
+                params:{
+                    "loginId": dec.loginId,
+                    "title": "test2"
+                },
+                headers: {
+                    Authorization: jwt,
+                
+                }
+            })
+            
+            .then((response) => {
+            console.log(`Response : ${response}`);
+            })
+            .catch((error) => {
+            console.log('Error:', error.response);
+            });
+        
+
+    },[]);
 
     return(
         <Wrapper>

@@ -39,6 +39,9 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
 
     }
 
+    const clientId : string = 'a'
+    const clientSecret :string = 'a'
+
     const search = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
 
@@ -48,18 +51,28 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         const config = {
             headers: {
             Authorization: jwt,
-            // "X-Naver-Client-Id": config.naverBook.clientID,
-            // "X-Naver-Client-Secret": config.naverBook.clientSecret,
+            "X-Naver-Client-Id": clientId,
+            "X-Naver-Client-Secret": clientSecret,
             },
         };
         
         axios
-            .get(`https://openapi.naver.com/v1/search/book.json?query=${searchWord}`,  config)
+            .get(`/v1/search/movie.json`,{
+                params:{
+                  query: searchWord,
+                },
+                headers: {
+                    Authorization: jwt,
+                  'X-Naver-Client-Id': clientId,
+                  'X-Naver-Client-Secret': clientSecret
+                }
+              })
+            
             .then((response) => {
             console.log(`Response : ${response}`);
             })
             .catch((error) => {
-            console.log('Error:', error.response.data);
+            console.log('Error:', error.response);
             });
         
         resetInput();
@@ -82,7 +95,7 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
                 </div>
 
                 <div>
-                <SearchButton onClick={submit}>
+                <SearchButton onClick={search}>
                     검색
                 </SearchButton>
                 </div>

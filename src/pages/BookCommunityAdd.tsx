@@ -5,22 +5,71 @@ import Test from '../assets/imgs/testbookcover.jpg'
 import SearchBook from "../modal/SearchBook";
 
 import { styled } from "styled-components";
+import { getCookie } from "../components/Cookie";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 
 export default function BookCommunityAdd() {
+
+    const [ { title, rate, content }, onInputChange, resetInput ] = useInput({
+        id: '',
+        rate: '',
+        content: '',
+    });
+
+
     const [viewModal , setViewModal] = useState(false);
 
     const openModal = (e : React.MouseEvent) => {
         
         viewModal === true ? setViewModal(false) : setViewModal(true)
     }
+
+    const navigate = useNavigate();
+
+    const add = (e: React.MouseEvent) => {
+        e.preventDefault(); // Prevent the default form submission behavior.
+
+        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+        
+        // Data to be sent in the request body.
+        const data = {
+            "title" : title,
+            "isbn" : "123456789",
+            "bookTitle" : "리뷰글 도서 제목",
+            "author" : "김민교",
+            "publisher" : "교출판사",
+            "coverImg" : "https://shopping-phinf.pstatic.net/main_3246698/32466988102.20230725121118.jpg",
+            "content" : content,
+            "score" : rate,
+        };
+        
+        // Axios configuration for the POST request.
+        const config = {
+            headers: {
+            Authorization: jwt,
+            },
+        };
+        if (true){
+        axios
+            .post(`http://61.79.215.100/review/post/save`, data, config)
+            .then((response) => {
+            console.log(`Response : ${(JSON.stringify(data))}`);
+            navigate(-1);
+            })
+            .catch((error) => {
+            console.log('Error:', error.response.data);
+            });
+        
+        };}
     return(
         <Wrapper>
             <Header />
             
             <Container >
                 <H3>
-                    판매하기
+                    글 작성하기
                 </H3>
                 <Hr />
 
@@ -33,7 +82,12 @@ export default function BookCommunityAdd() {
 
 
                     <RightContainer>
-                    <Title placeholder='게시글 제목'/>
+                    <Title 
+                        placeholder='게시글 제목'
+                        name="title"
+                        value={title}
+                        onChange={onInputChange} 
+                        />
                         
 
                     <BookTitle placeholder='책 제목을 입력해주세요'
@@ -47,7 +101,12 @@ export default function BookCommunityAdd() {
                         placeholder='출판사를 입력해주세요' />
 
                     <Price
-                        placeholder='후기 평점 (1~5사이)' />
+                        placeholder='후기 평점 (1~5사이)'
+                        name="rate"
+                        value={rate}
+                        onChange={onInputChange} 
+                        
+                        />
 
                 
                 </RightContainer>
@@ -57,17 +116,22 @@ export default function BookCommunityAdd() {
                 <ContentContainer>
                     <input
                         className="content"
-                        placeholder='게시글 내용을 입력하세요' />
+                        placeholder='게시글 내용을 입력하세요' 
+                        name="content"
+                        value={content}
+                        onChange={onInputChange} 
+                        
+                        />
                 </ContentContainer>
 
                 <ButtonContainer>
 
 
                     <CancelButton>
-                        뒤로가기
+                        취소하기
                     </CancelButton>
 
-                    <AddButton>
+                    <AddButton onClick={add}>
                         등록하기
                     </AddButton>
                 </ButtonContainer>
