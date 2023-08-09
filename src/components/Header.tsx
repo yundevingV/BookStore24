@@ -81,8 +81,7 @@ export default function Header() {
         
         <Positioner>
             
-            {/* {openModalData&&loginStateData&&dec.nickname===null&& */}
-            {
+            {openModalData&&loginStateData&&dec.nickname===null&&
             <FirstLogin />
                 
                 

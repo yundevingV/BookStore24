@@ -6,6 +6,7 @@ import MainRankingRating from "../components/MainRankingRating";
 
 import { styled } from "styled-components";
 import { Space } from "../styles/Space";
+import RankingPreview from "../components/RankingPreview";
 
 
 
@@ -16,11 +17,12 @@ export default function Main(){
 
             <Header />
             <Carousel />
-            <Space width={0} height={100} />
+            {/* <Space width={0} height={100} />
             <MainRankingView />
             <Space width={0} height={200} />
-            <MainRankingRating />
+            <MainRankingRating /> */}
 
+            <RankingPreview /> 
         </Wrapper>  
     )
 }
