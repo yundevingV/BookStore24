@@ -21,23 +21,12 @@ export default function Naver(){
             `http://61.79.215.100/auth/naver/callback?Authorization_code=${code}`,
         )
         .then(response => {
-            console.log(response.status)
 
             // 토큰 획득
             const token = response.headers.authorization 
-            console.log(token);
             
             setCookie('jwt', token);   
-            console.log(getCookie('jwt'));
-
-            let payload = token.substring(token.indexOf('.')+1,token.lastIndexOf('.')); 
-            let dec = JSON.parse(base64.decode(payload));
-            
-            console.log(dec);
-
-            if(dec.nickName === null){
-                navigate('/');
-            }
+            sessionStorage.setItem('status',token);
 
             axios.get(`http://61.79.215.100/user`,
             
@@ -45,12 +34,13 @@ export default function Naver(){
                 
                 headers : {
     
-                    'Authorization' : getCookie('jwt')
+                    'Authorization' : token
                 }
             }
             )
             .then(response =>{
                 console.log(`Response : ${response.data}`)
+                navigate('/')
                 
             })
             .catch(error => {

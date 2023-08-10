@@ -24,16 +24,11 @@ export default function Header() {
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
 
-    const [login,setLogin] = useState<boolean>(loginStateData);
-
-    useEffect(() => {
-        setLogin(loginStateData)
-    }, [loginStateData]);
-
     const dispatch = useDispatch();
 
     const logout = () =>{
         dispatch(saveloginStatus(false));
+        sessionStorage.clear()
         removeCookie('jwt');
     }
 
@@ -43,12 +38,19 @@ export default function Header() {
     );
 
     // In your React project
+        
     let token = getCookie('jwt');
     let dec = useDecodedJWT(token);
-
+    console.log(token)
     console.log(dec)
 
     useEffect(()=>{
+
+        const auth = sessionStorage.getItem("status");
+        if (auth) {
+            dispatch(saveloginStatus(true));
+        }
+
         axios.get('http://61.79.215.100/member/nicknameresidence/check'
         ,
         {
@@ -76,12 +78,14 @@ export default function Header() {
         
     },[dispatch])
 
+    console.log(getCookie('jwt'));
+
     return (
         
         
         <Positioner>
             
-            {openModalData&&loginStateData&&dec.nickname===null&&
+            {openModalData&&loginStateData&&dec?.nickname===null&&
             <FirstLogin />
                 
                 
@@ -138,7 +142,7 @@ export default function Header() {
             </Ranking>
 
             <Menu>
-                {!login ? 
+                {!loginStateData ? 
                 <>
                 <Join>
                     <StyledLinkBlack to='/signup'>

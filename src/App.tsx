@@ -25,6 +25,7 @@ import Google from './pages/oauth/Google';
 
 import { Route , Routes } from 'react-router';
 import axios from 'axios';
+import Finish from './pages/oauth/finish';
 
 function App() {
 
@@ -54,7 +55,7 @@ function App() {
         <Route path="/bookranking/*" element={<BookRanking />} />
 
         {/* OAuth 로그인 */}
-        <Route path='/bookstore24.shop/auth/kakao/*' element={<Kakao />} />
+        <Route path='/finish' element={<Finish />} />
         <Route path='/auth/kakao/*' element={<Kakao />} />
         <Route path='/auth/naver/*' element={<Naver />} />
         <Route path='/auth/google/*' element={<Google />} />

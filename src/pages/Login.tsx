@@ -12,7 +12,7 @@ import {useNavigate} from 'react-router-dom';
 import { useSelector , useDispatch} from "react-redux";
 import { RootState } from "../reducer/index";
 import axios from "axios";
-import { setCookie } from "../components/Cookie";
+import { getCookie, setCookie } from "../components/Cookie";
 
 export default function Login() {
 
@@ -20,13 +20,6 @@ export default function Login() {
         id: '',
         password: '',
     });
-
-    const submit = (e : React.MouseEvent) => {
-        console.log(id);
-        console.log(password);
-        resetInput();
-        navigate(-1);
-    }
 
     const kakao_redirect_uri = 'http://localhost:3000/auth/kakao' //Redirect URI
     const naver_redirect_uri = 'http://localhost:3000/auth/naver' //Redirect URI
@@ -36,24 +29,16 @@ export default function Login() {
     const kakaoLoginLink : string = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=${kakao_redirect_uri}`;
     const googleLoginLink : string = `https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=${google_redirect_uri}&response_type=code&scope=openid%20email%20profile`;
 
-
-
     // 로그인 상태.
 
-    const loginStateData = useSelector(
-        (state: RootState) => state.LoginStatusReducer.loginStatusData
-    );
 
     const navigate = useNavigate();
-    
-    console.log(`login status : ${loginStateData}`);
 
     type loginTypes =(
         id : string,
         pwd : string,
     ) => void;
 
-    const dispatch = useDispatch();
 
     const login : loginTypes = (id,pwd) => {
         axios.post('http://bookstore24.shop/login',
@@ -62,7 +47,7 @@ export default function Login() {
             loginPassword : pwd,
         },
         )
-        .then(function (response) {
+        .then(response => {
 
             console.log(response);
             console.log(response.headers);
@@ -70,7 +55,8 @@ export default function Login() {
             const token = response.headers.authorization 
 
             setCookie('jwt',token)
-            dispatch(saveloginStatus(true));
+
+            sessionStorage.setItem('status',token);
 
             // 유저인증
             axios.get('http://bookstore24.shop/user',
@@ -108,6 +94,7 @@ export default function Login() {
 
     return(
         <Wrapper>
+
             <Header />
             <LoginContainer>
                 <Title>

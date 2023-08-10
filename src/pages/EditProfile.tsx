@@ -83,6 +83,8 @@ export default function EditProfile() {
             .post(`http://61.79.215.100/member/profile/residence/edit/save`, data, config)
             .then((response) => {
             console.log(`Response : ${JSON.stringify(data)}`);
+            // window.location.replace("/")
+
             })
             .catch((error) => {
             console.log('Error:', error.response.data);

@@ -37,7 +37,7 @@ export default function FirstLogin(){
       {
       headers : {
         "Content-Type" : "application/json; charset=utf-8",
-        'Authorization' : getCookie('jwt')
+        'Authorization' : sessionStorage.getItem('status')
       }
       }
     )
