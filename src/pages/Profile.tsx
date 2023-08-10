@@ -28,6 +28,7 @@ export default function Profile(){
     
     const [residence,setResidence] = useState<string>('');
     
+    const [auth,setAuth] = useState<boolean>();
 
     useEffect(()=>{
         axios.get(`http://61.79.215.100/member/profile/edit`,
@@ -42,10 +43,12 @@ export default function Profile(){
 
                 setNickname(response.data.nickname);
                 setResidence(response.data.residence);
+                setAuth(true);
 
             })
             .catch(error => {
                 console.log('Error : ', error);
+                setAuth(false);
             })
     },[])
 
@@ -56,6 +59,7 @@ export default function Profile(){
             <ProfileContainer>
 
                 {/* 자신의 페이지인지 확인 & 프로필 수정버튼 */}
+                {auth ? 
                 <Div value={0}>
                     <P value={15}>
                         마이페이지
@@ -68,6 +72,13 @@ export default function Profile(){
                     </ModifyButton>
 
                 </Div>
+                :
+                <>
+                <P value={15}>
+                        회원 정보
+                    </P>
+                </>
+                }
 
                 {/* 사용자 정보 */}
                 <ProfileInfoContainer>

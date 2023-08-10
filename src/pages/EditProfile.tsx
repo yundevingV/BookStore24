@@ -12,6 +12,7 @@ import axios from "axios";
 import { getCookie } from "../components/Cookie";
 import { useSelector} from "react-redux";
 import { RootState } from "../reducer/index";
+import { useNavigate } from "react-router";
 
 export default function EditProfile() {
 
@@ -20,6 +21,8 @@ export default function EditProfile() {
         //기존 닉네임 받아오기!
         nickname : '',
     });
+
+    const navigate = useNavigate();
 
     const dropDownValueData = useSelector(
         (state: RootState) => state.DropDownValueReducer.dropDownValueData
@@ -50,12 +53,11 @@ export default function EditProfile() {
                 console.log(response.data)
                 setData(response.data);
                 console.log(data);
-                // setNickname(response.data.nickname);
-                // setResidence(response.data.residence);
 
             })
             .catch(error => {
                 console.log('Error : ', error);
+                navigate(-1);
             })
     },[])
     
@@ -110,6 +112,7 @@ export default function EditProfile() {
                 Authorization: jwt,
                 },
             };
+
             if (nickname.length >= 1 ){
             axios
                 .post(`http://61.79.215.100/member/profile/nickname/edit/save`, data, config)
