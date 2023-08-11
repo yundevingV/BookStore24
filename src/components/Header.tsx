@@ -41,8 +41,7 @@ export default function Header() {
         
     let token = getCookie('jwt');
     let dec = useDecodedJWT(token);
-    console.log(token)
-    console.log(dec)
+
 
     useEffect(()=>{
 
@@ -61,8 +60,7 @@ export default function Header() {
         })
 
         .then(response => {
-            console.log(response.status);
-            console.log(getCookie('jwt'));
+
 
         })
         .catch(error => {
@@ -78,7 +76,6 @@ export default function Header() {
         
     },[dispatch])
 
-    console.log(getCookie('jwt'));
 
     return (
         

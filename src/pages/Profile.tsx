@@ -24,11 +24,23 @@ interface DivMarginProps {
 export default function Profile(){
 
 
-    const [nickname,setNickname] = useState<string>('');
-    
-    const [residence,setResidence] = useState<string>('');
+
     
     const [auth,setAuth] = useState<boolean>();
+
+
+    interface DataType{
+        nickname : string;
+        residence : string;
+    }
+
+    const [data,setData] = useState<DataType | null>(null)
+
+    const list = ["서울", "인천", "경기도"];
+    const value = ["seoul","incheon","gyeonggi"]
+
+    const [residence , setResidence] = useState('');
+
 
     useEffect(()=>{
         axios.get(`http://61.79.215.100/member/profile/edit`,
@@ -39,12 +51,14 @@ export default function Profile(){
             }
             )
             .then(response =>{
-                console.log(response.data)
+                console.log(response.data);
+                setData(response.data);
+                
+                let idx = value.indexOf(response.data.residence)
+                setResidence(list[idx])
 
-                setNickname(response.data.nickname);
-                setResidence(response.data.residence);
+                console.log(residence)
                 setAuth(true);
-
             })
             .catch(error => {
                 console.log('Error : ', error);
@@ -90,7 +104,7 @@ export default function Profile(){
 
                     <NickNameContainer>
                         <NickName>
-                            {nickname}
+                            {data?.nickname}
                         </NickName>
                     </NickNameContainer>
 

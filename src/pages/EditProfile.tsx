@@ -13,6 +13,9 @@ import { getCookie } from "../components/Cookie";
 import { useSelector} from "react-redux";
 import { RootState } from "../reducer/index";
 import { useNavigate } from "react-router";
+import DropTest from "../components/DropTest";
+import { useDispatch } from "react-redux";
+import { saveDropDownValue } from "../action/dropdown_value";
 
 export default function EditProfile() {
 
@@ -37,10 +40,8 @@ export default function EditProfile() {
     }
 
     const [data,setData] = useState<DataType | null>(null)
-    // const [nickname,setNickname] = useState<string>('');
-    
-    // const [residence,setResidence] = useState<string>('');
-    
+    const dispatch =useDispatch();
+
     useEffect(()=>{
         axios.get(`http://61.79.215.100/member/profile/edit`,
             {
@@ -52,7 +53,7 @@ export default function EditProfile() {
             .then(response =>{
                 console.log(response.data)
                 setData(response.data);
-                console.log(data);
+                dispatch(saveDropDownValue(response.data.residence))            
 
             })
             .catch(error => {
@@ -187,7 +188,7 @@ export default function EditProfile() {
                         
                         <Space width={0} height={15} />
 
-                            <Dropdown />
+                        <DropTest dropValue={dropDownValueData}/>
                     </Box>
 
                 </ProfileInfoContainer>
@@ -204,7 +205,6 @@ export default function EditProfile() {
                         회원 탈퇴하기
                     </RetireButton>
                 </RetireButtonContainer>
-
             </Container>
         </Wrapper>
     )
