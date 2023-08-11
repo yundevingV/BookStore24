@@ -21,8 +21,6 @@ export default function EditProfile() {
 
     //입력창 이메일
     const [ { nickname }, onInputChange, resetInput ] = useInput({
-        //기존 닉네임 받아오기!
-        nickname : '',
     });
 
     const navigate = useNavigate();

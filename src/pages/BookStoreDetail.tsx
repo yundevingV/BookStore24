@@ -7,9 +7,12 @@ import Login from "./Login";
 
 
 import { styled } from "styled-components";
-import { useLocation } from 'react-router-dom';
+import { useLocation,  useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../reducer/index";
+import axios from "axios";
+import { getCookie } from "../components/Cookie";
+import useDecodedJWT from "../hooks/useDecodedJWT";
 
 export default function BookStoreDetail() {
     // 현재 주소
@@ -26,6 +29,48 @@ export default function BookStoreDetail() {
         setLogin(loginStateData)
     }, [loginStateData]);
 
+    let token = getCookie('jwt');
+    let dec = useDecodedJWT(token);
+
+    interface DataType{
+        "title": string,
+        "bookTitle": string,
+        "author": string,
+        "publisher": string,
+        "coverImg": string,
+        "isbn": string,
+        "content": string,
+        "price": string,
+        "talkUrl": string,
+        "createdDate": string,
+        "nickname": string,
+    }
+
+    const [data,setData] = useState<DataType | null>(null)
+
+    useEffect(() => {        
+        axios
+            .get(`http://61.79.215.100/sell/post/detail`,{
+                
+                params:{
+                    "loginId": dec.loginId,
+                    "title": "t"
+                },
+                headers: {
+                    Authorization: token,
+                
+                }
+            })
+            
+            .then((response) => {
+            console.log(`Response : ${response.data}`);
+            setData(response.data)
+            })
+            .catch((error) => {
+            console.log('Error:', error.response);
+            });
+    },[]);
+    
     return(
         <Wrapper>
             {/* b   로그인 실패시 & 비로그인 */}
@@ -55,19 +100,19 @@ export default function BookStoreDetail() {
                 <RightContainer>
                         
                     <div>
-                        <p className="title">판매 제목</p>
+                        <p className="title">{data?.title}</p>
                     </div>
 
 
                     <div>
-                    <p className="profile">프로필</p>
+                    <p className="profile">{dec?.nickname}</p>
                     </div>
                     
                     <div>
-                        <p className="title">책 이름</p>
-                        <p className="publisher">저자 : 나동빈</p>
-                        <p className="publisher">출판사 : 한빛</p>
-                        <p className='price'>₩ 41,000</p>
+                        <p className="title">{data?.bookTitle}</p>
+                        <p className="publisher">저자 : {data?.author}</p>
+                        <p className="publisher">출판사 : {data?.publisher}</p>
+                        <p className='price'>₩ {data?.price}</p>
                     </div>
 
 
@@ -83,7 +128,7 @@ export default function BookStoreDetail() {
                     </p>
 
                     <div>
-                        이책을 공부하게 되면이책을 공부하게 되면이책을 공부하게 되면이책을 공부하게 되면
+                        {data?.content}
                     </div>
                 </ContentContainer>
 
@@ -92,9 +137,11 @@ export default function BookStoreDetail() {
                 <ButtonContainer>
                 
                         
+                    
                     <OpenChatButton>
                         오픈 채팅으로 연락하기
                     </OpenChatButton>
+                    
                 </ButtonContainer>
             </Container>
             </>

@@ -10,7 +10,7 @@ import EditPwd from './pages/EditPwd';
 import BookStore from './pages/BookStore';
 import BookStoreAdd from './pages/BookStoreAdd';
 import BookStoreDetail from './pages/BookStoreDetail';
-import BookStoreEdit from './pages/BookCommunityEdit';
+import BookStoreEdit from './pages/BookStoreEdit';
 
 import BookComunity from './pages/BookCommunity';
 import BookCommunityAdd from './pages/BookCommunityAdd';
@@ -43,16 +43,16 @@ function App() {
         <Route path='/editpwd' element={<EditPwd />} />
         <Route path='/bookstore' element={<BookStore />} />
         <Route path='/bookstoreadd' element={<BookStoreAdd />} />
-        <Route path="/bookstoredetail/:id" element={<BookStoreDetail />} />
-        <Route path="/bookstoredetail/:id/edit" element={<BookStoreEdit />} />
+        <Route path="/bookstoredetail" element={<BookStoreDetail />} />
+        <Route path="/bookstoredetail/edit" element={<BookStoreEdit />} />
 
 
         <Route path='/bookcommunity' element={<BookComunity />} />
         <Route path='/bookcommunityadd' element={<BookCommunityAdd />} />
-        <Route path="/bookcommunitydetail/" element={<BookCommunityDetail />} />
-        <Route path="/bookcommunitydetail/:id/edit" element={<BookCommunityEdit />} />
+        <Route path="/bookcommunitydetail" element={<BookCommunityDetail />} />
+        <Route path="/bookcommunitydetail/edit" element={<BookCommunityEdit />} />
 
-        <Route path="/bookranking/*" element={<BookRanking />} />
+        <Route path="/bookranking" element={<BookRanking />} />
 
         {/* OAuth 로그인 */}
         <Route path='/finish' element={<Finish />} />

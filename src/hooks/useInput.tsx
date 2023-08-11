@@ -12,3 +12,5 @@ export default function useInput(initialForm : any) {
     return [form, onChange, reset];
 }
 
+
+

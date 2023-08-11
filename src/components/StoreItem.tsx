@@ -14,15 +14,12 @@ function ItemList(){
         (state: RootState) => state.searchWordReducer.searchWordData
     );
 
-    if (searchWordData.includes('a'))
-    {
-        console.log('a');
-    }
+
 
     return(
         <>
             
-            <StyledLink to='/bookstoredetail/1'>
+            <StyledLink to='/bookstoredetail'>
             <Frame>
 
             <Top>

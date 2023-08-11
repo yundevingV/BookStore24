@@ -1,29 +1,128 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
 import Test from '../assets/imgs/testbookcover.jpg'
-import EditButton from "../components/EditButton";
 import SearchBook from "../modal/SearchBook";
 
 import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import { getCookie } from "../components/Cookie";
+import {  useNavigate } from 'react-router-dom';
+import useDecodedJWT from "../hooks/useDecodedJWT";
 
 
 export default function BookStoreEdit() {
-    
-    const [viewModal , setViewModal] = useState(false);
 
-    const openModal = (e : React.MouseEvent) => {
-        
-        viewModal === true ? setViewModal(false) : setViewModal(true)
+
+
+
+    interface DataType{
+        "title": string,
+        "bookTitle": string,
+        "author": string,
+        "publisher": string,
+        "coverImg": string,
+        "isbn": string,
+        "content": string,
+        "price": string,
+        "talkUrl": string,
+        "createdDate": string,
+        "nickname": string,
     }
+
+    const [data,setData] = useState<DataType | null>(null)
+
+
+    let token = getCookie('jwt');
+    let dec = useDecodedJWT(token);
+
+    useEffect(() => {        
+        axios
+            .get(`http://61.79.215.100/sell/post/edit`,{
+                
+                params:{
+                    "loginId": dec.loginId,
+                    "title": "t"
+                },
+                headers: {
+                    Authorization: token,
+                
+                }
+            })
+            
+            .then((response) => {
+            console.log(`Response : ${response}`);
+            setData(response.data);
+        })
+            .catch((error) => {
+            console.log('Error:', error.response);
+            navigate(-1);
+            });
+        
+
+    },[]);
+
+    const navigate = useNavigate()
+
+    const [ { title, talkUrl, price, content }, onInputChange, resetInput ] = useInput({
+
+    });
+    
+    const save = (e: React.MouseEvent) => {
+        e.preventDefault();
+    
+        // Check if any input values have been modified
+        const isTitleModified = title !== data?.title;
+        const isContentModified = content !== data?.content;
+        // const isPriceModified = (price) !== (data?.price);
+        const isTalkUrlModified = talkUrl !== data?.talkUrl;
+    
+        if (!isTitleModified && !isContentModified &&  !isTalkUrlModified) {
+            // No changes were made, you can handle this case if needed
+            console.log("No changes were made.");
+            return;
+        }
+    
+        const newData = {
+            "title": 't',
+            "bookTitle": "김민교 자서전",
+            "author": "김민교",
+            "publisher": "교출판사",
+            "coverImg": "https://shopping-phinf.pstatic.net/main_3729966/37299668618.20230119064022.jpg",
+            "isbn": "123456789",
+            "content": isContentModified ? content : data?.content,
+            "price": 500,
+            "talkUrl": isTalkUrlModified ? talkUrl : data?.talkUrl
+        };
+    
+        const config = {
+            headers: {
+                Authorization: token,
+            },
+        };
+    
+        if (true) {
+            axios
+                .post(`http://61.79.215.100/sell/post/edit/save`, newData, config)
+                .then((response) => {
+                    console.log(`Response : ${JSON.stringify(newData)}`);
+                    navigate(-1);
+                })
+                .catch((error) => {
+                    console.log('Error:', error.response.data);
+                });
+        }
+    };
+    
+
     return(
         <Wrapper>
             <Header />
             
             <Container >
                 <H3>
-                    판매하기
+                    수정하기
                 </H3>
                 <Hr />
 
@@ -36,25 +135,43 @@ export default function BookStoreEdit() {
 
 
                     <RightContainer>
-                    <Title placeholder='게시글 제목'/>
+                    <Title placeholder='게시글 제목'
+                            name="title"
+                            value={data?.title}
+                            onChange={onInputChange}
+
+                        />
                         
 
                     <BookTitle 
                         placeholder='책 제목을 입력해주세요'
-                        onClick={openModal} />
-                    {viewModal && <SearchBook viewModal={viewModal} setViewModal={setViewModal}/>}
+                        name="bookTitle"
+                        value={data?.bookTitle}
+                        />
 
                     <BookTitle 
-                        placeholder='저자를 입력해주세요' />
+                        placeholder='저자를 입력해주세요' 
+                        value={data?.author}
+                        />
                     
                     <BookTitle 
-                        placeholder='출판사를 입력해주세요' />
+                        placeholder='출판사를 입력해주세요'
+                        value={data?.publisher} />
                                             
                     <BookTitle 
-                        placeholder='오픈채팅 대화방 링크를 입력해주세요' />
+                        placeholder='오픈채팅 대화방 링크를 입력해주세요' 
+                        name="talkUrl"
+                        defaultValue={data?.talkUrl}
+                        onChange={onInputChange}
+
+                        />
 
                     <Price
-                        placeholder='희망 가격을 입력해주세요' />
+                        placeholder='희망 가격을 입력해주세요'
+                        name="price"
+                        defaultValue={data?.price}
+                        onChange={onInputChange}
+                        />
 
                 
                 </RightContainer>
@@ -64,7 +181,13 @@ export default function BookStoreEdit() {
                 <ContentContainer>
                     <input
                         className="content"
-                        placeholder='게시글 내용을 입력하세요' />
+                        name="content"
+                        placeholder='게시글 내용을 입력하세요'
+                        defaultValue={data?.content}
+                        onChange={onInputChange}
+
+
+                        />
                 </ContentContainer>
 
                 <ButtonContainer>
@@ -74,7 +197,7 @@ export default function BookStoreEdit() {
                         뒤로가기
                     </CancelButton>
 
-                    <AddButton>
+                    <AddButton onClick={save}>
                         등록하기
                     </AddButton>
                 </ButtonContainer>

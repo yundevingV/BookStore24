@@ -29,19 +29,19 @@ export default function BookCommunityDetail() {
         setLogin(loginStateData)
     }, [loginStateData]);
 
-    const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
     let token = getCookie('jwt');
     let dec = useDecodedJWT(token);
         
     useEffect(() => {        
         axios
             .get(`http://61.79.215.100/review/post/detail`,{
+                
                 params:{
                     "loginId": dec.loginId,
-                    "title": "test2"
+                    "title": "t"
                 },
                 headers: {
-                    Authorization: jwt,
+                    Authorization: token,
                 
                 }
             })

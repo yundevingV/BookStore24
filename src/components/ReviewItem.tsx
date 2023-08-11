@@ -24,7 +24,7 @@ function ItemList(){
     return(
         <>
             
-            <StyledLink to='/bookcommunitydetail/1'>
+            <StyledLink to='/bookcommunitydetail'>
             <Frame>
 
             <Top>

@@ -6,6 +6,9 @@ import SearchBook from "../modal/SearchBook";
 
 
 import { styled } from "styled-components";
+import axios from "axios";
+import {  useNavigate } from 'react-router-dom';
+import { getCookie } from "../components/Cookie";
 
 
 export default function BookStoreAdd() {
@@ -16,6 +19,54 @@ export default function BookStoreAdd() {
         
         viewModal === true ? setViewModal(false) : setViewModal(true)
     }
+
+    const [ { title, talkUrl, price, content }, onInputChange, resetInput ] = useInput({
+        title: '',
+        talkUrl : '',
+        price: '',
+        content: '',
+    });
+
+    const navigate = useNavigate()
+
+    const add = (e: React.MouseEvent) => {
+        e.preventDefault(); // Prevent the default form submission behavior.
+
+        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+        
+        // Data to be sent in the request body.
+        const data = {
+            "title" : title,
+            "bookTitle" : "김민교 자서전",
+            "author" : "김민교",
+            "publisher" : "교출판사",
+            "isbn" : "123456789",
+            "talkUrl" : talkUrl,
+            "coverImg" : "https://shopping-phinf.pstatic.net/main_3729966/37299668618.20230119064022.jpg",
+            "price" : price,
+            "content" : content
+            
+        };
+        
+        // Axios configuration for the POST request.
+        const config = {
+            headers: {
+            Authorization: jwt,
+            },
+        };
+        if (true){
+        axios
+            .post(`http://61.79.215.100/sell/post/save`, data, config)
+            .then((response) => {
+            console.log(`Response : ${(JSON.stringify(data))}`);
+            navigate(-1);
+            })
+            .catch((error) => {
+            console.log('Error:', error.response.data);
+            });
+        
+        };}
+    
     return(
         <Wrapper>
             <Header />
@@ -35,7 +86,12 @@ export default function BookStoreAdd() {
 
 
                     <RightContainer>
-                    <Title placeholder='게시글 제목'/>
+                    <Title 
+                        placeholder='게시글 제목'
+                        name="title"
+                        value={title}
+                        onChange={onInputChange}
+                    />
                         
 
                     <BookTitle 
@@ -50,10 +106,16 @@ export default function BookStoreAdd() {
                         placeholder='출판사를 입력해주세요' />
                                             
                     <BookTitle 
-                        placeholder='오픈채팅 대화방 링크를 입력해주세요' />
-
+                        placeholder='오픈채팅 대화방 링크를 입력해주세요' 
+                        name="talkUrl"
+                        value={talkUrl}
+                        onChange={onInputChange}/>
                     <Price
-                        placeholder='희망 가격을 입력해주세요' />
+                        placeholder='희망 가격을 입력해주세요' 
+                        name="price"
+                        value={price}
+                        onChange={onInputChange}
+                        />
 
                 
                 </RightContainer>
@@ -63,6 +125,9 @@ export default function BookStoreAdd() {
                 <ContentContainer>
                     <input
                         className="content"
+                        name="content"
+                        value={content}
+                        onChange={onInputChange}
                         placeholder='게시글 내용을 입력하세요' />
                 </ContentContainer>
 
@@ -73,7 +138,7 @@ export default function BookStoreAdd() {
                         뒤로가기
                     </CancelButton>
 
-                    <AddButton>
+                    <AddButton onClick={add}>
                         등록하기
                     </AddButton>
                 </ButtonContainer>

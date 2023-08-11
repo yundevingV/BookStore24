@@ -8,6 +8,7 @@ import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
 import { getCookie } from "../components/Cookie";
 import axios from "axios";
+import useDecodedJWT from "../hooks/useDecodedJWT";
 
 
 export default function BookCommunityEdit() {
@@ -20,19 +21,21 @@ export default function BookCommunityEdit() {
         viewModal === true ? setViewModal(false) : setViewModal(true)
     }
 
+    let token = getCookie('jwt');
+    let dec = useDecodedJWT(token);
+
     useEffect(()=>{
-        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
         
 
         // Axios configuration for the POST request.
         const config = {
             headers: {
-            Authorization: jwt,
+            Authorization: token,
 
             },
             params : {
-                "loginId" : "kakao_12345145",
-                "title" : "카카오 오어스가 읽은, 도서 리뷰입니다."
+                "loginId" : dec?.nickname,
+                "title" : "t"
             }
         };
         

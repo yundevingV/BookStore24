@@ -76,6 +76,7 @@ export default function Header() {
         
     },[dispatch])
 
+    console.log(getCookie('jwt'))
 
     return (
         
