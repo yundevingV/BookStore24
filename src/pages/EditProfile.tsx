@@ -41,7 +41,7 @@ export default function EditProfile() {
     const dispatch =useDispatch();
 
     useEffect(()=>{
-        axios.get(`http://61.79.215.100/member/profile/edit`,
+        axios.get(`http://52.79.234.227/member/profile/edit`,
             {
                 headers : {
                     'Authorization' : getCookie('jwt')
@@ -81,7 +81,7 @@ export default function EditProfile() {
         };
         
         axios
-            .post(`http://61.79.215.100/member/profile/residence/edit/save`, data, config)
+            .post(`http://52.79.234.227/member/profile/residence/edit/save`, data, config)
             .then((response) => {
             console.log(`Response : ${JSON.stringify(data)}`);
             // window.location.replace("/")
@@ -114,7 +114,7 @@ export default function EditProfile() {
 
             if (nickname.length >= 1 ){
             axios
-                .post(`http://61.79.215.100/member/profile/nickname/edit/save`, data, config)
+                .post(`http://52.79.234.227/member/profile/nickname/edit/save`, data, config)
                 .then((response) => {
                 console.log(`Response : ${JSON.stringify(data)}`);
                 })

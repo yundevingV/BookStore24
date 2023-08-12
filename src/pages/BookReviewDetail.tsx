@@ -51,11 +51,11 @@ export default function BookCommunityDetail() {
 
     useEffect(() => {        
         axios
-            .get(`http://61.79.215.100/sell/post/detail`,{
+            .get(`http://bookstore24.shop/review/post/detail`,{
                 
                 params:{
-                    "loginId": dec.loginId,
-                    "title": "t"
+                    "loginId": 'acc',
+                    "title": "이윤성 자서전을 보고 쓴 리뷰"
                 },
                 headers: {
                     Authorization: token,
@@ -88,7 +88,7 @@ export default function BookCommunityDetail() {
             
             <Container >
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
-                <EditButton />
+                {dec?.loginId === 'acc' ? <EditButton /> : <></>}
 
                 <InnerContainer>
 

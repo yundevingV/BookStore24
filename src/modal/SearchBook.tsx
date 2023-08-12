@@ -54,7 +54,7 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         };
         
         axios
-            .get(`http://61.79.215.100/book/information/search`,{
+            .get(`http://52.79.234.227/book/information/search`,{
                 params:{
                   query: searchWord,
                 },
@@ -65,7 +65,7 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
               })
             
             .then((response) => {
-            console.log(`Response : ${response}`);
+            console.log(`Response : ${JSON.stringify(response)}`);
             })
             .catch((error) => {
             console.log('Error:', error.response);

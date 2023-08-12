@@ -23,7 +23,7 @@ export default function FirstLogin(){
 
   const save_NickNameResidence = (e : React.MouseEvent) => {
 
-      axios.post('http://61.79.215.100/member/nicknameresidence/save'
+      axios.post('http://bookstore24.shop/member/nicknameresidence/save'
       ,
       {
   

@@ -32,11 +32,11 @@ export default function BookCommunityEdit() {
 
     useEffect(() => {        
         axios
-            .get(`http://61.79.215.100/review/post/edit`,{
+            .get(`http://bookstore24.shop/review/post/edit`,{
                 
                 params:{
                     "loginId": dec.loginId,
-                    "title": "t"
+                    "title": "이윤성 자서전을 보고 쓴 리뷰"
                 },
                 headers: {
                     Authorization: token,
@@ -66,12 +66,13 @@ export default function BookCommunityEdit() {
         e.preventDefault();
     
         const newData = {
-            "title" : "카카오 오어스가 읽은, 도서 리뷰입니다.",
-            "bookTitle" : "김민교 자서전",
-            "author" : "김민교",
-            "publisher" : "교출판사",
-            "coverImg" : "https://shopping-phinf.pstatic.net/main_3729966/37299668618.20230119064022.jpg",
-            "isbn" : "123456789",
+            "title" : "이윤성 자서전을 보고 쓴 리뷰",
+            
+            "isbn" : "12345619",
+            "bookTitle" : "이윤성자서전",
+            "author" : "이윤성",
+            "publisher" : "성출판사",
+            "coverImg" : "https://shopping-phinf.pstatic.net/main_3246698/32466988102.20230725121118.jpg",
             "content" : content,
             "score" : score
         };
@@ -84,7 +85,7 @@ export default function BookCommunityEdit() {
     
         if (true) {
             axios
-                .post(`http://61.79.215.100/review/post/edit/save`, newData, config)
+                .post(`http://bookstore24.shop/review/post/edit/save`, newData, config)
                 .then((response) => {
                     console.log(`Response : ${JSON.stringify(newData)}`);
                     navigate(-1);
@@ -140,8 +141,11 @@ export default function BookCommunityEdit() {
 
                     <Score
                         placeholder='별점' 
+                        name='score'
                         defaultValue={data?.score}
                         key={data?.score}
+                        onChange={onInputChange}
+
                         />
 
                 
@@ -152,9 +156,12 @@ export default function BookCommunityEdit() {
                 <ContentContainer>
                     <input
                         className="content"
+                        name='content'
                         placeholder='게시글 내용을 입력하세요' 
                         defaultValue={data?.content}
-                        key={data?.content  }
+                        key={data?.content}
+                        onChange={onInputChange}
+
                         />
                 </ContentContainer>
 
@@ -165,7 +172,7 @@ export default function BookCommunityEdit() {
                         뒤로가기
                     </CancelButton>
 
-                    <AddButton>
+                    <AddButton onClick={save}>
                         등록하기
                     </AddButton>
                 </ButtonContainer>

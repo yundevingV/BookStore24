@@ -43,7 +43,7 @@ export default function EditPwd(){
         };
         
         axios
-            .post(`http://61.79.215.100/member/password/edit/save`, data, config)
+            .post(`http://bookstore24.shop/member/password/edit/save`, data, config)
             .then((response) => {
             console.log(`Response : ${response.status}`);
             console.log(`Response : ${data}`);

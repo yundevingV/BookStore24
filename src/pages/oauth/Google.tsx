@@ -13,7 +13,7 @@ export default function Google(){
         const code : string | null = new URL(window.location.href).searchParams.get("code");
 
         axios.post(
-            `http://61.79.215.100/auth/google/callback?Authorization_code=${code}`,
+            `http://52.79.234.227/auth/google/callback?Authorization_code=${code}`,
         )
         .then(response => {
             console.log(response.status)

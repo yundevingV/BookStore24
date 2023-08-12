@@ -43,7 +43,7 @@ export default function Profile(){
 
 
     useEffect(()=>{
-        axios.get(`http://61.79.215.100/member/profile/edit`,
+        axios.get(`http://52.79.234.227/member/profile/edit`,
             {
                 headers : {
                     'Authorization' : getCookie('jwt')

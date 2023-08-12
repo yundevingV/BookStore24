@@ -36,10 +36,10 @@ export default function BookCommunityAdd() {
         // Data to be sent in the request body.
         const data = {
             "title" : title,
-            "isbn" : "123456789",
-            "bookTitle" : "리뷰글 도서 제목",
-            "author" : "김민교",
-            "publisher" : "교출판사",
+            "isbn" : "12345619",
+            "bookTitle" : "이윤성자서전",
+            "author" : "이윤성",
+            "publisher" : "성출판사",
             "coverImg" : "https://shopping-phinf.pstatic.net/main_3246698/32466988102.20230725121118.jpg",
             "content" : content,
             "score" : rate,
@@ -53,7 +53,7 @@ export default function BookCommunityAdd() {
         };
         if (true){
         axios
-            .post(`http://61.79.215.100/review/post/save`, data, config)
+            .post(`http://bookstore24.shop/review/post/save`, data, config)
             .then((response) => {
             console.log(`Response : ${(JSON.stringify(data))}`);
             navigate(-1);

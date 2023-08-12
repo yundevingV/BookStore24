@@ -48,7 +48,7 @@ export default function Header() {
         if (auth) {
             dispatch(saveloginStatus(true));
 
-            axios.get('http://61.79.215.100/member/nicknameresidence/check'
+            axios.get('http://52.79.234.227/member/nicknameresidence/check'
             ,
             {
             

@@ -19,7 +19,7 @@ function ItemList(){
     return(
         <>
             
-            <StyledLink to='/bookstoredetail'>
+            <StyledLink to='/bookstore/detail'>
             <Frame>
 
             <Top>

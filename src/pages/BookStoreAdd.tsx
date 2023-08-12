@@ -56,7 +56,7 @@ export default function BookStoreAdd() {
         };
         if (true){
         axios
-            .post(`http://61.79.215.100/sell/post/save`, data, config)
+            .post(`http://52.79.234.227/sell/post/save`, data, config)
             .then((response) => {
             console.log(`Response : ${(JSON.stringify(data))}`);
             navigate(-1);

@@ -55,7 +55,7 @@ export default function Login() {
             setCookie('jwt',token)
 
             sessionStorage.setItem('status',token);
-            navigate(`./${redirectUrl}`)
+            navigate(`/`)
 
         })
         

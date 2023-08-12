@@ -35,11 +35,11 @@ export default function BookStoreEdit() {
 
     useEffect(() => {        
         axios
-            .get(`http://61.79.215.100/sell/post/edit`,{
+            .get(`http://52.79.234.227/sell/post/edit`,{
                 
                 params:{
-                    "loginId": dec.loginId,
-                    "title": "t"
+                    "loginId": 'acc',
+                    "title": "ㅍㅍ"
                 },
                 headers: {
                     Authorization: token,
@@ -62,14 +62,14 @@ export default function BookStoreEdit() {
     const navigate = useNavigate()
 
     const [ { talkUrl, price, content }, onInputChange, resetInput ] = useInput({
-
+        talkUrl : ''
     });
-    
+    console.log(talkUrl)
     const save = (e: React.MouseEvent) => {
         e.preventDefault();
     
         const newData = {
-            "title": 't',
+            "title": 'ㅍㅍ',
             "bookTitle": "김민교 자서전",
             "author": "김민교",
             "publisher": "교출판사",
@@ -88,7 +88,7 @@ export default function BookStoreEdit() {
     
         if (true) {
             axios
-                .post(`http://61.79.215.100/sell/post/edit/save`, newData, config)
+                .post(`http://52.79.234.227/sell/post/edit/save`, newData, config)
                 .then((response) => {
                     console.log(`Response : ${JSON.stringify(newData)}`);
                     navigate(-1);
@@ -105,7 +105,7 @@ export default function BookStoreEdit() {
             
             <Container >
                 <H3>
-                    수정하기
+                    수정하기{data?.content}
                 </H3>
                 <Hr />
 
@@ -144,8 +144,7 @@ export default function BookStoreEdit() {
                     <BookTitle 
                         placeholder='오픈채팅 대화방 링크를 입력해주세요' 
                         name="talkUrl"
-                        defaultValue={data?.talkUrl}
-                        key={data?.talkUrl}
+                        defaultValue={data?.talkUrl || 'a'}
                         onChange={onInputChange}
 
                         />
@@ -153,7 +152,7 @@ export default function BookStoreEdit() {
                     <Price
                         placeholder='희망 가격을 입력해주세요'
                         name="price"
-                        defaultValue={data?.price}
+                        defaultValue={data?.price || 11}
                         key={data?.price}
                         onChange={onInputChange}
                         />

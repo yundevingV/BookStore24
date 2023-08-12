@@ -50,11 +50,11 @@ export default function BookStoreDetail() {
 
     useEffect(() => {        
         axios
-            .get(`http://61.79.215.100/sell/post/detail`,{
+            .get(`http://52.79.234.227/sell/post/detail`,{
                 
                 params:{
-                    "loginId": dec.loginId,
-                    "title": "t"
+                    "loginId": 'acc',
+                    "title": "ㅍㅍ"
                 },
                 headers: {
                     Authorization: token,
@@ -87,7 +87,9 @@ export default function BookStoreDetail() {
             
             <Container >
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
-                <EditButton />
+                {dec?.loginId === 'acc' ? <EditButton /> : <></>}
+                
+                
 
                 <InnerContainer>
 

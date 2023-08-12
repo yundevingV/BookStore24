@@ -13,14 +13,12 @@ export default function Naver(){
     const navigate = useNavigate();
     const redirectUrl = getCookie('redirectUrl');
 
-
-
     useEffect(() => {
 
         const code : string | null = new URL(window.location.href).searchParams.get("code");
 
         axios.post(
-            `http://61.79.215.100/auth/naver/callback?Authorization_code=${code}`,
+            `http://52.79.234.227/auth/naver/callback?Authorization_code=${code}`,
         )
         .then(response => {
 
