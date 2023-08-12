@@ -31,10 +31,27 @@ export default function BookCommunityDetail() {
 
     let token = getCookie('jwt');
     let dec = useDecodedJWT(token);
-        
+
+    interface DataType{
+        "title": string,
+        "bookTitle": string,
+        "author": string,
+        "publisher": string,
+        "coverImg": string,
+        "isbn": number,
+        "content": string,
+        "view": number,
+        "score": number,
+        "createdDate": string,
+        "nickname": string,
+        "reviewComments" : [],
+    }
+
+    const [data,setData] = useState<DataType | null>(null)
+
     useEffect(() => {        
         axios
-            .get(`http://61.79.215.100/review/post/detail`,{
+            .get(`http://61.79.215.100/sell/post/detail`,{
                 
                 params:{
                     "loginId": dec.loginId,
@@ -47,13 +64,12 @@ export default function BookCommunityDetail() {
             })
             
             .then((response) => {
-            console.log(`Response : ${response}`);
+            console.log(`Response : ${response.data}`);
+            setData(response.data)
             })
             .catch((error) => {
             console.log('Error:', error.response);
             });
-        
-
     },[]);
 
     return(
@@ -85,19 +101,19 @@ export default function BookCommunityDetail() {
                 <RightContainer>
                         
                     <div>
-                        <p className="title">판매 제목</p>
+                        <p className="title">{data?.title}</p>
                     </div>
 
 
                     <div>
-                    <p className="profile">프로필</p>
+                    <p className="profile">{dec?.nickname}</p>
                     </div>
                     
                     <div>
-                        <p className="title">책 이름</p>
-                        <p className="publisher">저자 : 나동빈</p>
-                        <p className="publisher">출판사 : 한빛</p>
-                        <p className='rating'>4.8</p>
+                        <p className="title">{data?.bookTitle}</p>
+                        <p className="publisher">저자 : {data?.author}</p>
+                        <p className="publisher">출판사 : {data?.publisher}</p>
+                        <p className='rating'>{data?.score}</p>
                     </div>
 
 
@@ -113,19 +129,10 @@ export default function BookCommunityDetail() {
                     </p>
 
                     <div>
-                        꼼꼼하게 설명되어있네요.
+                        {data?.content}
                     </div>
                 </ContentContainer>
 
-
-                {/* 오픈채팅 */}
-                <ButtonContainer>
-                
-                        
-                    <OpenChatButton>
-                        오픈 채팅으로 연락하기
-                    </OpenChatButton>
-                </ButtonContainer>
             </Container>
             </>
             )}

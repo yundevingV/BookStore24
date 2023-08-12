@@ -1,15 +1,13 @@
 import React from "react"
 import useInput from "../hooks/useInput";
-import Dropdown from "../components/Dropdown";
+import Dropdown from "../components/DropTest";
 import { openModal } from "../action/modal";
 
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../reducer/index";
-import { useNavigate } from "react-router";
 
 import axios from "axios";
-import { getCookie} from "../components/Cookie";
 
 export default function FirstLogin(){
   const dispatch = useDispatch();
@@ -80,7 +78,7 @@ export default function FirstLogin(){
                 거주지역을 선택해주세요
               </Font>
               <CenterContainer>
-                <Dropdown />
+                <Dropdown dropValue={dropDownValueData}/>
               </CenterContainer>
             </Residence>
 

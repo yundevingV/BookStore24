@@ -14,8 +14,8 @@ import useDecodedJWT from "../hooks/useDecodedJWT";
 
 export default function BookStoreEdit() {
 
-
-
+    let token = getCookie('jwt');
+    let dec = useDecodedJWT(token);
 
     interface DataType{
         "title": string,
@@ -32,10 +32,6 @@ export default function BookStoreEdit() {
     }
 
     const [data,setData] = useState<DataType | null>(null)
-
-
-    let token = getCookie('jwt');
-    let dec = useDecodedJWT(token);
 
     useEffect(() => {        
         axios
@@ -65,24 +61,12 @@ export default function BookStoreEdit() {
 
     const navigate = useNavigate()
 
-    const [ { title, talkUrl, price, content }, onInputChange, resetInput ] = useInput({
+    const [ { talkUrl, price, content }, onInputChange, resetInput ] = useInput({
 
     });
     
     const save = (e: React.MouseEvent) => {
         e.preventDefault();
-    
-        // Check if any input values have been modified
-        const isTitleModified = title !== data?.title;
-        const isContentModified = content !== data?.content;
-        // const isPriceModified = (price) !== (data?.price);
-        const isTalkUrlModified = talkUrl !== data?.talkUrl;
-    
-        if (!isTitleModified && !isContentModified &&  !isTalkUrlModified) {
-            // No changes were made, you can handle this case if needed
-            console.log("No changes were made.");
-            return;
-        }
     
         const newData = {
             "title": 't',
@@ -91,9 +75,9 @@ export default function BookStoreEdit() {
             "publisher": "교출판사",
             "coverImg": "https://shopping-phinf.pstatic.net/main_3729966/37299668618.20230119064022.jpg",
             "isbn": "123456789",
-            "content": isContentModified ? content : data?.content,
-            "price": 500,
-            "talkUrl": isTalkUrlModified ? talkUrl : data?.talkUrl
+            "content": content,
+            "price": price,
+            "talkUrl": talkUrl,
         };
     
         const config = {
@@ -114,7 +98,6 @@ export default function BookStoreEdit() {
                 });
         }
     };
-    
 
     return(
         <Wrapper>
@@ -162,6 +145,7 @@ export default function BookStoreEdit() {
                         placeholder='오픈채팅 대화방 링크를 입력해주세요' 
                         name="talkUrl"
                         defaultValue={data?.talkUrl}
+                        key={data?.talkUrl}
                         onChange={onInputChange}
 
                         />
@@ -170,6 +154,7 @@ export default function BookStoreEdit() {
                         placeholder='희망 가격을 입력해주세요'
                         name="price"
                         defaultValue={data?.price}
+                        key={data?.price}
                         onChange={onInputChange}
                         />
 
@@ -184,6 +169,7 @@ export default function BookStoreEdit() {
                         name="content"
                         placeholder='게시글 내용을 입력하세요'
                         defaultValue={data?.content}
+                        key={data?.content}
                         onChange={onInputChange}
 
 

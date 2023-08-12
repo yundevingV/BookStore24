@@ -5,86 +5,97 @@ import Test from '../assets/imgs/testbookcover.jpg'
 import SearchBook from "../modal/SearchBook";
 
 import { styled } from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { getCookie } from "../components/Cookie";
 import axios from "axios";
 import useDecodedJWT from "../hooks/useDecodedJWT";
 
 
 export default function BookCommunityEdit() {
-    
-    // add랑 비슷한로직.
-    const [viewModal , setViewModal] = useState(false);
-
-    const openModal = (e : React.MouseEvent) => {
-        
-        viewModal === true ? setViewModal(false) : setViewModal(true)
-    }
 
     let token = getCookie('jwt');
     let dec = useDecodedJWT(token);
 
-    useEffect(()=>{
-        
+    interface DataType{
+        "title": string,
+        "bookTitle": string,
+        "author": string,
+        "publisher": string,
+        "coverImg": string,
+        "isbn": number,
+        "content": string,
+        "score": number,
+        "createdDate": string,
+        "nickname": string,
+    }
+    const [data,setData] = useState<DataType | null>(null)
 
-        // Axios configuration for the POST request.
-        const config = {
-            headers: {
-            Authorization: token,
-
-            },
-            params : {
-                "loginId" : dec?.nickname,
-                "title" : "t"
-            }
-        };
-        
+    useEffect(() => {        
         axios
-            .get(`http://61.79.215.100/review/post/edit`, config)
+            .get(`http://61.79.215.100/review/post/edit`,{
+                
+                params:{
+                    "loginId": dec.loginId,
+                    "title": "t"
+                },
+                headers: {
+                    Authorization: token,
+                
+                }
+            })
+            
             .then((response) => {
             console.log(`Response : ${response}`);
-            })
+            setData(response.data);
+        })
             .catch((error) => {
-            console.log('Error:', error.response.data);
+            console.log('Error:', error.response);
+            navigate(-1);
             });
         
-    },[])
 
-    const save =() => {
+    },[]);
+
+    const navigate = useNavigate()
+
+    const [ { content, score }, onInputChange, resetInput ] = useInput({
+
+    });
     
-            const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
-            
-            // Data to be sent in the request body.
-            const data = {
-                "title" : "카카오 오어스가 읽은, 도서 리뷰입니다.",
-                "bookTitle" : "김민교 자서전",
-                "author" : "김민교",
-                "publisher" : "교출판사",
-                "coverImg" : "https://shopping-phinf.pstatic.net/main_3729966/37299668618.20230119064022.jpg",
-                "isbn" : "123456789",
-                "content" : "이 책을 읽고 주체적인 삶을 살았더니, 결국 제가 원하는 삶을 살게 되었습니다.수정테스트합니다. 데이터베이스에서 수정이 되었나요?",
-                "score" : "4"
+    const save = (e: React.MouseEvent) => {
+        e.preventDefault();
     
-            };
-            
-            // Axios configuration for the POST request.
-            const config = {
-                headers: {
-                Authorization: jwt,
-                },
-            };
-            if (true ){
+        const newData = {
+            "title" : "카카오 오어스가 읽은, 도서 리뷰입니다.",
+            "bookTitle" : "김민교 자서전",
+            "author" : "김민교",
+            "publisher" : "교출판사",
+            "coverImg" : "https://shopping-phinf.pstatic.net/main_3729966/37299668618.20230119064022.jpg",
+            "isbn" : "123456789",
+            "content" : content,
+            "score" : score
+        };
+    
+        const config = {
+            headers: {
+                Authorization: token,
+            },
+        };
+    
+        if (true) {
             axios
-                .post(`http://61.79.215.100/review/post/edit/save`, data, config)
+                .post(`http://61.79.215.100/review/post/edit/save`, newData, config)
                 .then((response) => {
-                console.log(`Response : ${JSON.stringify(data)}`);
+                    console.log(`Response : ${JSON.stringify(newData)}`);
+                    navigate(-1);
                 })
                 .catch((error) => {
-                console.log('Error:', error.response.data);
+                    console.log('Error:', error.response.data);
                 });
-            
-    }
-}
+        }
+    };
+
+    
     return(
         <Wrapper>
             <Header />
@@ -104,25 +115,34 @@ export default function BookCommunityEdit() {
 
 
                     <RightContainer>
-                    <Title placeholder='게시글 제목'/>
+                    <Title
+                        placeholder='게시글 제목'
+                        value={data?.title}
+                    />
                         
 
                     <BookTitle 
                         placeholder='책 제목을 입력해주세요'
-                        onClick={openModal} />
-                    {viewModal && <SearchBook viewModal={viewModal} setViewModal={setViewModal}/>}
+                        value={data?.bookTitle}
+
+                         />
 
                     <BookTitle 
-                        placeholder='저자를 입력해주세요' />
+                        placeholder='저자를 입력해주세요' 
+                        value={data?.author}
+
+                        />
                     
                     <BookTitle 
-                        placeholder='출판사를 입력해주세요' />
-                                            
-                    <BookTitle 
-                        placeholder='오픈채팅 대화방 링크를 입력해주세요' />
+                        placeholder='출판사를 입력해주세요' 
+                        value={data?.publisher}
+                        />
 
-                    <Price
-                        placeholder='희망 가격을 입력해주세요' />
+                    <Score
+                        placeholder='별점' 
+                        defaultValue={data?.score}
+                        key={data?.score}
+                        />
 
                 
                 </RightContainer>
@@ -132,7 +152,10 @@ export default function BookCommunityEdit() {
                 <ContentContainer>
                     <input
                         className="content"
-                        placeholder='게시글 내용을 입력하세요' />
+                        placeholder='게시글 내용을 입력하세요' 
+                        defaultValue={data?.content}
+                        key={data?.content  }
+                        />
                 </ContentContainer>
 
                 <ButtonContainer>
@@ -240,7 +263,9 @@ const BookTitle = styled.input`
 
 `
 
-const Price = styled.input`
+const Score = styled.input`
+
+
 
 `
 

@@ -39,8 +39,6 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
 
     }
 
-    const clientId : string = 'a'
-    const clientSecret :string = 'a'
 
     const search = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -51,20 +49,18 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         const config = {
             headers: {
             Authorization: jwt,
-            "X-Naver-Client-Id": clientId,
-            "X-Naver-Client-Secret": clientSecret,
+
             },
         };
         
         axios
-            .get(`/v1/search/movie.json`,{
+            .get(`http://61.79.215.100/book/information/search`,{
                 params:{
                   query: searchWord,
                 },
                 headers: {
                     Authorization: jwt,
-                  'X-Naver-Client-Id': clientId,
-                  'X-Naver-Client-Secret': clientSecret
+                  
                 }
               })
             
