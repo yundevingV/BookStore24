@@ -15,7 +15,7 @@ export default function Kakao(){
         const code : string | null = new URL(window.location.href).searchParams.get("code");
 
         axios.post(
-            `http://52.79.234.227/auth/kakao/callback?Authorization_code=${code}`,
+            `http://bookstore24.shop/auth/kakao/callback?Authorization_code=${code}`,
         )
         .then(response => {
 

@@ -22,23 +22,13 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
     searchWord : '',
 });
 
-// 검색 구현
-    type Books = {name : string , publisher : string};
-
-    const [searchResultList , setSearchResultList] = useState<Books[]>([]);
-
-    let books= [
-        { name: 'scas', publisher: 'aaa'},
-        { name: 'sss', publisher: 'bd'}
-    ];
-    
-    const submit = (e : React.MouseEvent) => {
-
-        let filterList = books.filter(item => item.name.includes(searchWord) && searchWord !== '')
-        setSearchResultList(filterList);
-
+    interface DataType{
+        "title": string,
+        "author": string,
+        "publisher": string,
     }
-
+    
+    const [data,setData] = useState<DataType[] | null>(null)
 
     const search = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -54,18 +44,18 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         };
         
         axios
-            .get(`http://52.79.234.227/book/information/search`,{
+            .get(`http://bookstore24.shop/book/information/search`,{
                 params:{
-                  query: searchWord,
+                    query: searchWord,
                 },
                 headers: {
                     Authorization: jwt,
-                  
                 }
-              })
+            })
             
             .then((response) => {
-            console.log(`Response : ${JSON.stringify(response)}`);
+            console.log(`${response.data}}`);
+            setData(response.data);
             })
             .catch((error) => {
             console.log('Error:', error.response);
@@ -73,6 +63,10 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         
         resetInput();
         };
+
+        const save = () => {
+
+        }
     
     return(
         <ModalBackground>
@@ -81,6 +75,8 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
             <Font>
             책 제목을 입력해주세요
             </Font>
+            
+            <SearchResult>
 
             <SearchContainer>
                 <div >
@@ -98,13 +94,14 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
             </SearchContainer>
 
             
-            <SearchResult>
 
             <>
-            {searchResultList.map(item=>
-                <SearchBox>
-                    <p className='title'>{item.name}</p>
-                    <p className='publisher'>{item.publisher}</p>
+            {data?.map(item=>
+                <SearchBox onClick={() => save()}>
+                    <div className="bookname">{item.title}</div>
+                    <span className="authors">{item.author} </span>
+                    <span className="authors">/</span>
+                    <span className="publisher">{item.publisher}</span>
                 </SearchBox>
                 )}
             </>
@@ -130,7 +127,7 @@ const ModalBackground = styled.div`
 `;
 const Container = styled.div`
 /* 모달창 크기 */
-  width: 400px;
+  width: 500px;
   height: 600px;
 
   /* 최상단 위치 */
@@ -168,8 +165,6 @@ input {
 
 
 `
-
-
 const SearchButton = styled.button`
 width: 50px;
 height: 25px;
@@ -206,8 +201,8 @@ const Button = styled.button`
 `
 
 const SearchResult = styled.div`
-width: 400px;
-height : 400px;
+width: 500px;
+height : 500px;
 
 display: flex;
 flex-direction: column;
@@ -217,24 +212,30 @@ overflow : auto;
 `
 
 const SearchBox = styled.div`
-font-family: tway, sans-serif, Arial;
 
-height : 50px;
+    width: 400px;
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-left : 40px;
+    color: #303030;
 
-border: 1px solid #000;
 
-margin : 10px 10px;
-
-padding: 5px;
-
-p{
-    line-height : 1px;
-}
-.title{
-    
-    font-size: 20px;
-}
-.publisher{
-    font-size: 12px;
-}
+    .bookImg {
+        display: none;
+    }
+    .bookname {
+        font-size: 16.5px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+    .authors {
+        font-size: 13px;
+        margin-right: 7px;
+    }
+    .publisher {
+        font-size: 13px;
+        margin-left: 7px;
+    }
 `

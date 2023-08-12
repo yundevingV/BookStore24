@@ -18,7 +18,7 @@ export default function Naver(){
         const code : string | null = new URL(window.location.href).searchParams.get("code");
 
         axios.post(
-            `http://52.79.234.227/auth/naver/callback?Authorization_code=${code}`,
+            `http://bookstore24.shop/auth/naver/callback?Authorization_code=${code}`,
         )
         .then(response => {
 
