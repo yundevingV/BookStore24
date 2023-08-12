@@ -7,6 +7,7 @@ import {  getCookie, setCookie } from "../../components/Cookie";
 export default function Google(){
 
     const navigate = useNavigate();
+    const redirectUrl = getCookie('redirectUrl');
 
     useEffect(() => {
         const code : string | null = new URL(window.location.href).searchParams.get("code");
@@ -21,26 +22,8 @@ export default function Google(){
 
             setCookie('jwt',token)
             sessionStorage.setItem('status',token);
+            navigate(`./${redirectUrl}`)
 
-            axios.get(`http://61.79.215.100/user`,
-            
-            {
-                
-                headers : {
-
-                    'Authorization' : token
-                }
-            }
-            )
-            .then(response =>{
-                console.log(`Response : ${response.data}`)
-                navigate('/')
-
-            })
-            .catch(error => {
-                console.log('Error:', error);
-
-            })
         })
         .catch(error => {
             
@@ -51,7 +34,7 @@ export default function Google(){
 
         });
 
-    }, [navigate]);
+    }, []);
 
 
 

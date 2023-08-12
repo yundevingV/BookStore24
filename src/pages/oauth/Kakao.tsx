@@ -8,6 +8,7 @@ import { getCookie, setCookie } from "../../components/Cookie";
 export default function Kakao(){
 
     const navigate = useNavigate();
+    const redirectUrl = getCookie('redirectUrl');
 
 
     useEffect(() => {
@@ -26,24 +27,9 @@ export default function Kakao(){
             // 토큰 쿠키 저장
             setCookie('jwt', token);   
             sessionStorage.setItem('status',token);
-
-            axios.get(`http://61.79.215.100/user`,
-            {
-                headers : {
-                    'Authorization' : token
-                }
-            }
-            )
-            .then(response =>{
-                console.log(`Response : ${response.data}`)
-
-                navigate('/')
-
-            })
-            .catch(error => {
-                console.log('Error:', error);
-            })
+            navigate(`./${redirectUrl}`)
         })
+        
         .catch(error => {
         console.error('Error:', error);
 
@@ -52,22 +38,10 @@ export default function Kakao(){
 
         });
 
-    }, [navigate]);
-
-    const b = () =>{
-        navigate(-1)
-        
-
-    }
+    }, []);
 
     return(
         <>
-
-
-        <button onClick={b}>
-            로그인 하기
-        </button>
-
 
         </>
     )

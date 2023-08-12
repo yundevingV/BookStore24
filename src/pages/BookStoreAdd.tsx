@@ -82,9 +82,7 @@ export default function BookStoreAdd() {
                 <LeftContainer>
                     <Picture src={Test} alt='x'/>
                 </LeftContainer>
-
-
-
+                
                     <RightContainer>
                     <Title 
                         placeholder='게시글 제목'
@@ -93,7 +91,6 @@ export default function BookStoreAdd() {
                         onChange={onInputChange}
                     />
                         
-
                     <BookTitle 
                         placeholder='책 제목을 입력해주세요'
                         onClick={openModal} />

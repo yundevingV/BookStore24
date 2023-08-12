@@ -11,7 +11,7 @@ import { Space } from "../styles/Space";
 import { useLocation } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
 import { RootState } from "../reducer/index";
-import { getCookie, removeCookie,  } from "./Cookie";
+import { getCookie, removeCookie, setCookie  } from "./Cookie";
 import base64 from 'base-64';
 import axios from "axios";
 import useDecodedJWT from "../hooks/useDecodedJWT";
@@ -42,51 +42,50 @@ export default function Header() {
     let token = getCookie('jwt');
     let dec = useDecodedJWT(token);
 
-
     useEffect(()=>{
 
         const auth = sessionStorage.getItem("status");
         if (auth) {
             dispatch(saveloginStatus(true));
+
+            axios.get('http://61.79.215.100/member/nicknameresidence/check'
+            ,
+            {
+            
+            headers : {
+                'Authorization' : getCookie('jwt')
+            }
+            })
+    
+            .then(response => {
+    
+    
+            })
+            .catch(error => {
+            console.log(`에러 사유 : ${error}`)
+            console.log(error.status)
+            if(error === 'AxiosError: Request failed with status code 400'){
+                console.log('tt')
+            }
+    
+            dispatch(openModal(true));
+    
+            });
+        } else {
+            setCookie('redirectUrl',pathname)
         }
 
-        axios.get('http://61.79.215.100/member/nicknameresidence/check'
-        ,
-        {
-        
-        headers : {
-            'Authorization' : getCookie('jwt')
-        }
-        })
 
-        .then(response => {
-
-
-        })
-        .catch(error => {
-        console.log(`에러 사유 : ${error}`)
-        console.log(error.status)
-        if(error === 'AxiosError: Request failed with status code 400'){
-            console.log('tt')
-        }
-
-        dispatch(openModal(true));
-
-        });
         
     },[dispatch])
 
     console.log(getCookie('jwt'))
-
     return (
-        
         
         <Positioner>
             
             {openModalData&&loginStateData&&dec?.nickname===null&&
             <FirstLogin />
-                
-                
             }
 
             <Space width={50} height={0} />
@@ -97,12 +96,12 @@ export default function Header() {
             </Logo>
             
             <Review>
-                {pathname.includes('community') ? 
-                <CurrentLink to='/bookcommunity'>
+                {pathname.includes('review') ? 
+                <CurrentLink to='/bookreview'>
                 커뮤니티
                 </CurrentLink>
                 : 
-                <StyledLink to='/bookcommunity'>
+                <StyledLink to='/bookreview'>
                     커뮤니티
                 </StyledLink> 
 

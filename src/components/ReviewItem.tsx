@@ -19,12 +19,10 @@ function ItemList(){
         (state: RootState) => state.searchWordReducer.searchWordData
     );
 
-
-
     return(
         <>
             
-            <StyledLink to='/bookcommunitydetail'>
+            <StyledLink to='/bookreview/detail'>
             <Frame>
 
             <Top>

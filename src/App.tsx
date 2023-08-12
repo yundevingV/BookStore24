@@ -12,10 +12,10 @@ import BookStoreAdd from './pages/BookStoreAdd';
 import BookStoreDetail from './pages/BookStoreDetail';
 import BookStoreEdit from './pages/BookStoreEdit';
 
-import BookComunity from './pages/BookCommunity';
-import BookCommunityAdd from './pages/BookCommunityAdd';
-import BookCommunityDetail from './pages/BookCommunityDetail';
-import BookCommunityEdit from './pages/BookCommunityEdit';
+import BookReview from './pages/BookReview';
+import BookReviewAdd from './pages/BookReviewAdd';
+import BookReviewDetail from './pages/BookReviewDetail';
+import BookReviewEdit from './pages/BookReviewEdit';
 
 import BookRanking from './pages/BookRanking';
 
@@ -42,15 +42,15 @@ function App() {
         <Route path='/editprofile' element={<EditProfile />} />
         <Route path='/editpwd' element={<EditPwd />} />
         <Route path='/bookstore' element={<BookStore />} />
-        <Route path='/bookstoreadd' element={<BookStoreAdd />} />
-        <Route path="/bookstoredetail" element={<BookStoreDetail />} />
-        <Route path="/bookstoredetail/edit" element={<BookStoreEdit />} />
+        <Route path='/bookstore/add' element={<BookStoreAdd />} />
+        <Route path="/bookstore/detail" element={<BookStoreDetail />} />
+        <Route path="/bookstore/detail/edit" element={<BookStoreEdit />} />
 
 
-        <Route path='/bookcommunity' element={<BookComunity />} />
-        <Route path='/bookcommunityadd' element={<BookCommunityAdd />} />
-        <Route path="/bookcommunitydetail" element={<BookCommunityDetail />} />
-        <Route path="/bookcommunitydetail/edit" element={<BookCommunityEdit />} />
+        <Route path='/bookReview' element={<BookReview />} />
+        <Route path='/bookReview/add' element={<BookReviewAdd />} />
+        <Route path="/bookReview/detail" element={<BookReviewDetail />} />
+        <Route path="/bookReview/detail/edit" element={<BookReviewEdit />} />
 
         <Route path="/bookranking" element={<BookRanking />} />
 

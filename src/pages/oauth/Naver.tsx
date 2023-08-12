@@ -9,13 +9,15 @@ import {useNavigate} from 'react-router-dom';
 
 export default function Naver(){
 
-    const code : string | null = new URL(window.location.href).searchParams.get("code");
 
     const navigate = useNavigate();
+    const redirectUrl = getCookie('redirectUrl');
 
 
 
     useEffect(() => {
+
+        const code : string | null = new URL(window.location.href).searchParams.get("code");
 
         axios.post(
             `http://61.79.215.100/auth/naver/callback?Authorization_code=${code}`,
@@ -28,25 +30,7 @@ export default function Naver(){
             setCookie('jwt', token);   
             sessionStorage.setItem('status',token);
 
-            axios.get(`http://61.79.215.100/user`,
-            
-            {
-                
-                headers : {
-    
-                    'Authorization' : token
-                }
-            }
-            )
-            .then(response =>{
-                console.log(`Response : ${response.data}`)
-                navigate('/')
-                
-            })
-            .catch(error => {
-                console.log('Error : ', error);
-            })
-
+            navigate(`./${redirectUrl}`)
         
         })
         .catch(error => {
@@ -56,7 +40,7 @@ export default function Naver(){
 
         });
 
-    }, [code]);
+    }, []);
     
     return(
         <>

@@ -29,10 +29,8 @@ export default function Login() {
     const kakaoLoginLink : string = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=${kakao_redirect_uri}`;
     const googleLoginLink : string = `https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=${google_redirect_uri}&response_type=code&scope=openid%20email%20profile`;
 
-    // 로그인 상태.
-
-
     const navigate = useNavigate();
+    const redirectUrl = getCookie('redirectUrl');
 
     type loginTypes =(
         id : string,
@@ -57,29 +55,7 @@ export default function Login() {
             setCookie('jwt',token)
 
             sessionStorage.setItem('status',token);
-
-            // 유저인증
-            axios.get('http://bookstore24.shop/user',
-            {
-                headers : {
-            
-                authorization : token
-            }
-            },
-            
-            )
-            .then(function (response) {
-                navigate(-1);
-                console.log(response);
-            })
-            
-            .catch(function (error) {
-                console.log(`error : ${error}`);
-                if(error.response){
-                    console.log(error.response);
-                    alert(`${error.response.data}`);
-                }
-            });
+            navigate(`./${redirectUrl}`)
 
         })
         
