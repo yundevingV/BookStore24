@@ -27,8 +27,12 @@ export default function Kakao(){
             // 토큰 쿠키 저장
             setCookie('jwt', token);   
             sessionStorage.setItem('status',token);
-            navigate(`./${redirectUrl}`)
-        })
+
+            if(getCookie('redirectUrl')==='/login' ){
+                navigate('/')
+            } else {
+                navigate(`${redirectUrl}`)
+            }        })
         
         .catch(error => {
         console.error('Error:', error);
@@ -42,7 +46,7 @@ export default function Kakao(){
 
     return(
         <>
-
+            카카오
         </>
     )
 }

@@ -22,8 +22,11 @@ export default function Google(){
 
             setCookie('jwt',token)
             sessionStorage.setItem('status',token);
-            navigate(`./${redirectUrl}`)
-
+            if(getCookie('redirectUrl')==='/login' ){
+                navigate('/')
+            } else {
+                navigate(`${redirectUrl}`)
+            }
         })
         .catch(error => {
             

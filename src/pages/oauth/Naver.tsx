@@ -28,8 +28,13 @@ export default function Naver(){
             setCookie('jwt', token);   
             sessionStorage.setItem('status',token);
 
-            navigate(`./${redirectUrl}`)
-        
+            if(getCookie('redirectUrl')==='/login' ){
+                navigate('/')
+            } else {
+                navigate(`${redirectUrl}`)
+            }
+            
+
         })
         .catch(error => {
         console.log(`에러 사유 : ${error.response.data}`)
