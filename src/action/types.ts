@@ -7,3 +7,5 @@ export const OPEN_MODAL = 'open_modal' as const
 
 export const SAVE_BOOK_INFORMATION = 'save_book_information' as const
 export const SAVE_BOOK_RATING = 'save_book_rating' as const
+
+export const SAVE_CANCEL_STATUS = 'save_cancel_status' as const

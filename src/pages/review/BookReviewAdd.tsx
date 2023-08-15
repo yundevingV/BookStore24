@@ -11,6 +11,9 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import StarRating from "../../components/Star";
+import Cancel from "../../modal/Cancel";
+import { saveCancelStatus } from "../../action/cancel_status";
+import { useDispatch } from "react-redux";
 
 export default function BookCommunityAdd() {
 
@@ -19,8 +22,6 @@ export default function BookCommunityAdd() {
         rate: '',
         content: '',
     });
-
-
 
     const [viewModal , setViewModal] = useState(false);
 
@@ -79,6 +80,17 @@ export default function BookCommunityAdd() {
             (state : RootState) => state.BookratingReducer.bookRatingData
         )
 
+        const cancelStatus = useSelector(
+            (state : RootState) => state.cancelStatusReducer.cancelStatusData
+        )
+
+        const dispatch = useDispatch();
+
+        const cancel = () => {
+            dispatch(saveCancelStatus(true))
+            console.log(cancelStatus)
+        }
+
     return(
         <Wrapper>
             <Header />
@@ -112,7 +124,7 @@ export default function BookCommunityAdd() {
                         onClick={openModal} />
 
                     {viewModal && <SearchBook viewModal={viewModal} setViewModal={setViewModal}/>}
-                    
+                    {cancelStatus && <Cancel />}
                     <BookTitle 
                         placeholder='저자를 입력해주세요'
                         value={bookInformationData.author}
@@ -145,7 +157,7 @@ export default function BookCommunityAdd() {
                 <ButtonContainer>
 
 
-                    <CancelButton>
+                    <CancelButton onClick={cancel}>
                         취소하기
                     </CancelButton>
 

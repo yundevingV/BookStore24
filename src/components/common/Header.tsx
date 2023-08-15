@@ -23,7 +23,7 @@ export default function Header() {
     const loginStateData = useSelector(
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
-
+        
     const dispatch = useDispatch();
 
     const logout = () =>{
