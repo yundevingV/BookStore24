@@ -23,11 +23,7 @@ interface DivMarginProps {
 
 export default function Profile(){
 
-
-
-    
     const [auth,setAuth] = useState<boolean>();
-
 
     interface DataType{
         nickname : string;

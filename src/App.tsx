@@ -23,6 +23,8 @@ import Kakao from './pages/oauth/Kakao'
 import Naver from './pages/oauth/Naver';
 import Google from './pages/oauth/Google';
 
+import Test from './pages/test/Test';
+
 import { Route , Routes } from 'react-router';
 
 function App() {
@@ -57,6 +59,7 @@ function App() {
         <Route path='/auth/naver/*' element={<Naver />} />
         <Route path='/auth/google/*' element={<Google />} />
 
+        <Route path='/test' element={<Test />} />
 
       </Routes>
 
