@@ -1,20 +1,20 @@
 //내부
 import React,{useState,useEffect} from "react";
-import { saveloginStatus } from "../action/login_status";
-import FirstLogin from "../modal/FirstLogin";
-import { openModal } from "../action/modal";
+import { saveloginStatus } from "../../action/login_status";
+import FirstLogin from "../../modal/FirstLogin";
+import { openModal } from "../../action/modal";
 
 //외부
 import styled from "styled-components";
-import { CurrentLink, StyledLink, StyledLinkBlack } from "../styles/link";
-import { Space } from "../styles/Space";
+import { CurrentLink, StyledLink, StyledLinkBlack } from "../../styles/link";
+import { Space } from "../../styles/Space";
 import { useLocation } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
-import { RootState } from "../reducer/index";
+import { RootState } from "../../reducer/index";
 import { getCookie, removeCookie, setCookie  } from "./Cookie";
 import base64 from 'base-64';
 import axios from "axios";
-import useDecodedJWT from "../hooks/useDecodedJWT";
+import useDecodedJWT from "../../hooks/useDecodedJWT";
 
 export default function Header() {
 

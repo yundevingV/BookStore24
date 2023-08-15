@@ -1,12 +1,12 @@
 import React from "react"
-import useInput from "../hooks/useInput"
-import Header from "../components/Header"
+import useInput from "../../hooks/useInput"
+import Header from "../../components/common/Header"
 
 
 import { styled,css } from "styled-components"
-import { StyledButtonLink } from "../styles/link"
+import { StyledButtonLink } from "../../styles/link"
 import axios from "axios"
-import { getCookie } from "../components/Cookie"
+import { getCookie } from "../../components/common/Cookie"
 
 export default function EditPwd(){
 

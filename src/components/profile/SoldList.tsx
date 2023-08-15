@@ -1,5 +1,5 @@
 import React from "react";
-import Test from '../assets/imgs/testbookcover.jpg'
+import Test from '../../assets/imgs/testbookcover.jpg'
 
 import { styled } from "styled-components";
 

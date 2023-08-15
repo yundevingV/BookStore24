@@ -1,14 +1,14 @@
 import React,{useEffect, useState} from "react";
-import useInput from "../hooks/useInput";
-import Header from "../components/Header";
-import Test from '../assets/imgs/testbookcover.jpg'
-import SearchBook from "../modal/SearchBook";
+import useInput from "../../hooks/useInput";
+import Header from "../../components/common/Header";
+import Test from '../../assets/imgs/testbookcover.jpg'
+import SearchBook from "../../modal/SearchBook";
 
 import { styled } from "styled-components";
 import { useNavigate} from "react-router-dom";
-import { getCookie } from "../components/Cookie";
+import { getCookie } from "../../components/common/Cookie";
 import axios from "axios";
-import useDecodedJWT from "../hooks/useDecodedJWT";
+import useDecodedJWT from "../../hooks/useDecodedJWT";
 
 
 export default function BookCommunityEdit() {

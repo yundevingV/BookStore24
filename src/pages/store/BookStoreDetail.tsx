@@ -1,18 +1,18 @@
 import React,{useState,useEffect} from "react";
-import useInput from "../hooks/useInput";
-import Header from "../components/Header";
-import Test from '../assets/imgs/testbookcover.jpg'
-import EditButton from "../components/EditButton";
-import Login from "./Login";
+import useInput from "../../hooks/useInput";
+import Header from "../../components/common/Header";
+import Test from '../../assets/imgs/testbookcover.jpg'
+import EditButton from "../../components/EditButton";
+import Login from "./../Login";
 
 
 import { styled } from "styled-components";
 import { useLocation,  useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { RootState } from "../reducer/index";
+import { RootState } from "../../reducer/index";
 import axios from "axios";
-import { getCookie } from "../components/Cookie";
-import useDecodedJWT from "../hooks/useDecodedJWT";
+import { getCookie } from "../../components/common/Cookie";
+import useDecodedJWT from "../../hooks/useDecodedJWT";
 
 export default function BookStoreDetail() {
     // 현재 주소

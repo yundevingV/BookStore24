@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import useInput from "../../hooks/useInput";
-import Jisoo from '../assets/imgs/jisoo.jpg'
+import Jisoo from '../../assets/imgs/jisoo.jpg'
 import Header from "../../components/common/Header";
 import { Space } from "../../styles/Space";
 import { StyledButtonLink } from "../../styles/link";

@@ -1,5 +1,5 @@
 import React,{useState , useEffect} from "react";
-import Header from "../components/Header";
+import Header from "../components/common/Header";
 import useInput from "../hooks/useInput";
 import FirstLogin from "../modal/FirstLogin";
 

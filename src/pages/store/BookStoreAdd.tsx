@@ -1,14 +1,14 @@
 import React,{useState} from "react";
-import useInput from "../hooks/useInput";
-import Header from "../components/Header";
-import Test from '../assets/imgs/testbookcover.jpg'
-import SearchBook from "../modal/SearchBook";
+import useInput from "../../hooks/useInput";
+import Header from "../../components/common/Header";
+import Test from '../../assets/imgs/testbookcover.jpg'
+import SearchBook from "../../modal/SearchBook";
 
 
 import { styled } from "styled-components";
 import axios from "axios";
 import {  useNavigate } from 'react-router-dom';
-import { getCookie } from "../components/Cookie";
+import { getCookie } from "../../components/common/Cookie";
 
 
 export default function BookStoreAdd() {

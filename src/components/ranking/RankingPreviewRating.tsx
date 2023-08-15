@@ -1,11 +1,11 @@
 import React from "react"
 import styled from "styled-components"
 
-import ex from '../assets/imgs/Slide1.jpg';
+import ex from '../../assets/imgs/Slide1.jpg';
 
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import '../styles/fontAwesome.css'
+import '../../styles/fontAwesome.css'
 
 export default function RankingPreviewRating(){
     return(

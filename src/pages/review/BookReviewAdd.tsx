@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from "react";
 import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
-import Test from '../assets/imgs/testbookcover.jpg'
+import Test from '../../assets/imgs/testbookcover.jpg'
 import SearchBook from "../../modal/SearchBook";
 
 import { styled } from "styled-components";

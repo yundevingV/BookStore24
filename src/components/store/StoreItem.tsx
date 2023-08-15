@@ -1,5 +1,5 @@
 import React from "react";
-import Test from '../assets/imgs/testbookcover.jpg'
+import Test from '../../assets/imgs/testbookcover.jpg'
 import { StyledLink } from "../../styles/link";
 
 import { useSelector } from "react-redux";

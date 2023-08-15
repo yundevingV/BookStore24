@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import Slide1 from '../assets/imgs/Slide1.jpg';
-import Slide2 from '../assets/imgs/Slide2.jpg';
-import Slide3 from '../assets/imgs/Slide3.jpg';
-
+import Slide1 from '../../assets/imgs/Slide1.jpg';
+import Slide2 from '../../assets/imgs/Slide2.jpg';
 
 import { styled } from 'styled-components';
 

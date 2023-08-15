@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/common/Header";
-import Jisoo from '../assets/imgs/jisoo.jpg'
+import Jisoo from '../../assets/imgs/jisoo.jpg'
 import SellingList from "../../components/profile/SellingList";
 import SoldList from "../../components/profile/SoldList";
 import ReviewList from "../../components/profile/ReviewList";
