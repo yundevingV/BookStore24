@@ -3,7 +3,7 @@ import useInput from "../hooks/useInput";
 
 import styled from "styled-components";
 import axios from "axios";
-import { getCookie } from "../components/Cookie";
+import { getCookie } from "../components/common/Cookie";
 
 import { useDispatch } from "react-redux";
 import { saveBookInformation } from "../action/book_information";

@@ -1,15 +1,15 @@
 import React,{useEffect, useState} from "react";
-import useInput from "../hooks/useInput";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
-import Item from "../components/ReviewItem";
+import useInput from "../../hooks/useInput";
+import Header from "../../components/common/Header";
+import Navbar from "../../components/Navbar";
+import Item from "../../components/review/ReviewItem";
 
 import { styled } from "styled-components";
 import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { RootState } from "../reducer/index";
+import { RootState } from "../../reducer/index";
 
-import Login from "./Login";
+import Login from "../Login";
 
 
 export default function BookStoreCommunity() {

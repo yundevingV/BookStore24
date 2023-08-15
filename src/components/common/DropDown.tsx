@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { saveDropDownValue } from '../action/dropdown_value';
+import { saveDropDownValue } from '../../action/dropdown_value';
 import styled from 'styled-components';
 
 type dropProps ={

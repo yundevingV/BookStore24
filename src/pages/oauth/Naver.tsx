@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import FirstLogin from "../../modal/FirstLogin";
 
 import axios from "axios";
-import { getCookie, setCookie } from "../../components/Cookie";
+import { getCookie, setCookie } from "../../components/common/Cookie";
 import base64 from 'base-64';
 import {useNavigate} from 'react-router-dom';
 

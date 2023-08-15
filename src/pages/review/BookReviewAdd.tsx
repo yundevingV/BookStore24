@@ -1,17 +1,16 @@
 import React,{useEffect, useState} from "react";
-import useInput from "../hooks/useInput";
-import Header from "../components/Header";
+import useInput from "../../hooks/useInput";
+import Header from "../../components/common/Header";
 import Test from '../assets/imgs/testbookcover.jpg'
-import SearchBook from "../modal/SearchBook";
+import SearchBook from "../../modal/SearchBook";
 
 import { styled } from "styled-components";
-import { getCookie } from "../components/Cookie";
+import { getCookie } from "../../components/common/Cookie";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { RootState } from "../reducer/index";
-import StarRating from "../components/Star";
-import { saveBookInformation } from "../action/book_information";
+import { RootState } from "../../reducer/index";
+import StarRating from "../../components/Star";
 
 export default function BookCommunityAdd() {
 

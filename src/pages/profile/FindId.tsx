@@ -1,6 +1,6 @@
 import React from "react";
-import useInput from "../hooks/useInput";
-import Header from "../components/Header";
+import useInput from "../../hooks/useInput";
+import Header from "../../components/common/Header";
 
 
 import { styled } from "styled-components";

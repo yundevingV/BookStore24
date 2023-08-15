@@ -2,30 +2,28 @@ import React from 'react';
 import Login from './pages/Login'
 import SignUp from './pages/SignUp';
 import Main from './pages/Main';
-import FindId from './pages/FindId';
-import FindPwd from './pages/FindPwd';
-import Profile from './pages/Profile';
-import EditProfile from './pages/EditProfile';
-import EditPwd from './pages/EditPwd';
-import BookStore from './pages/BookStore';
-import BookStoreAdd from './pages/BookStoreAdd';
-import BookStoreDetail from './pages/BookStoreDetail';
-import BookStoreEdit from './pages/BookStoreEdit';
+import FindId from './pages/profile/FindId';
+import FindPwd from './pages/profile/FindPwd';
+import Profile from './pages/profile/Profile';
+import EditProfile from './pages/profile/EditProfile';
+import EditPwd from './pages/profile/EditPwd';
+import BookStore from './pages/store/BookStore';
+import BookStoreAdd from './pages/store/BookStoreAdd';
+import BookStoreDetail from './pages/store/BookStoreDetail';
+import BookStoreEdit from './pages/store/BookStoreEdit';
 
-import BookReview from './pages/BookReview';
-import BookReviewAdd from './pages/BookReviewAdd';
-import BookReviewDetail from './pages/BookReviewDetail';
-import BookReviewEdit from './pages/BookReviewEdit';
+import BookReview from './pages/review/BookReview';
+import BookReviewAdd from './pages/review/BookReviewAdd';
+import BookReviewDetail from './pages/review/BookReviewDetail';
+import BookReviewEdit from './pages/review/BookReviewEdit';
 
-import BookRanking from './pages/BookRanking';
+import BookRanking from './pages/ranking/BookRanking';
 
 import Kakao from './pages/oauth/Kakao'
 import Naver from './pages/oauth/Naver';
 import Google from './pages/oauth/Google';
 
 import { Route , Routes } from 'react-router';
-import axios from 'axios';
-import Finish from './pages/oauth/finish';
 
 function App() {
 
@@ -55,7 +53,6 @@ function App() {
         <Route path="/bookranking" element={<BookRanking />} />
 
         {/* OAuth 로그인 */}
-        <Route path='/finish' element={<Finish />} />
         <Route path='/auth/kakao/*' element={<Kakao />} />
         <Route path='/auth/naver/*' element={<Naver />} />
         <Route path='/auth/google/*' element={<Google />} />

@@ -1,6 +1,6 @@
 import React from "react"
 import useInput from "../hooks/useInput";
-import Dropdown from "../components/DropTest";
+import Dropdown from "../components/common/DropDown";
 import { openModal } from "../action/modal";
 
 import styled from "styled-components";

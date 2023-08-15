@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import Header from "../components/Header";
+import Header from "../components/common/Header";
 import {StyledLink} from '../styles/link'
 import useInput from '../hooks/useInput';
 import naver from '../assets/imgs/Naver.jpg'
@@ -12,7 +12,7 @@ import {useNavigate} from 'react-router-dom';
 import { useSelector , useDispatch} from "react-redux";
 import { RootState } from "../reducer/index";
 import axios from "axios";
-import { getCookie, setCookie } from "../components/Cookie";
+import { getCookie, setCookie } from "../components/common/Cookie";
 
 export default function Login() {
 

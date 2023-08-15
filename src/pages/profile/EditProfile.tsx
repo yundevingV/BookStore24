@@ -1,21 +1,20 @@
 import React,{useState,useEffect} from "react";
-import useInput from "../hooks/useInput";
+import useInput from "../../hooks/useInput";
 import Jisoo from '../assets/imgs/jisoo.jpg'
-import Header from "../components/Header";
-import Dropdown from "../components/Dropdown";
-import { Space } from "../styles/Space";
-import { StyledButtonLink } from "../styles/link";
+import Header from "../../components/common/Header";
+import { Space } from "../../styles/Space";
+import { StyledButtonLink } from "../../styles/link";
+import DropTest from "../../components/common/DropDown";
 
 
 import { styled } from "styled-components";
 import axios from "axios";
-import { getCookie } from "../components/Cookie";
+import { getCookie } from "../../components/common/Cookie";
 import { useSelector} from "react-redux";
-import { RootState } from "../reducer/index";
+import { RootState } from "../../reducer/index";
 import { useNavigate } from "react-router";
-import DropTest from "../components/DropTest";
 import { useDispatch } from "react-redux";
-import { saveDropDownValue } from "../action/dropdown_value";
+import { saveDropDownValue } from "../../action/dropdown_value";
 
 export default function EditProfile() {
 

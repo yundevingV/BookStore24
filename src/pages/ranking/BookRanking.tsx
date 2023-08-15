@@ -1,18 +1,14 @@
 import React,{useState,useEffect} from "react";
-import Header from "../components/Header";
-import RankingContent from "../components/RankingContent";
-import RankingTitle from "../components/RankingTitle";
-import { Space } from "../styles/Space";
-import Login from "./Login";
+import Header from "../../components/common/Header";
+import RankingContent from "../../components/ranking/RankingContent";
+import RankingTitle from "../../components/ranking/RankingTitle";
+import { Space } from "../../styles/Space";
+import Login from "../Login";
 
 import { styled } from "styled-components";
 import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { RootState } from "../reducer/index";
-
-import { setCookie,getCookie } from "../components/Cookie";
-import { useCookies } from "react-cookie";
-
+import { RootState } from "../../reducer/index";
 
 export default function BookRanking(){
         // 현재 주소

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
+import Header from "../../components/common/Header";
 import Jisoo from '../assets/imgs/jisoo.jpg'
-import SellingList from "../components/SellingList";
-import SoldList from "../components/SoldList";
-import ReviewList from "../components/ReviewList";
-import { StyledButtonLink } from "../styles/link";
+import SellingList from "../../components/profile/SellingList";
+import SoldList from "../../components/profile/SoldList";
+import ReviewList from "../../components/profile/ReviewList";
+import { StyledButtonLink } from "../../styles/link";
 
 
 import { styled } from "styled-components";
-import { getCookie  } from "../components/Cookie";
+import { getCookie  } from "../../components/common/Cookie";
 import base64 from 'base-64';
 import axios from "axios";
 

@@ -1,37 +1,34 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Test from '../assets/imgs/testbookcover.jpg'
-import { StyledLink } from "../styles/link";
-
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { StyledLink } from "../../styles/link";
 
 import { useSelector } from "react-redux";
-import { RootState } from "../reducer/index";
+import { RootState } from "../../reducer/index";
 
 import styled from "styled-components";
-import { getCookie } from "./Cookie";
-import axios from "axios";
 
 
 function ItemList(){
-    
+
     const searchWordData = useSelector(
         (state: RootState) => state.searchWordReducer.searchWordData
     );
 
+
+
     return(
         <>
             
-            <StyledLink to='/bookreview/detail'>
+            <StyledLink to='/bookstore/detail'>
             <Frame>
 
             <Top>
                 <Title>
-                    후기 글 제목
+                    판매 글 제목
                 </Title>
-                <Rating>
-                    4.8
-                </Rating>
+                <Status>
+                    판매중
+                </Status>
             </Top>
 
             <Middle>    
@@ -41,13 +38,12 @@ function ItemList(){
 
                 <RContainer>
                 <Name>
-                    이름
+                    이것이 코딩테스트다.
                 </Name>
 
-                <Views>
-                <FontAwesomeIcon icon={faEye} />
-                567
-                </Views>
+                <Price>
+                20,000 원 
+                </Price>
 
                 <ItemPublisher>
                     저자 / 출판사
@@ -136,7 +132,7 @@ const Title = styled.div`
 
 `
 
-const Rating = styled.div`
+const Status = styled.div`
     
     color : #f10000;
 `
@@ -206,7 +202,7 @@ const Date = styled.span`
 
 `
 
-const Views = styled.span`
+const Price = styled.span`
 
 color : #000000;
 

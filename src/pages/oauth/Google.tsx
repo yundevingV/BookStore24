@@ -2,7 +2,7 @@ import React,{useState, useEffect} from "react";
 
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
-import {  getCookie, setCookie } from "../../components/Cookie";
+import {  getCookie, setCookie } from "../../components/common/Cookie";
 
 export default function Google(){
 
