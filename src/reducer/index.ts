@@ -5,13 +5,15 @@ import searchWordReducer from "./search_word_reducer";
 import LoginStatusReducer from "./login_status_reducer";
 import DropDownValueReducer from "./dropdown_value_reducer";
 import openModal  from "./openModal_reducer";
+import BookInformationReducer from "./book_information_reducer";
 
 const rootReducer = combineReducers({
   searchOptionReducer,
   searchWordReducer,
   LoginStatusReducer,
   DropDownValueReducer,
-  openModal
+  openModal,
+  BookInformationReducer
   
 });
 

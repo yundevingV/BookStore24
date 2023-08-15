@@ -8,7 +8,8 @@ import { styled } from "styled-components";
 import { getCookie } from "../components/Cookie";
 import axios from "axios";
 import { useNavigate } from "react-router";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../reducer/index";
 
 export default function BookCommunityAdd() {
 
@@ -63,6 +64,11 @@ export default function BookCommunityAdd() {
             });
         
         };}
+
+        const bookInformationData = useSelector(
+            (state: RootState) => state.BookInformationReducer.bookInformationData
+        );
+            console.log(bookInformationData)
     return(
         <Wrapper>
             <Header />
@@ -91,14 +97,24 @@ export default function BookCommunityAdd() {
                         
 
                     <BookTitle placeholder='책 제목을 입력해주세요'
+                        value={bookInformationData.title}
+                        readOnly
                         onClick={openModal} />
                     {viewModal && <SearchBook viewModal={viewModal} setViewModal={setViewModal}/>}
                     
                     <BookTitle 
-                        placeholder='저자를 입력해주세요' />
+                        placeholder='저자를 입력해주세요'
+                        value={bookInformationData.author}
+                        readOnly
+                        />
                     
                     <BookTitle 
-                        placeholder='출판사를 입력해주세요' />
+                        placeholder='출판사를 입력해주세요' 
+                        value={bookInformationData.publisher}
+                        readOnly 
+                        />
+
+                        
 
                     <Price
                         placeholder='후기 평점 (1~5사이)'

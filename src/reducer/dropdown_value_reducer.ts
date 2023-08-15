@@ -13,7 +13,7 @@ const initalState = {
 type DropDownValueActionType =
     | ReturnType<typeof saveDropDownValue>;
 
-export default function LoginStatusReducer(
+export default function DropDownValueReducer(
     state : DropDownValueType = initalState,
     action : DropDownValueActionType
 ) {

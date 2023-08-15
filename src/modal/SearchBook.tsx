@@ -5,6 +5,11 @@ import styled from "styled-components";
 import axios from "axios";
 import { getCookie } from "../components/Cookie";
 
+import { useDispatch } from "react-redux";
+import { saveBookInformation } from "../action/book_information";
+    
+import { useSelector } from "react-redux";
+import { RootState } from "../reducer/index";
 type ViewProps = {
     viewModal : boolean;
     setViewModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,13 +27,7 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
     searchWord : '',
 });
 
-    interface DataType{
-        "title": string,
-        "author": string,
-        "publisher": string,
-    }
-    
-    const [data,setData] = useState<DataType[] | null>(null)
+    const [data,setData] = useState<any | null>(null)
 
     const search = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -64,10 +63,22 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         resetInput();
         };
 
-        const save = () => {
 
+
+        const dispatch = useDispatch();
+        
+
+        const save = (index : number) => {
+            
+            dispatch(saveBookInformation(data?.[index]))
+            console.log(data?.[index])
+            
         }
     
+        const bookInformationData = useSelector(
+            (state: RootState) => state.BookInformationReducer.bookInformationData
+        );
+            console.log(bookInformationData)
     return(
         <ModalBackground>
         <Container>
@@ -96,14 +107,15 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
             
 
             <>
-            {data?.map(item=>
-                <SearchBox onClick={() => save()}>
+            {data?.map((item : any, index : number) => (
+                <SearchBox key={index} onClick={() => save(index)}>
                     <div className="bookname">{item.title}</div>
                     <span className="authors">{item.author} </span>
                     <span className="authors">/</span>
                     <span className="publisher">{item.publisher}</span>
+                    
                 </SearchBox>
-                )}
+            ))}
             </>
                 
                 
