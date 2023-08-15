@@ -6,6 +6,7 @@ import LoginStatusReducer from "./login_status_reducer";
 import DropDownValueReducer from "./dropdown_value_reducer";
 import openModal  from "./openModal_reducer";
 import BookInformationReducer from "./book_information_reducer";
+import BookratingReducer from "./book_rating_reducer";
 
 const rootReducer = combineReducers({
   searchOptionReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   LoginStatusReducer,
   DropDownValueReducer,
   openModal,
-  BookInformationReducer
+  BookInformationReducer,
+  BookratingReducer
   
 });
 

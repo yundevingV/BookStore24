@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import useInput from "../hooks/useInput";
 import Header from "../components/Header";
 import Test from '../assets/imgs/testbookcover.jpg'
@@ -10,6 +10,8 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { RootState } from "../reducer/index";
+import StarRating from "../components/Star";
+import { saveBookInformation } from "../action/book_information";
 
 export default function BookCommunityAdd() {
 
@@ -18,6 +20,7 @@ export default function BookCommunityAdd() {
         rate: '',
         content: '',
     });
+
 
 
     const [viewModal , setViewModal] = useState(false);
@@ -37,13 +40,13 @@ export default function BookCommunityAdd() {
         // Data to be sent in the request body.
         const data = {
             "title" : title,
-            "isbn" : "12345619",
-            "bookTitle" : "이윤성자서전",
-            "author" : "이윤성",
-            "publisher" : "성출판사",
-            "coverImg" : "https://shopping-phinf.pstatic.net/main_3246698/32466988102.20230725121118.jpg",
+            "isbn" : bookInformationData.isbn,
+            "bookTitle" : bookInformationData.title,
+            "author" : bookInformationData.author,
+            "publisher" : bookInformationData.publisher,
+            "coverImg" : bookInformationData.image,
             "content" : content,
-            "score" : rate,
+            "score" : bookRatingData,
         };
         
         // Axios configuration for the POST request.
@@ -65,10 +68,18 @@ export default function BookCommunityAdd() {
         
         };}
 
+        // 제목 저자 출판사
         const bookInformationData = useSelector(
             (state: RootState) => state.BookInformationReducer.bookInformationData
         );
-            console.log(bookInformationData)
+        
+        console.log(bookInformationData)
+
+        // 별점
+        const bookRatingData = useSelector(
+            (state : RootState) => state.BookratingReducer.bookRatingData
+        )
+
     return(
         <Wrapper>
             <Header />
@@ -100,6 +111,7 @@ export default function BookCommunityAdd() {
                         value={bookInformationData.title}
                         readOnly
                         onClick={openModal} />
+
                     {viewModal && <SearchBook viewModal={viewModal} setViewModal={setViewModal}/>}
                     
                     <BookTitle 
@@ -113,17 +125,8 @@ export default function BookCommunityAdd() {
                         value={bookInformationData.publisher}
                         readOnly 
                         />
-
                         
-
-                    <Price
-                        placeholder='후기 평점 (1~5사이)'
-                        name="rate"
-                        value={rate}
-                        onChange={onInputChange} 
-                        
-                        />
-
+                    <StarRating  />
                 
                 </RightContainer>
 
@@ -242,10 +245,6 @@ const Title = styled.input`
 
 // 제목 , 저자, 출판사는 똑같은 컴포넌트로
 const BookTitle = styled.input`
-
-`
-
-const Price = styled.input`
 
 `
 

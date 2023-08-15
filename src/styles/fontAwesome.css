@@ -1,5 +1,5 @@
 .star-icon {
-    color: #ff9900; /* Change this to your desired color */
+  color: yellow; /* Color for the selected (active) star */
     font-size : 20px;
     margin-right : 10px;
   }
@@ -8,3 +8,11 @@
     margin-right : 10px;
 }
 
+.star {
+  color: black; /* Default color for all stars */
+  cursor: pointer;
+}
+
+.star.active {
+  color: yellow; /* Color for the selected (active) star */
+}

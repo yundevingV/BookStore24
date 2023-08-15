@@ -1,4 +1,4 @@
-import React ,{useState} from "react"
+import React ,{useEffect, useState} from "react"
 import useInput from "../hooks/useInput";
 
 import styled from "styled-components";
@@ -33,15 +33,7 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         e.preventDefault(); // Prevent the default form submission behavior.
 
         const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
-        
-        // Axios configuration for the POST request.
-        const config = {
-            headers: {
-            Authorization: jwt,
 
-            },
-        };
-        
         axios
             .get(`http://bookstore24.shop/book/information/search`,{
                 params:{
@@ -63,23 +55,17 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         resetInput();
         };
 
-
-
         const dispatch = useDispatch();
         
+
 
         const save = (index : number) => {
             
             dispatch(saveBookInformation(data?.[index]))
-            console.log(data?.[index])
             
         }
-    
-        const bookInformationData = useSelector(
-            (state: RootState) => state.BookInformationReducer.bookInformationData
-        );
-            console.log(bookInformationData)
-    return(
+
+        return(
         <ModalBackground>
         <Container>
             
