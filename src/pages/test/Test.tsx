@@ -44,6 +44,7 @@ interface SellDataType {
     status    :    string
     title    :    string
     view    :    number
+    loginId : string
 }
 
 export default function Test() {
@@ -157,6 +158,8 @@ export default function Test() {
                         {data4.map((item: SellDataType) => (
                             <li key={item.id}>
                                 <div>Book ID: {item.title}</div>
+                                <div>login ID: {item.loginId}</div>
+                                <div>status : {item.status}</div>
 
                                 {/* ... other sell data */}
                             </li>

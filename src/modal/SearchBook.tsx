@@ -8,8 +8,7 @@ import { getCookie } from "../components/common/Cookie";
 import { useDispatch } from "react-redux";
 import { saveBookInformation } from "../action/book_information";
     
-import { useSelector } from "react-redux";
-import { RootState } from "../reducer/index";
+
 type ViewProps = {
     viewModal : boolean;
     setViewModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,7 +18,7 @@ type ViewProps = {
 export default function SearchBook({viewModal , setViewModal} : ViewProps){
     console.log(viewModal);
 
-    const closeModal = (e : React.MouseEvent) => {
+    const closeModal = () => {
         setViewModal(false);
     }
 
@@ -94,7 +93,7 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
 
             <>
             {data?.map((item : any, index : number) => (
-                <SearchBox key={index} onClick={() => save(index)}>
+                <SearchBox key={index} onClick={() => { save(index); closeModal(); }}>
                     <div className="bookname">{item.title}</div>
                     <span className="authors">{item.author} </span>
                     <span className="authors">/</span>

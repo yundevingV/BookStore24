@@ -13,6 +13,7 @@ import { RootState } from "../../reducer/index";
 import axios from "axios";
 import { getCookie } from "../../components/common/Cookie";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
+import Toggle from "../../components/store/Toggle";
 
 export default function BookStoreDetail() {
     // 현재 주소
@@ -44,6 +45,8 @@ export default function BookStoreDetail() {
         "talkUrl": string,
         "createdDate": string,
         "nickname": string,
+        "loginId" : string,
+        "status" : string,
     }
 
     const [data,setData] = useState<DataType | null>(null)
@@ -54,7 +57,7 @@ export default function BookStoreDetail() {
                 
                 params:{
                     "loginId": dec.loginId,
-                    "title": "팝니다"
+                    "title": "test"
                 },
                 headers: {
                     Authorization: token,
@@ -63,11 +66,11 @@ export default function BookStoreDetail() {
             })
             
             .then((response) => {
-            console.log(`Response : ${response.data}`);
-            setData(response.data)
+                console.log(`Response : ${JSON.stringify(response.data)}`);
+                setData(response.data)
             })
             .catch((error) => {
-            console.log('Error:', error.response);
+                console.log('Error:', error.response);
             });
     },[]);
     
@@ -87,7 +90,12 @@ export default function BookStoreDetail() {
             
             <Container >
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
-                {dec?.loginId !== 'acc' ? <EditButton /> : <></>}
+                {dec?.loginId === data?.loginId ? 
+                <>
+                    <EditButton /> <Toggle status={data?.status}/>
+                </>
+                : 
+                <></>}
                 
                 
 

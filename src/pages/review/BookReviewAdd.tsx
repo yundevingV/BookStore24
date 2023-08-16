@@ -14,6 +14,7 @@ import StarRating from "../../components/review/Star";
 import Cancel from "../../modal/Cancel";
 import { saveCancelStatus } from "../../action/cancel_status";
 import { useDispatch } from "react-redux";
+import { saveBookInformation } from "../../action/book_information";
 
 export default function BookCommunityAdd() {
 
@@ -31,6 +32,11 @@ export default function BookCommunityAdd() {
     }
 
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        dispatch(saveBookInformation([]))
+        console.log('clear')
+    },[])
 
     const add = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -90,6 +96,8 @@ export default function BookCommunityAdd() {
             dispatch(saveCancelStatus(true))
             console.log(cancelStatus)
         }
+
+
 
     return(
         <Wrapper>

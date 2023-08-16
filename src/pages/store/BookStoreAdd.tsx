@@ -14,6 +14,7 @@ import StarRating from "../../components/review/Star";
 import Cancel from "../../modal/Cancel";
 import { saveCancelStatus } from "../../action/cancel_status";
 import { useDispatch } from "react-redux";
+import { saveBookInformation } from "../../action/book_information";
 
 export default function BookCommunityAdd() {
 
@@ -24,6 +25,7 @@ export default function BookCommunityAdd() {
         content: '',
     });
 
+
     const [viewModal , setViewModal] = useState(false);
 
     const openModal = (e : React.MouseEvent) => {
@@ -32,6 +34,10 @@ export default function BookCommunityAdd() {
     }
 
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        dispatch(saveBookInformation([]))
+    },[])
 
     const add = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -75,13 +81,6 @@ export default function BookCommunityAdd() {
             (state: RootState) => state.BookInformationReducer.bookInformationData
         );
         
-        console.log(bookInformationData)
-
-        // 별점
-        const bookRatingData = useSelector(
-            (state : RootState) => state.BookratingReducer.bookRatingData
-        )
-
         const cancelStatus = useSelector(
             (state : RootState) => state.cancelStatusReducer.cancelStatusData
         )
@@ -97,7 +96,7 @@ export default function BookCommunityAdd() {
         <Wrapper>
             <Header />
             
-            <Container >
+            <Container>
                 <H3>
                     판매하기
                 </H3>
@@ -108,8 +107,6 @@ export default function BookCommunityAdd() {
                 <LeftContainer>
                     <Picture src={Test} alt='x'/>
                 </LeftContainer>
-
-
 
                     <RightContainer>
                     <Title 

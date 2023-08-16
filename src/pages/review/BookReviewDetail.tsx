@@ -54,7 +54,7 @@ export default function BookCommunityDetail() {
                 
                 params:{
                     "loginId": dec.loginId,
-                    "title": "습관이 중요해"
+                    "title": "test"
                 },
                 headers: {
                     Authorization: token,
@@ -63,7 +63,7 @@ export default function BookCommunityDetail() {
             })
             
             .then((response) => {
-            console.log(`Response : ${response.data}`);
+            console.log(`Response : ${JSON.stringify(response.data)}`);
             setData(response.data)
             })
             .catch((error) => {
