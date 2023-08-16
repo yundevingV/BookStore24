@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa"; // Import icons for stars
 import { useDispatch } from "react-redux";
-import { saveBookRating } from "../action/book_rating";
-import "../styles/fontAwesome.css"
+import { saveBookRating } from "../../action/book_rating";
+import "../../styles/fontAwesome.css"
 
 interface StarRatingProps {
     initialRating?: number;

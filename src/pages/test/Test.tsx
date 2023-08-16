@@ -157,6 +157,7 @@ export default function Test() {
                         {data4.map((item: SellDataType) => (
                             <li key={item.id}>
                                 <div>Book ID: {item.title}</div>
+
                                 {/* ... other sell data */}
                             </li>
                         ))}

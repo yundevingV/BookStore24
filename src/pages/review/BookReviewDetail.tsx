@@ -53,8 +53,8 @@ export default function BookCommunityDetail() {
             .get(`http://bookstore24.shop/review/post/detail`,{
                 
                 params:{
-                    "loginId": 'acc',
-                    "title": "이윤성 자서전을 보고 쓴 리뷰"
+                    "loginId": dec.loginId,
+                    "title": "습관이 중요해"
                 },
                 headers: {
                     Authorization: token,

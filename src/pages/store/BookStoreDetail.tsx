@@ -53,8 +53,8 @@ export default function BookStoreDetail() {
             .get(`http://52.79.234.227/sell/post/detail`,{
                 
                 params:{
-                    "loginId": 'acc',
-                    "title": "ㅍㅍ"
+                    "loginId": dec.loginId,
+                    "title": "팝니다"
                 },
                 headers: {
                     Authorization: token,
@@ -87,7 +87,7 @@ export default function BookStoreDetail() {
             
             <Container >
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
-                {dec?.loginId === 'acc' ? <EditButton /> : <></>}
+                {dec?.loginId !== 'acc' ? <EditButton /> : <></>}
                 
                 
 

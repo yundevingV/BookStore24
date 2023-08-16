@@ -1,24 +1,21 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
 import Test from '../../assets/imgs/testbookcover.jpg'
 import SearchBook from "../../modal/SearchBook";
 
-
 import { styled } from "styled-components";
-import axios from "axios";
-import {  useNavigate } from 'react-router-dom';
 import { getCookie } from "../../components/common/Cookie";
+import axios from "axios";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducer/index";
+import StarRating from "../../components/review/Star";
+import Cancel from "../../modal/Cancel";
+import { saveCancelStatus } from "../../action/cancel_status";
+import { useDispatch } from "react-redux";
 
-
-export default function BookStoreAdd() {
-    
-    const [viewModal , setViewModal] = useState(false);
-
-    const openModal = (e : React.MouseEvent) => {
-        
-        viewModal === true ? setViewModal(false) : setViewModal(true)
-    }
+export default function BookCommunityAdd() {
 
     const [ { title, talkUrl, price, content }, onInputChange, resetInput ] = useInput({
         title: '',
@@ -27,7 +24,14 @@ export default function BookStoreAdd() {
         content: '',
     });
 
-    const navigate = useNavigate()
+    const [viewModal , setViewModal] = useState(false);
+
+    const openModal = (e : React.MouseEvent) => {
+        
+        viewModal === true ? setViewModal(false) : setViewModal(true)
+    }
+
+    const navigate = useNavigate();
 
     const add = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -37,15 +41,14 @@ export default function BookStoreAdd() {
         // Data to be sent in the request body.
         const data = {
             "title" : title,
-            "bookTitle" : "김민교 자서전",
-            "author" : "김민교",
-            "publisher" : "교출판사",
-            "isbn" : "123456789",
+            "bookTitle" : bookInformationData.title,
+            "author" : bookInformationData.author,
+            "publisher" : bookInformationData.publisher,
+            "isbn" : bookInformationData.isbn,
             "talkUrl" : talkUrl,
-            "coverImg" : "https://shopping-phinf.pstatic.net/main_3729966/37299668618.20230119064022.jpg",
+            "coverImg" : bookInformationData.image,
             "price" : price,
-            "content" : content
-            
+            "content" : content,
         };
         
         // Axios configuration for the POST request.
@@ -56,7 +59,7 @@ export default function BookStoreAdd() {
         };
         if (true){
         axios
-            .post(`http://52.79.234.227/sell/post/save`, data, config)
+            .post(`http://bookstore24.shop/sell/post/save`, data, config)
             .then((response) => {
             console.log(`Response : ${(JSON.stringify(data))}`);
             navigate(-1);
@@ -66,7 +69,30 @@ export default function BookStoreAdd() {
             });
         
         };}
-    
+
+        // 제목 저자 출판사
+        const bookInformationData = useSelector(
+            (state: RootState) => state.BookInformationReducer.bookInformationData
+        );
+        
+        console.log(bookInformationData)
+
+        // 별점
+        const bookRatingData = useSelector(
+            (state : RootState) => state.BookratingReducer.bookRatingData
+        )
+
+        const cancelStatus = useSelector(
+            (state : RootState) => state.cancelStatusReducer.cancelStatusData
+        )
+
+        const dispatch = useDispatch();
+
+        const cancel = () => {
+            dispatch(saveCancelStatus(true))
+            console.log(cancelStatus)
+        }
+
     return(
         <Wrapper>
             <Header />
@@ -82,39 +108,50 @@ export default function BookStoreAdd() {
                 <LeftContainer>
                     <Picture src={Test} alt='x'/>
                 </LeftContainer>
-                
+
+
+
                     <RightContainer>
                     <Title 
                         placeholder='게시글 제목'
                         name="title"
                         value={title}
-                        onChange={onInputChange}
-                    />
+                        onChange={onInputChange} 
+                        />
                         
-                    <BookTitle 
-                        placeholder='책 제목을 입력해주세요'
-                        onClick={openModal} />
-                    {viewModal && <SearchBook viewModal={viewModal} setViewModal={setViewModal}/>}
 
+                    <BookTitle placeholder='책 제목을 입력해주세요'
+                        value={bookInformationData.title}
+                        readOnly
+                        onClick={openModal} />
+
+                    {viewModal && <SearchBook viewModal={viewModal} setViewModal={setViewModal}/>}
+                    {cancelStatus && <Cancel />}
                     <BookTitle 
-                        placeholder='저자를 입력해주세요' />
+                        placeholder='저자를 입력해주세요'
+                        value={bookInformationData.author}
+                        readOnly
+                        />
                     
                     <BookTitle 
-                        placeholder='출판사를 입력해주세요' />
-                                            
+                        placeholder='출판사를 입력해주세요' 
+                        value={bookInformationData.publisher}
+                        readOnly 
+                        />
+                        
                     <BookTitle 
                         placeholder='오픈채팅 대화방 링크를 입력해주세요' 
                         name="talkUrl"
                         value={talkUrl}
                         onChange={onInputChange}/>
-                    <Price
+
+                    <BookTitle
+
                         placeholder='희망 가격을 입력해주세요' 
                         name="price"
                         value={price}
                         onChange={onInputChange}
-                        />
-
-                
+                        />                
                 </RightContainer>
 
                 </InnerContainer>
@@ -122,17 +159,19 @@ export default function BookStoreAdd() {
                 <ContentContainer>
                     <input
                         className="content"
+                        placeholder='게시글 내용을 입력하세요' 
                         name="content"
                         value={content}
-                        onChange={onInputChange}
-                        placeholder='게시글 내용을 입력하세요' />
+                        onChange={onInputChange} 
+                        
+                        />
                 </ContentContainer>
 
                 <ButtonContainer>
 
 
-                    <CancelButton>
-                        뒤로가기
+                    <CancelButton onClick={cancel}>
+                        취소하기
                     </CancelButton>
 
                     <AddButton onClick={add}>
@@ -230,10 +269,6 @@ const Title = styled.input`
 
 // 제목 , 저자, 출판사는 똑같은 컴포넌트로
 const BookTitle = styled.input`
-
-`
-
-const Price = styled.input`
 
 `
 

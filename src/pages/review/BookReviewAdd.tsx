@@ -10,7 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
-import StarRating from "../../components/Star";
+import StarRating from "../../components/review/Star";
 import Cancel from "../../modal/Cancel";
 import { saveCancelStatus } from "../../action/cancel_status";
 import { useDispatch } from "react-redux";
