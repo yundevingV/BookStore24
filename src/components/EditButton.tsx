@@ -1,9 +1,7 @@
 import React from "react";
 
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import { StyledButtonLink } from "../styles/link";
-
-
 
 export default function EditButton(){
 
@@ -11,14 +9,15 @@ export default function EditButton(){
         <Container>
             <Form>
 
-                <DeleteButton>
+                <Button bgColor={'#f34747'}>
                     삭제
-                </DeleteButton>
+                </Button>
 
                 <StyledButtonLink to='./edit'>
-                <ModifyButton>
+
+                <Button  marginLeft="10px" bgColor={'#4d4df5'}>
                     수정
-                </ModifyButton>
+                </Button>
                 </StyledButtonLink>
             </Form>
         </Container>
@@ -35,23 +34,35 @@ margin: 30px 0px;
 `
 
 const Form = styled.form`
-  display: flex;
-  align-items: center;
-  
+    display: flex;
+    align-items: center;
+    
 `;
 
-const DeleteButton = styled.button`
+interface ButtonProps{
+    bgColor : string;
+    marginLeft?: string; // Optional marginLeft prop
+}
 
-background : #f34747;
-border : 1px solid #000000;
-border-radius : 4px;
+const Button = styled.button<ButtonProps>`
 
-margin : 10px;
-`
+    width: 40px;
+    height: 25px;
+    
+    ${props =>
+    props.marginLeft &&
+    css`
+        margin-left: ${props.marginLeft};
+    `}
+    border-radius: 5px;
+    
+    background-color: ${props => props.bgColor}; 
+    
+    cursor: pointer;
 
-const ModifyButton = styled.button`
+    border : 0px;
 
-color : #4d4df5;
-border : 1px solid #4d4df5;
-border-radius : 4px;
+    font-family: tway, sans-serif, Arial;
+
+    transition: background-color 0.3s ease-in-out;
 `
