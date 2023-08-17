@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect, useRef, useState} from "react";
 import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
 import Test from '../../assets/imgs/testbookcover.jpg'
@@ -35,9 +35,15 @@ export default function BookCommunityAdd() {
 
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        dispatch(saveBookInformation([]))
-    },[])
+    interface bookInfoType{
+        title : string | undefined,
+        author : string | undefined,
+        publisher : string | undefined,
+        isbn : number | undefined,
+        image : string | undefined,
+    }
+
+    const [bookInformation, setBookinformation] = useState<bookInfoType>();
 
     const add = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -47,14 +53,15 @@ export default function BookCommunityAdd() {
         // Data to be sent in the request body.
         const data = {
             "title" : title,
-            "bookTitle" : bookInformationData.title,
-            "author" : bookInformationData.author,
-            "publisher" : bookInformationData.publisher,
-            "isbn" : bookInformationData.isbn,
+            "bookTitle" : bookInformation?.title,
+            "author" : bookInformation?.author,
+            "publisher" : bookInformation?.publisher,
+            "isbn" : bookInformation?.isbn,
             "talkUrl" : talkUrl,
-            "coverImg" : bookInformationData.image,
+            "coverImg" : bookInformation?.image,
             "price" : price,
             "content" : content,
+
         };
         
         // Axios configuration for the POST request.
@@ -86,7 +93,20 @@ export default function BookCommunityAdd() {
         )
 
         const dispatch = useDispatch();
+        
+        useEffect(()=>{
+            dispatch(saveBookInformation([]))
+        },[])
 
+        const didMountRef = useRef(false);
+
+        useEffect(() => {
+            if (didMountRef.current) {
+                setBookinformation(bookInformationData);
+            } else {
+                didMountRef.current = true;
+            }
+        }, [cancelStatus, bookInformationData]);
         const cancel = () => {
             dispatch(saveCancelStatus(true))
             console.log(cancelStatus)

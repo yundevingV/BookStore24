@@ -43,6 +43,7 @@ export default function BookCommunityDetail() {
         "score": number,
         "createdDate": string,
         "nickname": string,
+        "loginId" : string,
         "reviewComments" : [],
     }
 
@@ -87,7 +88,7 @@ export default function BookCommunityDetail() {
             
             <Container >
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
-                {dec?.loginId === 'acc' ? <EditButton /> : <></>}
+                {dec?.loginId === data?.loginId ? <EditButton /> : <></>}
 
                 <InnerContainer>
 

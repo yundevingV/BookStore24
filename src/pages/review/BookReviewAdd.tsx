@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect, useRef, useState} from "react";
 import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
 import Test from '../../assets/imgs/testbookcover.jpg'
@@ -33,10 +33,15 @@ export default function BookCommunityAdd() {
 
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        dispatch(saveBookInformation([]))
-        console.log('clear')
-    },[])
+    interface bookInfoType{
+        title : string | undefined,
+        author : string | undefined,
+        publisher : string | undefined,
+        isbn : number | undefined,
+        image : string | undefined,
+    }
+    const [bookInformation, setBookinformation] = useState<bookInfoType>();
+
 
     const add = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -46,11 +51,11 @@ export default function BookCommunityAdd() {
         // Data to be sent in the request body.
         const data = {
             "title" : title,
-            "isbn" : bookInformationData.isbn,
-            "bookTitle" : bookInformationData.title,
-            "author" : bookInformationData.author,
-            "publisher" : bookInformationData.publisher,
-            "coverImg" : bookInformationData.image,
+            "isbn" : bookInformation?.isbn,
+            "bookTitle" : bookInformation?.title,
+            "author" : bookInformation?.author,
+            "publisher" : bookInformation?.publisher,
+            "coverImg" : bookInformation?.image,
             "content" : content,
             "score" : bookRatingData,
         };
@@ -81,6 +86,11 @@ export default function BookCommunityAdd() {
         
         console.log(bookInformationData)
 
+
+        useEffect(()=>{
+            dispatch(saveBookInformation([]))
+        },[])
+
         // 별점
         const bookRatingData = useSelector(
             (state : RootState) => state.BookratingReducer.bookRatingData
@@ -89,6 +99,17 @@ export default function BookCommunityAdd() {
         const cancelStatus = useSelector(
             (state : RootState) => state.cancelStatusReducer.cancelStatusData
         )
+
+        const didMountRef = useRef(false);
+
+        useEffect(() => {
+            if (didMountRef.current) {
+                setBookinformation(bookInformationData);
+            } else {
+                didMountRef.current = true;
+            }
+        }, [cancelStatus, bookInformationData]);
+        
 
         const dispatch = useDispatch();
 
@@ -127,7 +148,7 @@ export default function BookCommunityAdd() {
                         
 
                     <BookTitle placeholder='책 제목을 입력해주세요'
-                        value={bookInformationData.title}
+                        value={bookInformation?.title}
                         readOnly
                         onClick={openModal} />
 
@@ -135,13 +156,13 @@ export default function BookCommunityAdd() {
                     {cancelStatus && <Cancel />}
                     <BookTitle 
                         placeholder='저자를 입력해주세요'
-                        value={bookInformationData.author}
+                        value={bookInformation?.author}
                         readOnly
                         />
                     
                     <BookTitle 
                         placeholder='출판사를 입력해주세요' 
-                        value={bookInformationData.publisher}
+                        value={bookInformation?.publisher}
                         readOnly 
                         />
                         

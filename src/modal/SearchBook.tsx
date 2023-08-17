@@ -55,8 +55,6 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
         };
 
         const dispatch = useDispatch();
-        
-
 
         const save = (index : number) => {
             
