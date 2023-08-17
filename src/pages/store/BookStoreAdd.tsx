@@ -304,7 +304,7 @@ margin: 50px 50px;
 
 const AddButton = styled.button`
 width : 70px;
-height : 30px;
+height : 40px;
 
 font-size : 12px;
 
@@ -312,11 +312,10 @@ margin : 10px;
 padding : 5px;
 
 background-color: #033bfa;
-    border : 2px solid #ffffff;
-    color : #ffffff;
+border : 2px solid #ffffff;
+color : #ffffff;
 
-border-radius : 24px;
-
+border-radius : 8px;
 
 font-family: tway, sans-serif, Arial;
 
@@ -329,9 +328,10 @@ font-family: tway, sans-serif, Arial;
     cursor : pointer;
     }
 `
+
 const CancelButton = styled.button`
 width : 70px;
-height : 30px;
+height : 40px;
 
 font-size : 12px;
 
@@ -340,7 +340,7 @@ padding : 5px;
 
 background-color: #ffffff;
 border : 2px solid #033bfa;
-border-radius : 24px;
+border-radius : 8px;
 color : #033bfa;
 
 font-family: tway, sans-serif, Arial;
