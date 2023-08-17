@@ -12,6 +12,8 @@ import { RootState } from "../../reducer/index";
 import { getCookie } from "../../components/common/Cookie";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
+import Comment from "../../components/comment/Comment";
+
 
 export default function BookCommunityDetail() {
     // 현재 주소
@@ -31,7 +33,17 @@ export default function BookCommunityDetail() {
     let token = getCookie('jwt');
     let dec = useDecodedJWT(token);
 
+    interface ReviewComment {
+        id: string;
+        content: string;
+        createdDate: string;
+        nickname: string;
+        loginId: string;
+        reviewId: string;
+      }
+
     interface DataType{
+        "id" : string,
         "title": string,
         "bookTitle": string,
         "author": string,
@@ -44,7 +56,7 @@ export default function BookCommunityDetail() {
         "createdDate": string,
         "nickname": string,
         "loginId" : string,
-        "reviewComments" : [],
+        "reviewComments" : ReviewComment[],
     }
 
     const [data,setData] = useState<DataType | null>(null)
@@ -71,6 +83,8 @@ export default function BookCommunityDetail() {
             console.log('Error:', error.response);
             });
     },[]);
+
+    console.log(data?.reviewComments.length)
 
     return(
         <Wrapper>
@@ -116,8 +130,6 @@ export default function BookCommunityDetail() {
                         <p className='rating'>{data?.score}</p>
                     </div>
 
-
-
                 </RightContainer>
 
                 </InnerContainer>
@@ -133,6 +145,23 @@ export default function BookCommunityDetail() {
                     </div>
                 </ContentContainer>
 
+                <CommentContainer>
+                    <Comment id={data?.id} title={data?.title} number={data?.reviewComments.length}/>
+
+                    {data?.reviewComments.map((item : any, index : number) => (
+                        <div key={index} >
+                            <div>------------------</div>
+                            <div >{item.id}</div>
+                            <div >{item.content}</div>
+                            <div >{item.createdDate}</div>
+                            <div >{item.nickname}</div>
+                            <div >{item.loginId}</div>
+                            <div >{item.reviewId} </div>
+                            <div>------------------</div>
+                            
+                        </div>
+            ))}
+                </CommentContainer>
             </Container>
             </>
             )}
@@ -239,40 +268,12 @@ div{
 
 `
 
-const ButtonContainer = styled.div`
+
+const CommentContainer = styled.div`
 display: flex;
-justify-content: center;
-margin: 50px 50px;
+flex-direction : column;
+justify-content: space-between;
 
-p{
-    font-size : 1px;
-}
-`
+margin-bottom: 50px;
 
-const OpenChatButton = styled.button`
-width : 150px;
-height : 50px;
-
-font-size : 12px;
-
-margin : 10px;
-padding : 5px;
-
-background-color: #ffee00;
-border : 2px solid #000000;
-color : #000000;
-
-border-radius : 4px;
-
-
-font-family: tway, sans-serif, Arial;
-
-&:hover {
-
-    background-color: #000000;
-    border : 2px solid #ffee00;
-    color : #ffee00;
-
-    cursor : pointer;
-    }
 `

@@ -110,7 +110,6 @@ export default function BookCommunityAdd() {
             }
         }, [cancelStatus, bookInformationData]);
         
-
         const dispatch = useDispatch();
 
         const cancel = () => {

@@ -16,8 +16,6 @@ import useDecodedJWT from "../../hooks/useDecodedJWT";
 import Toggle from "../../components/store/Toggle";
 
 export default function BookStoreDetail() {
-    // 현재 주소
-    const location = useLocation();
 
     // 로그인
     const loginStateData = useSelector(
@@ -53,7 +51,7 @@ export default function BookStoreDetail() {
 
     useEffect(() => {        
         axios
-            .get(`http://52.79.234.227/sell/post/detail`,{
+            .get(`http://bookstore24.shop/sell/post/detail`,{
                 
                 params:{
                     "loginId": dec.loginId,
@@ -144,15 +142,12 @@ export default function BookStoreDetail() {
 
 
                 {/* 오픈채팅 */}
-                <ButtonContainer>
-                
-                        
-                    
+                <OpenChatContainer>
                     <OpenChatButton>
                         오픈 채팅으로 연락하기
                     </OpenChatButton>
-                    
-                </ButtonContainer>
+                </OpenChatContainer>
+
             </Container>
             </>
             )}
@@ -162,6 +157,7 @@ export default function BookStoreDetail() {
 const Wrapper = styled.div`
 
 `
+
 const Container = styled.div`
 width : 50vw;
 
@@ -259,10 +255,12 @@ div{
 
 `
 
-const ButtonContainer = styled.div`
+const OpenChatContainer = styled.div`
 display: flex;
 justify-content: center;
-margin-bottom: 70px;
+
+
+margin-bottom: 50px;
 
 p{
     font-size : 1px;
@@ -284,7 +282,6 @@ color : #000000;
 
 border-radius : 4px;
 
-
 font-family: tway, sans-serif, Arial;
 
 &:hover {
@@ -296,3 +293,4 @@ font-family: tway, sans-serif, Arial;
     cursor : pointer;
     }
 `
+

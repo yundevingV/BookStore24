@@ -21,7 +21,14 @@ interface BookDataType {
     publisher: string
     title: string
 }
-
+interface ReviewComment {
+    id: string;
+    content: string;
+    createdDate: string;
+    nickname: string;
+    loginId: string;
+    reviewId: string;
+  }
 interface ReviewDataType {
     bookId: number
     content: string
@@ -31,7 +38,7 @@ interface ReviewDataType {
     score:    number
     title:    string
     view:    number
-
+    reviewComments : ReviewComment[],
 }
 
 interface SellDataType {
@@ -45,6 +52,7 @@ interface SellDataType {
     title    :    string
     view    :    number
     loginId : string
+
 }
 
 export default function Test() {
@@ -106,6 +114,7 @@ export default function Test() {
             });
     }, []);
 
+    console.log(data3)
 
     return (
         <>
