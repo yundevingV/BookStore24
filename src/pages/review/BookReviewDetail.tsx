@@ -111,7 +111,7 @@ export default function BookCommunityDetail() {
                     
                     <div>
                         <p className="title">{data?.bookTitle}</p>
-                        <p className="publisher">저자 : {data?.author}</p>
+                        <p className="publisher">저자 : {data?.author.replace('^', ',')}</p>
                         <p className="publisher">출판사 : {data?.publisher}</p>
                         <p className='rating'>{data?.score}</p>
                     </div>

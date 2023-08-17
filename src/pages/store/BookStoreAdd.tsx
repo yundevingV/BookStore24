@@ -107,6 +107,7 @@ export default function BookCommunityAdd() {
                 didMountRef.current = true;
             }
         }, [cancelStatus, bookInformationData]);
+
         const cancel = () => {
             dispatch(saveCancelStatus(true))
             console.log(cancelStatus)
@@ -138,7 +139,7 @@ export default function BookCommunityAdd() {
                         
 
                     <BookTitle placeholder='책 제목을 입력해주세요'
-                        value={bookInformationData.title}
+                        value={bookInformation?.title}
                         readOnly
                         onClick={openModal} />
 
@@ -146,13 +147,13 @@ export default function BookCommunityAdd() {
                     {cancelStatus && <Cancel />}
                     <BookTitle 
                         placeholder='저자를 입력해주세요'
-                        value={bookInformationData.author}
+                        value={bookInformation?.author?.replace('^', ',')}
                         readOnly
                         />
                     
                     <BookTitle 
                         placeholder='출판사를 입력해주세요' 
-                        value={bookInformationData.publisher}
+                        value={bookInformation?.publisher}
                         readOnly 
                         />
                         

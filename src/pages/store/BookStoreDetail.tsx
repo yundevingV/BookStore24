@@ -57,7 +57,7 @@ export default function BookStoreDetail() {
                 
                 params:{
                     "loginId": dec.loginId,
-                    "title": "test"
+                    "title": "테스트"
                 },
                 headers: {
                     Authorization: token,
@@ -120,7 +120,7 @@ export default function BookStoreDetail() {
                     
                     <div>
                         <p className="title">{data?.bookTitle}</p>
-                        <p className="publisher">저자 : {data?.author}</p>
+                        <p className="publisher">저자 : {data?.author.replace('^', ',')}</p>
                         <p className="publisher">출판사 : {data?.publisher}</p>
                         <p className='price'>₩ {data?.price}</p>
                     </div>

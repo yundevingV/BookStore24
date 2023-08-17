@@ -93,7 +93,7 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
             {data?.map((item : any, index : number) => (
                 <SearchBox key={index} onClick={() => { save(index); closeModal(); }}>
                     <div className="bookname">{item.title}</div>
-                    <span className="authors">{item.author} </span>
+                    <span className="authors">{item.author.replace('^', ',')} </span>
                     <span className="authors">/</span>
                     <span className="publisher">{item.publisher}</span>
                     

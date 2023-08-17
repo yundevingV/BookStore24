@@ -156,7 +156,7 @@ export default function BookCommunityAdd() {
                     {cancelStatus && <Cancel />}
                     <BookTitle 
                         placeholder='저자를 입력해주세요'
-                        value={bookInformation?.author}
+                        value={bookInformation?.author?.replace('^', ',')}
                         readOnly
                         />
                     
