@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 import useDecodedJWT from '../../hooks/useDecodedJWT';
 import { getCookie } from '../common/Cookie';
 
-function ToggleButton({ status }: { status: boolean | undefined }) {
+function ToggleButton({ status }: { status: string | undefined }) {
     const [isToggled, setToggled] = useState(status);
 
     let token = getCookie('jwt');
@@ -26,10 +26,10 @@ function ToggleButton({ status }: { status: boolean | undefined }) {
         );
 
         console.log(`Response: ${response.data}`);
-        if (isToggled === false) {
-            setToggled(true);
+        if (isToggled === 'sold') {
+            setToggled('sell');
         } else {
-            setToggled(false);
+            setToggled('sold');
         }
         } catch (error) {
         console.log('Error:', error);
@@ -39,7 +39,7 @@ function ToggleButton({ status }: { status: boolean | undefined }) {
     return (
         <Container>
         <ToggleBtn isToggled={isToggled} onClick={handleToggle}>
-            {isToggled === true ? '판매중' : '판매보류'}
+            {isToggled === 'sell' ? '판매중' : '판매보류'}
         </ToggleBtn>
         </Container>
     );
@@ -53,7 +53,7 @@ const Container = styled.div`
 `;
 
 interface toggleProps {
-    isToggled : boolean | undefined
+    isToggled : string | undefined
 }
 
 const ToggleBtn = styled.button<toggleProps>`
@@ -63,7 +63,7 @@ const ToggleBtn = styled.button<toggleProps>`
     border-radius: 5px;
     
     background-color: ${({ isToggled }) =>
-        isToggled === true ? '#3CB371' : '#ccc'};
+        isToggled === 'sell' ? '#3CB371' : '#ccc'};
 
     cursor: pointer;
 
