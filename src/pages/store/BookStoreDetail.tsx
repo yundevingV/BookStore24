@@ -46,7 +46,7 @@ export default function BookStoreDetail() {
         "createdDate": string,
         "nickname": string,
         "loginId" : string,
-        "status" : string,
+        "status" : boolean,
     }
 
     const [data,setData] = useState<DataType | null>(null)

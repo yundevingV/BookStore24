@@ -41,7 +41,7 @@ interface SellDataType {
     id    :    number
     memberId    :    number
     price    :    number
-    status    :    string
+    status    :    boolean
     title    :    string
     view    :    number
     loginId : string
