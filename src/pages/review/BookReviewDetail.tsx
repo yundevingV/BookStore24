@@ -13,6 +13,7 @@ import { getCookie } from "../../components/common/Cookie";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import Comment from "../../components/comment/Comment";
+import CommentList from "../../components/comment/CommentList";
 
 
 export default function BookCommunityDetail() {
@@ -40,7 +41,7 @@ export default function BookCommunityDetail() {
         nickname: string;
         loginId: string;
         reviewId: string;
-      }
+    }
 
     interface DataType{
         "id" : string,
@@ -146,21 +147,11 @@ export default function BookCommunityDetail() {
                 </ContentContainer>
 
                 <CommentContainer>
+                    
                     <Comment id={data?.id} title={data?.title} number={data?.reviewComments.length}/>
 
-                    {data?.reviewComments.map((item : any, index : number) => (
-                        <div key={index} >
-                            <div>------------------</div>
-                            <div >{item.id}</div>
-                            <div >{item.content}</div>
-                            <div >{item.createdDate}</div>
-                            <div >{item.nickname}</div>
-                            <div >{item.loginId}</div>
-                            <div >{item.reviewId} </div>
-                            <div>------------------</div>
-                            
-                        </div>
-            ))}
+                    <CommentList reviewComments={data?.reviewComments} />
+
                 </CommentContainer>
             </Container>
             </>
