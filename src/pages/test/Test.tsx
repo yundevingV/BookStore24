@@ -38,6 +38,7 @@ interface ReviewDataType {
     score:    number
     title:    string
     view:    number
+    loginId : string
     reviewComments : ReviewComment[],
 }
 
@@ -125,6 +126,7 @@ export default function Test() {
                         {data.map((item: ProfileDataType) => (
                             <li key={item.id}>
                                 <div>Email: {item.email}</div>
+                                <div>login Id : {item.loginId}</div>
                                 {/* ... other profile data */}
                             </li>
                         ))}
@@ -139,6 +141,7 @@ export default function Test() {
                         {data2.map((item: BookDataType) => (
                             <li key={item.id}>
                                 <div>Author: {item.author}</div>
+
                                 {/* ... other book data */}
                             </li>
                         ))}
@@ -153,6 +156,8 @@ export default function Test() {
                         {data3.map((item: ReviewDataType) => (
                             <li key={item.id}>
                                 <div>Book ID: {item.title}</div>
+                                <div>ID: {item.loginId}</div>
+
                                 {/* ... other review data */}
                             </li>
                         ))}

@@ -55,7 +55,7 @@ export default function BookStoreDetail() {
                 
                 params:{
                     "loginId": dec.loginId,
-                    "title": "테스트"
+                    "title": "test1"
                 },
                 headers: {
                     Authorization: token,

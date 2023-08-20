@@ -67,7 +67,7 @@ export default function BookCommunityDetail() {
             .get(`http://bookstore24.shop/review/post/detail`,{
                 
                 params:{
-                    "loginId": dec.loginId,
+                    "loginId": 'kakao_2884949260',
                     "title": "test"
                 },
                 headers: {
@@ -84,8 +84,6 @@ export default function BookCommunityDetail() {
             console.log('Error:', error.response);
             });
     },[]);
-
-    console.log(data?.reviewComments.length)
 
     return(
         <Wrapper>
@@ -121,7 +119,7 @@ export default function BookCommunityDetail() {
 
 
                     <div>
-                    <p className="profile">{dec?.nickname}</p>
+                    <p className="profile">{data?.nickname}</p>
                     </div>
                     
                     <div>
@@ -148,7 +146,7 @@ export default function BookCommunityDetail() {
 
                 <CommentContainer>
                     
-                    <Comment id={data?.id} title={data?.title} number={data?.reviewComments.length}/>
+                    <Comment id={data?.id} loginId={data?.loginId} title={data?.title} number={data?.reviewComments.length}/>
 
                     <CommentList reviewComments={data?.reviewComments} />
 

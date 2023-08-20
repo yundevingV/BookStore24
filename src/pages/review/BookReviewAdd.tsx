@@ -68,7 +68,7 @@ export default function BookCommunityAdd() {
         };
         if (true){
         axios
-            .post(`http://bookstore24.shop/review/post/save`, data, config)
+            .post(`http://bookstore24.shop/review/comment/post/save`, data, config)
             .then((response) => {
             console.log(`Response : ${(JSON.stringify(data))}`);
             navigate(-1);
@@ -100,6 +100,7 @@ export default function BookCommunityAdd() {
             (state : RootState) => state.cancelStatusReducer.cancelStatusData
         )
 
+        // 처음 렌더링될때만 값 불러오기.
         const didMountRef = useRef(false);
 
         useEffect(() => {

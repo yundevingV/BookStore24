@@ -16,7 +16,7 @@ function ToggleButton({ status }: { status: string | undefined }) {
             'http://bookstore24.shop/sell/post/status/edit/save',
             {
             loginId: dec.loginId,
-            title: 'test',
+            title: 'test1',
             },
             {
             headers: {

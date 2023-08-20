@@ -3,24 +3,29 @@ import useDecodedJWT from "../../hooks/useDecodedJWT";
 import { getCookie } from "../common/Cookie";
 import CommentAdd from "./CommentAdd"
 import CommentNumber from "./CommentNumber"
+import useInput from "../../hooks/useInput";
 
 import axios from "axios";
 import { styled } from "styled-components"
 
 interface CommentProps{
     id : string | undefined,
+    loginId : string | undefined,
     title : string | undefined,
     number : number | undefined,
 }
 
-export default function Comment({id , title , number} : CommentProps ){
+export default function Comment({id , loginId, title , number} : CommentProps ){
 
     let token = getCookie('jwt');
-    let dec = useDecodedJWT(token);
 
+    const [ {  content }, onInputChange, resetInput ] = useInput({
+        
+        content: '',
+    });
     const saveComment = async () => {
 
-        const url = 'http://bookstore24.shop/comment/post/save';
+        const url = 'http://bookstore24.shop/review/comment/post/save';
     
         const headers = {
             Authorization: token,
@@ -29,18 +34,22 @@ export default function Comment({id , title , number} : CommentProps ){
     
         const data = {
             id: id,
-            loginId: dec?.loginId,
+            loginId: loginId,
             title: title,
-            content: 'The content of the comment',
+            content: content,
         };
     
         try {
-          const response = await axios.post(url, data, { headers });
-          console.log('Response:', response.data);
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      };
+            const response = await axios.post(url, data, { headers });
+            console.log('Response:', response.data);
+            resetInput();
+            
+            } catch (error) {
+            console.error('Error:', error);
+            }
+        };
+
+
 
     return(
         <>
@@ -54,7 +63,10 @@ export default function Comment({id , title , number} : CommentProps ){
                 <ContentContainer>
                     <CommentInputWrapper> 
                         <CommentInput 
-                        
+                            placeholder='댓글을 입력하세요.' 
+                            name="content"
+                            value={content}
+                            onChange={onInputChange} 
                         /> 
                     </CommentInputWrapper>
                 </ContentContainer>

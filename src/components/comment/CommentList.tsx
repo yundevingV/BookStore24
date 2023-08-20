@@ -1,20 +1,20 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { getCookie } from '../common/Cookie';
 
 interface ReviewComment {
-  id: string;
-  content: string;
-  createdDate: string;
-  nickname: string;
-  loginId: string;
-  reviewId: string;
+    id: string;
+    content: string;
+    createdDate: string;
+    nickname: string;
+    loginId: string;
+    reviewId: string;
 }
 
 interface CommentListProps {
   reviewComments: ReviewComment[] | undefined;
 }
-
-
 
 const CommentItem = styled.div`
   margin-bottom: 10px;
@@ -36,6 +36,10 @@ const NoCommentsMessage = styled.p`
   font-style: italic;
   color: #777;
 `;
+const EditButton = styled.button`
+  margin : 0px 30px;
+
+`
 
 export default function CommentList({ reviewComments }: CommentListProps) {
     
@@ -52,19 +56,89 @@ export default function CommentList({ reviewComments }: CommentListProps) {
         
         return formattedDate;
         }
+
+        const [edit,setEdit] = useState<boolean>(false)
+        const [idx,setIdx] = useState<number>();
+
+        const doEdit = (idx : number) =>{
+            edit === false ? setEdit(true) : setEdit(false)
+            setIdx(idx);
+            
+        }
+
+        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+        
+        const [editArray, setEditArray] = useState<boolean[] >([]);
+
+        useEffect(() => {
+            // Initialize editArray with the desired length and initial value
+            if (reviewComments) {
+            const length = reviewComments.length;
+            const initialValue = false;
+            const initialEditArray = new Array(length).fill(initialValue);
+            setEditArray(initialEditArray);
+            }
+        }, [reviewComments]);
+        
+        useEffect(() => {
+            // Loop through reviewComments inside useEffect and make a GET request for each comment individually.
+            if (reviewComments && jwt) {
+            reviewComments.forEach((comment, idx) => {
+                axios
+                .get('http://bookstore24.shop/review/comment/post/edit', {
+                    params: {
+                    reviewId: comment.reviewId,
+                    reviewCommentId: comment.id,
+                    },
+                    headers: {
+                    Authorization: jwt,
+                    },
+                })
+                .then((response) => {
+                    // Assuming your response indicates success in some way, update editArray
+                    
+                    setEditArray((prevEditArray) => {
+                        const updatedArray = [...prevEditArray];
+                        updatedArray[idx] = true;
+                        return updatedArray;
+                    });
+                    
+                })
+                .catch((error) => {
+                    console.log('Error:', error.response);
+                });
+            });
+            }
+        }, [reviewComments, jwt]);
+
+    console.log(editArray)
+
+
     return (
         <>
-        {reviewComments?.map((comment) => (
-            <CommentItem key={comment.id}>
-
+        {reviewComments?.map((comment,index) => (
+            <CommentItem key={comment.id} >
             <p> 
-                {comment.nickname} 
+                {comment.nickname}
                     <DateSpan>
                         {formatDate(comment.createdDate)}
+
                     </DateSpan>
+                    {editArray[index] ?
+                    <EditButton onClick={() => doEdit(index)}>수정</EditButton>
+                    : <></>
+                    }
+
             </p>
 
-            <p> {comment.content}</p>
+            {edit === true && index === idx? 
+            <input 
+                defaultValue={comment.content}/>
+            :
+            <p > {comment.content} </p>
+            
+            }
+
 
             </CommentItem>
         ))}
