@@ -25,21 +25,23 @@ export default function BookStoreEdit() {
         "coverImg": string,
         "isbn": string,
         "content": string,
-        "price": string,
-        "talkUrl": string,
         "createdDate": string,
         "nickname": string,
     }
 
     const [data,setData] = useState<DataType | null>(null)
 
+    const [talkUrl, setTalkUrl] = useState<string>('');
+    const [content, setContent] = useState<string>('');
+    const [price, setPrice] = useState<number>();
+
     useEffect(() => {        
         axios
             .get(`http://52.79.234.227/sell/post/edit`,{
                 
                 params:{
-                    "loginId": 'acc',
-                    "title": "ㅍㅍ"
+                    "loginId": dec.loginId,
+                    "title": "test",
                 },
                 headers: {
                     Authorization: token,
@@ -50,6 +52,10 @@ export default function BookStoreEdit() {
             .then((response) => {
             console.log(`Response : ${response}`);
             setData(response.data);
+            setTalkUrl(response.data.talkUrl);
+            setPrice(response.data.price);
+            setContent(response.data.content);
+
         })
             .catch((error) => {
             console.log('Error:', error.response);
@@ -61,23 +67,33 @@ export default function BookStoreEdit() {
 
     const navigate = useNavigate()
 
-    const [ { talkUrl, price, content }, onInputChange, resetInput ] = useInput({
-        talkUrl : ''
-    });
-    console.log(talkUrl)
+
+
+    const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+    
+        if (name === 'talkUrl') {
+            setTalkUrl(value);
+        } else if (name === 'content') {
+            setContent(value);
+        } else if (name === 'price') {
+            setPrice(Number(value));
+        }
+    };
+
     const save = (e: React.MouseEvent) => {
         e.preventDefault();
     
         const newData = {
-            "title": 'ㅍㅍ',
-            "bookTitle": "김민교 자서전",
-            "author": "김민교",
-            "publisher": "교출판사",
-            "coverImg": "https://shopping-phinf.pstatic.net/main_3729966/37299668618.20230119064022.jpg",
-            "isbn": "123456789",
-            "content": content,
-            "price": price,
+            "title": data?.title,
+            "bookTitle": data?.bookTitle,
+            "author": data?.author,
+            "publisher": data?.publisher,
+            "coverImg": data?.coverImg,
+            "isbn": data?.isbn,
             "talkUrl": talkUrl,
+            "price": price,
+            "content": content,
         };
     
         const config = {
@@ -88,7 +104,7 @@ export default function BookStoreEdit() {
     
         if (true) {
             axios
-                .post(`http://52.79.234.227/sell/post/edit/save`, newData, config)
+                .post(`http://bookstore24.shop/sell/post/edit/save`, newData, config)
                 .then((response) => {
                     console.log(`Response : ${JSON.stringify(newData)}`);
                     navigate(-1);
@@ -105,10 +121,11 @@ export default function BookStoreEdit() {
             
             <Container >
                 <H3>
-                    수정하기{data?.content}
+                    수정하기
                 </H3>
                 <Hr />
-
+                {data ? 
+                <>
                 <InnerContainer>
 
                 <LeftContainer>
@@ -121,7 +138,6 @@ export default function BookStoreEdit() {
                     <Title placeholder='게시글 제목'
                             name="title"
                             value={data?.title}
-                            onChange={onInputChange}
 
                         />
                         
@@ -144,7 +160,7 @@ export default function BookStoreEdit() {
                     <BookTitle 
                         placeholder='오픈채팅 대화방 링크를 입력해주세요' 
                         name="talkUrl"
-                        defaultValue={data?.talkUrl || 'a'}
+                        defaultValue={talkUrl}
                         onChange={onInputChange}
 
                         />
@@ -152,8 +168,7 @@ export default function BookStoreEdit() {
                     <Price
                         placeholder='희망 가격을 입력해주세요'
                         name="price"
-                        defaultValue={data?.price || 11}
-                        key={data?.price}
+                        defaultValue={price} 
                         onChange={onInputChange}
                         />
 
@@ -167,11 +182,8 @@ export default function BookStoreEdit() {
                         className="content"
                         name="content"
                         placeholder='게시글 내용을 입력하세요'
-                        defaultValue={data?.content}
-                        key={data?.content}
+                        defaultValue={data?.content}                        
                         onChange={onInputChange}
-
-
                         />
                 </ContentContainer>
 
@@ -186,7 +198,9 @@ export default function BookStoreEdit() {
                         등록하기
                     </AddButton>
                 </ButtonContainer>
-
+                </>
+                :
+                <></>}
                 
             </Container>
         </Wrapper>

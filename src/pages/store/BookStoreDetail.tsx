@@ -55,7 +55,7 @@ export default function BookStoreDetail() {
                 
                 params:{
                     "loginId": dec.loginId,
-                    "title": "test1"
+                    "title": "test"
                 },
                 headers: {
                     Authorization: token,
@@ -113,7 +113,7 @@ export default function BookStoreDetail() {
 
 
                     <div>
-                    <p className="profile">{dec?.nickname}</p>
+                    <p className="profile">{data?.nickname}</p>
                     </div>
                     
                     <div>
