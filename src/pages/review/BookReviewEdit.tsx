@@ -1,14 +1,15 @@
 import React,{useEffect, useState} from "react";
-import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
 import Test from '../../assets/imgs/testbookcover.jpg'
-import SearchBook from "../../modal/SearchBook";
 
 import { styled } from "styled-components";
 import { useNavigate} from "react-router-dom";
 import { getCookie } from "../../components/common/Cookie";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
+import StarRating from "../../components/review/Star";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducer";
 
 
 export default function BookCommunityEdit() {
@@ -36,7 +37,7 @@ export default function BookCommunityEdit() {
                 
                 params:{
                     "loginId": dec.loginId,
-                    "title": "이윤성 자서전을 보고 쓴 리뷰"
+                    "title": "test"
                 },
                 headers: {
                     Authorization: token,
@@ -45,36 +46,43 @@ export default function BookCommunityEdit() {
             })
             
             .then((response) => {
-            console.log(`Response : ${response}`);
-            setData(response.data);
-        })
-            .catch((error) => {
-            console.log('Error:', error.response);
-            navigate(-1);
-            });
-        
+                console.log(`Response : ${response}`);
+                setData(response.data);
+                setContent(response.data.content);
 
+            })
+            .catch((error) => {
+                console.log('Error:', error.response);
+                navigate(-1);
+            });
+    
     },[]);
+
+    const [content,setContent] = useState<string>('');
+
+    const onInputChange = (event : any) => {
+        // '내용'을 변경 핸들링
+        setContent(event.target.value);
+    };
 
     const navigate = useNavigate()
 
-    const [ { content, score }, onInputChange, resetInput ] = useInput({
-
-    });
+    const score = useSelector(
+        (state : RootState) => state.BookratingReducer.bookRatingData
+    )
     
     const save = (e: React.MouseEvent) => {
         e.preventDefault();
     
         const newData = {
-            "title" : "이윤성 자서전을 보고 쓴 리뷰",
-            
-            "isbn" : "12345619",
-            "bookTitle" : "이윤성자서전",
-            "author" : "이윤성",
-            "publisher" : "성출판사",
-            "coverImg" : "https://shopping-phinf.pstatic.net/main_3246698/32466988102.20230725121118.jpg",
+            "title" : data?.title,            
+            "isbn" : data?.isbn,
+            "bookTitle" : data?.bookTitle,
+            "author" : data?.author,
+            "publisher" : data?.publisher,
+            "coverImg" : data?.coverImg,
             "content" : content,
-            "score" : score
+            "score" : score,
         };
     
         const config = {
@@ -96,6 +104,7 @@ export default function BookCommunityEdit() {
         }
     };
 
+
     
     return(
         <Wrapper>
@@ -107,13 +116,13 @@ export default function BookCommunityEdit() {
                 </H3>
                 <Hr />
 
+                {data ? 
+                <>
                 <InnerContainer>
 
                 <LeftContainer>
                     <Picture src={Test} alt='x'/>
                 </LeftContainer>
-
-
 
                     <RightContainer>
                     <Title
@@ -126,7 +135,7 @@ export default function BookCommunityEdit() {
                         placeholder='책 제목을 입력해주세요'
                         value={data?.bookTitle}
 
-                         />
+                        />
 
                     <BookTitle 
                         placeholder='저자를 입력해주세요' 
@@ -139,30 +148,21 @@ export default function BookCommunityEdit() {
                         value={data?.publisher}
                         />
 
-                    <Score
-                        placeholder='별점' 
-                        name='score'
-                        defaultValue={data?.score}
-                        key={data?.score}
-                        onChange={onInputChange}
+                    <StarRating initialRating={score} />
 
-                        />
-
-                
                 </RightContainer>
 
                 </InnerContainer>
 
-                <ContentContainer>
-                    <input
-                        className="content"
-                        name='content'
-                        placeholder='게시글 내용을 입력하세요' 
-                        defaultValue={data?.content}
-                        key={data?.content}
-                        onChange={onInputChange}
+                    <ContentContainer>
+                        <input
+                            className="content"
+                            name="content"
+                            placeholder='게시글 내용을 입력하세요' 
+                            defaultValue={content}
+                            onChange={onInputChange}
 
-                        />
+                            />
                 </ContentContainer>
 
                 <ButtonContainer>
@@ -176,6 +176,10 @@ export default function BookCommunityEdit() {
                         등록하기
                     </AddButton>
                 </ButtonContainer>
+                </>
+                :
+                <> </>
+                }
 
                 
             </Container>

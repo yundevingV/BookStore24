@@ -5,7 +5,7 @@ import { saveBookRating } from "../../action/book_rating";
 import "../../styles/fontAwesome.css"
 
 interface StarRatingProps {
-    initialRating?: number;
+    initialRating ?: number | undefined;
 }
 
 export default function StarRating({ initialRating = 0 } : StarRatingProps) {
@@ -17,6 +17,7 @@ export default function StarRating({ initialRating = 0 } : StarRatingProps) {
     const handleStarClick = (newRating: number) => {
         setRating(newRating);
         dispatch(saveBookRating(newRating));
+        console.log(newRating)
     };
 
     return (

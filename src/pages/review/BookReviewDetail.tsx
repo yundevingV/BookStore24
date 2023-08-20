@@ -77,7 +77,6 @@ export default function BookCommunityDetail() {
             })
             
             .then((response) => {
-            console.log(`Response : ${JSON.stringify(response.data)}`);
             setData(response.data)
             })
             .catch((error) => {

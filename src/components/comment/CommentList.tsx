@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import useInput from '../../hooks/useInput';
 import { getCookie } from '../common/Cookie';
 
 interface ReviewComment {
@@ -42,6 +43,10 @@ const EditButton = styled.button`
 `
 
 export default function CommentList({ reviewComments }: CommentListProps) {
+    const [ {  content }, onInputChange, resetInput ] = useInput({
+        
+        content: '',
+    });
     
     function formatDate(inputDate : string) {
         const date = new Date(inputDate);
@@ -113,6 +118,11 @@ export default function CommentList({ reviewComments }: CommentListProps) {
 
     console.log(editArray)
 
+    const [c,setC] = useState<string>('');
+
+    useEffect(()=>{
+        
+    },[])
 
     return (
         <>
@@ -133,7 +143,10 @@ export default function CommentList({ reviewComments }: CommentListProps) {
 
             {edit === true && index === idx? 
             <input 
-                defaultValue={comment.content}/>
+                defaultValue={comment.content}
+                name="content"
+                onChange={onInputChange} 
+                />
             :
             <p > {comment.content} </p>
             

@@ -18,9 +18,8 @@ import { saveBookInformation } from "../../action/book_information";
 
 export default function BookCommunityAdd() {
 
-    const [ { title, rate, content }, onInputChange, resetInput ] = useInput({
+    const [ { title,content }, onInputChange, resetInput ] = useInput({
         id: '',
-        rate: '',
         content: '',
     });
 
@@ -166,7 +165,7 @@ export default function BookCommunityAdd() {
                         readOnly 
                         />
                         
-                    <StarRating  />
+                    <StarRating initialRating={0} />
                 
                 </RightContainer>
 

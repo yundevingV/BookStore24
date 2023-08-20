@@ -20,6 +20,7 @@ export default function EditProfile() {
 
     //입력창 이메일
     const [ { nickname }, onInputChange, resetInput ] = useInput({
+        nickname : '',
     });
 
     const navigate = useNavigate();
