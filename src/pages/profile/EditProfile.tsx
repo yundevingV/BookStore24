@@ -39,12 +39,14 @@ export default function EditProfile() {
 
     const [data,setData] = useState<DataType | null>(null)
     const dispatch =useDispatch();
+    
+    const token = sessionStorage.getItem('token')
 
     useEffect(()=>{
         axios.get(`http://52.79.234.227/member/profile/edit`,
             {
                 headers : {
-                    'Authorization' : getCookie('jwt')
+                    'Authorization' : token
                 }
             }
             )
@@ -65,7 +67,7 @@ export default function EditProfile() {
     const modifyResidence = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
 
-        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+        const token = sessionStorage.getItem('token')
         
         // Data to be sent in the request body.
         const data = {
@@ -76,7 +78,7 @@ export default function EditProfile() {
         // Axios configuration for the POST request.
         const config = {
             headers: {
-            Authorization: jwt,
+            Authorization: token,
             },
         };
         
@@ -97,7 +99,7 @@ export default function EditProfile() {
         const modifyNickname = (e: React.MouseEvent) => {
             e.preventDefault(); // Prevent the default form submission behavior.
     
-            const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+            const token = sessionStorage.getItem('token')
             
             // Data to be sent in the request body.
             const data = {
@@ -108,7 +110,7 @@ export default function EditProfile() {
             // Axios configuration for the POST request.
             const config = {
                 headers: {
-                Authorization: jwt,
+                Authorization: token,
                 },
             };
 

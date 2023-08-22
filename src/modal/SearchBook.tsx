@@ -16,7 +16,8 @@ type ViewProps = {
 }
 
 export default function SearchBook({viewModal , setViewModal} : ViewProps){
-    console.log(viewModal);
+    const token = sessionStorage.getItem('token')
+
 
     const closeModal = () => {
         setViewModal(false);
@@ -31,7 +32,6 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
     const search = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
 
-        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
 
         axios
             .get(`http://bookstore24.shop/book/information/search`,{
@@ -39,7 +39,7 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
                     query: searchWord,
                 },
                 headers: {
-                    Authorization: jwt,
+                    Authorization: token,
                 }
             })
             

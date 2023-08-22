@@ -25,8 +25,8 @@ export default function Kakao(){
             // 토큰 획득
             const token = response.headers.authorization 
             // 토큰 쿠키 저장
-            setCookie('jwt', token);   
-            sessionStorage.setItem('status',token);
+            setCookie('jwt', token,1000);
+            sessionStorage.setItem('token',token);
 
             if(getCookie('redirectUrl')==='/login' ){
                 navigate('/')

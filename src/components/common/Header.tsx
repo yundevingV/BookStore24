@@ -39,12 +39,13 @@ export default function Header() {
 
     // In your React project
         
-    let token = getCookie('jwt');
+    let token = sessionStorage.getItem('token')
     let dec = useDecodedJWT(token);
 
     useEffect(()=>{
 
-        const auth = sessionStorage.getItem("status");
+        const auth = sessionStorage.getItem("token");
+
         if (auth) {
             dispatch(saveloginStatus(true));
 
@@ -53,7 +54,7 @@ export default function Header() {
             {
             
             headers : {
-                'Authorization' : getCookie('jwt')
+                'Authorization' : token
             }
             })
     
@@ -79,7 +80,6 @@ export default function Header() {
         
     },[dispatch])
 
-    console.log(getCookie('jwt'))
     return (
         
         <Positioner>

@@ -22,6 +22,8 @@ export default function BookStore() {
     );
 
     const [login,setLogin] = useState<boolean>(loginStateData);
+    
+    const token = sessionStorage.getItem('token')
 
     useEffect(() => {
         setLogin(loginStateData)

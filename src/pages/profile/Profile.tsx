@@ -8,7 +8,6 @@ import { StyledButtonLink } from "../../styles/link";
 
 
 import { styled } from "styled-components";
-import { getCookie  } from "../../components/common/Cookie";
 import base64 from 'base-64';
 import axios from "axios";
 
@@ -37,12 +36,13 @@ export default function Profile(){
 
     const [residence , setResidence] = useState('');
 
+    const token = sessionStorage.getItem('token')
 
     useEffect(()=>{
         axios.get(`http://52.79.234.227/member/profile/edit`,
             {
                 headers : {
-                    'Authorization' : getCookie('jwt')
+                    'Authorization' : token
                 }
             }
             )

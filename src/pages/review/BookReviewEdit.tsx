@@ -14,7 +14,7 @@ import { RootState } from "../../reducer";
 
 export default function BookCommunityEdit() {
 
-    let token = getCookie('jwt');
+    const token = sessionStorage.getItem('token')
     let dec = useDecodedJWT(token);
 
     interface DataType{

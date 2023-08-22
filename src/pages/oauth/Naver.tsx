@@ -26,7 +26,7 @@ export default function Naver(){
             const token = response.headers.authorization 
             
             setCookie('jwt', token);   
-            sessionStorage.setItem('status',token);
+            sessionStorage.setItem('token',token);
 
             if(getCookie('redirectUrl')==='/login' ){
                 navigate('/')

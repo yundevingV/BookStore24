@@ -54,7 +54,7 @@ export default function Login() {
 
             setCookie('jwt',token)
 
-            sessionStorage.setItem('status',token);
+            sessionStorage.setItem('token',token);
             navigate(`/`)
 
         })

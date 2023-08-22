@@ -28,7 +28,7 @@ export default function BookStoreDetail() {
         setLogin(loginStateData)
     }, [loginStateData]);
 
-    let token = getCookie('jwt');
+    const token = sessionStorage.getItem('token')
     let dec = useDecodedJWT(token);
 
     interface DataType{

@@ -31,18 +31,21 @@ export default function BookCommunityDetail() {
         setLogin(loginStateData)
     }, [loginStateData]);
 
-    let token = getCookie('jwt');
+    const token = sessionStorage.getItem('token')
     let dec = useDecodedJWT(token);
 
     interface ReviewComment {
-        id: string;
+        id : string;
+        reviewCommentId: string;
         content: string;
         createdDate: string;
         nickname: string;
         loginId: string;
         reviewId: string;
+        title : string;
     }
 
+    
     interface DataType{
         "id" : string,
         "title": string,
@@ -64,25 +67,23 @@ export default function BookCommunityDetail() {
 
     useEffect(() => {        
         axios
-            .get(`http://bookstore24.shop/review/post/detail`,{
-                
-                params:{
+            .get(`http://bookstore24.shop/review/post/detail`, {
+                params: {
                     "loginId": 'kakao_2884949260',
                     "title": "test"
                 },
                 headers: {
                     Authorization: token,
-                
                 }
             })
-            
             .then((response) => {
-            setData(response.data)
+                setData(response.data)
             })
             .catch((error) => {
-            console.log('Error:', error.response);
+                console.log('에러:', error.response);
             });
-    },[]);
+    }, []); // data 상태가 변경될 때마다 이 useEffect 실행
+    
 
     return(
         <Wrapper>

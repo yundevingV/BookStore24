@@ -14,7 +14,7 @@ import useDecodedJWT from "../../hooks/useDecodedJWT";
 
 export default function BookStoreEdit() {
 
-    let token = getCookie('jwt');
+    const token = sessionStorage.getItem('token')
     let dec = useDecodedJWT(token);
 
     interface DataType{

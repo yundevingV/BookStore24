@@ -45,7 +45,7 @@ export default function BookCommunityAdd() {
     const add = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
 
-        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+        const token = sessionStorage.getItem('token')
         
         // Data to be sent in the request body.
         const data = {
@@ -62,7 +62,7 @@ export default function BookCommunityAdd() {
         // Axios configuration for the POST request.
         const config = {
             headers: {
-            Authorization: jwt,
+            Authorization: token,
             },
         };
         if (true){

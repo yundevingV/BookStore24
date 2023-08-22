@@ -4,50 +4,50 @@ import styled from 'styled-components';
 import useInput from '../../hooks/useInput';
 import { getCookie } from '../common/Cookie';
 
+// props
 interface ReviewComment {
-    id: string;
+    id : string;
+    reviewCommentId: string;
     content: string;
     createdDate: string;
     nickname: string;
     loginId: string;
     reviewId: string;
+    title : string;
 }
 
 interface CommentListProps {
   reviewComments: ReviewComment[] | undefined;
 }
 
-const CommentItem = styled.div`
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  border-radius: 5px;
+// 댓글 수정 권한 확인 응답 - 성공
 
-  p {
-    margin: 10px 0px;
-    font-size : 20px;
-    paddint : 5px;
-  }
-`;
-const DateSpan = styled.span`
-font-size : 15px;
-`
-const NoCommentsMessage = styled.p`
-  font-style: italic;
-  color: #777;
-`;
-const EditButton = styled.button`
-  margin : 0px 30px;
+// interface ReviewAuthProps {
+//     reviewId : string,
+//     reviewTitle : string,
+//     reviewLoginId : string,
+//     reviewCommentId : string,
+//     reviewCommentLoginId : string,
+//     reviewCommentContent : string,
+// }
 
-`
+// interface ReviewAuthListProps {
+//     reviewAuthList : ReviewAuthProps[] | undefined
+// }
 
 export default function CommentList({ reviewComments }: CommentListProps) {
-    const [ {  content }, onInputChange, resetInput ] = useInput({
-        
-        content: '',
-    });
+
+    const [data,setData] = useState<ReviewComment[] | undefined>();
+
+    useEffect(()=>{
+        setData(reviewComments);
+    },[])
+
     
+    
+    const token = sessionStorage.getItem('token')
+
+    // 날짜
     function formatDate(inputDate : string) {
         const date = new Date(inputDate);
         
@@ -70,8 +70,6 @@ export default function CommentList({ reviewComments }: CommentListProps) {
             setIdx(idx);
             
         }
-
-        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
         
         const [editArray, setEditArray] = useState<boolean[] >([]);
 
@@ -86,17 +84,16 @@ export default function CommentList({ reviewComments }: CommentListProps) {
         }, [reviewComments]);
         
         useEffect(() => {
-            // Loop through reviewComments inside useEffect and make a GET request for each comment individually.
-            if (reviewComments && jwt) {
+            if (reviewComments && token) {
             reviewComments.forEach((comment, idx) => {
                 axios
                 .get('http://bookstore24.shop/review/comment/post/edit', {
                     params: {
                     reviewId: comment.reviewId,
-                    reviewCommentId: comment.id,
+                    reviewCommentId: comment.reviewCommentId,
                     },
                     headers: {
-                    Authorization: jwt,
+                    Authorization: token,
                     },
                 })
                 .then((response) => {
@@ -107,30 +104,71 @@ export default function CommentList({ reviewComments }: CommentListProps) {
                         updatedArray[idx] = true;
                         return updatedArray;
                     });
-                    
                 })
                 .catch((error) => {
                     console.log('Error:', error.response);
                 });
             });
             }
-        }, [reviewComments, jwt]);
+        }, [reviewComments, token]);
 
-    console.log(editArray)
 
-    const [c,setC] = useState<string>('');
+    interface editCommentProps{
+        reviewCommentId: string;
+        loginId: string;
+        reviewId: string;
+        title : string;
+    }
+    
+    const editComment = async ({reviewCommentId,title,loginId,reviewId} : editCommentProps ,e : any) => {
+        e.preventDefault();
 
-    useEffect(()=>{
-        
-    },[])
+        const url = 'http://bookstore24.shop/review/comment/post/edit/save';
+    
+        const headers = {
+            Authorization: token,
+            'Content-Type': 'application/json',
+        };
+    
+        const data = {
+            reviewId: reviewId,
+            loginId: loginId,
+            title: 'test',
+            reviewCommentId :reviewCommentId,
+            content: content,
+        };
+        if(content){
+        try {
+            const response = await axios.post(url, data, { headers });
+            console.log('Response:', response.data);
+            console.log(data)
+            setEdit(false);
+            alert('수정이 완료되었습니다.')
+            
+            } catch (error) {
+            console.error('Error:', error);
+            console.log(data)
+            }
+            }
+        };
+
+    const [content,setContent] = useState<string>('');
+
+    const onInputChange = (event : any) => {
+        // '내용'을 변경 핸들링
+        setContent(event.target.value);
+        console.log(content)
+    };
+
 
     return (
         <>
         {reviewComments?.map((comment,index) => (
-            <CommentItem key={comment.id} >
+            <CommentItem>
             <p> 
                 {comment.nickname}
                     <DateSpan>
+
                         {formatDate(comment.createdDate)}
 
                     </DateSpan>
@@ -138,17 +176,21 @@ export default function CommentList({ reviewComments }: CommentListProps) {
                     <EditButton onClick={() => doEdit(index)}>수정</EditButton>
                     : <></>
                     }
-
             </p>
 
             {edit === true && index === idx? 
+            <>
             <input 
-                defaultValue={comment.content}
+                defaultValue={comment?.content}
                 name="content"
                 onChange={onInputChange} 
                 />
+            <button onClick={(e) => editComment(comment,e)}>                
+                완료
+            </button>
+            </>
             :
-            <p > {comment.content} </p>
+            <p > {comment?.content} </p>
             
             }
 
@@ -160,3 +202,28 @@ export default function CommentList({ reviewComments }: CommentListProps) {
         </>
     );
 }
+
+const CommentItem = styled.div`
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 5px;
+
+  p {
+    margin: 10px 0px;
+    font-size : 20px;
+    paddint : 5px;
+  }
+`;
+const DateSpan = styled.span`
+font-size : 15px;
+margin : 0px 15px;
+`
+const NoCommentsMessage = styled.p`
+  font-style: italic;
+  color: #777;
+`;
+const EditButton = styled.button`
+
+`

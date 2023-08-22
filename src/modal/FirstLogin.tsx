@@ -12,6 +12,8 @@ import axios from "axios";
 export default function FirstLogin(){
   const dispatch = useDispatch();
 
+  const token = sessionStorage.getItem('token')
+
 
     const [ { nickname}, onInputChange, resetInput ] = useInput({
       nickname : '',
@@ -35,7 +37,7 @@ export default function FirstLogin(){
       {
       headers : {
         "Content-Type" : "application/json; charset=utf-8",
-        'Authorization' : sessionStorage.getItem('status')
+        'Authorization' : token
       }
       }
     )

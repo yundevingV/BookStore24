@@ -21,7 +21,7 @@ export default function Google(){
             const token = response.headers.authorization 
 
             setCookie('jwt',token)
-            sessionStorage.setItem('status',token);
+            sessionStorage.setItem('token',token);
             if(getCookie('redirectUrl')==='/login' ){
                 navigate('/')
             } else {

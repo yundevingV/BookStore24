@@ -56,12 +56,20 @@ interface SellDataType {
 
 }
 
+interface CommentDataType {
+    id : any,
+    reviewId : any,
+    content : any,
+
+}
+
 export default function Test() {
 
     const [data, setData] = useState<ProfileDataType[] | null>(null);
     const [data2, setData2] = useState<BookDataType[] | null>(null);
     const [data3, setData3] = useState<ReviewDataType[] | null>(null);
     const [data4, setData4] = useState<SellDataType[] | null>(null);
+    const [data5, setData5] = useState<CommentDataType[] | null>(null);
 
     useEffect(() => {
 
@@ -115,6 +123,22 @@ export default function Test() {
             });
     }, []);
 
+
+useEffect(() => {
+
+        axios.get("http://bookstore24.shop/reviewcomment/list/sub")
+
+            .then(response => {
+                console.log(response.data);
+                setData5(response.data)
+
+            })
+            .catch(error => {
+                console.log("Error:", error);
+            });
+    }, []);
+
+    
     console.log(data3)
 
     return (
@@ -174,6 +198,24 @@ export default function Test() {
                                 <div>Book ID: {item.title}</div>
                                 <div>login ID: {item.loginId}</div>
                                 <div>status : {item.status}</div>
+
+                                {/* ... other sell data */}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+
+            <div>
+                <h2>Comment Data:</h2>
+                {data5 && (
+                    <ul>
+                        {data5.map((item : any) => (
+                            <li key={item.id}>
+                                <div>reviewId: {item.reviewId}</div>
+                                <div>ID: {item.id}</div>
+                                <div>content: {item.content}</div>
+
 
                                 {/* ... other sell data */}
                             </li>

@@ -27,6 +27,8 @@ export default function BookStoreCommunity() {
     useEffect(() => {
         setLogin(loginStateData)
     }, [loginStateData]);
+    
+    const token = sessionStorage.getItem('token')
 
     return(
 

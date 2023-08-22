@@ -17,7 +17,7 @@ interface CommentProps{
 
 export default function Comment({id , loginId, title , number} : CommentProps ){
 
-    let token = getCookie('jwt');
+    const token = sessionStorage.getItem('token')
 
     const [ {  content }, onInputChange, resetInput ] = useInput({
         

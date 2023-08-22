@@ -26,7 +26,7 @@ export default function EditPwd(){
         // const password1 = ...;
         // const password2 = ...;
         
-        const jwt = getCookie('jwt'); // Assuming you have a function to get the JWT token from cookies.
+        const token = sessionStorage.getItem('token')
         
         // Data to be sent in the request body.
         const data = {
@@ -38,7 +38,7 @@ export default function EditPwd(){
         // Axios configuration for the POST request.
         const config = {
             headers: {
-            Authorization: jwt,
+            Authorization: token,
             },
         };
         
