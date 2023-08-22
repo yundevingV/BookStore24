@@ -144,6 +144,7 @@ export default function CommentList({ reviewComments }: CommentListProps) {
             console.log(data)
             setEdit(false);
             alert('수정이 완료되었습니다.')
+            window.location.replace("")
             
             } catch (error) {
             console.error('Error:', error);
