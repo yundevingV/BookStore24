@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { timeEnd } from 'console';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useInput from '../../hooks/useInput';
@@ -37,30 +38,38 @@ interface CommentListProps {
 
 export default function CommentList({ reviewComments }: CommentListProps) {
 
-    const [data,setData] = useState<ReviewComment[] | undefined>();
+    function timeForToday(value : string) {
+        const today = new Date();
+        const timeValue = new Date(value);
 
-    useEffect(()=>{
-        setData(reviewComments);
-    },[])
+        const betweenTime = Math.floor(((today.getTime() - timeValue.getTime() ) / 1000 / 60) - 540);
+        console.log(`value : ${betweenTime}`)
+        if (betweenTime < 1) return '방금전';
+        if (betweenTime < 60) {
+            return `${betweenTime}분전`;
+        }
 
+        const betweenTimeHour = Math.floor(betweenTime / 60);
+        if (betweenTimeHour < 24) {
+            return `${betweenTimeHour}시간전`;
+        }
+
+        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+        if (betweenTimeDay < 365) {
+            return `${betweenTimeDay}일전`;
+        }
+
+        return `${Math.floor(betweenTimeDay / 365)}년전`;
+ }
     
     
+    
+    
+
+
     const token = sessionStorage.getItem('token')
 
-    // 날짜
-    function formatDate(inputDate : string) {
-        const date = new Date(inputDate);
-        
-        const year = date.getFullYear();
-        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 because months are 0-indexed
-        const day = date.getDate().toString().padStart(2, '0');
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        
-        const formattedDate = `${year}.${month}.${day} ${hours}:${minutes}`;
-        
-        return formattedDate;
-        }
+    
 
         const [edit,setEdit] = useState<boolean>(false)
         const [idx,setIdx] = useState<number>();
@@ -170,7 +179,7 @@ export default function CommentList({ reviewComments }: CommentListProps) {
                 {comment.nickname}
                     <DateSpan>
 
-                        {formatDate(comment.createdDate)}
+                        {(timeForToday(comment.createdDate))}
 
                     </DateSpan>
                     {editArray[index] ?
