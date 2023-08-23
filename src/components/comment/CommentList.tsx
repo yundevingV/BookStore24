@@ -3,6 +3,7 @@ import { timeEnd } from 'console';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useInput from '../../hooks/useInput';
+import timeForToday from '../../hooks/timeForToday';
 import { getCookie } from '../common/Cookie';
 
 // props
@@ -21,55 +22,9 @@ interface CommentListProps {
   reviewComments: ReviewComment[] | undefined;
 }
 
-// 댓글 수정 권한 확인 응답 - 성공
-
-// interface ReviewAuthProps {
-//     reviewId : string,
-//     reviewTitle : string,
-//     reviewLoginId : string,
-//     reviewCommentId : string,
-//     reviewCommentLoginId : string,
-//     reviewCommentContent : string,
-// }
-
-// interface ReviewAuthListProps {
-//     reviewAuthList : ReviewAuthProps[] | undefined
-// }
-
 export default function CommentList({ reviewComments }: CommentListProps) {
-
-    function timeForToday(value : string) {
-        const today = new Date();
-        const timeValue = new Date(value);
-
-        const betweenTime = Math.floor(((today.getTime() - timeValue.getTime() ) / 1000 / 60) - 540);
-        console.log(`value : ${betweenTime}`)
-        if (betweenTime < 1) return '방금전';
-        if (betweenTime < 60) {
-            return `${betweenTime}분전`;
-        }
-
-        const betweenTimeHour = Math.floor(betweenTime / 60);
-        if (betweenTimeHour < 24) {
-            return `${betweenTimeHour}시간전`;
-        }
-
-        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-        if (betweenTimeDay < 365) {
-            return `${betweenTimeDay}일전`;
-        }
-
-        return `${Math.floor(betweenTimeDay / 365)}년전`;
- }
     
-    
-    
-    
-
-
-    const token = sessionStorage.getItem('token')
-
-    
+        const token = sessionStorage.getItem('token')
 
         const [edit,setEdit] = useState<boolean>(false)
         const [idx,setIdx] = useState<number>();
@@ -77,7 +32,6 @@ export default function CommentList({ reviewComments }: CommentListProps) {
         const doEdit = (idx : number) =>{
             edit === false ? setEdit(true) : setEdit(false)
             setIdx(idx);
-            
         }
         
         const [editArray, setEditArray] = useState<boolean[] >([]);
@@ -170,6 +124,8 @@ export default function CommentList({ reviewComments }: CommentListProps) {
         console.log(content)
     };
 
+    
+
 
     return (
         <>
@@ -178,8 +134,8 @@ export default function CommentList({ reviewComments }: CommentListProps) {
             <p> 
                 {comment.nickname}
                     <DateSpan>
-
-                        {(timeForToday(comment.createdDate))}
+                    
+                        {timeForToday(comment.createdDate)}
 
                     </DateSpan>
                     {editArray[index] ?

@@ -10,9 +10,28 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 
 import Login from "../Login";
+import axios from "axios";
+import Paging from "../../components/common/Paging";
 
 
 export default function BookStoreCommunity() {
+
+    interface DataType{
+        author:string
+        bookTitle:string
+        coverImg:string
+        createdDate:string
+        id:number
+        nickname:string
+        publisher:string
+        score:number
+        title:string
+        view:number
+    }
+
+
+
+    const [data,setData] = useState<DataType[] | undefined>();
 
     // 현재 주소
     const location = useLocation();
@@ -21,27 +40,44 @@ export default function BookStoreCommunity() {
     const loginStateData = useSelector(
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
-
-    const [login,setLogin] = useState<boolean>(loginStateData);
-
-    useEffect(() => {
-        setLogin(loginStateData)
-    }, [loginStateData]);
     
-    const token = sessionStorage.getItem('token')
+    const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
+
+    const page = useSelector(
+        (state: RootState) => state.PagingReducer.PagingData
+    );
+    
+    useEffect(() => {        
+        axios
+            .get(`http://bookstore24.shop/review/post/list`, {
+                params: {
+                    page : page | 0,
+                    size : 10,
+                },
+            })
+            .then((response) => {
+                setData(response.data.content);
+                setTotalPages(response.data.totalPages);
+            })
+            .catch((error) => {
+                console.log('에러:', error.response);
+            });
+    }, [page]);
+
+    console.log(data?.[0])
 
     return(
 
         <Wrapper>
             {/* 로그인 실패시 & 비로그인 */}
-            {!login && (
+            {!loginStateData && (
                 <>
                 <Login />
                 </>
             )}
 
             {/* 로그인 성공시 */}
-            {login && (
+            {loginStateData && (
             <>
             <Header />
             
@@ -52,7 +88,12 @@ export default function BookStoreCommunity() {
             </Title>
             <Navbar text='후기 작성하기' url={location.pathname} />
 
-                <Item />    
+
+
+            <Item items={data} />
+            
+            <Paging totalPages={totalPages} />
+
             </Container>
             </>
             )}

@@ -8,6 +8,7 @@ import openModal  from "./openModal_reducer";
 import BookInformationReducer from "./book_information_reducer";
 import BookratingReducer from "./book_rating_reducer";
 import cancelStatusReducer from "./cancel_status_reducer";
+import PagingReducer from "./paging_reducer";
 
 const rootReducer = combineReducers({
   searchOptionReducer,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   openModal,
   BookInformationReducer,
   BookratingReducer,
-  cancelStatusReducer
+  cancelStatusReducer,
+  PagingReducer,
   
 });
 

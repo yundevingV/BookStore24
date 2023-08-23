@@ -39,7 +39,7 @@ export default function Profile(){
     const token = sessionStorage.getItem('token')
 
     useEffect(()=>{
-        axios.get(`http://52.79.234.227/member/profile/edit`,
+        axios.get(`http://bookstore24.shop/member/profile/edit`,
             {
                 headers : {
                     'Authorization' : token

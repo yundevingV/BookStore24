@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Test from '../../assets/imgs/testbookcover.jpg'
 import { StyledLink } from "../../styles/link";
+import timeForToday from '../../hooks/timeForToday';
 
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,11 +10,27 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 
 import styled from "styled-components";
-import { getCookie } from "../common/Cookie";
-import axios from "axios";
 
 
-function ItemList(){
+
+interface DataType{
+    author:string
+    bookTitle:string
+    coverImg:string
+    createdDate:string
+    id:number
+    nickname:string
+    publisher:string
+    score:number
+    title:string
+    view:number
+}
+
+interface DataTypeList {
+    items: DataType[] | undefined;
+  }
+
+function ItemList({items} : DataTypeList){
     
     const searchWordData = useSelector(
         (state: RootState) => state.searchWordReducer.searchWordData
@@ -22,42 +39,43 @@ function ItemList(){
     return(
         <>
             
+            {items?.map((item )=>(
             <StyledLink to='/bookreview/detail'>
             <Frame>
 
             <Top>
                 <Title>
-                    후기 글 제목
+                    {item.title}
                 </Title>
                 <Rating>
-                    4.8
+                    {item.score}
                 </Rating>
             </Top>
 
             <Middle>    
                 <LContainer>
-                <Img src={Test} alt='x' />
+                    <Img src={item.coverImg} alt='x' />
                 </LContainer>
 
                 <RContainer>
                 <Name>
-                    이름
+                    {item.bookTitle}
                 </Name>
 
                 <Views>
                 <FontAwesomeIcon icon={faEye} />
-                567
+                    {item.view}
                 </Views>
 
                 <ItemPublisher>
-                    저자 / 출판사
+                    {item.author} / {item.publisher}
                 </ItemPublisher>
 
                 <Writter>
-                    XX 님
+                    {item.nickname}
                 </Writter>
                 <Date>
-                    22.05.25
+                    {timeForToday(item.createdDate)}
                 </Date>
 
                 </RContainer>
@@ -65,15 +83,16 @@ function ItemList(){
             </Middle>
             </Frame>
             </StyledLink>
+            ))}
         </>
     )
 }   
 
-export default function StoreItem(){
+export default function StoreItem({items} : DataTypeList){
 
     return(
         <Positioner>            
-            <ItemList />
+            <ItemList items={items}/>
         </Positioner>
     )
 }
