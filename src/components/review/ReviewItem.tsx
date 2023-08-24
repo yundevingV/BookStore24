@@ -91,44 +91,43 @@ export default function StoreItem({items} : DataTypeList){
 
     return(
         <Positioner>            
-            <ItemList items={items}/>
+            <ItemLists items={items}/>
         </Positioner>
     )
 }
 
 const Positioner = styled.div`
-    display: inline-block;
 
-    width : 100%;
-
-    height: fit-content;
-    z-index:99;
-    
-    padding : 0px;
-    padding-bottom : 5rem;
-    border: 0px;
 
 `;
+const ItemLists = styled(ItemList)`
+
+`
 
 const Frame = styled.div`
-display: inline-block;
 
-width: 34%;
+display : inline-block;
+
+width: 30vw;
 height: 300px;
 
 font-size : 16px;
 
-margin : 3% 8%;
+margin: 3vh calc(5vw - 1px);
 
 border : 1px solid #e2e2e2;
 border-radius : 5px;
 
-position : relative;
-
 //1080px 이하면
 @media (max-width : 1080px){
-    width: 70%;
-    margin : 3% 15%;
+    width: 70vw;
+    margin : 3vh 5vw;
+
+}
+//1080px 이하면
+@media (max-width : 810px){
+    width: 500px;
+    margin : 3vh 30px;
 
 }
 

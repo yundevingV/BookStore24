@@ -91,7 +91,9 @@ export default function BookStoreCommunity() {
 
             <Item items={data} />
             
-            <Paging totalPages={totalPages} />
+            <PagingContainer>
+                <Paging totalPages={totalPages} />
+            </PagingContainer>
 
             </Container>
             </>
@@ -118,10 +120,9 @@ font-family: tway, sans-serif, Arial;
 position : relative;
 top:5vh;
 
-
 //810px 이하면
 @media (max-width : 810px){
-    width: 567px;
+    width: 560px;
 }
 
 `
@@ -144,4 +145,13 @@ font-size : 30px;
 const PContent = styled.p`
 font-weight : 200;
 font-size : 18px;
+`
+
+const PagingContainer = styled.div`
+width : 100%;
+
+display: flex;
+flex-direction : column;
+
+text-align : center;
 `

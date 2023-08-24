@@ -187,5 +187,6 @@ const NoCommentsMessage = styled.p`
   color: #777;
 `;
 const EditButton = styled.button`
-
+border : 0px;
+background : transparent;
 `

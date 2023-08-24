@@ -130,10 +130,10 @@ export default function BookReviewDetail() {
                     </div>
                     
                     <div>
-                        <p className="title">{data?.bookTitle}</p>
+                        <p className="bookTitle">{data?.bookTitle}</p>
                         <p className="publisher">저자 : {data?.author.replace('^', ',')}</p>
                         <p className="publisher">출판사 : {data?.publisher}</p>
-                        <p className='rating'>{data?.score}</p>
+                        <p className='rating'>평점 : {data?.score}</p>
                     </div>
 
                 </RightContainer>
@@ -219,12 +219,14 @@ const RightContainer = styled.div`
     border-radius: 2px;
 }
     
-    .title{
-        font-weight : 900;
+    .bookTitle{
+        font-weight : 700;
+        font-size : 18px;
+
     }
 
     .profile {
-        font-size : 12px;
+        font-size : 14px;
     }
 
     .publisher{
