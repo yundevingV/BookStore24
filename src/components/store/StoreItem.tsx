@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Test from '../../assets/imgs/testbookcover.jpg'
 import { StyledLink } from "../../styles/link";
-import timeForToday from '../../hooks/timeForToday';
+import timeForToday from '../../util/timeForToday';
 
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 
 import styled from "styled-components";
+import truncate from "../../util/truncate";
 
 
 
@@ -59,7 +60,7 @@ function ItemList({items} : DataTypeList){
 
                 <RContainer>
                 <Name>
-                    {item.bookTitle}
+                    {truncate(`${item.bookTitle}`,15)}
                 </Name>
 
                 <Price>
@@ -67,7 +68,13 @@ function ItemList({items} : DataTypeList){
                 </Price>
 
                 <ItemPublisher>
-                    {item.author.replace('^', ',')} / {item.publisher}
+                    {item.author.replace('^', ',')} 
+                    
+                </ItemPublisher>
+
+                <ItemPublisher>
+                    {item.publisher}
+
                 </ItemPublisher>
 
                 <Writter>

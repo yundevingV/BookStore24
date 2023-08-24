@@ -3,7 +3,7 @@ import { timeEnd } from 'console';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useInput from '../../hooks/useInput';
-import timeForToday from '../../hooks/timeForToday';
+import timeForToday from '../../util/timeForToday';
 import { getCookie } from '../common/Cookie';
 
 // props
