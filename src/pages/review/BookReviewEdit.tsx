@@ -3,7 +3,7 @@ import Header from "../../components/common/Header";
 import Test from '../../assets/imgs/testbookcover.jpg'
 
 import { styled } from "styled-components";
-import { useNavigate} from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 import { getCookie } from "../../components/common/Cookie";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
@@ -13,7 +13,16 @@ import { RootState } from "../../reducer";
 
 
 export default function BookCommunityEdit() {
+    
+    // 현재 주소
+    const location = useLocation();
+    console.log(location)
 
+    const params = decodeURIComponent(location.search.replace('?','')).split('&');
+
+    const loginId = params[0];
+    const title = params[1];
+    
     const token = sessionStorage.getItem('token')
     let dec = useDecodedJWT(token);
 
@@ -36,8 +45,8 @@ export default function BookCommunityEdit() {
             .get(`http://bookstore24.shop/review/post/edit`,{
                 
                 params:{
-                    "loginId": dec.loginId,
-                    "title": "test"
+                    "loginId": loginId,
+                    "title": title
                 },
                 headers: {
                     Authorization: token,
@@ -121,7 +130,7 @@ export default function BookCommunityEdit() {
                 <InnerContainer>
 
                 <LeftContainer>
-                    <Picture src={Test} alt='x'/>
+                    <Picture src={data?.coverImg} alt='x'/>
                 </LeftContainer>
 
                     <RightContainer>

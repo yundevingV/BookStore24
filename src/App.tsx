@@ -43,14 +43,14 @@ function App() {
         <Route path='/editpwd' element={<EditPwd />} />
         <Route path='/bookstore' element={<BookStore />} />
         <Route path='/bookstore/add' element={<BookStoreAdd />} />
-        <Route path="/bookstore/detail" element={<BookStoreDetail />} />
-        <Route path="/bookstore/detail/edit" element={<BookStoreEdit />} />
+        <Route path="/bookstore/detail/*" element={<BookStoreDetail />} />
+        <Route path="/bookstore/detail/edit/*" element={<BookStoreEdit />} />
 
 
         <Route path='/bookReview' element={<BookReview />} />
         <Route path='/bookReview/add' element={<BookReviewAdd />} />
         <Route path="/bookReview/detail/*" element={<BookReviewDetail />} />
-        <Route path="/bookReview/detail/*/edit" element={<BookReviewEdit />} />
+        <Route path="/bookReview/detail/edit/*" element={<BookReviewEdit />} />
 
         <Route path="/bookranking" element={<BookRanking />} />
 

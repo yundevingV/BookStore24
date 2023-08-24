@@ -3,7 +3,12 @@ import React from "react";
 import { css, styled } from "styled-components";
 import { StyledButtonLink } from "../styles/link";
 
-export default function EditButton(){
+interface accessProps{
+    loginId : string | undefined,
+    title : string | undefined
+}
+
+export default function EditButton({loginId , title} : accessProps){
 
     return(
         <Container>
@@ -13,7 +18,7 @@ export default function EditButton(){
                     삭제
                 </Button>
 
-                <StyledButtonLink to='./edit'>
+                <StyledButtonLink to={`./edit/?${loginId}&${title}`}>
 
                 <Button  marginLeft="10px" bgColor={'#4d4df5'}>
                     수정

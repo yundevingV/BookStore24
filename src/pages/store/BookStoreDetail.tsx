@@ -90,7 +90,7 @@ export default function BookStoreDetail() {
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
                 {dec?.loginId === data?.loginId ? 
                 <>
-                    <EditButton /> <Toggle status={data?.status}/>
+                    <EditButton loginId={data?.loginId} title={data?.title}/> <Toggle status={data?.status}/>
                 </>
                 : 
                 <></>}

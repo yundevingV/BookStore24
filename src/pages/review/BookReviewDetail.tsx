@@ -108,7 +108,7 @@ export default function BookReviewDetail() {
             
             <Container >
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
-                {dec?.loginId === data?.loginId ? <EditButton /> : <></>}
+                {dec?.loginId === data?.loginId ? <EditButton loginId={data?.loginId} title={data?.title} /> : <></>}
 
                 <InnerContainer>
 
