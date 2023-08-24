@@ -49,8 +49,8 @@ function App() {
 
         <Route path='/bookReview' element={<BookReview />} />
         <Route path='/bookReview/add' element={<BookReviewAdd />} />
-        <Route path="/bookReview/detail" element={<BookReviewDetail />} />
-        <Route path="/bookReview/detail/edit" element={<BookReviewEdit />} />
+        <Route path="/bookReview/detail/*" element={<BookReviewDetail />} />
+        <Route path="/bookReview/detail/*/edit" element={<BookReviewEdit />} />
 
         <Route path="/bookranking" element={<BookRanking />} />
 

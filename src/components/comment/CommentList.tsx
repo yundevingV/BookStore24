@@ -69,7 +69,6 @@ export default function CommentList({ reviewComments }: CommentListProps) {
                     });
                 })
                 .catch((error) => {
-                    console.log('Error:', error.response);
                 });
             });
             }
@@ -103,15 +102,13 @@ export default function CommentList({ reviewComments }: CommentListProps) {
         if(content){
         try {
             const response = await axios.post(url, data, { headers });
-            console.log('Response:', response.data);
-            console.log(data)
+
             setEdit(false);
             alert('수정이 완료되었습니다.')
             window.location.replace("")
             
             } catch (error) {
-            console.error('Error:', error);
-            console.log(data)
+
             }
             }
         };
@@ -121,7 +118,6 @@ export default function CommentList({ reviewComments }: CommentListProps) {
     const onInputChange = (event : any) => {
         // '내용'을 변경 핸들링
         setContent(event.target.value);
-        console.log(content)
     };
 
     

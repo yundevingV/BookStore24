@@ -6,7 +6,7 @@ import Login from "./../Login";
 
 
 import { styled } from "styled-components";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import { getCookie } from "../../components/common/Cookie";
@@ -16,9 +16,15 @@ import Comment from "../../components/comment/Comment";
 import CommentList from "../../components/comment/CommentList";
 
 
-export default function BookCommunityDetail() {
+export default function BookReviewDetail() {
     // 현재 주소
     const location = useLocation();
+    console.log(location)
+
+    const params = decodeURIComponent(location.search.replace('?','')).split('&');
+
+    const loginId = params[0];
+    const title = params[1];
 
     // 로그인
     const loginStateData = useSelector(
@@ -64,13 +70,14 @@ export default function BookCommunityDetail() {
     }
 
     const [data,setData] = useState<DataType | null>(null)
+    
 
     useEffect(() => {        
         axios
             .get(`http://bookstore24.shop/review/post/detail`, {
                 params: {
-                    "loginId": 'kakao_2884949260',
-                    "title": "test"
+                    "loginId": loginId,
+                    "title": title
                 },
                 headers: {
                     Authorization: token,
@@ -106,7 +113,7 @@ export default function BookCommunityDetail() {
                 <InnerContainer>
 
                 <LeftContainer>
-                    <Picture src={Test} alt='x'/>
+                    <Picture src={data?.coverImg} alt='x'/>
                 </LeftContainer>
 
 

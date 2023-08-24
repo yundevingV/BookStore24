@@ -24,6 +24,7 @@ interface DataType{
     score:number
     title:string
     view:number
+    loginId : string
 }
 
 interface DataTypeList {
@@ -31,16 +32,14 @@ interface DataTypeList {
   }
 
 function ItemList({items} : DataTypeList){
-    
-    const searchWordData = useSelector(
-        (state: RootState) => state.searchWordReducer.searchWordData
-    );
 
     return(
         <>
             
             {items?.map((item )=>(
-            <StyledLink to='/bookreview/detail'>
+
+            <StyledLink to={`/bookreview/detail/?${item.loginId}&${item.title}`}>
+
             <Frame>
 
             <Top>

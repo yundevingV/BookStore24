@@ -39,8 +39,8 @@ export default function BookCommunityAdd() {
         isbn : number | undefined,
         image : string | undefined,
     }
-    const [bookInformation, setBookinformation] = useState<bookInfoType>();
 
+    const [bookInformation, setBookinformation] = useState<bookInfoType>();
 
     const add = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -67,7 +67,7 @@ export default function BookCommunityAdd() {
         };
         if (true){
         axios
-            .post(`http://bookstore24.shop/review/comment/post/save`, data, config)
+            .post(`http://bookstore24.shop/review/post/save`, data, config)
             .then((response) => {
             console.log(`Response : ${(JSON.stringify(data))}`);
             navigate(-1);
@@ -118,6 +118,7 @@ export default function BookCommunityAdd() {
         }
 
 
+        console.log(bookInformation)
 
     return(
         <Wrapper>
@@ -132,7 +133,10 @@ export default function BookCommunityAdd() {
                 <InnerContainer>
 
                 <LeftContainer>
-                    <Picture src={Test} alt='x'/>
+                    {bookInformation ? <Picture src={bookInformation?.image} alt='x' />
+                    : <Picture src={Test} alt='x' />    
+                }
+                    
                 </LeftContainer>
 
 

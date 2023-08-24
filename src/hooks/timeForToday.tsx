@@ -4,7 +4,6 @@ export default function useTimeForToday(value : string) {
     const timeValue = new Date(value);
 
     const betweenTime = Math.floor(((today.getTime() - timeValue.getTime() ) / 1000 / 60) - 540);
-    console.log(`value : ${betweenTime}`)
     if (betweenTime < 1) return '방금전';
     if (betweenTime < 60) {
         return `${betweenTime}분전`;

@@ -27,6 +27,7 @@ export default function BookStoreCommunity() {
         score:number
         title:string
         view:number
+        loginId : string
     }
 
 
@@ -87,8 +88,6 @@ export default function BookStoreCommunity() {
                 <PContent>책의 다양한 의견을 나눠 보세요!</PContent>
             </Title>
             <Navbar text='후기 작성하기' url={location.pathname} />
-
-
 
             <Item items={data} />
             
