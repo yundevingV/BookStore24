@@ -3,6 +3,7 @@ import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
 import Navbar from "../../components/Navbar";
 import Item from "../../components/review/ReviewItem";
+import Paging from "../../components/common/Paging";
 
 import { styled } from "styled-components";
 import { useLocation } from 'react-router-dom';
@@ -11,7 +12,6 @@ import { RootState } from "../../reducer/index";
 
 import Login from "../Login";
 import axios from "axios";
-import Paging from "../../components/common/Paging";
 
 
 export default function BookStoreCommunity() {
@@ -65,7 +65,6 @@ export default function BookStoreCommunity() {
             });
     }, [page]);
 
-    console.log(data?.[0])
 
     return(
 
@@ -87,6 +86,7 @@ export default function BookStoreCommunity() {
                 <PTitle>북 커뮤니티</PTitle> 
                 <PContent>책의 다양한 의견을 나눠 보세요!</PContent>
             </Title>
+
             <Navbar text='후기 작성하기' url={location.pathname} />
 
             <Item items={data} />

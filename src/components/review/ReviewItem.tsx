@@ -67,7 +67,7 @@ function ItemList({items} : DataTypeList){
                 </Views>
 
                 <ItemPublisher>
-                    {item.author} / {item.publisher}
+                    {item.author.replace('^', ',')} / {item.publisher}
                 </ItemPublisher>
 
                 <Writter>

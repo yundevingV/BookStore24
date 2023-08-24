@@ -4,7 +4,13 @@ import { styled } from 'styled-components';
 import useDecodedJWT from '../../hooks/useDecodedJWT';
 import { getCookie } from '../common/Cookie';
 
-function ToggleButton({ status }: { status: string | undefined }) {
+interface toggleTypeProps{
+    status : string | undefined
+    loginId : string | undefined
+    title : string | undefined
+}
+
+function ToggleButton({ status , loginId, title }: toggleTypeProps) {
     const [isToggled, setToggled] = useState(status);
 
     let token = getCookie('jwt');
@@ -15,8 +21,8 @@ function ToggleButton({ status }: { status: string | undefined }) {
         const response = await axios.post(
             'http://bookstore24.shop/sell/post/status/edit/save',
             {
-            loginId: dec.loginId,
-            title: 'test1',
+            loginId: loginId,
+            title: title,
             },
             {
             headers: {
@@ -26,10 +32,10 @@ function ToggleButton({ status }: { status: string | undefined }) {
         );
 
         console.log(`Response: ${response.data}`);
-        if (isToggled === 'sold') {
-            setToggled('sell');
+        if (isToggled === 'off') {
+            setToggled('on');
         } else {
-            setToggled('sold');
+            setToggled('off');
         }
         } catch (error) {
         console.log('Error:', error);
@@ -39,7 +45,7 @@ function ToggleButton({ status }: { status: string | undefined }) {
     return (
         <Container>
         <ToggleBtn isToggled={isToggled} onClick={handleToggle}>
-            {isToggled === 'sell' ? '판매중' : '판매보류'}
+            {isToggled === 'on' ? '판매중' : '판매보류'}
         </ToggleBtn>
         </Container>
     );
@@ -63,7 +69,7 @@ const ToggleBtn = styled.button<toggleProps>`
     border-radius: 5px;
     
     background-color: ${({ isToggled }) =>
-        isToggled === 'sell' ? '#3CB371' : '#ccc'};
+        isToggled === 'on' ? '#3CB371' : '#ccc'};
 
     cursor: pointer;
 

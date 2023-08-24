@@ -17,6 +17,15 @@ import Toggle from "../../components/store/Toggle";
 
 export default function BookStoreDetail() {
 
+    // 현재 주소
+    const location = useLocation();
+    console.log(location)
+
+    const params = decodeURIComponent(location.search.replace('?','')).split('&');
+
+    const loginId = params[0];
+    const title = params[1];
+
     // 로그인
     const loginStateData = useSelector(
         (state: RootState) => state.LoginStatusReducer.loginStatusData
@@ -54,8 +63,8 @@ export default function BookStoreDetail() {
             .get(`http://bookstore24.shop/sell/post/detail`,{
                 
                 params:{
-                    "loginId": dec.loginId,
-                    "title": "test"
+                    "loginId": loginId,
+                    "title": title
                 },
                 headers: {
                     Authorization: token,
@@ -90,7 +99,8 @@ export default function BookStoreDetail() {
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
                 {dec?.loginId === data?.loginId ? 
                 <>
-                    <EditButton loginId={data?.loginId} title={data?.title}/> <Toggle status={data?.status}/>
+                    <EditButton loginId={data?.loginId} title={data?.title}/>
+                    <Toggle status={data?.status} loginId={data?.loginId} title={data?.title}/>
                 </>
                 : 
                 <></>}
@@ -100,7 +110,7 @@ export default function BookStoreDetail() {
                 <InnerContainer>
 
                 <LeftContainer>
-                    <Picture src={Test} alt='x'/>
+                    <Picture src={data?.coverImg} alt='x'/>
                 </LeftContainer>
 
 

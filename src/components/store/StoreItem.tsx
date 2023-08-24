@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Test from '../../assets/imgs/testbookcover.jpg'
 import { StyledLink } from "../../styles/link";
+import timeForToday from '../../hooks/timeForToday';
+
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
@@ -8,52 +12,74 @@ import { RootState } from "../../reducer/index";
 import styled from "styled-components";
 
 
-function ItemList(){
 
-    const searchWordData = useSelector(
-        (state: RootState) => state.searchWordReducer.searchWordData
-    );
+interface DataType{
+    author:string
+    bookTitle:string
+    coverImg:string
+    createdDate:string
+    id:number
+    nickname:string
+    publisher:string
+    score:number
+    title:string
+    view:number
+    loginId : string
+    price : number
+    status : string
+}
 
+interface DataTypeList {
+    items: DataType[] | undefined;
+  }
 
+function ItemList({items} : DataTypeList){
 
     return(
         <>
             
-            <StyledLink to='/bookstore/detail'>
+            {items?.map((item )=>(
+
+            <StyledLink to={`/bookstore/detail/?${item.loginId}&${item.title}`}>
             <Frame>
 
             <Top>
                 <Title>
-                    판매 글 제목
+                    {item.title}
                 </Title>
                 <Status>
-                    판매중
+                    {item.status === 'on' ? '판매중' : '판매완료'}
                 </Status>
             </Top>
 
             <Middle>    
                 <LContainer>
-                <Img src={Test} alt='x' />
+                <Img src={item.coverImg} alt='x' />
                 </LContainer>
 
                 <RContainer>
                 <Name>
-                    이것이 코딩테스트다.
+                    {item.bookTitle}
                 </Name>
 
                 <Price>
-                20,000 원 
+                    {item.price} 
                 </Price>
 
                 <ItemPublisher>
-                    저자 / 출판사
+                    {item.author.replace('^', ',')} / {item.publisher}
                 </ItemPublisher>
 
                 <Writter>
-                    XX 님
+                    {item.nickname}
                 </Writter>
+
                 <Date>
-                    22.05.25
+                    {timeForToday(item.createdDate)}
+                    <Views>
+                    <FontAwesomeIcon icon={faEye} />
+                        {item.view}
+                    </Views>
                 </Date>
 
                 </RContainer>
@@ -61,52 +87,48 @@ function ItemList(){
             </Middle>
             </Frame>
             </StyledLink>
+            ))}
         </>
     )
 }   
 
-export default function StoreItem(){
+export default function StoreItem({items} : DataTypeList){
 
     return(
         <Positioner>            
-            <ItemList />
+            <ItemList items={items}/>
         </Positioner>
     )
 }
 
 const Positioner = styled.div`
-    display: inline-block;
 
-    width : 100%;
-
-    height: fit-content;
-    z-index:99;
-    
-    padding : 0px;
-    padding-bottom : 5rem;
-    border: 0px;
 
 `;
 
 const Frame = styled.div`
-display: inline-block;
+display : inline-block;
 
-width: 34%;
+width: 30vw;
 height: 300px;
 
 font-size : 16px;
 
-margin : 3% 8%;
+margin: 3vh calc(5vw - 1px);
 
 border : 1px solid #e2e2e2;
 border-radius : 5px;
 
-position : relative;
-
 //1080px 이하면
 @media (max-width : 1080px){
-    width: 70%;
-    margin : 3% 15%;
+    width: 70vw;
+    margin : 3vh 5vw;
+
+}
+//1080px 이하면
+@media (max-width : 810px){
+    width: 500px;
+    margin : 3vh 30px;
 
 }
 
@@ -204,6 +226,11 @@ const Date = styled.span`
 
 const Price = styled.span`
 
+color : #000000;
+
+`
+const Views = styled.span`
+margin : 0px 10px;
 color : #000000;
 
 `

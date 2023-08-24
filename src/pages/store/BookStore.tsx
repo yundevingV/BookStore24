@@ -4,42 +4,76 @@ import Header from "../../components/common/Header";
 import Navbar from "../../components/Navbar";
 import Item from "../../components/store/StoreItem";
 import Login from "../Login";
+import Paging from "../../components/common/Paging";
 
 
 import { styled } from "styled-components";
 import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
+import axios from "axios";
 
 export default function BookStore() {
+    interface DataType{
+        author:string
+        bookTitle:string
+        coverImg:string
+        createdDate:string
+        id:number
+        nickname:string
+        publisher:string
+        score:number
+        title:string
+        view:number
+        loginId : string
+        status : string
+        price : number
+    }
 
     // 현재 주소
     const location = useLocation();
 
-    // 로그인
+    //로그인
     const loginStateData = useSelector(
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
 
-    const [login,setLogin] = useState<boolean>(loginStateData);
-    
-    const token = sessionStorage.getItem('token')
+    const [data,setData] = useState<DataType[] | undefined>();
 
-    useEffect(() => {
-        setLogin(loginStateData)
-    }, [loginStateData]);
+    const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
+
+    const page = useSelector(
+        (state: RootState) => state.PagingReducer.PagingData
+    );
+
+    useEffect(() => {        
+        axios
+            .get(`http://bookstore24.shop/sell/post/list`, {
+                params: {
+                    page : page | 0,
+                    size : 10,
+                },
+            })
+            .then((response) => {
+                setData(response.data.content);
+                setTotalPages(response.data.totalPages);
+            })
+            .catch((error) => {
+                console.log('에러:', error.response);
+            });
+    }, [page]);
 
     return(
         <Wrapper>
             {/* 로그인 실패시 & 비로그인 */}
-            {!login && (
+            {!loginStateData && (
                 <>
                 <Login />
                 </>
             )}
             
             {/* 로그인 성공시 */}
-            {login && (
+            {loginStateData && (
             <>
             <Header />
             
@@ -52,8 +86,11 @@ export default function BookStore() {
 
             <Navbar text='책 판매하기' url={location.pathname}/>
 
-                <Item />    
-                
+            <Item items={data} />
+            
+            <PagingContainer>
+                <Paging totalPages={totalPages} />
+            </PagingContainer>
             </Container>
             </>
             )}
@@ -106,4 +143,13 @@ font-size : 30px;
 const PContent = styled.p`
 font-weight : 200;
 font-size : 18px;
+`
+
+const PagingContainer = styled.div`
+width : 100%;
+
+display: flex;
+flex-direction : column;
+
+text-align : center;
 `
