@@ -129,7 +129,7 @@ export default function BookStoreEdit() {
                 <InnerContainer>
 
                 <LeftContainer>
-                    <Picture src={Test} alt='x'/>
+                    <Picture src={data?.coverImg} alt='x'/>
                 </LeftContainer>
 
 

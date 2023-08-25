@@ -126,7 +126,8 @@ export default function BookCommunityAdd() {
                 <InnerContainer>
 
                 <LeftContainer>
-                    <Picture src={Test} alt='x'/>
+                {bookInformation ? <Picture src={bookInformation?.image} alt='x' />
+                    : <Picture src={Test} alt='x' />    }
                 </LeftContainer>
 
                     <RightContainer>

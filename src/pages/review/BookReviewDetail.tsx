@@ -6,7 +6,7 @@ import Login from "./../Login";
 
 
 import { styled } from "styled-components";
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import { getCookie } from "../../components/common/Cookie";
@@ -31,12 +31,9 @@ export default function BookReviewDetail() {
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
 
-    const [login,setLogin] = useState<boolean>(loginStateData);
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        setLogin(loginStateData)
-    }, [loginStateData]);
-
+    
     const token = sessionStorage.getItem('token')
     let dec = useDecodedJWT(token);
 
@@ -88,6 +85,8 @@ export default function BookReviewDetail() {
             })
             .catch((error) => {
                 console.log('에러:', error.response);
+                navigate(`/bookreview`);
+
             });
     }, []); // data 상태가 변경될 때마다 이 useEffect 실행
     
@@ -95,20 +94,20 @@ export default function BookReviewDetail() {
     return(
         <Wrapper>
             {/* 로그인 실패시 & 비로그인 */}
-            {!login && (
+            {!loginStateData && (
                 <>
                 <Login />
                 </>
             )}
             
             {/* 로그인 성공시 */}
-            {login && (
+            {loginStateData && (
             <>
             <Header />
             
             <Container >
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
-                {dec?.loginId === data?.loginId ? <EditButton loginId={data?.loginId} title={data?.title} /> : <></>}
+                {dec?.loginId === data?.loginId ? <EditButton id={data?.id} loginId={data?.loginId} title={data?.title} url='review' /> : <></>}
 
                 <InnerContainer>
 

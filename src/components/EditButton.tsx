@@ -1,24 +1,62 @@
+import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router";
 
 import { css, styled } from "styled-components";
 import { StyledButtonLink } from "../styles/link";
 
-interface accessProps{
+interface editProps{
+    id : string | undefined
     loginId : string | undefined,
-    title : string | undefined
+    title : string | undefined,
+    
+}
+interface urlProps {
+    url : string,
 }
 
-export default function EditButton({loginId , title} : accessProps){
+interface CombinedProps extends editProps, urlProps {}
 
+export default function EditButton(props : CombinedProps){
+
+
+    const doDelete = () => {
+
+        const token = sessionStorage.getItem('token')
+        
+        // Data to be sent in the request body.
+        const data = {
+            sellId : props.id,
+            loginId : props.loginId,
+            title : props.title
+        };
+        
+        // Axios configuration for the POST request.
+        const config = {
+            headers: {
+            Authorization: token,
+            },
+        };
+        if (true){
+        axios
+            .post(`http://bookstore24.shop/${props.url}/post/delete`, data, config)
+            .then((response) => {
+            
+            })
+            .catch((error) => {
+            console.log('Error:', error.response.data);
+            });
+        
+        };}
     return(
         <Container>
             <Form>
 
-                <Button bgColor={'#f34747'}>
+                <Button onClick={doDelete} bgColor={'#f34747'}>
                     삭제
                 </Button>
 
-                <StyledButtonLink to={`./edit/?${loginId}&${title}`}>
+                <StyledButtonLink to={`./edit/?${props.loginId}&${props.title}`}>
 
                 <Button  marginLeft="10px" bgColor={'#4d4df5'}>
                     수정

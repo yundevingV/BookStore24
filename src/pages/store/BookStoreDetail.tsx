@@ -31,29 +31,27 @@ export default function BookStoreDetail() {
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
 
-    const [login,setLogin] = useState<boolean>(loginStateData);
-
-    useEffect(() => {
-        setLogin(loginStateData)
-    }, [loginStateData]);
+    const navigate = useNavigate();
 
     const token = sessionStorage.getItem('token')
     let dec = useDecodedJWT(token);
 
     interface DataType{
+        "id" : string,
         "title": string,
+        "content": string,
+        "view" : string,
+        "createdDate": string,
+        "nickname": string,
+        "loginId" : string,
+        "price": number,
+        "talkUrl": string,
+        "status" : string,
         "bookTitle": string,
         "author": string,
         "publisher": string,
         "coverImg": string,
         "isbn": string,
-        "content": string,
-        "price": string,
-        "talkUrl": string,
-        "createdDate": string,
-        "nickname": string,
-        "loginId" : string,
-        "status" : string,
     }
 
     const [data,setData] = useState<DataType | null>(null)
@@ -78,20 +76,21 @@ export default function BookStoreDetail() {
             })
             .catch((error) => {
                 console.log('Error:', error.response);
+                navigate(`/bookstore`);
             });
     },[]);
     
     return(
         <Wrapper>
             {/* b   로그인 실패시 & 비로그인 */}
-            {!login && (
+            {!loginStateData && (
                 <>
                 <Login />
                 </>
             )}
             
             {/* 로그인 성공시 */}
-            {login && (
+            {loginStateData && (
             <>
             <Header />
             
@@ -99,7 +98,7 @@ export default function BookStoreDetail() {
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
                 {dec?.loginId === data?.loginId ? 
                 <>
-                    <EditButton loginId={data?.loginId} title={data?.title}/>
+                    <EditButton id={data?.id} loginId={data?.loginId} title={data?.title} url='sell' />
                     <Toggle status={data?.status} loginId={data?.loginId} title={data?.title}/>
                 </>
                 : 
