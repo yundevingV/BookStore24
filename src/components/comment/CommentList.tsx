@@ -15,7 +15,6 @@ interface ReviewComment {
     nickname: string;
     loginId: string;
     reviewId: string;
-    title : string;
 }
 
 interface TitleProps{
@@ -84,10 +83,11 @@ export default function CommentList(props: CombinedProps) {
         reviewCommentId: string;
         loginId: string;
         reviewId: string;
-        title : string;
     }
+
+
     
-    const editComment = async ({reviewCommentId,title,loginId,reviewId} : editCommentProps ,e : any) => {
+    const editComment = async ({reviewCommentId,loginId,reviewId} : editCommentProps ,e : any) => {
         e.preventDefault();
 
         const url = 'http://bookstore24.shop/review/comment/post/edit/save';
@@ -105,6 +105,7 @@ export default function CommentList(props: CombinedProps) {
             content: content,
         };
         if(content){
+
         try {
             const response = await axios.post(url, data, { headers });
 
