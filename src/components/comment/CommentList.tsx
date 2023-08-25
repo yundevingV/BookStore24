@@ -18,11 +18,16 @@ interface ReviewComment {
     title : string;
 }
 
+interface TitleProps{
+    title : string | undefined
+}
 interface CommentListProps {
-  reviewComments: ReviewComment[] | undefined;
+    reviewComments: ReviewComment[] | undefined;
 }
 
-export default function CommentList({ reviewComments }: CommentListProps) {
+interface CombinedProps extends TitleProps, CommentListProps {}
+
+export default function CommentList(props: CombinedProps) {
     
         const token = sessionStorage.getItem('token')
 
@@ -38,17 +43,17 @@ export default function CommentList({ reviewComments }: CommentListProps) {
 
         useEffect(() => {
             // Initialize editArray with the desired length and initial value
-            if (reviewComments) {
-            const length = reviewComments.length;
+            if (props.reviewComments) {
+            const length = props.reviewComments.length;
             const initialValue = false;
             const initialEditArray = new Array(length).fill(initialValue);
             setEditArray(initialEditArray);
             }
-        }, [reviewComments]);
+        }, [props.reviewComments]);
         
         useEffect(() => {
-            if (reviewComments && token) {
-            reviewComments.forEach((comment, idx) => {
+            if (props.reviewComments && token) {
+            props.reviewComments.forEach((comment, idx) => {
                 axios
                 .get('http://bookstore24.shop/review/comment/post/edit', {
                     params: {
@@ -72,7 +77,7 @@ export default function CommentList({ reviewComments }: CommentListProps) {
                 });
             });
             }
-        }, [reviewComments, token]);
+        }, [props.reviewComments, token]);
 
 
     interface editCommentProps{
@@ -95,7 +100,7 @@ export default function CommentList({ reviewComments }: CommentListProps) {
         const data = {
             reviewId: reviewId,
             loginId: loginId,
-            title: 'test',
+            title: props.title,
             reviewCommentId :reviewCommentId,
             content: content,
         };
@@ -125,7 +130,7 @@ export default function CommentList({ reviewComments }: CommentListProps) {
 
     return (
         <>
-        {reviewComments?.map((comment,index) => (
+        {props.reviewComments?.map((comment,index) => (
             <CommentItem>
             <p> 
                 {comment.nickname}
@@ -135,7 +140,10 @@ export default function CommentList({ reviewComments }: CommentListProps) {
 
                     </DateSpan>
                     {editArray[index] ?
+                    <>
                     <EditButton onClick={() => doEdit(index)}>수정</EditButton>
+                    <EditButton >삭제</EditButton>
+                    </>
                     : <></>
                     }
             </p>
@@ -160,7 +168,7 @@ export default function CommentList({ reviewComments }: CommentListProps) {
             </CommentItem>
         ))}
 
-        {reviewComments?.length === 0 && <NoCommentsMessage>댓글이 없습니다.</NoCommentsMessage>}
+        {props.reviewComments?.length === 0 && <NoCommentsMessage>댓글이 없습니다.</NoCommentsMessage>}
         </>
     );
 }
@@ -189,4 +197,6 @@ const NoCommentsMessage = styled.p`
 const EditButton = styled.button`
 border : 0px;
 background : transparent;
+
+cursor : pointer;
 `
