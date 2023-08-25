@@ -119,6 +119,43 @@ export default function CommentList(props: CombinedProps) {
             }
         };
 
+    interface deleteProps {
+        reviewId : string;
+        loginId : string;
+        reviewCommentId : string;
+    }
+
+    const deleteComment = async ({reviewCommentId,loginId,reviewId} : deleteProps ) => {
+    
+            const url = 'http://bookstore24.shop/review/comment/post/delete';
+        
+            const headers = {
+                Authorization: token,
+                'Content-Type': 'application/json',
+            };
+        
+            const data = {
+                reviewCommentId :reviewCommentId,
+                reviewId: reviewId,
+                loginId: loginId,
+                title: props.title,
+
+            };
+            if(!content){
+    
+            try {
+                const response = await axios.post(url, data, { headers });
+    
+                
+                alert('삭제가 완료되었습니다.')
+                window.location.replace("")
+                
+                } catch (error) {
+    
+                }
+                }
+            };
+
     const [content,setContent] = useState<string>('');
 
     const onInputChange = (event : any) => {
@@ -143,7 +180,7 @@ export default function CommentList(props: CombinedProps) {
                     {editArray[index] ?
                     <>
                     <EditButton onClick={() => doEdit(index)}>수정</EditButton>
-                    <EditButton >삭제</EditButton>
+                    <EditButton onClick={() => deleteComment(comment)}>삭제</EditButton>
                     </>
                     : <></>
                     }
