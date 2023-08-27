@@ -9,7 +9,7 @@ import { styled } from "styled-components";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
-import { getCookie } from "../../components/common/Cookie";
+import { getCookie, setCookie } from "../../components/common/Cookie";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import Comment from "../../components/comment/Comment";
@@ -32,6 +32,8 @@ export default function BookReviewDetail() {
     );
 
     const navigate = useNavigate();
+    
+    const { pathname } = useLocation();
 
     
     const token = sessionStorage.getItem('token')
@@ -85,7 +87,11 @@ export default function BookReviewDetail() {
             })
             .catch((error) => {
                 console.log('에러:', error.response);
-                navigate(`/bookreview`);
+                setCookie('redirectUrl',pathname)
+
+                if(loginStateData){navigate(`/bookreview`);}
+                else {navigate(`/login`)}
+                
 
             });
     }, []); // data 상태가 변경될 때마다 이 useEffect 실행

@@ -28,11 +28,9 @@ export default function Kakao(){
             setCookie('jwt', token,1000);
             sessionStorage.setItem('token',token);
 
-            if(getCookie('redirectUrl')==='/login' ){
-                navigate('/')
-            } else {
-                navigate(`${redirectUrl}`)
-            }        })
+            navigate(-2)
+
+        })
         
         .catch(error => {
         console.error('Error:', error);

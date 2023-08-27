@@ -76,8 +76,9 @@ export default function BookStoreDetail() {
             })
             .catch((error) => {
                 console.log('Error:', error.response);
-                navigate(`/bookstore`);
-            });
+                if(loginStateData){navigate(`/bookreview`);}
+                else {navigate(`/login`)}
+                });
     },[]);
     
     return(

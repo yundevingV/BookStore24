@@ -29,7 +29,7 @@ export default function Header() {
     const logout = () =>{
         dispatch(saveloginStatus(false));
         sessionStorage.clear()
-        removeCookie('jwt');
+        removeCookie('redirectUrl');
     }
 
     //모달 펼치기
@@ -49,7 +49,7 @@ export default function Header() {
         if (auth) {
             dispatch(saveloginStatus(true));
 
-            axios.get('http://52.79.234.227/member/nicknameresidence/check'
+            axios.get('http://bookstore24.shop/member/nicknameresidence/check'
             ,
             {
             
@@ -65,21 +65,19 @@ export default function Header() {
             .catch(error => {
             console.log(`에러 사유 : ${error}`)
             console.log(error.status)
-            if(error === 'AxiosError: Request failed with status code 400'){
-                console.log('tt')
-            }
+            
     
             dispatch(openModal(true));
     
             });
         } else {
-            setCookie('redirectUrl',pathname)
+            // 로그인이 안되있을때
         }
 
-
-        
     },[dispatch])
+    
 
+    
     return (
         
         <Positioner>

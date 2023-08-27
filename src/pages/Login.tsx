@@ -55,8 +55,8 @@ export default function Login() {
             setCookie('jwt',token)
 
             sessionStorage.setItem('token',token);
-            navigate(`/`)
 
+            navigate(-2)
         })
         
         .catch(function (error) {

@@ -28,12 +28,7 @@ export default function Naver(){
             setCookie('jwt', token);   
             sessionStorage.setItem('token',token);
 
-            if(getCookie('redirectUrl')==='/login' ){
-                navigate('/')
-            } else {
-                navigate(`${redirectUrl}`)
-            }
-            
+            navigate(-2)
 
         })
         .catch(error => {
