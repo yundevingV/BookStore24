@@ -94,7 +94,7 @@ export default function BookReviewDetail() {
                 
 
             });
-    }, []); // data 상태가 변경될 때마다 이 useEffect 실행
+    }, [data]); // data 상태가 변경될 때마다 이 useEffect 실행
     
 
     return(

@@ -28,55 +28,55 @@ interface CombinedProps extends TitleProps, CommentListProps {}
 
 export default function CommentList(props: CombinedProps) {
     
-        const token = sessionStorage.getItem('token')
+    const token = sessionStorage.getItem('token');
 
-        const [edit,setEdit] = useState<boolean>(false)
-        const [idx,setIdx] = useState<number>();
+    const [edit,setEdit] = useState<boolean>(false);
+    const [idx,setIdx] = useState<number>();
 
-        const doEdit = (idx : number) =>{
-            edit === false ? setEdit(true) : setEdit(false)
-            setIdx(idx);
+    const doEdit = (idx : number) =>{
+        edit === false ? setEdit(true) : setEdit(false)
+        setIdx(idx);
+    }
+    
+    const [editArray, setEditArray] = useState<boolean[] >([]);
+
+    useEffect(() => {
+        // Initialize editArray with the desired length and initial value
+        if (props.reviewComments) {
+        const length = props.reviewComments.length;
+        const initialValue = false;
+        const initialEditArray = new Array(length).fill(initialValue);
+        setEditArray(initialEditArray);
         }
-        
-        const [editArray, setEditArray] = useState<boolean[] >([]);
-
-        useEffect(() => {
-            // Initialize editArray with the desired length and initial value
-            if (props.reviewComments) {
-            const length = props.reviewComments.length;
-            const initialValue = false;
-            const initialEditArray = new Array(length).fill(initialValue);
-            setEditArray(initialEditArray);
-            }
-        }, [props.reviewComments]);
-        
-        useEffect(() => {
-            if (props.reviewComments && token) {
-            props.reviewComments.forEach((comment, idx) => {
-                axios
-                .get('http://bookstore24.shop/review/comment/post/edit', {
-                    params: {
-                    reviewId: comment.reviewId,
-                    reviewCommentId: comment.reviewCommentId,
-                    },
-                    headers: {
-                    Authorization: token,
-                    },
-                })
-                .then((response) => {
-                    // Assuming your response indicates success in some way, update editArray
-                    
-                    setEditArray((prevEditArray) => {
-                        const updatedArray = [...prevEditArray];
-                        updatedArray[idx] = true;
-                        return updatedArray;
-                    });
-                })
-                .catch((error) => {
+    }, []);
+    
+    useEffect(() => {
+        if (props.reviewComments && token) {
+        props.reviewComments.forEach((comment, idx) => {
+            axios
+            .get('http://bookstore24.shop/review/comment/post/edit', {
+                params: {
+                reviewId: comment.reviewId,
+                reviewCommentId: comment.reviewCommentId,
+                },
+                headers: {
+                Authorization: token,
+                },
+            })
+            .then((response) => {
+                // Assuming your response indicates success in some way, update editArray
+                
+                setEditArray((prevEditArray) => {
+                    const updatedArray = [...prevEditArray];
+                    updatedArray[idx] = true;
+                    return updatedArray;
                 });
+            })
+            .catch((error) => {
             });
-            }
-        }, [props.reviewComments, token]);
+        });
+        }
+    }, [props.reviewComments, token]);
 
 
     interface editCommentProps{
@@ -111,7 +111,6 @@ export default function CommentList(props: CombinedProps) {
 
             setEdit(false);
             alert('수정이 완료되었습니다.')
-            window.location.replace("")
             
             } catch (error) {
 
@@ -145,11 +144,8 @@ export default function CommentList(props: CombinedProps) {
     
             try {
                 const response = await axios.post(url, data, { headers });
-    
-                
-                alert('삭제가 완료되었습니다.')
-                window.location.replace("")
-                
+
+                alert('삭제가 완료되었습니다.')                
                 } catch (error) {
     
                 }
