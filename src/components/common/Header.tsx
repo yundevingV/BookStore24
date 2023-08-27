@@ -64,7 +64,6 @@ export default function Header() {
             })
             .catch(error => {
             console.log(`에러 사유 : ${error}`)
-            console.log(error.status)
             
     
             dispatch(openModal(true));
@@ -74,7 +73,7 @@ export default function Header() {
             // 로그인이 안되있을때
         }
 
-    },[dispatch])
+    },[dispatch, token])
     
 
     

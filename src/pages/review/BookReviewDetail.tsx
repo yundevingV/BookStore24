@@ -69,34 +69,35 @@ export default function BookReviewDetail() {
     }
 
     const [data,setData] = useState<DataType | null>(null)
-    
 
-    useEffect(() => {        
+
+    useEffect(() => {
         axios
             .get(`http://bookstore24.shop/review/post/detail`, {
                 params: {
-                    "loginId": loginId,
-                    "title": title
+                "loginId": loginId,
+                "title": title
                 },
                 headers: {
-                    Authorization: token,
+                Authorization: token,
                 }
             })
             .then((response) => {
-                setData(response.data)
+                setData(response.data);
+
             })
             .catch((error) => {
-                console.log('에러:', error.response);
-                setCookie('redirectUrl',pathname)
-
-                if(loginStateData){navigate(`/bookreview`);}
-                else {navigate(`/login`)}
-                
-
+                console.log('Error:', error.response);
+                setCookie('redirectUrl', pathname);
+        
+                if (loginStateData) {
+                navigate(`/bookreview`);
+                } else {
+                navigate(`/login`);
+                }
             });
-    }, [data]); // data 상태가 변경될 때마다 이 useEffect 실행
+        }, [loginId, title, token, pathname, loginStateData]);
     
-
     return(
         <Wrapper>
             {/* 로그인 실패시 & 비로그인 */}

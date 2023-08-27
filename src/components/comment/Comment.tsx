@@ -23,6 +23,7 @@ export default function Comment({id , loginId, title , number} : CommentProps ){
         
         content: '',
     });
+
     const saveComment = async () => {
 
         const url = 'http://bookstore24.shop/review/comment/post/save';
@@ -43,7 +44,10 @@ export default function Comment({id , loginId, title , number} : CommentProps ){
             const response = await axios.post(url, data, { headers });
             console.log('Response:', response.data);
             resetInput();
-            
+            alert('댓글을 성공적으로 작성했습니다!');
+            window.location.reload();
+
+
             } catch (error) {
             console.error('Error:', error);
             }

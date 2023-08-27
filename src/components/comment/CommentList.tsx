@@ -85,8 +85,6 @@ export default function CommentList(props: CombinedProps) {
         reviewId: string;
     }
 
-
-    
     const editComment = async ({reviewCommentId,loginId,reviewId} : editCommentProps ,e : any) => {
         e.preventDefault();
 
@@ -110,8 +108,8 @@ export default function CommentList(props: CombinedProps) {
             const response = await axios.post(url, data, { headers });
 
             setEdit(false);
-            alert('수정이 완료되었습니다.')
-            
+            alert('댓글을 수정했습니다!');
+            window.location.reload();            
             } catch (error) {
 
             }
@@ -145,8 +143,9 @@ export default function CommentList(props: CombinedProps) {
             try {
                 const response = await axios.post(url, data, { headers });
 
-                alert('삭제가 완료되었습니다.')                
-                } catch (error) {
+                alert('댓글을 성공적으로 삭제했습니다!');
+                window.location.reload();
+            } catch (error) {
     
                 }
                 }
@@ -158,9 +157,6 @@ export default function CommentList(props: CombinedProps) {
         // '내용'을 변경 핸들링
         setContent(event.target.value);
     };
-
-    
-
 
     return (
         <>
