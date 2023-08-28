@@ -16,6 +16,7 @@ import axios from "axios";
 
 export default function BookStoreCommunity() {
 
+
     interface DataType{
         author:string
         bookTitle:string
@@ -30,12 +31,11 @@ export default function BookStoreCommunity() {
         loginId : string
     }
 
-
-
     const [data,setData] = useState<DataType[] | undefined>();
 
     // 현재 주소
-    const location = useLocation();
+
+    const { pathname } = useLocation();
 
     //로그인
     const loginStateData = useSelector(
@@ -59,6 +59,8 @@ export default function BookStoreCommunity() {
             .then((response) => {
                 setData(response.data.content);
                 setTotalPages(response.data.totalPages);
+                sessionStorage.setItem('url',pathname);
+
             })
             .catch((error) => {
                 console.log('에러:', error.response);
@@ -80,7 +82,7 @@ export default function BookStoreCommunity() {
                 <PContent>책의 다양한 의견을 나눠 보세요!</PContent>
             </Title>
 
-            <Navbar text='후기 작성하기' url={location.pathname} />
+            <Navbar text='후기 작성하기' url={pathname} />
 
             <Item items={data} />
             

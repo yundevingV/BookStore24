@@ -8,7 +8,7 @@ import Login from "./../Login";
 
 import { styled } from "styled-components";
 import { useLocation,  useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import axios from "axios";
 import { getCookie } from "../../components/common/Cookie";
@@ -19,7 +19,6 @@ export default function BookStoreDetail() {
 
     // 현재 주소
     const location = useLocation();
-    console.log(location)
 
     const params = decodeURIComponent(location.search.replace('?','')).split('&');
 
@@ -32,6 +31,8 @@ export default function BookStoreDetail() {
     );
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { pathname } = useLocation();
 
     const token = sessionStorage.getItem('token')
     let dec = useDecodedJWT(token);
@@ -76,9 +77,12 @@ export default function BookStoreDetail() {
             })
             .catch((error) => {
                 console.log('Error:', error.response);
-                if(loginStateData){navigate(`/bookreview`);}
-                else {navigate(`/login`)}
-                });
+
+            if (!token) {
+                navigate("/login");
+                sessionStorage.setItem('url',pathname)
+            }
+        })
     },[]);
     
     return(

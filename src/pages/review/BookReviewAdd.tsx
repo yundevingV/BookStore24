@@ -15,8 +15,13 @@ import Cancel from "../../modal/Cancel";
 import { saveCancelStatus } from "../../action/cancel_status";
 import { useDispatch } from "react-redux";
 import { saveBookInformation } from "../../action/book_information";
+import Login from "../Login";
 
-export default function BookCommunityAdd() {
+export default function BookReviewAdd() {
+
+    const loginStateData =  useSelector(
+        (state: RootState) => state.LoginStatusReducer.loginStatusData
+    )
 
     const [ { title,content }, onInputChange, resetInput ] = useInput({
         id: '',
@@ -83,8 +88,6 @@ export default function BookCommunityAdd() {
             (state: RootState) => state.BookInformationReducer.bookInformationData
         );
         
-        console.log(bookInformationData)
-
 
         useEffect(()=>{
             dispatch(saveBookInformation([]))
@@ -96,7 +99,7 @@ export default function BookCommunityAdd() {
         )
 
         const cancelStatus = useSelector(
-            (state : RootState) => state.cancelStatusReducer.cancelStatusData
+            (state : RootState) => state.CancelStatusReducer.cancelStatusData
         )
 
         // 처음 렌더링될때만 값 불러오기.
@@ -117,11 +120,19 @@ export default function BookCommunityAdd() {
             console.log(cancelStatus)
         }
 
-
         console.log(bookInformation)
 
     return(
         <Wrapper>
+            {!loginStateData && (
+                <>
+                <Login />
+                </>
+            )}
+            
+
+            {loginStateData && (
+            <>
             <Header />
             
             <Container >
@@ -200,7 +211,10 @@ export default function BookCommunityAdd() {
 
                 
             </Container>
+        </>
+        )}
         </Wrapper>
+
     )
 }
 const Wrapper = styled.div`

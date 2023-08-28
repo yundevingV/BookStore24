@@ -8,13 +8,16 @@ import google from '../assets/imgs/Google.png'
 import { saveloginStatus } from "../action/login_status";
 
 import { styled } from "styled-components";
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { useSelector , useDispatch} from "react-redux";
 import { RootState } from "../reducer/index";
 import axios from "axios";
 import { getCookie, setCookie } from "../components/common/Cookie";
+import { useLocation } from "react-router";
 
 export default function Login() {
+
+    const redirect = sessionStorage.getItem('url')?.split("/")[1]
 
     const [ { id, password }, onInputChange, resetInput ] = useInput({
         id: '',
@@ -31,6 +34,12 @@ export default function Login() {
 
     const navigate = useNavigate();
     const redirectUrl = getCookie('redirectUrl');
+    
+    const location = useLocation();
+
+    const state = location.state;
+
+    console.log(state)
 
     type loginTypes =(
         id : string,
@@ -56,7 +65,11 @@ export default function Login() {
 
             sessionStorage.setItem('token',token);
 
-            navigate(-2)
+            if(redirect){
+                navigate(`/${redirect}`);
+            } else{
+                navigate('/')
+            }
         })
         
         .catch(function (error) {
@@ -132,7 +145,7 @@ export default function Login() {
 
                 <MenuContainer>
                     <Menu>
-                        <StyledLink to='/signup'>
+                        <StyledLink to='/signup' >
                             회원 가입 
                         </StyledLink>
                     </Menu>

@@ -1,24 +1,24 @@
 
 import { combineReducers } from "redux";
-import searchOptionReducer from "./search_option_reducer";
-import searchWordReducer from "./search_word_reducer";
+import SearchOptionReducer from "./search_option_reducer";
+import SearchWordReducer from "./search_word_reducer";
 import LoginStatusReducer from "./login_status_reducer";
 import DropDownValueReducer from "./dropdown_value_reducer";
-import openModal  from "./openModal_reducer";
+import OpenModal  from "./openModal_reducer";
 import BookInformationReducer from "./book_information_reducer";
 import BookratingReducer from "./book_rating_reducer";
-import cancelStatusReducer from "./cancel_status_reducer";
+import CancelStatusReducer from "./cancel_status_reducer";
 import PagingReducer from "./paging_reducer";
 
 const rootReducer = combineReducers({
-  searchOptionReducer,
-  searchWordReducer,
+  SearchOptionReducer,
+  SearchWordReducer,
   LoginStatusReducer,
   DropDownValueReducer,
-  openModal,
+  OpenModal,
   BookInformationReducer,
   BookratingReducer,
-  cancelStatusReducer,
+  CancelStatusReducer,
   PagingReducer,
   
 });

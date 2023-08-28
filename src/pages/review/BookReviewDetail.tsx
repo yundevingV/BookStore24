@@ -14,12 +14,12 @@ import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import Comment from "../../components/comment/Comment";
 import CommentList from "../../components/comment/CommentList";
+import { useDispatch } from "react-redux";
 
 
 export default function BookReviewDetail() {
     // 현재 주소
     const location = useLocation();
-    console.log(location)
 
     const params = decodeURIComponent(location.search.replace('?','')).split('&');
 
@@ -32,10 +32,8 @@ export default function BookReviewDetail() {
     );
 
     const navigate = useNavigate();
-    
     const { pathname } = useLocation();
 
-    
     const token = sessionStorage.getItem('token')
     let dec = useDecodedJWT(token);
 
@@ -70,7 +68,6 @@ export default function BookReviewDetail() {
 
     const [data,setData] = useState<DataType | null>(null)
 
-
     useEffect(() => {
         axios
             .get(`http://bookstore24.shop/review/post/detail`, {
@@ -88,12 +85,10 @@ export default function BookReviewDetail() {
             })
             .catch((error) => {
                 console.log('Error:', error.response);
-                setCookie('redirectUrl', pathname);
-        
-                if (loginStateData) {
-                navigate(`/bookreview`);
-                } else {
-                navigate(`/login`);
+
+                if (!token) {
+                    navigate("/login");
+                    sessionStorage.setItem('url',pathname);
                 }
             });
         }, [loginId, title, token, pathname, loginStateData]);

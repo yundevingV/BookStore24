@@ -31,7 +31,7 @@ export default function BookStore() {
     }
 
     // 현재 주소
-    const location = useLocation();
+    const { pathname } = useLocation();
 
     //로그인
     const loginStateData = useSelector(
@@ -57,6 +57,8 @@ export default function BookStore() {
             .then((response) => {
                 setData(response.data.content);
                 setTotalPages(response.data.totalPages);
+                sessionStorage.setItem('url',pathname);
+
             })
             .catch((error) => {
                 console.log('에러:', error.response);
@@ -75,7 +77,7 @@ export default function BookStore() {
                 <PContent>개인간 자유로운 거래로 인생 책을 찾아보세요!</PContent>
             </Title>
 
-            <Navbar text='책 판매하기' url={location.pathname}/>
+            <Navbar text='책 판매하기' url={pathname}/>
 
             <Item items={data} />
             

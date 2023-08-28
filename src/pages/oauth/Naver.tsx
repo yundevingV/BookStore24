@@ -11,7 +11,7 @@ export default function Naver(){
 
 
     const navigate = useNavigate();
-    const redirectUrl = getCookie('redirectUrl');
+    const redirectUrl = sessionStorage.getItem('url')?.split("/")[1]
 
     useEffect(() => {
 
@@ -25,11 +25,13 @@ export default function Naver(){
             // 토큰 획득
             const token = response.headers.authorization 
             
-            setCookie('jwt', token);   
             sessionStorage.setItem('token',token);
 
-            navigate(-2)
-
+            if(redirectUrl){
+                navigate(`/${redirectUrl}`);
+            } else{
+                navigate('/')
+            }
         })
         .catch(error => {
         console.log(`에러 사유 : ${error.response.data}`)

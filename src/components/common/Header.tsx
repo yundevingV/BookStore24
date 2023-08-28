@@ -8,7 +8,7 @@ import { openModal } from "../../action/modal";
 import styled from "styled-components";
 import { CurrentLink, StyledLink, StyledLinkBlack } from "../../styles/link";
 import { Space } from "../../styles/Space";
-import { useLocation } from "react-router";
+import { Navigate, useLocation, useNavigate } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
 import { RootState } from "../../reducer/index";
 import { getCookie, removeCookie, setCookie  } from "./Cookie";
@@ -18,6 +18,7 @@ import useDecodedJWT from "../../hooks/useDecodedJWT";
 
 export default function Header() {
 
+    const navigate = useNavigate();
     const { pathname } = useLocation();
 
     const loginStateData = useSelector(
@@ -30,11 +31,12 @@ export default function Header() {
         dispatch(saveloginStatus(false));
         sessionStorage.clear()
         removeCookie('redirectUrl');
+        navigate('/')
     }
 
     //모달 펼치기
     const openModalData = useSelector(
-        (state: RootState) => state.openModal.openModalData
+        (state: RootState) => state.OpenModal.openModalData
     );
 
     // In your React project

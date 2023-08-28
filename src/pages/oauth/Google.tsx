@@ -7,7 +7,8 @@ import {  getCookie, setCookie } from "../../components/common/Cookie";
 export default function Google(){
 
     const navigate = useNavigate();
-    const redirectUrl = getCookie('redirectUrl');
+
+    const redirectUrl = sessionStorage.getItem('url')?.split("/")[1]
 
     useEffect(() => {
         const code : string | null = new URL(window.location.href).searchParams.get("code");
@@ -20,11 +21,13 @@ export default function Google(){
             // 토큰 획득
             const token = response.headers.authorization 
 
-            setCookie('jwt',token)
             sessionStorage.setItem('token',token);
 
-            navigate(-2)
-
+            if(redirectUrl){
+                navigate(`/${redirectUrl}`);
+            } else{
+                navigate('/')
+            }
         })
         .catch(error => {
             

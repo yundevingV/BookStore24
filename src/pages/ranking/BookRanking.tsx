@@ -6,14 +6,16 @@ import { Space } from "../../styles/Space";
 import Login from "../Login";
 
 import { styled } from "styled-components";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 
 export default function BookRanking(){
         // 현재 주소
-        const location = useLocation();
-
+        const {pathname } = useLocation();
+        const navigate = useNavigate();
+        if(true){
+        }    
         // 로그인
         const loginStateData = useSelector(
             (state: RootState) => state.LoginStatusReducer.loginStatusData
@@ -23,6 +25,9 @@ export default function BookRanking(){
     
         useEffect(() => {
             setLogin(loginStateData)
+            console.log(pathname)
+            navigate('/',{state : pathname});
+
         }, [loginStateData]);
 
     return(
@@ -30,14 +35,14 @@ export default function BookRanking(){
         <Wrapper>
 
             {/* 로그인 실패시 & 비로그인 */}
-            {!login && (
+            {/* {!login && (
                 <>
                 <Login />
                 </>
-            )}
+            )} */}
             
             {/* 로그인 성공시 */}
-            {login && (
+            {!login && (
             <>
             
             <Header />

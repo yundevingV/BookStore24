@@ -20,11 +20,11 @@ export default function Navbar({text,url} : NavbarProps ){
 
     // 검색 옵션선택.
     const searchOptionData = useSelector(
-        (state: RootState) => state.searchOptionReducer.searchOptionData
+        (state: RootState) => state.SearchOptionReducer.searchOptionData
     );
 
     const searchWordData = useSelector(
-        (state: RootState) => state.searchWordReducer.searchWordData
+        (state: RootState) => state.SearchWordReducer.searchWordData
     );
 
 

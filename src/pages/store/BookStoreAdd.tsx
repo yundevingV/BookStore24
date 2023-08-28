@@ -15,8 +15,13 @@ import Cancel from "../../modal/Cancel";
 import { saveCancelStatus } from "../../action/cancel_status";
 import { useDispatch } from "react-redux";
 import { saveBookInformation } from "../../action/book_information";
+import Login from "../Login";
 
 export default function BookCommunityAdd() {
+
+    const loginStateData =  useSelector(
+        (state: RootState) => state.LoginStatusReducer.loginStatusData
+    )
 
     const [ { title, talkUrl, price, content }, onInputChange, resetInput ] = useInput({
         title: '',
@@ -89,7 +94,7 @@ export default function BookCommunityAdd() {
         );
         
         const cancelStatus = useSelector(
-            (state : RootState) => state.cancelStatusReducer.cancelStatusData
+            (state : RootState) => state.CancelStatusReducer.cancelStatusData
         )
 
         const dispatch = useDispatch();
@@ -115,6 +120,14 @@ export default function BookCommunityAdd() {
 
     return(
         <Wrapper>
+            {!loginStateData && (
+                <>
+                <Login />
+                </>
+            )}
+
+            {loginStateData && (
+            <>
             <Header />
             
             <Container>
@@ -200,6 +213,8 @@ export default function BookCommunityAdd() {
 
                 
             </Container>
+            </>
+            )}
         </Wrapper>
     )
 }

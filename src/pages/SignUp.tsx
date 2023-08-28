@@ -5,7 +5,7 @@ import FirstLogin from "../modal/FirstLogin";
 
 import { styled ,css } from "styled-components";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 
 export default function SignUp(){

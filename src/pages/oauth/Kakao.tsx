@@ -1,15 +1,18 @@
 import React,{useEffect, useState} from "react";
 
 import axios from "axios";
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import { getCookie, setCookie } from "../../components/common/Cookie";
+import { RootState } from "../../reducer";
+import { useSelector } from "react-redux";
+import Header from "../../components/common/Header";
 
 
 export default function Kakao(){
 
     const navigate = useNavigate();
-    const redirectUrl = getCookie('redirectUrl');
 
+    const redirectUrl = sessionStorage.getItem('url')?.split("/")[1]
 
     useEffect(() => {
         const code : string | null = new URL(window.location.href).searchParams.get("code");
@@ -24,11 +27,15 @@ export default function Kakao(){
 
             // 토큰 획득
             const token = response.headers.authorization 
-            // 토큰 쿠키 저장
-            setCookie('jwt', token,1000);
+            // 토큰 저장
             sessionStorage.setItem('token',token);
-
-            navigate(-2)
+            
+            if(redirectUrl){
+                navigate(`/${redirectUrl}`);
+            } else{
+                navigate('/')
+            }
+            
 
         })
         
