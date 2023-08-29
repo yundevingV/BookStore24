@@ -91,7 +91,7 @@ export default function BookReviewDetail() {
                     sessionStorage.setItem('url',pathname);
                 }
             });
-        }, [loginId, title, token, pathname, loginStateData]);
+        }, []);
     
     return(
         <Wrapper>
@@ -109,7 +109,7 @@ export default function BookReviewDetail() {
             
             <Container >
                 {/* 게시글을 작성한 사용자 와 로그인한 사용자가 같을때 */}
-                {dec?.loginId === data?.loginId ? <EditButton id={data?.id} loginId={data?.loginId} title={data?.title} url='review' /> : <></>}
+                {dec?.loginId === data?.loginId ? <EditButton id={data?.id} loginId={data?.loginId} title={data?.title} reviewComment={data?.reviewComments} url='review' /> : <></>}
 
                 <InnerContainer>
 

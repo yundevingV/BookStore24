@@ -1,14 +1,24 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 import { css, styled } from "styled-components";
 import { StyledButtonLink } from "../styles/link";
-
+interface ReviewComment {
+    id : string;
+    reviewCommentId: string;
+    content: string;
+    createdDate: string;
+    nickname: string;
+    loginId: string;
+    reviewId: string;
+    title : string;
+}
 interface editProps{
     id : string | undefined
     loginId : string | undefined,
     title : string | undefined,
+    reviewComment? : ReviewComment[] | undefined,
     
 }
 interface urlProps {
@@ -19,17 +29,38 @@ interface CombinedProps extends editProps, urlProps {}
 
 export default function EditButton(props : CombinedProps){
 
+    const [reviewCommentIds,setReviewCommentIds] = useState<string[] | null>([]);
+
+    useEffect(()=>{
+        
+    if(props.reviewComment){
+        const idsArray = props.reviewComment.map(
+            comment => (comment.reviewCommentId));
+        setReviewCommentIds(idsArray);
+    } 
+    else{
+        setReviewCommentIds(null);
+    }
+
+    },[])
 
     const doDelete = () => {
 
         const token = sessionStorage.getItem('token')
         
         // Data to be sent in the request body.
-        const data = {
+        const sellData = {
             sellId : props.id,
             loginId : props.loginId,
             title : props.title
         };
+
+        const reviewData = {
+            id : props.id,
+            loginId : props.loginId,
+            title : props.title,
+            reviewCommentIds : reviewCommentIds
+        }
         
         // Axios configuration for the POST request.
         const config = {
@@ -37,9 +68,9 @@ export default function EditButton(props : CombinedProps){
             Authorization: token,
             },
         };
-        if (true){
+        if (props.url === 'sell'){
         axios
-            .post(`http://bookstore24.shop/${props.url}/post/delete`, data, config)
+            .post(`http://bookstore24.shop/${props.url}/post/delete`, sellData, config)
             .then((response) => {
             
             })
@@ -47,7 +78,18 @@ export default function EditButton(props : CombinedProps){
             console.log('Error:', error.response.data);
             });
         
-        };}
+        }
+        else{
+        axios
+            .post(`http://bookstore24.shop/${props.url}/post/delete`, reviewData, config)
+            .then((response) => {
+            
+            })
+            .catch((error) => {
+            console.log('Error:', error.response.data);
+            });
+        
+        }}
     return(
         <Container>
             <Form>
