@@ -64,7 +64,8 @@ function ItemList({items} : DataTypeList){
 
                 <Views>
                 <FontAwesomeIcon icon={faEye} />
-                    {item.view}
+
+                    {item?.view?.toLocaleString('ko-KR')}
                 </Views>
 
                 <ItemPublisher>

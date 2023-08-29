@@ -64,7 +64,7 @@ function ItemList({items} : DataTypeList){
                 </Name>
 
                 <Price>
-                    {item.price} 
+                    {item?.price?.toLocaleString('ko-KR')} 
                 </Price>
 
                 <ItemPublisher>
@@ -85,7 +85,7 @@ function ItemList({items} : DataTypeList){
                     {timeForToday(item.createdDate)}
                     <Views>
                     <FontAwesomeIcon icon={faEye} />
-                        {item.view}
+                        {item?.view?.toLocaleString('ko-KR')}
                     </Views>
                 </Date>
 
