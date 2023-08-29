@@ -1,21 +1,21 @@
 import React,{useEffect, useRef, useState} from "react";
+import Login from "../Login";
 import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
-import Test from '../../assets/imgs/testbookcover.jpg'
+import init from '../../assets/imgs/initBook.png'
 import SearchBook from "../../modal/SearchBook";
+import StarRating from "../../components/review/Star";
+
+import { saveCancelStatus } from "../../action/cancel_status";
+import { saveBookInformation } from "../../action/book_information";
+
+import Cancel from "../../modal/Cancel";
 
 import { styled } from "styled-components";
-import { getCookie } from "../../components/common/Cookie";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducer/index";
-import StarRating from "../../components/review/Star";
-import Cancel from "../../modal/Cancel";
-import { saveCancelStatus } from "../../action/cancel_status";
-import { useDispatch } from "react-redux";
-import { saveBookInformation } from "../../action/book_information";
-import Login from "../Login";
 
 export default function BookReviewAdd() {
 
@@ -144,13 +144,11 @@ export default function BookReviewAdd() {
                 <InnerContainer>
 
                 <LeftContainer>
-                    {bookInformation ? <Picture src={bookInformation?.image} alt='x' />
-                    : <Picture src={Test} alt='x' />    
+                    {bookInformation?.image ? <Picture src={bookInformation?.image} alt='x' />
+                    : <Picture src={init} alt='x' />    
                 }
                     
                 </LeftContainer>
-
-
 
                     <RightContainer>
                     <Title 
