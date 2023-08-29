@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import styled from 'styled-components';
 import { savePaging } from '../../action/paging_status';
@@ -12,8 +12,12 @@ interface ButtonProps {
 }
 
 export default function Paging({ totalPages }: PagingProps) {
+
+    // 페이지 이동시 처음 페이지로 이동.
+    useEffect(()=>{dispatch(savePaging(0))},[])
+
     const dispatch = useDispatch();
-    const [selectedPage, setSelectedPage] = useState<number | null>(null);
+    const [selectedPage, setSelectedPage] = useState<number | null>(0);
 
     if (totalPages === undefined || totalPages <= 0) {
         return null;
