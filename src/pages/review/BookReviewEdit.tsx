@@ -157,7 +157,7 @@ export default function BookCommunityEdit() {
                         value={data?.publisher}
                         />
 
-                    <StarRating initialRating={score} />
+                    <StarRating initialRating={data?.score} />
 
                 </RightContainer>
 
