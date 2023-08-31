@@ -15,6 +15,7 @@ import { RootState } from "../../reducer/index";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { saveDropDownValue } from "../../action/dropdown_value";
+import { saveloginStatus } from "../../action/login_status";
 
 export default function EditProfile() {
 
@@ -43,7 +44,7 @@ export default function EditProfile() {
     const token = sessionStorage.getItem('token')
 
     useEffect(()=>{
-        axios.get(`http://52.79.234.227/member/profile/edit`,
+        axios.get(`http://bookstore24.shop/member/profile/edit`,
             {
                 headers : {
                     'Authorization' : token
@@ -83,7 +84,7 @@ export default function EditProfile() {
         };
         
         axios
-            .post(`http://52.79.234.227/member/profile/residence/edit/save`, data, config)
+            .post(`http://bookstore24.shop/member/profile/residence/edit/save`, data, config)
             .then((response) => {
             console.log(`Response : ${JSON.stringify(data)}`);
             // window.location.replace("/")
@@ -95,7 +96,7 @@ export default function EditProfile() {
         
         resetInput();
         };
-
+    
         const modifyNickname = (e: React.MouseEvent) => {
             e.preventDefault(); // Prevent the default form submission behavior.
     
@@ -116,7 +117,7 @@ export default function EditProfile() {
 
             if (nickname.length >= 1 ){
             axios
-                .post(`http://52.79.234.227/member/profile/nickname/edit/save`, data, config)
+                .post(`http://bookstore24.shop/member/profile/nickname/edit/save`, data, config)
                 .then((response) => {
                 console.log(`Response : ${JSON.stringify(data)}`);
                 })
@@ -126,6 +127,33 @@ export default function EditProfile() {
             
             resetInput();
             };}
+
+    const withdraw = (e: React.MouseEvent) => {
+        e.preventDefault(); // Prevent the default form submission behavior.
+
+        const token = sessionStorage.getItem('token')
+        console.log(token)
+        const data ={}
+        const config = {
+            headers: {
+            Authorization: token,
+            },
+        };
+        axios
+            .post(`http://bookstore24.shop/member/withdraw`, data,config)
+            .then((response) => {
+            alert('회원 탈퇴가 완료되었습니다.');
+            navigate('/');
+            dispatch(saveloginStatus(false));
+            
+
+            })
+            .catch((error) => {
+            console.log('Error:', error.response);
+            });
+        
+        resetInput();
+        };
     return(
         <Wrapper>
             <Header />
@@ -201,7 +229,7 @@ export default function EditProfile() {
                 </SaveButtonContainer>
 
                 <RetireButtonContainer>
-                    <RetireButton>
+                    <RetireButton onClick={withdraw}>
                         회원 탈퇴하기
                     </RetireButton>
                 </RetireButtonContainer>
