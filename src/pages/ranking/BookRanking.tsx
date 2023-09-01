@@ -9,40 +9,65 @@ import { styled } from "styled-components";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
+import axios from "axios";
+
+interface bookInfoProps{
+    id : string,
+    title : string,
+    author : string,
+    publisher : string,
+    avgScore : string,
+    coverImg : string,
+    isbn : string,
+}
+
+interface booksProps{
+    books : Array<bookInfoProps>,
+    
+}
 
 export default function BookRanking(){
-        // 현재 주소
-        const {pathname } = useLocation();
-        const navigate = useNavigate();
-        if(true){
-        }    
+
         // 로그인
         const loginStateData = useSelector(
             (state: RootState) => state.LoginStatusReducer.loginStatusData
         );
-    
-        const [login,setLogin] = useState<boolean>(loginStateData);
-    
-        useEffect(() => {
-            setLogin(loginStateData)
-            console.log(pathname)
-            navigate('/',{state : pathname});
 
-        }, [loginStateData]);
+        const token = sessionStorage.getItem('token');
+
+
+        const [data,setData] = useState<booksProps | undefined>();
+
+        useEffect(()=>{
+            axios.get(`http://bookstore24.shop/book/ranking/score`,
+                {
+                    headers : {
+                        'Authorization' : token
+                    }
+                }
+                )
+                .then(response =>{
+                    setData(response.data);
+    
+                })
+                .catch(error => {
+                    console.log('Error : ', error);
+                })
+        },[])
 
     return(
         
         <Wrapper>
-
+            
             {/* 로그인 실패시 & 비로그인 */}
-            {/* {!login && (
+            {!loginStateData && (
                 <>
                 <Login />
                 </>
-            )} */}
+            )}
             
             {/* 로그인 성공시 */}
-            {!login && (
+            {loginStateData && (
             <>
             
             <Header />
@@ -51,19 +76,12 @@ export default function BookRanking(){
 
                 <Space width={0} height={50} />
 
-                <RankingTitle text={'조회수 랭킹'} />
-                
-                <Space width={0} height={30} />
-
-                <RankingContent type={'view'} />
-                
-                <Space width={0} height={50} />
-
                 <RankingTitle text={'평점 랭킹'} />
 
                 <Space width={0} height={30} />
 
-                <RankingContent type={'rate'} />
+                <RankingContent books={data?.books} />
+
 
             </Container>
             </>
