@@ -1,15 +1,14 @@
 import React,{useState,useEffect} from "react";
 import Header from "../../components/common/Header";
 import RankingContent from "../../components/ranking/RankingContent";
-import RankingTitle from "../../components/ranking/RankingTitle";
 import { Space } from "../../styles/Space";
 import Login from "../Login";
 
 import { styled } from "styled-components";
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import axios from "axios";
+import RankingTitle from "../../components/ranking/RankingTitle";
 
 interface bookInfoProps{
     id : string,
