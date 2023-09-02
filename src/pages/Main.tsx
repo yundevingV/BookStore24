@@ -5,6 +5,8 @@ import Carousel from "../components/home/Carousel"
 
 import { styled } from "styled-components";
 import RankingPreview from "../components/ranking/RankingPreview";
+import ReviewVeiwPreview from "../components/ranking/ReviewVeiwPreview";
+import StoreVeiwPreview from "../components/ranking/StoreVeiwPreview";
 
 export default function Main(){
 
@@ -13,8 +15,12 @@ export default function Main(){
 
             <Header />
             <Carousel />
+                <RankingPreview /> 
+            <PreviewContainer>
 
-            <RankingPreview /> 
+                <ReviewVeiwPreview />
+                <StoreVeiwPreview />
+            </PreviewContainer>
         </Wrapper>  
     )
 }
@@ -23,4 +29,16 @@ const Wrapper = styled.div`
     height  : fit-content;
 
     margin-bottom : 500px;
+`
+
+const PreviewContainer = styled.div`
+display : flex;
+justify-content : center;
+
+@media screen and (max-width: 850px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
 `

@@ -30,11 +30,7 @@ export default function RankingPreview(){
 
     useEffect(()=>{
         axios.get(`http://bookstore24.shop/book/ranking/score`,
-            {
-                headers : {
-                    'Authorization' : token
-                }
-            }
+            
             )
             .then(response =>{
                 setData(response.data);
@@ -51,7 +47,7 @@ export default function RankingPreview(){
             <Container>
 
                 <Title>
-                    조회수 랭킹 
+                    평점 랭킹 
                 </Title>
 
                 {selectedData?.map((item : bookInfoProps , index : number) =>
@@ -101,13 +97,16 @@ const Container = styled.div`
     display : flex;
     justify-content : center;
     flex-direction : column;
+
     margin : 50px auto;
     padding : 10px;
+
+    border-radius : 4px;
 
 `
 
 
-const Title = styled.p`
+const Title = styled.h3`
     padding : 0px 40px;
 
     color : #ffffff;
