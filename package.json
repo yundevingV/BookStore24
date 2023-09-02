@@ -23,6 +23,7 @@
     "@types/slick-carousel": "^1.6.37",
     "axios": "^1.4.0",
     "base-64": "^1.0.0",
+    "gh-pages": "^6.0.0",
     "http-proxy-middleware": "^2.0.6",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
@@ -49,7 +50,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -74,4 +77,6 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26"
   }
+  ,"homepage": "https://github.com/yundevingV/BookStore24"
+
 }
