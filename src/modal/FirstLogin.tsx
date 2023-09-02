@@ -171,16 +171,6 @@ const CenterContainer = styled.div`
 text-align : center;
 `
 
-const Button = styled.button`
-  position: absolute;
-  right: 10px;
-  top: 10px;
-
-  border : 0px;
-  background-color: #e2e2e2;
-
-`
-
 const NickNameResidenceButtonContainer = styled.div`
   position: absolute;
   top : 400px;

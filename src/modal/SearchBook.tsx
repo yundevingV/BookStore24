@@ -87,8 +87,6 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
                 </div>
             </SearchContainer>
 
-            
-
             <>
             {data?.map((item : any, index : number) => (
                 <SearchBox key={index} onClick={() => { save(index); closeModal(); }}>
@@ -150,8 +148,9 @@ font-family: tway, sans-serif, Arial;
 `
 
 const SearchContainer = styled.div`
+
 display : flex;
-justify-content: space-evenly;
+justify-content: center;
 
 input {
     width: 250px;
@@ -166,6 +165,7 @@ height: 25px;
 
 font-size : 12px;
 
+margin-left : 10px;
 padding : 5px;
 
 background-color: #ffffff;

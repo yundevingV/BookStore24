@@ -125,7 +125,7 @@ export default function BookCommunityAdd() {
             )}
 
             {loginStateData && (
-            <>s
+            <>
             <Header />
             
             <Container>
