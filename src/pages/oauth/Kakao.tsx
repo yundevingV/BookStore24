@@ -31,9 +31,9 @@ export default function Kakao(){
             sessionStorage.setItem('token',token);
             
             if(redirectUrl){
-                navigate(`/${redirectUrl}`);
+                navigate(`./${redirectUrl}`);
             } else{
-                navigate('/')
+                navigate('./')
             }
             
 

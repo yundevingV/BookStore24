@@ -31,7 +31,7 @@ export default function Header() {
         dispatch(saveloginStatus(false));
         sessionStorage.clear()
         removeCookie('redirectUrl');
-        navigate('/')
+        navigate('./')
     }
 
     //모달 펼치기

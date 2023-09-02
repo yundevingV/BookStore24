@@ -143,7 +143,7 @@ export default function EditProfile() {
             .post(`http://bookstore24.shop/member/withdraw`, data,config)
             .then((response) => {
             alert('회원 탈퇴가 완료되었습니다.');
-            navigate('/');
+            navigate('./');
             dispatch(saveloginStatus(false));
             
 

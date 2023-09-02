@@ -24,9 +24,9 @@ export default function Google(){
             sessionStorage.setItem('token',token);
 
             if(redirectUrl){
-                navigate(`/${redirectUrl}`);
+                navigate(`//${redirectUrl}`);
             } else{
-                navigate('/')
+                navigate('//')
             }
         })
         .catch(error => {

@@ -87,7 +87,7 @@ export default function BookReviewDetail() {
                 console.log('Error:', error.response);
 
                 if (!token) {
-                    navigate("/login");
+                    navigate("./login");
                     sessionStorage.setItem('url',pathname);
                 }
             });
