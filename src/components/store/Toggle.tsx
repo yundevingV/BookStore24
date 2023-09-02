@@ -12,11 +12,8 @@ interface toggleTypeProps{
 
 function ToggleButton({ status , loginId, title }: toggleTypeProps) {
     const [isToggled, setToggled] = useState(status);
-
-    console.log(status,loginId,title)
     
-    let token = getCookie('jwt');
-    let dec = useDecodedJWT(token);
+    const token = sessionStorage.getItem('token');
 
     const handleToggle = async () => {
         try {
