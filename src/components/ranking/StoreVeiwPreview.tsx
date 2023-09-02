@@ -72,10 +72,7 @@ export default function StoreVeiwPreview(){
                     <p>{item.publisher}</p>
 
                 </BookAuthor>
-                <Rating>
-                    <FontAwesomeIcon icon={faStar} className="star-icon"/>
-                    {item.avgScore}
-                </Rating>
+
             </RContainer>
             </ItemContainer>
             )}

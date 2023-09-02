@@ -11,7 +11,6 @@ import { useLocation,  useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import axios from "axios";
-import { getCookie } from "../../components/common/Cookie";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import Toggle from "../../components/store/Toggle";
 
@@ -23,6 +22,7 @@ export default function BookStoreDetail() {
     const params = decodeURIComponent(location.search.replace('?','')).split('&');
 
     const loginId = params[0];
+    
     const title = params[1];
 
     // 로그인

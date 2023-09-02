@@ -15,8 +15,9 @@ export default function Main(){
 
             <Header />
             <Carousel />
-                <RankingPreview /> 
             <PreviewContainer>
+
+                <RankingPreview /> 
 
                 <ReviewVeiwPreview />
                 <StoreVeiwPreview />
@@ -35,7 +36,7 @@ const PreviewContainer = styled.div`
 display : flex;
 justify-content : center;
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1270px) {
     display: flex;
     flex-direction: column;
     align-items: center;

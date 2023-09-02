@@ -159,6 +159,10 @@ const Top = styled.div`
 const Title = styled.div`
     font-weight : bold;
 
+    h3{
+        
+    }
+
 `
 
 const Status = styled.div`
