@@ -1,12 +1,9 @@
 import React,{useEffect, useState} from "react";
 import Header from "../../components/common/Header";
-import Test from '../../assets/imgs/testbookcover.jpg'
 
 import { styled } from "styled-components";
 import { useLocation, useNavigate} from "react-router-dom";
-import { getCookie } from "../../components/common/Cookie";
 import axios from "axios";
-import useDecodedJWT from "../../hooks/useDecodedJWT";
 import StarRating from "../../components/review/Star";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer";
@@ -16,15 +13,15 @@ export default function BookCommunityEdit() {
     
     // 현재 주소
     const location = useLocation();
-    console.log(location)
+
+    const navigate = useNavigate();
 
     const params = decodeURIComponent(location.search.replace('?','')).split('&');
 
     const loginId = params[0];
     const title = params[1];
     
-    const token = sessionStorage.getItem('token')
-    let dec = useDecodedJWT(token);
+    const token = sessionStorage.getItem('token');
 
     interface DataType{
         "title": string,
@@ -38,7 +35,7 @@ export default function BookCommunityEdit() {
         "createdDate": string,
         "nickname": string,
     }
-    const [data,setData] = useState<DataType | null>(null)
+    const [data,setData] = useState<DataType | null>(null);
 
     useEffect(() => {        
         axios
@@ -73,8 +70,6 @@ export default function BookCommunityEdit() {
         // '내용'을 변경 핸들링
         setContent(event.target.value);
     };
-
-    const navigate = useNavigate()
 
     const score = useSelector(
         (state : RootState) => state.BookratingReducer.bookRatingData
@@ -140,19 +135,19 @@ export default function BookCommunityEdit() {
                     />
                         
 
-                    <BookTitle 
+                    <input 
                         placeholder='책 제목을 입력해주세요'
                         value={data?.bookTitle}
 
                         />
 
-                    <BookTitle 
+                    <input 
                         placeholder='저자를 입력해주세요' 
                         value={data?.author}
 
                         />
                     
-                    <BookTitle 
+                    <input 
                         placeholder='출판사를 입력해주세요' 
                         value={data?.publisher}
                         />

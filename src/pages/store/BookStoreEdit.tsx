@@ -1,21 +1,24 @@
 import React,{useEffect, useState} from "react";
-import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
-import Test from '../../assets/imgs/testbookcover.jpg'
-
 
 import { styled } from "styled-components";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
-import { getCookie } from "../../components/common/Cookie";
-import {  useNavigate } from 'react-router-dom';
-import useDecodedJWT from "../../hooks/useDecodedJWT";
 
 
 export default function BookStoreEdit() {
 
-    const token = sessionStorage.getItem('token')
-    let dec = useDecodedJWT(token);
+    // 현재 주소
+    const location = useLocation();
+
+    const navigate = useNavigate();
+
+    const params = decodeURIComponent(location.search.replace('?','')).split('&');
+
+    const loginId = params[0];
+    const title = params[1];
+    
+    const token = sessionStorage.getItem('token');
 
     interface DataType{
         "title": string,
@@ -29,7 +32,7 @@ export default function BookStoreEdit() {
         "nickname": string,
     }
 
-    const [data,setData] = useState<DataType | null>(null)
+    const [data,setData] = useState<DataType | null>(null);
 
     const [talkUrl, setTalkUrl] = useState<string>('');
     const [content, setContent] = useState<string>('');
@@ -37,11 +40,11 @@ export default function BookStoreEdit() {
 
     useEffect(() => {        
         axios
-            .get(`http://52.79.234.227/sell/post/edit`,{
+            .get(`http://bookstore24.shop/sell/post/edit`,{
                 
                 params:{
-                    "loginId": dec.loginId,
-                    "title": "test",
+                    "loginId": loginId,
+                    "title": title,
                 },
                 headers: {
                     Authorization: token,
@@ -61,13 +64,7 @@ export default function BookStoreEdit() {
             console.log('Error:', error.response);
             navigate(-1);
             });
-        
-
     },[]);
-
-    const navigate = useNavigate()
-
-
 
     const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -132,32 +129,29 @@ export default function BookStoreEdit() {
                     <Picture src={data?.coverImg} alt='x'/>
                 </LeftContainer>
 
-
-
                     <RightContainer>
                     <Title placeholder='게시글 제목'
                             name="title"
                             value={data?.title}
 
                         />
-                        
 
-                    <BookTitle 
+                    <input 
                         placeholder='책 제목을 입력해주세요'
                         name="bookTitle"
                         value={data?.bookTitle}
                         />
 
-                    <BookTitle 
+                    <input 
                         placeholder='저자를 입력해주세요' 
                         value={data?.author}
                         />
                     
-                    <BookTitle 
+                    <input 
                         placeholder='출판사를 입력해주세요'
                         value={data?.publisher} />
                                             
-                    <BookTitle 
+                    <input 
                         placeholder='오픈채팅 대화방 링크를 입력해주세요' 
                         name="talkUrl"
                         defaultValue={talkUrl}

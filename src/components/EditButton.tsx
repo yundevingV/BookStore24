@@ -28,7 +28,7 @@ interface urlProps {
 interface CombinedProps extends editProps, urlProps {}
 
 export default function EditButton(props : CombinedProps){
-
+    console.log(props)
     const [reviewCommentIds,setReviewCommentIds] = useState<string[] | null>([]);
 
     useEffect(()=>{
