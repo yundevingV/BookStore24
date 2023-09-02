@@ -1,4 +1,6 @@
-import React,{useEffect, useState} from "react";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import '../../styles/fontAwesome.css'
 
 import { styled } from "styled-components";
 
@@ -38,6 +40,8 @@ export default function RankingContent({ books }: BooksProps) {
                                     <span>{book.publisher} / {book.author}</span>
                                 </ItemPublisher>
                                 <ItemRating>
+                                <FontAwesomeIcon icon={faStar} className="star-icon"/>
+
                                     <span>{book.avgScore} 점</span>
                                 </ItemRating>
                             </Content>

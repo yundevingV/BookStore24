@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import truncate from "../../util/truncate";
 
 import styled from "styled-components"
 
@@ -6,7 +7,6 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../styles/fontAwesome.css'
 import axios from "axios";
-import truncate from "../../util/truncate";
 
 interface bookInfoProps{
     id : string,
