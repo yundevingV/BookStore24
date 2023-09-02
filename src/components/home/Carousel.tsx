@@ -1,5 +1,7 @@
 import Slide1 from '../../assets/imgs/Slide1.jpg';
 import Slide2 from '../../assets/imgs/Slide2.jpg';
+import Slide3 from '../../assets/imgs/Slide1.jpg';
+import Slide4 from '../../assets/imgs/Slide1.jpg';
 
 import { styled } from 'styled-components';
 
@@ -37,6 +39,13 @@ export default function Carousel() {
           <Img src={Slide2} />
         </ImgCover>
         
+        <ImgCover>
+          <Img src={Slide3} />
+        </ImgCover>
+
+        <ImgCover>
+          <Img src={Slide4} />
+        </ImgCover>
       </Slider>
     </Wrapper>
   );
