@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/yundevingV/BookStore24/static/css/main.7904d0e6.css",
-    "main.js": "/yundevingV/BookStore24/static/js/main.cbc38b17.js",
-    "static/media/tway.ttf": "/yundevingV/BookStore24/static/media/tway.2ae99103669383455f35.ttf",
-    "static/media/testbookcover.jpg": "/yundevingV/BookStore24/static/media/testbookcover.06025fc543284eececfd.jpg",
-    "static/media/Slide2.jpg": "/yundevingV/BookStore24/static/media/Slide2.9053b98591ad2819832a.jpg",
-    "static/media/Slide1.jpg": "/yundevingV/BookStore24/static/media/Slide1.b30a20933eb936b32c2b.jpg",
-    "static/media/slick.svg": "/yundevingV/BookStore24/static/media/slick.2630a3e3eab21c607e21.svg",
-    "static/media/slick.eot": "/yundevingV/BookStore24/static/media/slick.a4e97f5a2a64f0ab1323.eot",
-    "static/media/slick.ttf": "/yundevingV/BookStore24/static/media/slick.c94f7671dcc99dce43e2.ttf",
-    "static/media/slick.woff": "/yundevingV/BookStore24/static/media/slick.295183786cd8a1389865.woff",
-    "index.html": "/yundevingV/BookStore24/index.html",
-    "main.7904d0e6.css.map": "/yundevingV/BookStore24/static/css/main.7904d0e6.css.map",
-    "main.cbc38b17.js.map": "/yundevingV/BookStore24/static/js/main.cbc38b17.js.map"
+    "main.css": "/BookStore24/static/css/main.c55e1457.css",
+    "main.js": "/BookStore24/static/js/main.e0eaf04e.js",
+    "static/media/tway.ttf": "/BookStore24/static/media/tway.2ae99103669383455f35.ttf",
+    "static/media/testbookcover.jpg": "/BookStore24/static/media/testbookcover.06025fc543284eececfd.jpg",
+    "static/media/Slide2.jpg": "/BookStore24/static/media/Slide2.9053b98591ad2819832a.jpg",
+    "static/media/Slide1.jpg": "/BookStore24/static/media/Slide1.b30a20933eb936b32c2b.jpg",
+    "static/media/slick.svg": "/BookStore24/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/BookStore24/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/BookStore24/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/BookStore24/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/BookStore24/index.html",
+    "main.c55e1457.css.map": "/BookStore24/static/css/main.c55e1457.css.map",
+    "main.e0eaf04e.js.map": "/BookStore24/static/js/main.e0eaf04e.js.map"
   },
   "entrypoints": [
-    "static/css/main.7904d0e6.css",
-    "static/js/main.cbc38b17.js"
+    "static/css/main.c55e1457.css",
+    "static/js/main.e0eaf04e.js"
   ]
 }
