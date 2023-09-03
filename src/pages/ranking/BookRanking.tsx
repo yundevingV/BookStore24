@@ -57,16 +57,9 @@ export default function BookRanking(){
     return(
         
         <Wrapper>
+
             
-            {/* 로그인 실패시 & 비로그인 */}
-            {!loginStateData && (
-                <>
-                <Login />
-                </>
-            )}
-            
-            {/* 로그인 성공시 */}
-            {loginStateData && (
+
             <>
             
             <Header />
@@ -84,7 +77,6 @@ export default function BookRanking(){
 
             </Container>
             </>
-            )}
 
         </Wrapper>
         
