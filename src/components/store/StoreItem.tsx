@@ -166,7 +166,7 @@ const Title = styled.div`
 `
 
 const Status = styled.div<{status : string}>`
-    color : ${(props) => (props.status === 'sell' ? 'red' : 'black')};
+    color : ${(props) => (props.status === 'on' ? 'red' : 'black')};
 `;
 
 
