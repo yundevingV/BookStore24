@@ -46,10 +46,10 @@ function ItemList({items} : DataTypeList){
 
             <Top>
                 <Title>
-                    {item.title}
+                    {item.title} 
                 </Title>
-                <Status>
-                    {item.status === 'on' ? '판매중' : '판매완료'}
+                <Status status={item.status}>
+                    {item.status === 'on' ? <span>판매중</span> : <span>판매완료</span>}
                 </Status>
             </Top>
 
@@ -64,7 +64,7 @@ function ItemList({items} : DataTypeList){
                 </Name>
 
                 <Price>
-                    {item?.price?.toLocaleString('ko-KR')} 
+                    {item?.price?.toLocaleString('ko-KR')} ￦
                 </Price>
 
                 <ItemPublisher>
@@ -165,11 +165,9 @@ const Title = styled.div`
 
 `
 
-const Status = styled.div`
-    
-    color : #f10000;
-`
-
+const Status = styled.div<{status : string}>`
+    color : ${(props) => (props.status === 'sell' ? 'red' : 'black')};
+`;
 
 
 const Middle = styled.div`

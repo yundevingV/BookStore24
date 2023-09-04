@@ -44,7 +44,7 @@ function ToggleButton({ status , loginId, title }: toggleTypeProps) {
     return (
         <Container>
         <ToggleBtn isToggled={isToggled} onClick={handleToggle}>
-            {isToggled === 'on' ? '판매중' : '판매보류'}
+            {isToggled === 'on' ? '판매중' : '판매완료'}
         </ToggleBtn>
         </Container>
     );

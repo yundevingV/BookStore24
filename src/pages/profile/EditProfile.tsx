@@ -119,6 +119,7 @@ export default function EditProfile() {
             axios
                 .post(`http://bookstore24.shop/member/profile/nickname/edit/save`, data, config)
                 .then((response) => {
+                    
                 console.log(`Response : ${JSON.stringify(data)}`);
                 })
                 .catch((error) => {
@@ -143,7 +144,7 @@ export default function EditProfile() {
             .post(`http://bookstore24.shop/member/withdraw`, data,config)
             .then((response) => {
             alert('회원 탈퇴가 완료되었습니다.');
-            navigate('./');
+            navigate('/');
             dispatch(saveloginStatus(false));
             
 

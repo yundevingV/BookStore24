@@ -1,7 +1,7 @@
 import Slide1 from '../../assets/imgs/Slide1.jpg';
 import Slide2 from '../../assets/imgs/Slide2.jpg';
-import Slide3 from '../../assets/imgs/Slide1.jpg';
-import Slide4 from '../../assets/imgs/Slide1.jpg';
+import Slide3 from '../../assets/imgs/Slide3.jpg';
+import Slide4 from '../../assets/imgs/Slide4.jpg';
 
 import { styled } from 'styled-components';
 

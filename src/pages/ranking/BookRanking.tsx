@@ -39,11 +39,7 @@ export default function BookRanking(){
 
         useEffect(()=>{
             axios.get(`http://bookstore24.shop/book/ranking/score`,
-                {
-                    headers : {
-                        'Authorization' : token
-                    }
-                }
+
                 )
                 .then(response =>{
                     setData(response.data);
