@@ -4,7 +4,8 @@ import Test from '../../assets/imgs/testbookcover.jpg'
 import EditButton from "../../components/EditButton";
 import Login from "./../Login";
 
-
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { styled } from "styled-components";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
@@ -127,14 +128,17 @@ export default function BookReviewDetail() {
 
 
                     <div>
-                    <p className="profile">{data?.nickname}</p>
+                    <p className="profile"> 닉네임 : {data?.nickname}</p>
                     </div>
                     
                     <div>
                         <p className="bookTitle">{data?.bookTitle}</p>
                         <p className="publisher">저자 : {data?.author.replace('^', ',')}</p>
                         <p className="publisher">출판사 : {data?.publisher}</p>
+                        <p className='view'> <FontAwesomeIcon icon={faEye} />
+                        {data?.view?.toLocaleString('ko-KR')}</p>
                         <p className='rating'>평점 : {data?.score}</p>
+                        
                     </div>
 
                 </RightContainer>

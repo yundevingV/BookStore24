@@ -4,6 +4,7 @@ import Header from "../../components/common/Header";
 import Test from '../../assets/imgs/testbookcover.jpg'
 import EditButton from "../../components/EditButton";
 import Login from "./../Login";
+import truncate from "../../util/truncate";
 
 
 import { styled } from "styled-components";
@@ -127,14 +128,14 @@ export default function BookStoreDetail() {
 
 
                     <div>
-                    <p className="profile">{data?.nickname}</p>
+                    <p className="profile"> 닉네임 : {data?.nickname}</p>
                     </div>
                     
                     <div>
                         <p className="title">{data?.bookTitle}</p>
                         <p className="publisher">저자 : {data?.author.replace('^', ',')}</p>
                         <p className="publisher">출판사 : {data?.publisher}</p>
-                        <p className='price'>₩ {data?.price}</p>
+                        <p className='price'>₩ {data?.price.toLocaleString('ko-KR')}</p>
                     </div>
 
 
