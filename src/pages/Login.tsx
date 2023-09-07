@@ -24,14 +24,14 @@ export default function Login() {
         password: '',
     });
 
-    const kakao_redirect_uri = 'http://localhost:3000/auth/kakao' //Redirect URI
-    const naver_redirect_uri = 'http://localhost:3000/auth/naver' //Redirect URI
-    const google_redirect_uri = 'http://localhost:3000/auth/google' //Redirect URI
-    const g = 'https://yundevingv.github.io/BookStore24/auth/google'
+    const kakao_redirect_uri = 'http://yundevingv.github.io/auth/kakao' //Redirect URI
+    const naver_redirect_uri = 'http://yundevingv.github.io/auth/naver' //Redirect URI
+    const google_redirect_uri = 'http://yundevingv.github.io/auth/google' //Redirect URI
+    
 
     const naverLoginLink : string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=B3RGNtinEp3Va8fysxkN&redirect_uri=${naver_redirect_uri}`;
     const kakaoLoginLink : string = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=${kakao_redirect_uri}`;
-    const googleLoginLink : string = `https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=${g}&response_type=code&scope=openid%20email%20profile`;
+    const googleLoginLink : string = `https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=${google_redirect_uri}&response_type=code&scope=openid%20email%20profile`;
 
     const navigate = useNavigate();
     const redirectUrl = getCookie('redirectUrl');
