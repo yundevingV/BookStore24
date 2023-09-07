@@ -27,7 +27,7 @@ export default function Login() {
     const kakao_redirect_uri = 'http://localhost:3000/auth/kakao' //Redirect URI
     const naver_redirect_uri = 'http://localhost:3000/auth/naver' //Redirect URI
     const google_redirect_uri = 'http://localhost:3000/auth/google' //Redirect URI
-    const g = 'http://yundevingv.github.io/BookStore24/auth/google'
+    const g = 'https://yundevingv.github.io/BookStore24/auth/google'
 
     const naverLoginLink : string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=B3RGNtinEp3Va8fysxkN&redirect_uri=${naver_redirect_uri}`;
     const kakaoLoginLink : string = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=${kakao_redirect_uri}`;

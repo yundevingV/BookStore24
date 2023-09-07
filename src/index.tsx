@@ -11,10 +11,10 @@ import rootReducer from "./reducer";
 import { CookiesProvider } from 'react-cookie';
 
 let store = createStore(rootReducer);
-// basename={process.env.PUBLIC_URL}
 ReactDom.render(
 
-    <BrowserRouter >
+    <BrowserRouter basename={process.env.PUBLIC_URL}
+    >
     
     <GlobalStyle />
     <Provider store={store}>
