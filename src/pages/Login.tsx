@@ -24,9 +24,9 @@ export default function Login() {
         password: '',
     });
 
-    const kakao_redirect_uri = 'https://yundevingv.github.io/auth/kakao' //Redirect URI
-    const naver_redirect_uri = 'https://yundevingv.github.io/auth/naver' //Redirect URI
-    const google_redirect_uri = 'https://yundevingv.github.io/auth/google' //Redirect URI
+    const kakao_redirect_uri = 'https://yundevingv.github.io/BookStore24/auth/kakao' //Redirect URI
+    const naver_redirect_uri = 'https://yundevingv.github.io/BookStore24/auth/naver' //Redirect URI
+    const google_redirect_uri = 'https://yundevingv.github.io/BookStore24/auth/google' //Redirect URI
     
 
     const naverLoginLink : string = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=B3RGNtinEp3Va8fysxkN&redirect_uri=${naver_redirect_uri}`;
