@@ -1,7 +1,7 @@
 .star-icon {
-  color: yellow; /* Color for the selected (active) star */
-    font-size : 20px;
-    margin-right : 10px;
+  color: orange;
+  opacity: 1;  font-size : 20px;
+  margin-right : 10px;
   }
 
 .eye-icon{
@@ -14,5 +14,5 @@
 }
 
 .star.active {
-  color: yellow; /* Color for the selected (active) star */
-}
+  color: orange;
+  opacity: 1;}
