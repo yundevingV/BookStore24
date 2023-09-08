@@ -4,9 +4,9 @@ import Header from "../../components/common/Header";
 import Test from '../../assets/imgs/testbookcover.jpg'
 import EditButton from "../../components/EditButton";
 import Login from "./../Login";
-import truncate from "../../util/truncate";
 
-
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { styled } from "styled-components";
 import { useLocation,  useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
@@ -42,7 +42,7 @@ export default function BookStoreDetail() {
         "id" : string,
         "title": string,
         "content": string,
-        "view" : string,
+        "view" : number,
         "createdDate": string,
         "nickname": string,
         "loginId" : string,
@@ -137,6 +137,8 @@ export default function BookStoreDetail() {
                         <p className="title">{data?.bookTitle}</p>
                         <p className="publisher">저자 : {data?.author.replace('^', ',')}</p>
                         <p className="publisher">출판사 : {data?.publisher}</p>
+                        <p className='view'> <FontAwesomeIcon icon={faEye} />
+                        {data?.view.toLocaleString('ko-KR')}</p>
                         <p className='price'>₩ {data?.price.toLocaleString('ko-KR')}</p>
                     </div>
 
