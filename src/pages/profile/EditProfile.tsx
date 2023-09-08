@@ -16,6 +16,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { saveDropDownValue } from "../../action/dropdown_value";
 import { saveloginStatus } from "../../action/login_status";
+import Check from "../../modal/Check";
 
 export default function EditProfile() {
 
@@ -128,37 +129,17 @@ export default function EditProfile() {
             
             resetInput();
             };}
+    const [viewCheck,setCheck] = useState<boolean>(false);
 
-    const withdraw = (e: React.MouseEvent) => {
-        e.preventDefault(); // Prevent the default form submission behavior.
-
-        const token = sessionStorage.getItem('token')
-        console.log(token)
-        const data ={}
-        const config = {
-            headers: {
-            Authorization: token,
-            },
-        };
-        axios
-            .post(`http://bookstore24.shop/member/withdraw`, data,config)
-            .then((response) => {
-            alert('회원 탈퇴가 완료되었습니다.');
-            navigate('/');
-            dispatch(saveloginStatus(false));
-            
-
-            })
-            .catch((error) => {
-            console.log('Error:', error.response);
-            });
-        
-        resetInput();
-        };
+    const check = () => {
+        setCheck(true);
+    } 
+    
     return(
         <Wrapper>
             <Header />
             <Container>
+                {viewCheck ? <Check /> : <></>}
                 <Space width={0} height={5} />
 
                 <PwdButtonContainer>
@@ -230,7 +211,7 @@ export default function EditProfile() {
                 </SaveButtonContainer>
 
                 <RetireButtonContainer>
-                    <RetireButton onClick={withdraw}>
+                    <RetireButton onClick={check}>
                         회원 탈퇴하기
                     </RetireButton>
                 </RetireButtonContainer>

@@ -1,55 +1,71 @@
-import React from "react"
-import useInput from "../hooks/useInput";
-import Dropdown from "../components/common/DropDown";
-import { openModal } from "../action/modal";
+import React, { useState } from "react"
+
 
 import styled, { css } from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../reducer/index";
+
 
 import axios from "axios";
 import { saveCancelStatus } from "../action/cancel_status";
 import { useNavigate } from "react-router";
+import { saveloginStatus } from "../action/login_status";
+import { useDispatch } from "react-redux";
+import { removeCookie } from "../components/common/Cookie";
 
-export default function Cancel(){
-
-
-    
-    const dispatch = useDispatch();
+export default function Check(){
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const yes = () => {
-        dispatch(saveCancelStatus(false));
-        navigate(-1);
-    }
+
+    const withdraw = (e: React.MouseEvent) => {
+        e.preventDefault(); // Prevent the default form submission behavior.
+
+        const token = sessionStorage.getItem('token')
+        console.log(token)
+        const data ={}
+        const config = {
+            headers: {
+            Authorization: token,
+            },
+        };
+        axios
+            .post(`http://bookstore24.shop/member/withdraw`, data,config)
+            .then((response) => {
+            
+            navigate('/');
+
+            dispatch(saveloginStatus(false));
+            sessionStorage.clear()
+            removeCookie('redirectUrl');
+
+            })
+            .catch((error) => {
+            console.log('Error:', error.response);
+            });
+        
+        };
 
     const no = () => {
-        dispatch(saveCancelStatus(true));
+        window.location.reload();
     }
-
     return(
         <ModalBackground>
             <Container>
 
-                <TopDiv>
-                <Font fontSize={25}>
-                    작성을 취소하시겠습니까 ?
-                </Font>
-                </TopDiv>
-
                 <MiddleDiv>
                 <Font fontSize={15}>
-                    작성중인 내용은 저장되지 않습니다.
+                
+                    정말로 회원을 탈퇴 하시겠습니까 ?
+
                 </Font>
                 </MiddleDiv>
 
                 <ButtonContainer>
-                    <Button bgColor="#e20154" color="#ffffff" onClick={yes}>
-                        확인
+                    <Button bgColor="#e20154" color="#ffffff" onClick={withdraw}>
+                        네
                     </Button>
 
                     <Button bgColor="#ffffff" color="#000000" onClick={no}>
-                        취소
+                        아니오
                     </Button>
 
                 </ButtonContainer>
@@ -70,7 +86,7 @@ const ModalBackground = styled.div`
 const Container = styled.div`
 /* 모달창 크기 */
   width: 400px;
-  height: 200px;
+  height: 100px;
 
   /* 최상단 위치 */
   z-index: 999;
@@ -79,7 +95,7 @@ const Container = styled.div`
   /* top, bottom, left, right 는 브라우저 기준으로 작동한다. */
   /* translate는 본인의 크기 기준으로 작동한다. */
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -106,18 +122,9 @@ const Font = styled.p<FontProps>`
         `}
 `;
 
-
-const TopDiv = styled.div`
-  position: absolute;
-  top: 0px;
-  
-  width : 100%;
-
-`
-
 const MiddleDiv = styled.div`
     position: absolute;
-    top: 70px;
+    top: 0px;
 
     width : 100%;
 
@@ -126,7 +133,7 @@ const MiddleDiv = styled.div`
 
 const ButtonContainer = styled.div`
   position: absolute;
-  top : 100px;
+  top : 30px;
   width : 100%;
   text-align : center;  
 `
@@ -136,14 +143,16 @@ interface ButtonProps {
     color : string
 }
 const Button = styled.button<ButtonProps>`
-    width : 50px;
-    height : 40px;
+    width : 100px;
+    height : 30px;
 
     margin : 20px;
 
     border-radius : 5px;
-    border : 1px solid #000000;
+    border : 0px;
 
+    font-family : 'tway';
+    
     ${({ bgColor }) =>
         bgColor &&
         css`
@@ -157,3 +166,4 @@ const Button = styled.button<ButtonProps>`
         `}
 
 `
+

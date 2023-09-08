@@ -33,7 +33,7 @@ export default function Header() {
         removeCookie('redirectUrl');
         navigate('./')
     }
-
+    
     //모달 펼치기
     const openModalData = useSelector(
         (state: RootState) => state.OpenModal.openModalData
@@ -159,9 +159,9 @@ export default function Header() {
                     </StyledLinkBlack>
                 </Profile>
                 <Logout>
-                        <LogoutButton onClick={()=>logout()}>
-                            로그아웃
-                        </LogoutButton>
+                <LogoutButton onClick={()=>logout()}>
+                    로그아웃
+                </LogoutButton>
                 </Logout>
                 </>
             }
