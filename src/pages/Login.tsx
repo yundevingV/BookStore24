@@ -40,7 +40,11 @@ export default function Login() {
 
     const state = location.state;
 
-    console.log(state)
+    const handleSocialLogin = () => {
+        window.location.assign(
+          `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=${kakao_redirect_uri}`
+        );
+    }
 
     type loginTypes =(
         id : string,
@@ -111,6 +115,8 @@ export default function Login() {
                             </SnsFont>
                         </div>
                     </SnsButton>
+
+                    
 
                     <SnsButton> 
                         <div>
