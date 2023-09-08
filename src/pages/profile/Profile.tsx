@@ -25,8 +25,10 @@ interface DivMarginProps {
 
 export default function Profile(){
     
-
-
+    const loginStateData = useSelector(
+        (state: RootState) => state.LoginStatusReducer.loginStatusData
+    );
+    
     const [auth,setAuth] = useState<boolean>();
 
     interface DataType{
@@ -70,10 +72,19 @@ export default function Profile(){
 
     return(
         <Wrapper>
+            
+            {/* 로그인 실패시 & 비로그인 */}
+            {!loginStateData && (
+                <>
+                <Login />
+                </>
+            )}
+
+                
+            {loginStateData && (
+            <>
             <Header />
             <ProfileContainer>
-
-
                 {/* 자신의 페이지인지 확인 & 프로필 수정버튼 */}
                 {auth ? 
                 <Div value={0}>
@@ -91,11 +102,10 @@ export default function Profile(){
                 :
                 <>
                 <P value={15}>
-                        회원 정보
+                        {loginStateData ? '회원 정보' : ''}
                     </P>
                 </>
                 }
-
                 {/* 사용자 정보 */}
                 <ProfileInfoContainer>
 
@@ -150,7 +160,9 @@ export default function Profile(){
                 <Hr />
 
                 <ReviewList />
-            </ProfileContainer>    
+            </ProfileContainer>
+            </>
+            )}
         </Wrapper>
 
     )
