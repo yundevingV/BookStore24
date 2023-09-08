@@ -25,6 +25,11 @@ export default function FirstLogin(){
 
   const save_NickNameResidence = (e : React.MouseEvent) => {
 
+    if(nickname.length <= 2 ){
+      alert('닉네임은 최소 2글자 이상 입력하세요 ! ');
+      return;
+    }
+
       axios.post('http://bookstore24.shop/member/nicknameresidence/save'
       ,
       {
@@ -68,7 +73,7 @@ export default function FirstLogin(){
 
               <CenterContainer>
                 <NickNameInput 
-                  placeholder='닉네임을 입력해주세요'
+                  placeholder='닉네임을 입력해주세요 (최소 2글자 이상)'
                   name="nickname" 
                   value={nickname}
                   onChange={onInputChange}/>

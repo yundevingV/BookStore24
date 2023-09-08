@@ -10,6 +10,9 @@ import { StyledButtonLink } from "../../styles/link";
 import { styled } from "styled-components";
 import base64 from 'base-64';
 import axios from "axios";
+import Login from "../Login";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducer";
 
 
 interface PProps {
@@ -21,6 +24,8 @@ interface DivMarginProps {
 }
 
 export default function Profile(){
+    
+
 
     const [auth,setAuth] = useState<boolean>();
 
@@ -67,6 +72,7 @@ export default function Profile(){
         <Wrapper>
             <Header />
             <ProfileContainer>
+
 
                 {/* 자신의 페이지인지 확인 & 프로필 수정버튼 */}
                 {auth ? 
