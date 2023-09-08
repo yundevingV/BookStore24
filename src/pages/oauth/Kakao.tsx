@@ -32,10 +32,10 @@ export default function Kakao(){
             
             if(redirectUrl){
                 
-                navigate(`./${redirectUrl}`);
+                navigate(`/${redirectUrl}`);
             } else{
                 
-                navigate('./')
+                navigate('/')
             }
             
 

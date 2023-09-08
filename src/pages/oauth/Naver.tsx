@@ -28,9 +28,9 @@ export default function Naver(){
             sessionStorage.setItem('token',token);
 
             if(redirectUrl){
-                navigate(`./${redirectUrl}`);
+                navigate(`/${redirectUrl}`);
             } else{
-                navigate('./')
+                navigate('/')
             }
         })
         .catch(error => {
