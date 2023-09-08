@@ -28,7 +28,9 @@ interface urlProps {
 interface CombinedProps extends editProps, urlProps {}
 
 export default function EditButton(props : CombinedProps){
-    console.log(props)
+
+    const navigate = useNavigate();
+    
     const [reviewCommentIds,setReviewCommentIds] = useState<string[] | null>([]);
 
     useEffect(()=>{
@@ -68,11 +70,12 @@ export default function EditButton(props : CombinedProps){
             Authorization: token,
             },
         };
+
         if (props.url === 'sell'){
         axios
-            .post(`http://bookstore24.shop/${props.url}/post/delete`, sellData, config)
+            .post(`https://bookstore24.shop/${props.url}/post/delete`, sellData, config)
             .then((response) => {
-            
+            navigate('/store');
             })
             .catch((error) => {
             console.log('Error:', error.response.data);
@@ -81,9 +84,9 @@ export default function EditButton(props : CombinedProps){
         }
         else{
         axios
-            .post(`http://bookstore24.shop/${props.url}/post/delete`, reviewData, config)
+            .post(`https://bookstore24.shop/${props.url}/post/delete`, reviewData, config)
             .then((response) => {
-            
+                navigate('/bookreview');
             })
             .catch((error) => {
             console.log('Error:', error.response.data);
