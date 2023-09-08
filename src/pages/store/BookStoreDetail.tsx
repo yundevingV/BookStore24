@@ -82,6 +82,8 @@ export default function BookStoreDetail() {
             if (!token) {
                 navigate("./login");
                 sessionStorage.setItem('url',pathname)
+            }else{
+                navigate('/bookstore')
             }
         })
     },[]);

@@ -90,6 +90,8 @@ export default function BookReviewDetail() {
                 if (!token) {
                     navigate("./login");
                     sessionStorage.setItem('url',pathname);
+                } else{
+                    navigate('/bookreview')
                 }
             });
         }, []);
