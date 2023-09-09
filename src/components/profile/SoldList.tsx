@@ -1,10 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Test from '../../assets/imgs/testbookcover.jpg'
 
 import { styled } from "styled-components";
 import axios from "axios";
+import truncate from "../../util/truncate";
 
-export default function SoldList(){
+export default function ReviewList(){
+
+    interface DataType{
+        "id": number,
+        "title": string,
+        "status" : string,
+        "coverImg": string,
+        "bookTitle": string,
+        "author": string,
+        "publisher": string,
+        "nickname": string,
+        "price" : number,
+        "loginId": string,
+        "createdDate": string,
+        "view": number
+    }
+
+    const [data,setData] = useState<DataType[] | undefined>();
     const token = sessionStorage.getItem('token');
     
     useEffect(() => {        
@@ -12,7 +30,7 @@ export default function SoldList(){
             .get(`https://bookstore24.shop/member/profile/sell/off/list`, {
                 params: {
                     page : 0,
-                    size : 10,
+                    size : 3,
                 },
                 
                 headers : {
@@ -22,95 +40,50 @@ export default function SoldList(){
             })
             .then((response) => {
                 console.log(response)
+                setData(response.data.content)
 
             })
             .catch((error) => {
                 console.log('에러:', error.response);
             });
     }, []);
+
+    console.log(data);
+
     return(
         <>
         <Wrapper>
-        <SoldListContainer>
-
+        <ReviewListContainer>
+        
+        {data?.map((book )=>(
+                    <>
                     <Space />
-                    <ItemContainer>
-                        <ItemImg src={Test}alt='x'/>
-
+                    <ItemContainer >
                         <Box>
-                            <ItemRating>
-                                4.6
-                            </ItemRating>
-                        
-                    
-                        <ItemName>
-                            이것이 코딩테스트다.
+                            
+                            <ItemImg src={book.coverImg} alt={book.title} />
+                            
+                            <Content>
+                                <ItemName>
+                                    <span>{book.title}</span>
+                                </ItemName>
+                                <BookTitle>
+                                    <span>{truncate(book.bookTitle,27)}</span>
+                                </BookTitle>
+                                <ItemPublisher>
+                                    <span>{book.author} / {book.publisher} </span>
+                                </ItemPublisher>
+                                <ItemRating>
 
-                        </ItemName>
-                        <ItemPublisher>
-                            한빛 / 나동빈
-
-                            <ItemPrice>
-                            10,000
-                            </ItemPrice>
-
-                        </ItemPublisher>
-                        
-                        
-                    </Box>
+                                    <span>{book.price.toLocaleString('ko-KR')} ₩</span>
+                                </ItemRating>
+                            </Content>
+                        </Box>
                     </ItemContainer>
-                    <ItemContainer>
-                        <ItemImg src={Test}alt='x'/>
+                    </>
+                    ))}
 
-                        <Box>
-                            <ItemRating>
-                                4.6
-                            </ItemRating>
-                        
-                    
-                        <ItemName>
-                            이것이 코딩테스트다.
-
-                        </ItemName>
-                        <ItemPublisher>
-                            한빛 / 나동빈
-
-                            <ItemPrice>
-                            10,000
-                            </ItemPrice>
-
-                        </ItemPublisher>
-                        
-                        
-                    </Box>
-                    </ItemContainer>
-                    
-                    <ItemContainer>
-                        <ItemImg src={Test}alt='x'/>
-
-                        <Box>
-                            <ItemRating>
-                                4.6
-                            </ItemRating>
-                        
-                    
-                        <ItemName>
-                            이것이 코딩테스트다.
-
-                        </ItemName>
-                        <ItemPublisher>
-                            한빛 / 나동빈
-
-                            <ItemPrice>
-                            10,000
-                            </ItemPrice>
-
-                        </ItemPublisher>
-                    </Box>
-
-                    </ItemContainer>
-
-                </SoldListContainer>
+                </ReviewListContainer>
                 </Wrapper>
                 </>
     )
@@ -124,16 +97,13 @@ margin : 0px;
 padding : 0px;
 
 `
-const SoldListContainer = styled.div`
+const ReviewListContainer = styled.div`
 margin:0px;
 
 border : 0px;
 
 width : 100%;
-height : 300px;
-
-
-background-color : #e2e2e2;
+height : fit-content;
 
 
 `
@@ -142,52 +112,71 @@ const ItemContainer = styled.div`
 
 /* 상 우 하 좌 */
 margin : 0 15px 15px;
-height : 80px;
+height : 120px;
 
-background-color : white;
-&:hover {
-    background-color : #aaaeac;
-    cursor : pointer;
-    }
 `
+
+
+const Box = styled.div`
+    display: flex;
+
+    width : 100%;
+    height : 120px;
+    
+
+    background-color : #f1f1f1;
+    border-radius : 8px;
+    
+    &:hover {
+        background-color : #ffffff;
+        border-radius : 8px;
+
+        cursor : pointer;
+    }
+
+`
+
 
 const ItemImg = styled.img`
 
-height :75px;
-
-padding: 0px 10px 10px 0px;
-margin :0px;
-vertical-align: top;
+padding : 10px;
+height :100px;
 
 `
 
-const Box = styled.div`
-display : inline-block;
+const Content = styled.div`
+    display: flex;
+    flex-direction : column;
+    justify-content : flex-start;
+    padding : 0px 10px;
+`
 
-margin-top : -13px;
+const ItemName = styled.div`
+
+span{
+    font-size : 20px;
+}
+
+`
+const BookTitle =styled.div`
+span{
+    font-size: 16px;
+}
+`
+
+const ItemPublisher = styled.div`
+
+span {
+    font-size : 15px;
+    font-weight : 200;
+}
+`
+
+const ItemRating = styled.div`
+
+span{
+    font-size : 15px;
+}
 
 
 `
-const ItemRating = styled.p`
-font-size : 15px;
-color : red;
-
-`
-
-const ItemName = styled.p`
-
-font-size : 15px;
-font-weight : 1000;
-`
-
-const ItemPublisher = styled.p`
-font-size : 14px;
-margin-left : 10px;
-
-`
-
-const ItemPrice = styled.span`
-font-size : 15px;
-margin-left : 20px;
-`
-

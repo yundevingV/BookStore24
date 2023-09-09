@@ -102,9 +102,6 @@ justify-content : center;
 padding : 0px 10px;
 `
 
-const Img =styled.div`
-
-`
 const ItemImg = styled.img`
 
 padding : 7px;
