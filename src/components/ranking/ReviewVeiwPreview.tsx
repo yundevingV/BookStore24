@@ -42,7 +42,7 @@ export default function ReviewVeiwPreview(){
             <Container>
 
             <Title>
-                가장 많이 조회된 도서 후기 
+            커뮤니티에서 핫한 도서 탑 5 🔥
             </Title>
 
             {selectedData?.map((item : bookInfoProps , index : number) =>
@@ -127,14 +127,14 @@ justify-content : center;
 
 const Img = styled.img`
 width : 100px;
-height : 100px;
+height : 120px;
 padding : 20px;
 `
 
 const RContainer = styled.div`
 display : flex;
 flex-direction : column;
-justify-content: space-between; /* or other values like flex-start, flex-end, center, etc. */
+justify-content:  center; 
 margin : 0px;
 padding : 10px 0px;
 
@@ -144,9 +144,7 @@ padding : 10px 0px;
 const BookTitle = styled.span`
 color : #ffffff;
 `
-const Rating = styled.span`
-color : #ffffff;
-`
+
 const BookAuthor = styled.span`
 color : #ffffff;
 

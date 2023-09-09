@@ -48,7 +48,7 @@ export default function RankingPreview(){
             <Container>
 
                 <Title>
-                    평점 랭킹 
+                    평점 랭킹 🏆
                 </Title>
 
                 {selectedData?.map((item : bookInfoProps , index : number) =>
@@ -141,7 +141,7 @@ const Ranking = styled.div`
 
 const Img = styled.img`
 width : 100px;
-height : 100px;
+height : 120px;
 padding : 20px;
 `
 

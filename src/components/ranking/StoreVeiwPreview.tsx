@@ -44,7 +44,7 @@ export default function StoreVeiwPreview(){
             <Container>
 
             <Title>
-                가장 많이 조회된 판매 도서
+            스토어에서 핫한 도서 탑 5 🔥
             </Title>
 
             {selectedData?.map((item : bookInfoProps , index : number) =>
@@ -129,14 +129,14 @@ justify-content : center;
 
 const Img = styled.img`
 width : 100px;
-height : 100px;
+height : 120px;
 padding : 20px;
 `
 
 const RContainer = styled.div`
 display : flex;
 flex-direction : column;
-justify-content: space-between; /* or other values like flex-start, flex-end, center, etc. */
+justify-content:  center; 
 margin : 0px;
 padding : 10px 0px;
 
