@@ -73,7 +73,7 @@ export default function BookCommunityAdd() {
             Authorization: token,
             },
         };
-        if (true){
+        if (title && talkUrl && price && content && bookInformation?.title){
         axios
             .post(`http://bookstore24.shop/sell/post/save`, data, config)
             .then((response) => {

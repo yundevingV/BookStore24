@@ -70,7 +70,7 @@ export default function BookReviewAdd() {
             Authorization: token,
             },
         };
-        if (true){
+        if (bookRatingData >= 1 && title && content && bookInformation?.title ){
         axios
             .post(`http://bookstore24.shop/review/post/save`, data, config)
             .then((response) => {
@@ -81,7 +81,11 @@ export default function BookReviewAdd() {
             console.log('Error:', error.response.data);
             });
         
-        };}
+        }
+        else {
+            alert('빈칸을 확인해주세요 !');
+        }
+        }
 
         // 제목 저자 출판사
         const bookInformationData = useSelector(
