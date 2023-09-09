@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import truncate from "../../util/truncate";
+import decimalDisplay from "../../util/decimalDisplay";
 
 import styled from "styled-components"
 
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import '../../styles/fontAwesome.css'
+import '../../styles/fontAwesome.css';
 import axios from "axios";
 
 interface bookInfoProps{
@@ -13,7 +14,7 @@ interface bookInfoProps{
     title : string,
     author : string,
     publisher : string,
-    avgScore : string,
+    avgScore : number,
     coverImg : string,
     isbn : string,
 }
@@ -75,7 +76,10 @@ export default function RankingPreview(){
                     </BookAuthor>
                     <Rating>
                         <FontAwesomeIcon icon={faStar} className="star-icon"/>
-                        {item.avgScore}
+                        {item.avgScore.toString().length >= 3 ? <span>{decimalDisplay(item.avgScore)}</span>
+                        : item.avgScore
+                        }
+                        
                     </Rating>
                 </RContainer>
             </ItemContainer>

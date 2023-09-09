@@ -88,14 +88,14 @@ export default function ReviewList(){
     )
 }
 const Wrapper = styled.div`
-
 `
+
 const Space = styled.div`
 height : 15px;
 margin : 0px;
 padding : 0px;
-
 `
+
 const ReviewListContainer = styled.div`
 margin:0px;
 
@@ -106,7 +106,6 @@ height : fit-content;
 
 
 `
-
 const ItemContainer = styled.div`
 
 /* 상 우 하 좌 */
@@ -114,7 +113,6 @@ margin : 0 15px 15px;
 height : 120px;
 
 `
-
 
 const Box = styled.div`
     display: flex;

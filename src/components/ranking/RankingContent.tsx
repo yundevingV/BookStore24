@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../styles/fontAwesome.css'
 
 import { styled } from "styled-components";
+import decimalDisplay from "../../util/decimalDisplay";
 
 interface BookInfoProps {
     id: string;
     title: string;
     author: string;
     publisher: string;
-    avgScore: string;
+    avgScore: number;
     coverImg: string;
     isbn: string;
 }
@@ -42,7 +43,9 @@ export default function RankingContent({ books }: BooksProps) {
                                 <ItemRating>
                                 <FontAwesomeIcon icon={faStar} className="star-icon"/>
 
-                                    <span>{book.avgScore} 점</span>
+                                {book?.avgScore?.toString().length >= 3 ? <span>{decimalDisplay(book.avgScore)}</span>
+                                : <span>{book.avgScore}</span>
+                                }                        
                                 </ItemRating>
                             </Content>
                         </Box>

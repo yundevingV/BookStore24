@@ -15,7 +15,7 @@ interface bookInfoProps{
     title : string,
     author : string,
     publisher : string,
-    avgScore : string,
+    avgScore : number,
     coverImg : string,
     isbn : string,
 }
