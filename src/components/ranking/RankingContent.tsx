@@ -38,7 +38,7 @@ export default function RankingContent({ books }: BooksProps) {
                                     <span>{book.title}</span>
                                 </ItemName>
                                 <ItemPublisher>
-                                    <span>{book.publisher} / {book.author}</span>
+                                    <span>{book.publisher} / {book.author.replace('^', ',')}</span>
                                 </ItemPublisher>
                                 <ItemRating>
                                 <FontAwesomeIcon icon={faStar} className="star-icon"/>
