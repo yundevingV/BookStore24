@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Test from '../../assets/imgs/testbookcover.jpg'
 
 import { styled } from "styled-components";
+import axios from "axios";
 
 export default function SellingList(){
+
+    const token = sessionStorage.getItem('token');
+    
+    useEffect(() => {        
+        axios
+            .get(`https://bookstore24.shop/member/profile/sell/on/list`, {
+                params: {
+                    page : 0,
+                    size : 10,
+                },
+                
+                headers : {
+                    'Authorization' : token
+                }
+                
+            })
+            .then((response) => {
+                console.log(response)
+
+            })
+            .catch((error) => {
+                console.log('에러:', error.response);
+            });
+    }, []);
+
     return(
         <>
         <Wrapper>
