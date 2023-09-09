@@ -140,11 +140,7 @@ export default function Header() {
             <Menu>
                 {!loginStateData ? 
                 <>
-                <Join>
-                    <StyledLinkBlack to='/signup'>
-                    회원가입
-                    </StyledLinkBlack>
-                </Join>
+                
                 <Login>
                     <StyledLinkBlack to='/login'>
                     로그인
