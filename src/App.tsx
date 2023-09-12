@@ -26,6 +26,8 @@ import Google from './pages/oauth/Google';
 import Test from './pages/test/Test';
 
 import { Route , Routes } from 'react-router';
+import SearchReviewResult from './pages/search/SearchReviewResult';
+import SearchStoreResult from './pages/search/SearchStoreResult';
 
 function App() {
 
@@ -58,6 +60,9 @@ function App() {
         <Route path='/auth/kakao/*' element={<Kakao />} />
         <Route path='/auth/naver/*' element={<Naver />} />
         <Route path='/auth/google/*' element={<Google />} />
+
+        <Route path='/search/bookreview/result' element={<SearchReviewResult /> } />
+        <Route path='/search/bookstore/result' element={<SearchStoreResult /> } />
 
         <Route path='/test' element={<Test />} />
 

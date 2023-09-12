@@ -1,12 +1,24 @@
 import React from "react";
+import { useLocation } from "react-router";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 
 
 
 export default function SearchButton() {
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location.pathname)
+
+    const search = () =>
+    {
+        navigate(`/search${location.pathname}/result`);
+    }
+
     return (
     <>
-        <Button >
+        <Button onClick={search}>
         <span role="img" aria-label="search">
             🔎
         </span>

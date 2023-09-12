@@ -15,19 +15,18 @@ import truncate from "../../util/truncate";
 
 
 interface DataType{
-    author:string
-    bookTitle:string
-    coverImg:string
-    createdDate:string
-    id:number
-    nickname:string
-    publisher:string
-    score:number
-    title:string
-    view:number
-    loginId : string
-    price : number
-    status : string
+    "id": number,
+    "title": string,
+    "status": string,
+    "coverImg": string,
+    "bookTitle": string,
+    "author": string,
+    "publisher": string,
+    "price": number,
+    "nickname": string,
+    "loginId": string,
+    "createdDate": string,
+    "view": number,
 }
 
 interface DataTypeList {

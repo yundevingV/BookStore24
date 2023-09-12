@@ -18,17 +18,17 @@ export default function BookStoreCommunity() {
 
 
     interface DataType{
-        author:string
-        bookTitle:string
-        coverImg:string
-        createdDate:string
-        id:number
-        nickname:string
-        publisher:string
-        score:number
-        title:string
-        view:number
-        loginId : string
+        "id": number,
+        "title": string,
+        "score": number,
+        "coverImg": string,
+        "bookTitle": string,
+        "author": string,
+        "publisher": string,
+        "nickname": string,
+        "loginId": string,
+        "createdDate": string,
+        "view": number,
     }
 
     const [data,setData] = useState<DataType[] | undefined>();
