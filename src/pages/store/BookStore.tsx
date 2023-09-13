@@ -5,7 +5,7 @@ import Navbar from "../../components/Navbar";
 import Item from "../../components/store/StoreItem";
 import Login from "../Login";
 import Paging from "../../components/common/Paging";
-
+import ViewToggle from "../../components/store/ViewToggle";
 
 import { styled } from "styled-components";
 import { useLocation } from 'react-router-dom';
@@ -77,9 +77,9 @@ export default function BookStore() {
                 <PTitle>북 스토어</PTitle> 
                 <PContent>개인간 자유로운 거래로 인생 책을 찾아보세요!</PContent>
             </Title>
-
+            
             <Navbar text='책 판매하기' url={pathname}/>
-
+            <ViewToggle />
             <Item items={data} />
             
             <PagingContainer>

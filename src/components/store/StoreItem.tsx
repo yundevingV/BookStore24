@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Test from '../../assets/imgs/testbookcover.jpg'
 import { StyledLink } from "../../styles/link";
 import timeForToday from '../../util/timeForToday';
@@ -14,7 +14,7 @@ import truncate from "../../util/truncate";
 
 
 
-interface DataType{
+interface DataType {
     "id": number,
     "title": string,
     "status": string,
@@ -31,78 +31,98 @@ interface DataType{
 
 interface DataTypeList {
     items: DataType[] | undefined;
-  }
+}
 
-function ItemList({items} : DataTypeList){
+function ItemList({ items }: DataTypeList) {
 
-    return(
+
+    const viewStatus = useSelector(
+        (state: RootState) => state.ViewStatusReducer.viewStatusData
+    );
+    console.log(viewStatus)
+
+    const filteredItems = items
+        ?.filter((item) => {
+            if (viewStatus === 'all') {
+            // Show all items
+            return true;
+            } else if (viewStatus === 'on') {
+            // Show items with status 'on'
+            return item.status === 'on';
+            } else if (viewStatus === 'off') {
+            // Show items with status 'off'
+            return item.status === 'off';
+            }
+            return false;
+        });
+    
+    return (
         <>
-            
-            {items?.map((item )=>(
 
-            <StyledLink to={`/bookstore/detail/?${item.loginId}&${item.title}`}>
-            <Frame>
+{filteredItems?.map((item) => (
+        <StyledLink to={`/bookstore/detail/?${item.loginId}&${item.title}`}>
+                        <Frame>
 
-            <Top>
-                <Title>
-                    {item.title} 
-                </Title>
-                <Status status={item.status}>
-                    {item.status === 'on' ? <span>판매중</span> : <span>판매완료</span>}
-                </Status>
-            </Top>
+                            <Top>
+                                <Title>
+                                    {item.title}
+                                </Title>
+                                <Status status={item.status}>
+                                    {item.status === 'on' ? <span>판매중</span> : <span>판매완료</span>}
+                                </Status>
+                            </Top>
 
-            <Middle>    
-                <LContainer>
-                <Img src={item.coverImg} alt='x' />
-                </LContainer>
+                            <Middle>
+                                <LContainer>
+                                    <Img src={item.coverImg} alt='x' />
+                                </LContainer>
 
-                <RContainer>
-                <Name>
-                    {truncate(`${item.bookTitle}`,15)}
-                </Name>
+                                <RContainer>
+                                    <Name>
+                                        {truncate(`${item.bookTitle}`, 15)}
+                                    </Name>
 
-                <Price>
-                    {item?.price?.toLocaleString('ko-KR')} ￦
-                </Price>
+                                    <Price>
+                                        {item?.price?.toLocaleString('ko-KR')} ￦
+                                    </Price>
 
-                <ItemPublisher>
-                    {item.author.replace('^', ',')} 
-                    
-                </ItemPublisher>
+                                    <ItemPublisher>
+                                        {item.author.replace('^', ',')}
 
-                <ItemPublisher>
-                    {item.publisher}
+                                    </ItemPublisher>
 
-                </ItemPublisher>
+                                    <ItemPublisher>
+                                        {item.publisher}
 
-                <Writter>
-                    {item.nickname}
-                </Writter>
+                                    </ItemPublisher>
 
-                <Date>
-                    {timeForToday(item.createdDate)}
-                    <Views>
-                    <FontAwesomeIcon icon={faEye} />
-                        {item?.view?.toLocaleString('ko-KR')}
-                    </Views>
-                </Date>
+                                    <Writter>
+                                        {item.nickname}
+                                    </Writter>
 
-                </RContainer>
+                                    <Date>
+                                        {timeForToday(item.createdDate)}
+                                        <Views>
+                                            <FontAwesomeIcon icon={faEye} />
+                                            {item?.view?.toLocaleString('ko-KR')}
+                                        </Views>
+                                    </Date>
 
-            </Middle>
-            </Frame>
-            </StyledLink>
-            ))}
+                                </RContainer>
+
+                            </Middle>
+                        </Frame>
+                    </StyledLink>
+                ))}
         </>
     )
-}   
+}
 
-export default function StoreItem({items} : DataTypeList){
+export default function StoreItem({ items }: DataTypeList) {
 
-    return(
-        <Positioner>            
-            <ItemList items={items}/>
+    return (
+        <Positioner>
+            <ItemList items={items} />
         </Positioner>
     )
 }
@@ -164,7 +184,7 @@ const Title = styled.div`
 
 `
 
-const Status = styled.div<{status : string}>`
+const Status = styled.div<{ status: string }>`
     color : ${(props) => (props.status === 'on' ? 'red' : 'black')};
 `;
 

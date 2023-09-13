@@ -12,3 +12,4 @@ export const SAVE_CANCEL_STATUS = 'save_cancel_status' as const
 
 export const SAVE_PAGING = 'save_paging' as const
 
+export const SAVE_VIEW_STATUS = 'save_view_status' as const

@@ -9,6 +9,7 @@ import BookInformationReducer from "./book_information_reducer";
 import BookratingReducer from "./book_rating_reducer";
 import CancelStatusReducer from "./cancel_status_reducer";
 import PagingReducer from "./paging_reducer";
+import ViewStatusReducer from "./view_status_reducer copy";
 
 const rootReducer = combineReducers({
   SearchOptionReducer,
@@ -20,7 +21,7 @@ const rootReducer = combineReducers({
   BookratingReducer,
   CancelStatusReducer,
   PagingReducer,
-  
+  ViewStatusReducer  
 });
 
 export default rootReducer;

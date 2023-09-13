@@ -1,7 +1,5 @@
 import React,{useState,useEffect} from "react";
-import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
-import Test from '../../assets/imgs/testbookcover.jpg'
 import EditButton from "../../components/EditButton";
 import Login from "./../Login";
 
@@ -13,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
-import Toggle from "../../components/store/Toggle";
+import Toggle from "../../components/store/SetToggle";
 
 export default function BookStoreDetail() {
 
