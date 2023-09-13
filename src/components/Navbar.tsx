@@ -12,8 +12,8 @@ import { RootState } from "../reducer/index";
 import React from "react";
 
 type NavbarProps = {
-    text : string;
-    url : string;
+    text? : string;
+    url? : string;
 }
 
 export default function Navbar({text,url} : NavbarProps ){
@@ -29,9 +29,8 @@ export default function Navbar({text,url} : NavbarProps ){
 
 
     const submit = (e: React.MouseEvent,searchWordData :string) => {
-        e.preventDefault(); // Prevent the default form submission behavior
         console.log(searchWordData);
-        console.log(searchOptionData)
+        console.log(searchOptionData);
     }
 
     return(
@@ -47,9 +46,12 @@ export default function Navbar({text,url} : NavbarProps ){
 
                     <SearchButton />     
 
-                    <StyledButtonLink to={url + '/add'}>
+                    {url ? <StyledButtonLink to={url + '/add'}>
                         <PostButton text={text} />
                     </StyledButtonLink>
+                    :
+                    <> </>}
+                    
                 
                 </Form>
                 

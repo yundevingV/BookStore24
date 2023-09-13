@@ -9,11 +9,15 @@ export default function SearchButton() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location.pathname)
+    console.log(location.pathname)    
 
     const search = () =>
     {
-        navigate(`/search${location.pathname}/result`);
+        if (!location.pathname.includes('result')){
+        navigate(`/search${location.pathname}/result`);}
+        else {
+            navigate(`.`)
+        }
     }
 
     return (

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 type TextProps = {
-    text : string;
+    text : string | undefined;
 
 }
 

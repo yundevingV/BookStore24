@@ -50,12 +50,14 @@ export default function SearchReviewResult() {
             .get(`http://bookstore24.shop/review/post/list/search/by/${searchOpion}`, {
                 params: {
                     keyword : searchWord,
-                    page : page | 0,
+                    page : page ,
                     size : 10,
                 },
             })
             .then((response) => {
                 setData(response.data.content);
+                setTotalPages(response.data.totalPages);
+
                 console.log(response)
 
             })
@@ -64,7 +66,8 @@ export default function SearchReviewResult() {
             });
     }, [page]);
 
-
+    console.log(searchOpion)
+    console.log(searchWord)
     return(
 
         <Wrapper>
@@ -74,9 +77,10 @@ export default function SearchReviewResult() {
             
             <Container >
             <Title>
-                <PTitle>검색 결과</PTitle> 
-                테스트 중입니다!
+                <PTitle>검색 결과 입니다.</PTitle> 
+                <p>검색 결과가 정확하지 않으시면 , 을 빼고 검색해주세요</p>
             </Title>
+            {/* <Navbar /> */}
 
             <Item items={data} />
             
