@@ -1,7 +1,8 @@
 
-import { useDispatch } from 'react-redux';
-import { styled } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { css, styled } from 'styled-components';
 import { saveViewStatus } from '../../action/view_status';
+import { RootState } from '../../reducer';
 
 
 export default function ViewToggle() {
@@ -10,7 +11,7 @@ export default function ViewToggle() {
 
   const all = () =>{
     dispatch(saveViewStatus('all')); 
- 
+
   }
 
   const on = () =>{
@@ -22,22 +23,25 @@ export default function ViewToggle() {
     dispatch(saveViewStatus('off'));  
 
   }
-
+  const viewStatus = useSelector(
+    (state: RootState) => state.ViewStatusReducer.viewStatusData
+);
 
   return (
-    <div>
-      <button onClick={all}>
+    <Container>
+      <AllButton status={viewStatus} onClick={all}>
         전체
-      </button>
+      </AllButton>
 
-      <button onClick={on}>
-        판매중인 상품
-      </button>
+      <OnButton status={viewStatus} onClick={on}>
+        판매중
+      </OnButton>
 
-      <button onClick={off}>
-        판매완료된 상품
-      </button>
-    </div>
+      <OffButton status={viewStatus} onClick={off}>
+        판매완료
+      </OffButton>
+
+    </Container>
   );
 };
 
@@ -46,6 +50,69 @@ const Container = styled.div`
     justify-content: flex-end;
 `;
 
+interface ButtonProps {
+  status: string; // This variable will determine the background color
+}
 
+const AllButton = styled.button<ButtonProps>`
+border : 0px;
 
+font-size:15px;
+font-family : 'tway';
 
+padding : 10px;
+
+background-color : transparent;
+
+${(props) =>
+    props.status === 'all' &&
+    css`
+      background-color: #c2c2c2;
+    `};
+cursor : pointer;
+
+margin-left : 15px;
+
+`
+
+const OnButton = styled.button<ButtonProps>`
+border : 0px;
+
+font-size:15px;
+font-family : 'tway';
+
+padding : 10px;
+
+background-color : transparent;
+
+${(props) =>
+    props.status === 'on' &&
+    css`
+      background-color: #c2c2c2;
+    `};
+cursor : pointer;
+
+margin-left : 15px;
+
+`
+
+const OffButton = styled.button<ButtonProps>`
+border : 0px;
+
+font-size:15px;
+font-family : 'tway';
+
+padding : 10px;
+
+background-color : transparent;
+
+${(props) =>
+    props.status === 'off' &&
+    css`
+      background-color: #c2c2c2;
+    `};
+cursor : pointer;
+
+margin-left : 15px;
+
+`
