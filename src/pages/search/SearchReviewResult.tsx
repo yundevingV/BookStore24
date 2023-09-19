@@ -5,7 +5,7 @@ import Item from "../../components/review/ReviewItem";
 import Paging from "../../components/common/Paging";
 
 import { styled } from "styled-components";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 
@@ -41,9 +41,8 @@ export default function SearchReviewResult() {
         (state : RootState) => state.SearchOptionReducer.searchOptionData
     );
 
-    const searchWord = useSelector(
-        (state : RootState) => state.SearchWordReducer.searchWordData
-    );
+    const {searchWord} = useParams();
+
     
     useEffect(() => {        
         axios

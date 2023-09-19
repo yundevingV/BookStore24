@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 
 import axios from "axios";
+import { useParams } from "react-router";
 
 
 export default function SearchStoreResult() {
@@ -42,9 +43,7 @@ export default function SearchStoreResult() {
         (state : RootState) => state.SearchOptionReducer.searchOptionData
     );
 
-    const searchWord = useSelector(
-        (state : RootState) => state.SearchWordReducer.searchWordData
-    );
+    const {searchWord} = useParams();
     
     useEffect(() => {        
         axios
@@ -142,7 +141,6 @@ font-size : 18px;
 const PagingContainer = styled.div`
 width : 100%;
 
-display: flex;
 flex-direction : column;
 
 text-align : center;

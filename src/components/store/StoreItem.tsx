@@ -11,7 +11,7 @@ import { RootState } from "../../reducer/index";
 
 import styled from "styled-components";
 import truncate from "../../util/truncate";
-
+import { saveTotalPaging } from "../../action/totalPaging_status";
 
 
 interface DataType {
@@ -39,7 +39,6 @@ function ItemList({ items }: DataTypeList) {
     const viewStatus = useSelector(
         (state: RootState) => state.ViewStatusReducer.viewStatusData
     );
-    console.log(viewStatus)
 
     const filteredItems = items
         ?.filter((item) => {
@@ -55,6 +54,22 @@ function ItemList({ items }: DataTypeList) {
             }
             return false;
         });
+
+    console.log(filteredItems)
+
+    useEffect(()=>{
+        if(filteredItems){
+            console.log(filteredItems)
+            saveTotalPaging(Math.floor(filteredItems.length/10));
+            console.log(Math.floor(filteredItems.length/10));
+            
+            if(filteredItems.length < 10){
+                
+            }
+        }
+        else {};
+        
+    },[filteredItems]);
     
     return (
         <>

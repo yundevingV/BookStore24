@@ -2,6 +2,7 @@ import { SAVE_PAGING } from "../action/types";
 import { savePaging } from "../action/paging_status";
 
 
+
 type PagingStateType = {
     PagingData : number;
 }

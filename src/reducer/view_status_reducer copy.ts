@@ -7,7 +7,7 @@ type viewStatusStateType = {
 }
 
 const initalState = {
-    viewStatusData : '',
+    viewStatusData : 'all',
 }
 
 type viewStatusActionType =

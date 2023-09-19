@@ -59,13 +59,13 @@ export default function BookStoreCommunity() {
             .then((response) => {
                 setData(response.data.content);
                 setTotalPages(response.data.totalPages);
-                sessionStorage.setItem('url',pathname);
-
+                sessionStorage.setItem('url', pathname);
             })
             .catch((error) => {
                 console.log('에러:', error.response);
             });
     }, [page]);
+    
 
 
     return(

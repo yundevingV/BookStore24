@@ -59,7 +59,7 @@ export default function BookStore() {
                 setData(response.data.content);
                 setTotalPages(response.data.totalPages);
                 sessionStorage.setItem('url',pathname);
-
+                console.log(response)
             })
             .catch((error) => {
                 console.log('에러:', error.response);

@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+import { RootState } from "../reducer";
 
 
 
@@ -11,10 +13,14 @@ export default function SearchButton() {
     const location = useLocation();
     console.log(location.pathname)    
 
+    const searchWord = useSelector(
+        (state : RootState) => state.SearchWordReducer.searchWordData
+    );
+    
     const search = () =>
     {
         if (!location.pathname.includes('result')){
-        navigate(`/search${location.pathname}/result`);}
+        navigate(`/search/${location.pathname}/result/${searchWord}`);}
         else {
             navigate(`.`)
         }
