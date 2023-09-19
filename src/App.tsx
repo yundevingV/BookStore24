@@ -61,7 +61,7 @@ function App() {
         <Route path='/auth/naver/*' element={<Naver />} />
         <Route path='/auth/google/*' element={<Google />} />
 
-        <Route path='/search/review/result/:searchWord' element={<SearchReviewResult /> } />
+        <Route path='/search/bookreview/result/:searchWord' element={<SearchReviewResult /> } />
         <Route path='/search/bookstore/result/:searchWord' element={<SearchStoreResult /> } />
 
         <Route path='/test' element={<Test />} />

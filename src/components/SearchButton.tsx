@@ -16,11 +16,12 @@ export default function SearchButton() {
     const searchWord = useSelector(
         (state : RootState) => state.SearchWordReducer.searchWordData
     );
-    
+    const path = `/search/${location.pathname}/result/${searchWord}`;
     const search = () =>
     {
         if (!location.pathname.includes('result')){
-        navigate(`/search/${location.pathname}/result/${searchWord}`);}
+        navigate(path);
+        }
         else {
             navigate(`.`)
         }
