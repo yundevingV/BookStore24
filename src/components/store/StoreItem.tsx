@@ -40,41 +40,11 @@ function ItemList({ items }: DataTypeList) {
         (state: RootState) => state.ViewStatusReducer.viewStatusData
     );
 
-    const filteredItems = items
-        ?.filter((item) => {
-            if (viewStatus === 'all') {
-            // Show all items
-            return true;
-            } else if (viewStatus === 'on') {
-            // Show items with status 'on'
-            return item.status === 'on';
-            } else if (viewStatus === 'off') {
-            // Show items with status 'off'
-            return item.status === 'off';
-            }
-            return false;
-        });
 
-    console.log(filteredItems)
-
-    useEffect(()=>{
-        if(filteredItems){
-            console.log(filteredItems)
-            saveTotalPaging(Math.floor(filteredItems.length/10));
-            console.log(Math.floor(filteredItems.length/10));
-            
-            if(filteredItems.length < 10){
-                
-            }
-        }
-        else {};
-        
-    },[filteredItems]);
-    
     return (
         <>
 
-{filteredItems?.map((item) => (
+{items?.map((item) => (
         <StyledLink to={`/bookstore/detail/?${item.loginId}&${item.title}`}>
                         <Frame>
 

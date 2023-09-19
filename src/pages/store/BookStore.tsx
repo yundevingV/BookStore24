@@ -12,6 +12,7 @@ import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import axios from "axios";
+import { savePaging } from "../../action/paging_status";
 
 export default function BookStore() {
     
@@ -47,9 +48,13 @@ export default function BookStore() {
         (state: RootState) => state.PagingReducer.PagingData
     );
 
-    useEffect(() => {        
+    const viewType = useSelector(
+        (state : RootState) => state.ViewStatusReducer.viewStatusData
+    )
+            
+    useEffect(() => {   
         axios
-            .get(`http://bookstore24.shop/sell/post/list`, {
+            .get(`http://bookstore24.shop/sell/post/${viewType}`, {
                 params: {
                     page : page | 0,
                     size : 10,
@@ -64,7 +69,7 @@ export default function BookStore() {
             .catch((error) => {
                 console.log('에러:', error.response);
             });
-    }, [page]);
+    }, [page,viewType,pathname]);
 
     return(
         <Wrapper>

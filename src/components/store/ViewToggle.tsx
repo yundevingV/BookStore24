@@ -10,17 +10,17 @@ export default function ViewToggle() {
   const dispatch = useDispatch();
 
   const all = () =>{
-    dispatch(saveViewStatus('all')); 
+    dispatch(saveViewStatus('list')); 
 
   }
 
   const on = () =>{
-    dispatch(saveViewStatus('on'));  
+    dispatch(saveViewStatus('on/list'));  
 
   }
 
   const off = () =>{
-    dispatch(saveViewStatus('off'));  
+    dispatch(saveViewStatus('off/list'));  
 
   }
   const viewStatus = useSelector(
@@ -65,7 +65,7 @@ padding : 10px;
 background-color : transparent;
 
 ${(props) =>
-    props.status === 'all' &&
+    props.status === 'list' &&
     css`
       background-color: #c2c2c2;
     `};
@@ -86,7 +86,7 @@ padding : 10px;
 background-color : transparent;
 
 ${(props) =>
-    props.status === 'on' &&
+    props.status === 'on/list' &&
     css`
       background-color: #c2c2c2;
     `};
@@ -107,7 +107,7 @@ padding : 10px;
 background-color : transparent;
 
 ${(props) =>
-    props.status === 'off' &&
+    props.status === 'off/list' &&
     css`
       background-color: #c2c2c2;
     `};
