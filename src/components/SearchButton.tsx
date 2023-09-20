@@ -23,7 +23,7 @@ export default function SearchButton() {
         navigate(path);
         }
         else {
-            navigate(`.`)
+            navigate(`./d`)
         }
     }
 

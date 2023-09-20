@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import axios from "axios";
 import { savePaging } from "../../action/paging_status";
+import { saveViewStatus } from "../../action/view_status";
 
 export default function BookStore() {
     
@@ -70,6 +71,10 @@ export default function BookStore() {
                 console.log('에러:', error.response);
             });
     }, [page,viewType,pathname]);
+
+    useEffect(()=>{
+        saveViewStatus('list');
+    },[])
 
     return(
         <Wrapper>
