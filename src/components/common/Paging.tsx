@@ -17,6 +17,7 @@ export default function Paging({ totalPages }: PagingProps) {
     useEffect(()=>{dispatch(savePaging(0))},[])
 
     const dispatch = useDispatch();
+    
     const [selectedPage, setSelectedPage] = useState<number | null>(0);
 
     if (totalPages === undefined || totalPages <= 0) {

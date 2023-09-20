@@ -1,9 +1,7 @@
 import React,{useEffect,useState} from "react";
-import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
 import Navbar from "../../components/Navbar";
 import Item from "../../components/store/StoreItem";
-import Login from "../Login";
 import Paging from "../../components/common/Paging";
 import ViewToggle from "../../components/store/ViewToggle";
 
@@ -12,7 +10,6 @@ import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import axios from "axios";
-import { savePaging } from "../../action/paging_status";
 import { saveViewStatus } from "../../action/view_status";
 
 export default function BookStore() {
@@ -35,11 +32,6 @@ export default function BookStore() {
 
     // 현재 주소
     const { pathname } = useLocation();
-
-    //로그인
-    const loginStateData = useSelector(
-        (state: RootState) => state.LoginStatusReducer.loginStatusData
-    );
 
     const [data,setData] = useState<DataType[] | undefined>();
 

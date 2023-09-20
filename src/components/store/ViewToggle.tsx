@@ -1,6 +1,7 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { css, styled } from 'styled-components';
+import { savePaging } from '../../action/paging_status';
 import { saveViewStatus } from '../../action/view_status';
 import { RootState } from '../../reducer';
 
@@ -11,16 +12,19 @@ export default function ViewToggle() {
 
   const all = () =>{
     dispatch(saveViewStatus('list')); 
+    dispatch(savePaging(0));
 
   }
 
   const on = () =>{
     dispatch(saveViewStatus('on/list'));  
+    dispatch(savePaging(0));
 
   }
 
   const off = () =>{
     dispatch(saveViewStatus('off/list'));  
+    dispatch(savePaging(0));
 
   }
   const viewStatus = useSelector(
