@@ -77,7 +77,6 @@ export default function SearchStoreResult() {
             <Container >
             <Title>
                 <PTitle>검색 결과</PTitle> 
-                <p>검색 결과가 정확하지 않으시면 , 을 빼고 검색해주세요</p>
 
             </Title>
 
