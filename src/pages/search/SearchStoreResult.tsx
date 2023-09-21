@@ -30,6 +30,8 @@ export default function SearchStoreResult() {
         "view": number,
     }
 
+    const location = useLocation();
+
     const [data,setData] = useState<DataType[] | undefined>();
     
     const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
@@ -43,13 +45,19 @@ export default function SearchStoreResult() {
         (state : RootState) => state.SearchOptionReducer.searchOptionData
     );
 
-    const {searchWord} = useParams();
+    console.log(location)
+
+    // 쿼리 매개변수 추출
     
+    const searchParams = new URLSearchParams(location.search);
+    const searchQuery = searchParams.get('search_query');
+    console.log(searchQuery);   
+
     useEffect(() => {        
         axios
             .get(`http://bookstore24.shop/sell/post/list/search/by/${searchOpion}`, {
                 params: {
-                    keyword : searchWord,
+                    keyword : searchQuery,
                     page : page | 0,
                     size : 10,
                 },

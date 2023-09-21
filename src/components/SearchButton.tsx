@@ -11,19 +11,23 @@ export default function SearchButton() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location.pathname)    
 
     const searchWord = useSelector(
         (state : RootState) => state.SearchWordReducer.searchWordData
     );
-    const path = `/search/${location.pathname}/result/${searchWord}`;
+    const path = `/search/${location.pathname}/result?search_query=${searchWord}`;
+
+    const searchParams = new URLSearchParams(location.search);
+    const searchQuery = searchParams.get('search_query');
+
+
     const search = () =>
     {
         if (!location.pathname.includes('result')){
         navigate(path);
         }
         else {
-            navigate(`./d`)
+            navigate(path)
         }
     }
 

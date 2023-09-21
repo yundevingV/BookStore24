@@ -18,8 +18,7 @@ export default function SearchOption(){
     
     dispatch(saveSearchOption(selectValue));
 
-    console.log(selectValue)
-    
+
     return(
         <>
             <Select onChange={handleChange}>

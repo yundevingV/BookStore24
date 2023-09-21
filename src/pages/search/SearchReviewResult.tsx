@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 
 import axios from "axios";
+import SearchOption from "../../components/SearchOption";
 
 
 export default function SearchReviewResult() {
@@ -28,6 +29,8 @@ export default function SearchReviewResult() {
         "view": number,
     }
 
+    const location = useLocation();
+
     const [data,setData] = useState<DataType[] | undefined>();
     
     const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
@@ -41,14 +44,19 @@ export default function SearchReviewResult() {
         (state : RootState) => state.SearchOptionReducer.searchOptionData
     );
 
-    const {searchWord} = useParams();
+    console.log(location)
 
+    // 쿼리 매개변수 추출
+    
+    const searchParams = new URLSearchParams(location.search);
+    const searchQuery = searchParams.get('search_query');
+    console.log(searchQuery);
     
     useEffect(() => {        
         axios
             .get(`http://bookstore24.shop/review/post/list/search/by/${searchOpion}`, {
                 params: {
-                    keyword : searchWord,
+                    keyword : searchQuery,
                     page : page ,
                     size : 10,
                 },
@@ -65,8 +73,7 @@ export default function SearchReviewResult() {
             });
     }, [page]);
 
-    console.log(searchOpion)
-    console.log(searchWord)
+
     return(
 
         <Wrapper>
@@ -77,9 +84,8 @@ export default function SearchReviewResult() {
             <Container >
             <Title>
                 <PTitle>검색 결과 입니다.</PTitle> 
-                <p>검색 결과가 정확하지 않으시면 , 을 빼고 검색해주세요</p>
             </Title>
-            {/* <Navbar /> */}
+            <Navbar />
 
             <Item items={data} />
             
