@@ -15,19 +15,21 @@ export default function SearchButton() {
     const searchWord = useSelector(
         (state : RootState) => state.SearchWordReducer.searchWordData
     );
+
     const path = `/search/${location.pathname}/result?search_query=${searchWord}`;
-
-    const searchParams = new URLSearchParams(location.search);
-    const searchQuery = searchParams.get('search_query');
-
-
+    console.log(location.pathname);
     const search = () =>
     {
-        if (!location.pathname.includes('result')){
-        navigate(path);
+
+        if (!location.pathname.includes('search')){
+            navigate(path);
         }
         else {
-            navigate(path)
+            console.log(false)
+            navigate({
+                pathname: location.pathname,
+                search: `?search_query=${searchWord}`, // 쿼리 매개변수 구성 수정
+            });
         }
     }
 

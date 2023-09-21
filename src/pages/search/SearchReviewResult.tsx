@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 
 import axios from "axios";
-import SearchOption from "../../components/SearchOption";
+import useRedirect from "../../hooks/useRedirect";
 
 
 export default function SearchReviewResult() {
@@ -49,8 +49,11 @@ export default function SearchReviewResult() {
     // 쿼리 매개변수 추출
     
     const searchParams = new URLSearchParams(location.search);
+
     const searchQuery = searchParams.get('search_query');
     console.log(searchQuery);
+
+    useRedirect();
     
     useEffect(() => {        
         axios
@@ -71,7 +74,7 @@ export default function SearchReviewResult() {
             .catch((error) => {
                 console.log('에러:', error.response);
             });
-    }, [page]);
+    }, [page,searchOpion,searchQuery]);
 
 
     return(
@@ -84,6 +87,8 @@ export default function SearchReviewResult() {
             <Container >
             <Title>
                 <PTitle>검색 결과 입니다.</PTitle> 
+                {searchOpion}
+
             </Title>
             <Navbar />
 

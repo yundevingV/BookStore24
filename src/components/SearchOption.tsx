@@ -8,8 +8,6 @@ export default function SearchOption(){
 
     const dispatch = useDispatch();
 
-
-
     const [selectValue , setSelectValue] = useState('title')
 
     const handleChange = (e: { target: { value: React.SetStateAction<string>; }; } ) => {

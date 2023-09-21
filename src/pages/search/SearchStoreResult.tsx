@@ -11,6 +11,7 @@ import { RootState } from "../../reducer/index";
 
 import axios from "axios";
 import { useParams } from "react-router";
+import useRedirect from "../../hooks/useRedirect";
 
 
 export default function SearchStoreResult() {
@@ -51,7 +52,8 @@ export default function SearchStoreResult() {
     
     const searchParams = new URLSearchParams(location.search);
     const searchQuery = searchParams.get('search_query');
-    console.log(searchQuery);   
+
+    useRedirect();
 
     useEffect(() => {        
         axios
@@ -72,7 +74,7 @@ export default function SearchStoreResult() {
             .catch((error) => {
                 console.log('에러:', error.response);
             });
-    }, [page]);
+    }, [page,searchOpion,searchQuery]);
 
 
     return(
@@ -87,7 +89,7 @@ export default function SearchStoreResult() {
                 <PTitle>검색 결과</PTitle> 
 
             </Title>
-
+            <Navbar />
             <Item items={data} />
             
             <PagingContainer>
