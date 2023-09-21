@@ -30,6 +30,10 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
     const [data,setData] = useState<any | null>(null)
 
     const search = (e: React.MouseEvent) => {
+        if(searchWord === '' ){
+            alert('검색어를 입력해주세요 !');
+        }
+
         e.preventDefault(); // Prevent the default form submission behavior.
 
 
