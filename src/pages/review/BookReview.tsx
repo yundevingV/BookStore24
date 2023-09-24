@@ -36,11 +36,6 @@ export default function BookStoreCommunity() {
     // 현재 주소
 
     const { pathname } = useLocation();
-
-    //로그인
-    const loginStateData = useSelector(
-        (state: RootState) => state.LoginStatusReducer.loginStatusData
-    );
     
     const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
 
@@ -66,8 +61,6 @@ export default function BookStoreCommunity() {
             });
     }, [page]);
     
-
-
     return(
 
         <Wrapper>

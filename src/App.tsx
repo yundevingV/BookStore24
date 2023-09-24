@@ -28,6 +28,7 @@ import Test from './pages/test/Test';
 import { Route , Routes } from 'react-router';
 import SearchReviewResult from './pages/search/SearchReviewResult';
 import SearchStoreResult from './pages/search/SearchStoreResult';
+import UserList from './pages/profile/UserList';
 
 function App() {
 
@@ -63,6 +64,10 @@ function App() {
 
         <Route path='/search/bookreview/result' element={<SearchReviewResult /> } />
         <Route path='/search/bookstore/result' element={<SearchStoreResult /> } />
+
+        <Route path='/profile/review' element={< UserList/>} />
+        <Route path='/profile/sell/on' element={< UserList/>} />
+        <Route path='/profile/sell/off' element={< UserList/>} />
 
         <Route path='/test' element={<Test />} />
 

@@ -4,6 +4,8 @@ import Test from '../../assets/imgs/testbookcover.jpg'
 import { styled } from "styled-components";
 import axios from "axios";
 import truncate from "../../util/truncate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export default function ReviewList(){
 
@@ -38,16 +40,13 @@ export default function ReviewList(){
                 
             })
             .then((response) => {
-                console.log(response)
                 setData(response.data.content)
 
             })
             .catch((error) => {
-                console.log('에러:', error.response);
             });
     }, []);
 
-    console.log(data);
 
     return(
         <>
@@ -74,7 +73,10 @@ export default function ReviewList(){
                                 </ItemPublisher>
                                 <ItemRating>
 
-                                    <span>{book.score} 점</span>
+                                    <span>      
+                                        <FontAwesomeIcon icon={faStar} className="star-icon" />
+                                        {book.score}
+                                    </span>
                                 </ItemRating>
                             </Content>
                         </Box>

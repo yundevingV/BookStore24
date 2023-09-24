@@ -39,16 +39,13 @@ export default function ReviewList(){
                 
             })
             .then((response) => {
-                console.log(response)
                 setData(response.data.content)
 
             })
             .catch((error) => {
-                console.log('에러:', error.response);
             });
     }, []);
 
-    console.log(data);
 
     return(
         <>

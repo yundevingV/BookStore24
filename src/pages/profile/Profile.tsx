@@ -4,7 +4,8 @@ import Jisoo from '../../assets/imgs/jisoo.jpg'
 import SellingList from "../../components/profile/SellingList";
 import SoldList from "../../components/profile/SoldList";
 import ReviewList from "../../components/profile/ReviewList";
-import { StyledButtonLink } from "../../styles/link";
+import { StyledButtonLink, StyledLink } from "../../styles/link";
+
 
 
 import { styled } from "styled-components";
@@ -130,7 +131,7 @@ export default function Profile(){
                 {/* 판매중목록 */}
                 <Div value={0}>
                     <P value={15}>
-                        판매중인 상품 목록
+                        판매중인 상품 목록 <PlusLink to='sell/on'> + </PlusLink>
                     </P>
                 </Div>
 
@@ -142,6 +143,7 @@ export default function Profile(){
                 <Div value={15}>
                     <P value={15}>
                         판매완료한 상품 목록
+                        <PlusLink to='sell/off'> + </PlusLink>
 
                     </P>
                 </Div>
@@ -154,6 +156,7 @@ export default function Profile(){
                 <Div value={15}>
                     <P value={15}>
                         작성한 도서 후기 목록
+                        <PlusLink to='review'> + </PlusLink>
                     </P>
                 </Div>
 
@@ -268,4 +271,9 @@ left : 110px;
 
 const Residence = styled.span`
 font-size : 22px;
+`
+
+const PlusLink = styled(StyledLink)`
+color : #000;
+
 `
