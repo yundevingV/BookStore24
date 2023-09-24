@@ -72,7 +72,7 @@ export default function ReviewList(){
                                 </BookTitle>
 
                                 <ItemPublisher>
-                                    <span>{book.author} / {book.publisher} </span>
+                                <span> {book.author.replace('^', ',')} / {book.publisher} </span>
                                 </ItemPublisher>
                                 <ItemRating>
 

@@ -76,7 +76,6 @@ export default function SearchStoreResult() {
             });
     }, [page,searchOpion,searchQuery]);
 
-
     return(
 
         <Wrapper>

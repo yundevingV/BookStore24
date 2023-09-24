@@ -71,7 +71,7 @@ export default function ReviewList(){
                                     <span>{truncate(book.bookTitle,27)}</span>
                                 </BookTitle>
                                 <ItemPublisher>
-                                    <span>{book.author} / {book.publisher} </span>
+                                <span> {book.author.replace('^', ',')} / {book.publisher} </span>
                                 </ItemPublisher>
                                 <ItemRating>
 
