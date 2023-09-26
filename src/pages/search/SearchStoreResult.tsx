@@ -88,7 +88,7 @@ export default function SearchStoreResult() {
                 <PTitle>검색 결과</PTitle> 
 
             </Title>
-            <Navbar />
+            {/* <Navbar /> */}
             <Item items={data} />
             
             <PagingContainer>

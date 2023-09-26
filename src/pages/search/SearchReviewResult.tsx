@@ -87,7 +87,7 @@ export default function SearchReviewResult() {
                 <PTitle>검색 결과 입니다.</PTitle> 
 
             </Title>
-            <Navbar />
+            {/* <Navbar /> */}
 
             <Item items={data} />
             
