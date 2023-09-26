@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react"
 import truncate from "../../util/truncate";
 
 import styled from "styled-components"
+import { StyledButtonLink } from "../../styles/link";
+import { saveSearchOption } from "../../action/search_option";
+import { useDispatch } from "react-redux";
 
 import axios from "axios";
 
@@ -20,8 +23,9 @@ interface booksProps{
 }
 
 export default function ReviewVeiwPreview(){
-    const [data,setData] = useState<booksProps | undefined>();
 
+    const [data,setData] = useState<booksProps | undefined>();
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         axios.get(`http://bookstore24.shop/book/ranking/view/review`)
@@ -34,6 +38,10 @@ export default function ReviewVeiwPreview(){
             })
     },[])
 
+
+    const searchType = (type : string) => {
+        dispatch(saveSearchOption(type));
+    }
     const selectedData = data?.books.slice(0, 5);
     console.log(selectedData)
 
@@ -57,14 +65,18 @@ export default function ReviewVeiwPreview(){
             </LContainer>
 
             <RContainer>
+            <StyledButtonLink to={`/search/bookreview/result?search_query=${item.title}`} onClick={() => searchType('booktitle')}>
 
                 <BookTitle>
                 {truncate(`${item.title}`,15)}
                 </BookTitle>
-
+            </StyledButtonLink>
                 <BookAuthor>
 
-                    <p>{item.author.replace('^', ',')} </p>
+                <StyledButtonLink to={`/search/bookreview/result?search_query=${item.author}`} onClick={() => searchType('author')}>
+
+                    <BookAuthor>{item.author.replace('^', ',')} </BookAuthor>
+                </StyledButtonLink>
                     <p>{item.publisher}</p>
 
                 </BookAuthor>
@@ -147,5 +159,5 @@ color : #ffffff;
 
 const BookAuthor = styled.span`
 color : #ffffff;
-
+margin : 15px 0px;
 `

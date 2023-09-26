@@ -22,7 +22,7 @@ export default function SearchOption(){
             <Select onChange={handleChange}>
                 <option value='title'>제목</option>
                 <option value='author'>저자</option>
-                                <option value='booktitle'>책 제목</option>
+                <option value='booktitle'>책 제목</option>
 
                 <option value='nickname'>작성자</option>
             </Select>

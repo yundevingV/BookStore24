@@ -8,6 +8,9 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../styles/fontAwesome.css';
 import axios from "axios";
+import { StyledButtonLink } from "../../styles/link";
+import { saveSearchOption } from "../../action/search_option";
+import { useDispatch } from "react-redux";
 
 interface bookInfoProps{
     id : string,
@@ -28,6 +31,7 @@ export default function RankingPreview(){
     
     const [data,setData] = useState<booksProps | undefined>();
     const token = sessionStorage.getItem('token');
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         axios.get(`http://bookstore24.shop/book/ranking/score`,
@@ -42,6 +46,10 @@ export default function RankingPreview(){
             })
     },[])
     const selectedData = data?.books.slice(0, 5);
+
+    const searchType = (type : string) => {
+        dispatch(saveSearchOption(type));
+    }
 
     return(
         <>
@@ -64,13 +72,20 @@ export default function RankingPreview(){
 
                 <RContainer>
 
-                    <BookTitle>
-                    {truncate(`${item.title}`,15)}
-                    </BookTitle>
+                <StyledButtonLink to={`/search/bookreview/result?search_query=${item.title}`} onClick={() => searchType('booktitle')}>
+                        <BookTitle>
+                            {truncate(`${item.title}`,15)}
+                        </BookTitle>
+                    </StyledButtonLink>
 
                     <BookAuthor>
+                        
+                <StyledButtonLink to={`/search/bookreview/result?search_query=${item.author}`} onClick={() => searchType('author')}>
 
-                        <p>{item.author.replace('^', ',')} </p>
+                        <BookAuthor>{item.author.replace('^', ',')} </BookAuthor>
+                </StyledButtonLink>
+
+
                         <p>{item.publisher}</p>
 
                     </BookAuthor>

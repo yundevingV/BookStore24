@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react"
 import truncate from "../../util/truncate";
 
 import styled from "styled-components"
+import { StyledButtonLink } from "../../styles/link";
+import { saveSearchOption } from "../../action/search_option";
+import { useDispatch } from "react-redux";
 
-import '../../styles/fontAwesome.css'
 import axios from "axios";
 
 interface bookInfoProps{
@@ -20,14 +22,13 @@ interface booksProps{
     books : Array<bookInfoProps>,
 }
 
-export default function StoreVeiwPreview(){
-    const [data,setData] = useState<booksProps | undefined>();
+export default function ReviewVeiwPreview(){
 
+    const [data,setData] = useState<booksProps | undefined>();
+    const dispatch = useDispatch();
 
     useEffect(()=>{
-        axios.get(`http://bookstore24.shop/book/ranking/view/sell`,
-
-            )
+        axios.get(`http://bookstore24.shop/book/ranking/view/sell`)
             .then(response =>{
                 setData(response.data);
 
@@ -36,6 +37,11 @@ export default function StoreVeiwPreview(){
                 console.log('Error : ', error);
             })
     },[])
+
+
+    const searchType = (type : string) => {
+        dispatch(saveSearchOption(type));
+    }
     const selectedData = data?.books.slice(0, 5);
     console.log(selectedData)
 
@@ -59,18 +65,23 @@ export default function StoreVeiwPreview(){
             </LContainer>
 
             <RContainer>
+            <StyledButtonLink to={`/search/bookstore/result?search_query=${item.title}`} onClick={() => searchType('booktitle')}>
 
                 <BookTitle>
                 {truncate(`${item.title}`,15)}
                 </BookTitle>
-
+            </StyledButtonLink>
                 <BookAuthor>
 
-                    <p>{item.author.replace('^', ',')} </p>
+                <StyledButtonLink to={`/search/bookstore/result?search_query=${item.author}`} onClick={() => searchType('author')}>
+                    <BookAuthor>
+                    {item.author.replace('^', ',')} 
+                    </BookAuthor>
+                </StyledButtonLink>
                     <p>{item.publisher}</p>
 
                 </BookAuthor>
-
+                
             </RContainer>
             </ItemContainer>
             )}
@@ -146,10 +157,9 @@ padding : 10px 0px;
 const BookTitle = styled.span`
 color : #ffffff;
 `
-const Rating = styled.span`
-color : #ffffff;
-`
+
 const BookAuthor = styled.span`
 color : #ffffff;
+margin : 15px 0px;
 
 `
