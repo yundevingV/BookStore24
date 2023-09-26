@@ -43,15 +43,13 @@ export default function SearchReviewResult() {
     const searchOpion = useSelector(
         (state : RootState) => state.SearchOptionReducer.searchOptionData
     );
-
-    console.log(location)
-
+    console.log('--------')
+    console.log(searchOpion)
     // 쿼리 매개변수 추출
     
     const searchParams = new URLSearchParams(location.search);
 
     const searchQuery = searchParams.get('search_query');
-    console.log(searchQuery);
 
     useRedirect();
     
@@ -87,7 +85,6 @@ export default function SearchReviewResult() {
             <Container >
             <Title>
                 <PTitle>검색 결과 입니다.</PTitle> 
-                {searchOpion}
 
             </Title>
             <Navbar />
