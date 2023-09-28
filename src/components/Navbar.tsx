@@ -10,6 +10,8 @@ import { StyledButtonLink } from "../styles/link";
 import { useSelector } from "react-redux";
 import { RootState } from "../reducer/index";
 import React from "react";
+import { useLocation, useNavigate } from "react-router";
+import { useSearchParams } from "react-router-dom";
 
 type NavbarProps = {
     text? : string;
@@ -27,16 +29,39 @@ export default function Navbar({text,url} : NavbarProps ){
         (state: RootState) => state.SearchWordReducer.searchWordData
     );
 
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const submit = (e: React.MouseEvent,searchWordData :string) => {
-        console.log(searchWordData);
-        console.log(searchOptionData);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const searchWord = useSelector(
+        (state : RootState) => state.SearchWordReducer.searchWordData
+    );
+
+    const path = `/search/${location.pathname}/result?search_query=${searchWord}`;
+
+    const search = (e: React.FormEvent<HTMLFormElement>) =>
+    {       
+        e.preventDefault();
+
+        setSearchParams({
+            search_query : searchWord,
+        })
+
+        if (!location.pathname.includes('search')){
+
+        navigate(path);       
+        }
+        else {
+            navigate({
+                search: `?search_query=${searchWord}`, // 쿼리 매개변수 구성 수정
+            });
+        }
     }
-
     return(
         <>
         <NavContainer>
-                <Form onSubmit={(e : any) => submit(e, searchWordData)}>
+                <Form onSubmit={(e : React.FormEvent<HTMLFormElement>) => search(e)}>
 
                     <SearchOption />
 

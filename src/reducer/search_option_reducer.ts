@@ -6,7 +6,7 @@ type SearchOptionStateType = {
 }
 
 const initalState = {
-    searchOptionData : '',
+    searchOptionData : 'title',
 }
 
 type SearchOptionActionType =
