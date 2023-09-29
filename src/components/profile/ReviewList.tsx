@@ -6,6 +6,7 @@ import axios from "axios";
 import truncate from "../../util/truncate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { PLink } from "../../styles/link";
 
 export default function ReviewList(){
 
@@ -56,11 +57,15 @@ export default function ReviewList(){
         {data?.map((book )=>(
                     <>
                     <Space />
+                    <PLink to={`/bookreview/detail/?${book.loginId}&${book.title}`}>
+
                     <ItemContainer >
                         <Box>
-                            
+                            <Left>
                             <ItemImg src={book.coverImg} alt={book.title} />
-                            
+                            </Left>
+
+                            <Right>
                             <Content>
                                 <ItemName>
                                     <span>{book.title}</span>
@@ -79,8 +84,11 @@ export default function ReviewList(){
                                     </span>
                                 </ItemRating>
                             </Content>
+                            </Right>
                         </Box>
                     </ItemContainer>
+                    </PLink>
+
                     </>
                     ))}
 
@@ -89,6 +97,7 @@ export default function ReviewList(){
                 </>
     )
 }
+
 const Wrapper = styled.div`
 `
 
@@ -134,7 +143,10 @@ const Box = styled.div`
     }
 
 `
-
+const Left = styled.div`
+`
+const Right = styled.div`
+`
 
 const ItemImg = styled.img`
 
@@ -147,6 +159,7 @@ const Content = styled.div`
     display: flex;
     flex-direction : column;
     justify-content : flex-start;
+
     padding : 0px 10px;
 `
 

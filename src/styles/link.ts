@@ -2,13 +2,15 @@ import { styled } from "styled-components";
 import {Link} from "react-router-dom"
 
 export const StyledLink = styled(Link)`
-  color:  #7d7874;
+  color:  #000;
 
   text-decoration: none;
   cursor: pointer;    
 
-  font-size : 17px;
+  font-size : 17px;  
 `
+
+
 export const StyledLinkBlack = styled(Link)`
   color:  #000000;
 
@@ -36,4 +38,9 @@ export const StyledButtonLink = styled(Link)`
   font-size : 17px;
 
   
+`
+// 프로필 목록 링크
+export const PLink = styled(Link)`
+text-decoration : none;
+color : #000;
 `

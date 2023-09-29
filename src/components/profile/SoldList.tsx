@@ -4,6 +4,7 @@ import Test from '../../assets/imgs/testbookcover.jpg'
 import { styled } from "styled-components";
 import axios from "axios";
 import truncate from "../../util/truncate";
+import { PLink } from "../../styles/link";
 
 export default function ReviewList(){
 
@@ -55,6 +56,7 @@ export default function ReviewList(){
         {data?.map((book )=>(
                     <>
                     <Space />
+                    <PLink to={`/bookstore/detail/?${book.loginId}&${book.title}`}>
                     <ItemContainer >
                         <Box>
                             
@@ -67,6 +69,7 @@ export default function ReviewList(){
                                 <BookTitle>
                                     <span>{truncate(book.bookTitle,27)}</span>
                                 </BookTitle>
+
                                 <ItemPublisher>
                                 <span> {book.author.replace('^', ',')} / {book.publisher} </span>
                                 </ItemPublisher>
@@ -77,6 +80,7 @@ export default function ReviewList(){
                             </Content>
                         </Box>
                     </ItemContainer>
+                    </PLink>
                     </>
                     ))}
 
