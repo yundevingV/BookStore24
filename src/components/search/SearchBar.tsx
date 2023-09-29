@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import useInput from "../hooks/useInput";
-import { saveSearchWord } from "../action/search_word";
+import useInput from "../../hooks/useInput";
+import { saveSearchWord } from "../../action/search_word";
 
 import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { RootState } from "../reducer/index";
+
 
 
 export default function SearchBar(){

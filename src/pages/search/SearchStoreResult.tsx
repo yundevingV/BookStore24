@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import Header from "../../components/common/Header";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/search/Navbar";
 import Item from "../../components/store/StoreItem";
 import Paging from "../../components/common/Paging";
 

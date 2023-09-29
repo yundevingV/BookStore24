@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from "react";
 import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/search/Navbar";
 import Item from "../../components/review/ReviewItem";
 import Paging from "../../components/common/Paging";
 

@@ -1,14 +1,14 @@
-import useInput from "../hooks/useInput";
-import SearchOption from "../components/SearchOption";
-import SearchBar from "../components/SearchBar";
-import SearchButton from "../components/SearchButton";
-import PostButton from "../components/PostButton";
+import useInput from "../../hooks/useInput";
+import SearchOption from "./SearchOption";
+import SearchBar from "./SearchBar";
+import SearchButton from "./SearchButton";
+import PostButton from "./PostButton";
 
 
 import { styled } from "styled-components";
-import { StyledButtonLink } from "../styles/link";
+import { StyledButtonLink } from "../../styles/link";
 import { useSelector } from "react-redux";
-import { RootState } from "../reducer/index";
+import { RootState } from "../../reducer/index";
 import React from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useSearchParams } from "react-router-dom";

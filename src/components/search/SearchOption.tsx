@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveSearchOption } from "../action/search_option";
-import { RootState } from "../reducer"; // Import your RootState type from your Redux setup
+import { saveSearchOption } from "../../action/search_option";
+import { RootState } from "../../reducer"; // Import your RootState type from your Redux setup
 import { styled } from "styled-components";
 
 export default function SearchOption() {
