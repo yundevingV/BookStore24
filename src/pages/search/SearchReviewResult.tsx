@@ -79,7 +79,7 @@ export default function SearchReviewResult() {
             
             <Container >
             <Title>
-                <PTitle>검색 결과 입니다.</PTitle> 
+                <PTitle>{searchQuery}에 대한 검색 결과 입니다.</PTitle> 
 
             </Title>
             <Navbar />
