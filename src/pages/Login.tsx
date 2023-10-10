@@ -261,16 +261,17 @@ text-align : center;
 `
 
 const Input = styled.input`
-width : 350px;
+width : 340px;
 height : 30px;
 
 margin : 10px;
 
 border : 2px solid #e2e2e2;
-padding : 0px;
+padding : 5px;
 
 &::placeholder{
     font-family: tway, sans-serif, Arial;
+    padding : 5px;
 	}
     
 //인풋 창 포커스
@@ -278,7 +279,7 @@ padding : 0px;
     //클릭 했을때 기본(?) 선 안나오게.
     outline: none !important;
 
-    border: 2px solid blue;
+    border: 2px solid #bbb9b9;
     }
 `
 
@@ -309,23 +310,25 @@ const SubmitButton = styled.button`
 
 //기본 크기가 input > button
 width : 355px;
-height : 30px;
+height : 40px;
 
 font-size : 20px;
 color : #ffffff;
 
 margin-top : 10px;
 
-background-color: #033bfa;
+background-color: #567dfc;
 
 border : 2px solid #ffffff;
+border-radius : 8px;
 font-family: tway, sans-serif, Arial;
 
 &:hover {
-    background-color: #ffffff;
-    border : 2px solid #033bfa;
+    background-color: #567dfc;
 
-    color : black;    
+    border : 2px solid #ffffff;
+
+    color : #ffffff;    
     cursor : pointer;
     }
 `
