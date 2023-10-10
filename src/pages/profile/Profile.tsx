@@ -93,11 +93,9 @@ export default function Profile(){
                         마이페이지
                     </P>
 
-                    <ModifyButton>
-                        <StyledButtonLink to='/editprofile'>
+                        <StyledEditButtonLink to='/editprofile'>
                             프로필 수정
-                        </StyledButtonLink>
-                    </ModifyButton>
+                        </StyledEditButtonLink>
 
                 </Div>
                 :
@@ -217,20 +215,19 @@ font-weight : bold;
 
 `
 
+const StyledEditButtonLink = styled(StyledButtonLink)`
+    
+    padding : 10px;
 
-const ModifyButton = styled.button`
-font-size : 15px;
+    border-radius : 8px;
 
-/* 상 오 하 왼 */
-margin : 0px 0px 0px 0px;
+    font-size : 15px;
+    font-family: tway, sans-serif, Arial;
 
-color : #212221;
+    font-weight : bold;
 
-font-family: tway, sans-serif, Arial;
-font-weight : bold;
 
 `
-
 const ProfileInfoContainer = styled.div`
 margin:0px;
 border : 0px;

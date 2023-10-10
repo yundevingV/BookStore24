@@ -143,12 +143,10 @@ export default function EditProfile() {
                 <Space width={0} height={5} />
 
                 <PwdButtonContainer>
-                    <PwdButton>
-                        <StyledButtonLink to='/editpwd'>
+                        <StyledEditButtonLink to='/editpwd'>
                             비밀번호 수정하기
 
-                        </StyledButtonLink>
-                    </PwdButton>
+                        </StyledEditButtonLink>
                 </PwdButtonContainer>
 
                 {/* 사용자 정보 */}
@@ -244,21 +242,19 @@ const PwdButtonContainer = styled.div`
 text-align : right;
 `
 
-const PwdButton = styled.button`
-font-family: tway, sans-serif, Arial;
-font-weight : bold;
-font-size : 15px;
 
-/* 상 오 하 왼 */
-margin : 0px 0px 0px 0px;
+const StyledEditButtonLink = styled(StyledButtonLink)`
+    padding : 10px;
 
-color : #212221;
+    border-radius : 8px;
 
-background-color : transparent;
+    font-size : 15px;
+    font-family: tway, sans-serif, Arial;
 
-border : 0.1px solid #000000;
-
+    font-weight : bold;
 `
+
+
 const ProfileInfoContainer = styled.div`
 margin:0px;
 border : 0px;
@@ -341,19 +337,16 @@ const SaveButton = styled.button`
 width : 120px;
 height : 30px;
 
-background-color: #ffffff;
-border : 2px solid #033bfa;
-color : black;    
+background-color: #567dfc;
 
+border : 0px;
+border-radius : 8px;
+
+color : #ffffff;
 
 font-family: tway, sans-serif, Arial;
 
 &:hover {
-
-  color : #ffffff;
-  background-color: #033bfa;
-  border : 2px solid #ffffff;
-
     cursor : pointer;
     }
 
@@ -373,18 +366,15 @@ const RetireButton = styled.button`
 width : 120px;
 height : 30px;
 
-background-color: #e3174f;
-border : 2px solid #ffffff;
-color : black;    
+background-color: #ff225d;
 
+border : 0px;
+border-radius : 8px;
 
+color : #ffffff;    
 font-family: tway, sans-serif, Arial;
 
 &:hover {
-
-  background-color: #ffffff;
-  border : 2px solid #e3174f;
-
     cursor : pointer;
     }
 
