@@ -25,33 +25,37 @@ export default function Comment({id , loginId, title , number} : CommentProps ){
     });
 
     const saveComment = async () => {
-
         const url = 'http://bookstore24.shop/review/comment/post/save';
-    
         const headers = {
             Authorization: token,
             'Content-Type': 'application/json',
         };
-    
+        
+        // Assuming these values are defined elsewhere in your code
         const data = {
             id: id,
             loginId: loginId,
             title: title,
             content: content,
         };
+        
+        // Check if the 'content' field is not empty
+        if (!data.content) {
+            alert('댓글을 입력해주세요.');
+            return; // Exit the function to prevent posting an empty comment
+        }
     
         try {
             const response = await axios.post(url, data, { headers });
             console.log('Response:', response.data);
             resetInput();
-            alert('댓글을 성공적으로 작성했습니다!');
+            alert('Your comment has been successfully written!');
             window.location.reload();
-
-
-            } catch (error) {
+        } catch (error) {
             console.error('Error:', error);
-            }
-        };
+        }
+    };
+    
 
 
 
