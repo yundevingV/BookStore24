@@ -181,7 +181,6 @@ font-size: 30px;
 margin: 0 auto;
 padding : 10px;
 
-border : 2px solid #e2e2e2;
 
 font-family: tway, sans-serif, Arial;
 

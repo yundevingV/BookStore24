@@ -126,7 +126,6 @@ font-size: 24px;
 margin: 0 auto;
 padding : 10px;
 
-border : 2px solid #e2e2e2;
 
 font-family: tway, sans-serif, Arial;
 
@@ -167,7 +166,7 @@ border : 0px;
 
 `
 const P = styled.p`
-font-size : 5px;
+font-size : 12px;
 text-align : left;
 
 /* 상 오 하 왼 */
