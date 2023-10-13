@@ -67,7 +67,7 @@ font-family : 'tway';
 padding : 10px;
 
 background-color : transparent;
-
+border-radius : 8px;
 ${(props) =>
     props.status === 'list' &&
     css`
@@ -88,6 +88,7 @@ font-family : 'tway';
 padding : 10px;
 
 background-color : transparent;
+border-radius : 8px;
 
 ${(props) =>
     props.status === 'on/list' &&
@@ -109,6 +110,7 @@ font-family : 'tway';
 padding : 10px;
 
 background-color : transparent;
+border-radius : 8px;
 
 ${(props) =>
     props.status === 'off/list' &&

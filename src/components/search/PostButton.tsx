@@ -27,14 +27,15 @@ margin-left : 37px;
 
 
 background-color: #ffffff;
-border : 0.6px solid #033bfa;
+
+border : 1px solid #033bfa;
+border-radius : 8px;
 color : #033bfa;
 
 font-family: tway, sans-serif, Arial;
 
 &:hover {
 
-    background-color: #e2e2e2;
 
     cursor : pointer;
     }

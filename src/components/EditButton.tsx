@@ -134,15 +134,15 @@ interface ButtonProps{
 
 const Button = styled.button<ButtonProps>`
 
-    width: 40px;
+    width: 50px;
     height: 25px;
-    
+    color : #ffff;
     ${props =>
     props.marginLeft &&
     css`
         margin-left: ${props.marginLeft};
     `}
-    border-radius: 5px;
+    border-radius: 8px;
     
     background-color: ${props => props.bgColor}; 
     
