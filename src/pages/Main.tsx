@@ -7,6 +7,7 @@ import { styled } from "styled-components";
 import RankingPreview from "../components/ranking/RankingPreview";
 import ReviewVeiwPreview from "../components/ranking/ReviewVeiwPreview";
 import StoreVeiwPreview from "../components/ranking/StoreVeiwPreview";
+import BookStore from "../components/home/BookStore";
 
 export default function Main(){
 
@@ -15,8 +16,9 @@ export default function Main(){
 
             <Header />
             <Carousel />
-            <PreviewContainer>
+            <BookStore />
 
+            <PreviewContainer>
                 <RankingPreview /> 
 
                 <ReviewVeiwPreview />
