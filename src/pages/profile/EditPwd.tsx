@@ -21,11 +21,14 @@ export default function EditPwd(){
     const submit = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
         
-        // Assuming you have defined the following state variables:
-        // const currentPassword = ...;
-        // const password1 = ...;
-        // const password2 = ...;
-        
+
+            // 공백 여부 검사
+    if (currentPassword.trim() === '' || password1.trim() === '' || password2.trim() === '') {
+        alert('빈칸을 모두 채워주세요.'); // 공백인 경우 알람 창을 띄움.
+        return; // 더 이상 진행하지 않음.
+    } else if (password1 !== password2) {
+        alert('변경할 비밀번호가 일치하지 않습니다.')
+    }
         const token = sessionStorage.getItem('token')
         
         // Data to be sent in the request body.
