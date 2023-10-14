@@ -76,6 +76,7 @@ export default function EditPwd(){
                         </Div>
 
                         <Input password={true}
+                            type='password'
                             placeholder='비밀번호를 입력해주세요' 
                             name="currentPassword" 
                             value={currentPassword}
@@ -86,6 +87,7 @@ export default function EditPwd(){
                         </Div>
 
                         <Input password={true}
+                            type='password'
                             placeholder='비밀번호를 입력해주세요' 
                             name="password1" 
                             value={password1}
@@ -96,6 +98,7 @@ export default function EditPwd(){
                         </Div>
 
                         <Input password={true}
+                            type='password'
                             placeholder='비밀번호를 확인해주세요'
                             name="password2" 
                             value={password2}
@@ -150,7 +153,7 @@ color : #212221;
 
 background-color : transparent;
 
-border : 0.1px solid #000000;
+border : 0px;
 
 `
 
@@ -221,18 +224,15 @@ const SaveButton = styled.button`
 width : 120px;
 height : 30px;
 
-background-color: #ffffff;
-border : 2px solid #033bfa;
-color : black;    
-
+background-color: #567dfc;
+border : 2px solid #ffffff;
+color : #fff;
+border-radius : 8px;
 
 font-family: tway, sans-serif, Arial;
 
 &:hover {
 
-  color : #ffffff;
-  background-color: #033bfa;
-  border : 2px solid #ffffff;
 
     cursor : pointer;
     }
