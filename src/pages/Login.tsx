@@ -145,6 +145,7 @@ export default function Login() {
                         name="password"
                         value={password}
                         onChange={onInputChange}
+                        type="password"
                         />
                 </form>
 
