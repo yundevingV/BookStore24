@@ -1,21 +1,19 @@
 import React,{useState,useEffect} from "react";
 import Header from "../../components/common/Header";
-import Test from '../../assets/imgs/testbookcover.jpg'
 import EditButton from "../../components/EditButton";
 import Login from "./../Login";
+import convertTime from "../../util/convertTime";
 
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { styled } from "styled-components";
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
-import { getCookie, setCookie } from "../../components/common/Cookie";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import Comment from "../../components/comment/Comment";
 import CommentList from "../../components/comment/CommentList";
-import { useDispatch } from "react-redux";
 
 
 export default function BookReviewDetail() {
@@ -134,6 +132,8 @@ export default function BookReviewDetail() {
                     </div>
                     
                     <div>
+                        <p className="publisher">{convertTime(data?.createdDate)}</p>
+
                         <p className="bookTitle">{data?.bookTitle}</p>
                         <p className="publisher">저자 : {data?.author.replace('^', ',')}</p>
                         <p className="publisher">출판사 : {data?.publisher}</p>

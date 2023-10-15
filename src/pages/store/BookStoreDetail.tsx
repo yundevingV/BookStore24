@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import Header from "../../components/common/Header";
 import EditButton from "../../components/EditButton";
 import Login from "./../Login";
+import convertTime from "../../util/convertTime";
 
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -132,6 +133,8 @@ export default function BookStoreDetail() {
                     </div>
                     
                     <div>
+                        <p className="publisher">{convertTime(data?.createdDate)}</p>
+
                         <p className="title">{data?.bookTitle}</p>
                         <p className="publisher">저자 : {data?.author.replace('^', ',')}</p>
                         <p className="publisher">출판사 : {data?.publisher}</p>
