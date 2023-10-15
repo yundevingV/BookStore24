@@ -43,6 +43,10 @@ export default function Navbar({text,url} : NavbarProps ){
     const search = (e: React.FormEvent<HTMLFormElement>) =>
     {       
         e.preventDefault();
+        
+        if(searchWord.trim() === '' ){
+            alert('검색어를 입력해주세요.')
+            return;}
 
         setSearchParams({
             search_query : searchWord,
