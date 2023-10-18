@@ -163,26 +163,17 @@ export default function Header() {
             }
             </Menu>
             <Space width={50} height={0} />
-            
         </Positioner>
     )
 }
 
-
 //헤더 위치
 const Positioner = styled.div`
-
-    position : relative;
-    
-    padding : 10px;
-    display: flex;
-
-    color: black;
-
-    border-bottom : 1px solid#7d7874;
-
-
-`
+  position: relative;
+  padding: 10px;
+  display: flex;
+  color: black;
+`;
 
 //로고
 const Logo = styled.div`
