@@ -345,15 +345,15 @@ margin: 50px 50px;
 `
 
 const AddButton = styled.button`
-width : 70px;
+width : 100px;
 height : 40px;
 
-font-size : 12px;
+font-size : 14px;
 
 margin : 10px;
 padding : 5px;
 
-background-color: #033bfa;
+background-color: #567dfc;
 border : 2px solid #ffffff;
 color : #ffffff;
 
@@ -362,36 +362,27 @@ border-radius : 8px;
 font-family: tway, sans-serif, Arial;
 
 &:hover {
-
-    background-color: #ffffff;
-    border : 2px solid #033bfa;
-    color : #033bfa;
-
     cursor : pointer;
     }
 `
 
 const CancelButton = styled.button`
-width : 70px;
+width : 100px;
 height : 40px;
 
-font-size : 12px;
+font-size : 14px;
 
 margin : 10px;
 padding : 5px;
 
 background-color: #ffffff;
-border : 2px solid #033bfa;
+border : 2px solid #567dfc;
 border-radius : 8px;
-color : #033bfa;
+color : #567dfc;
 
 font-family: tway, sans-serif, Arial;
 
 &:hover {
-
-    background-color: #033bfa;
-    border : 2px solid #ffffff;
-    color : #ffffff;
 
     cursor : pointer;
     }
