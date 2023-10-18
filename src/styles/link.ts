@@ -23,10 +23,11 @@ export const StyledLinkBlack = styled(Link)`
 
 export const CurrentLink = styled(Link)`
   color:  #000000;
-  border-bottom : 1px solid #000000;
+  border-bottom : 3px solid #4dac27;
   text-decoration: none;
   cursor: pointer;    
   font-size : 17px;
+  font-weight : 900;
 
 `
 export const StyledButtonLink = styled(Link)`
