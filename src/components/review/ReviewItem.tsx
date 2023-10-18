@@ -6,8 +6,8 @@ import timeForToday from '../../util/timeForToday';
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../../reducer/index";
+
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import styled from "styled-components";
 import truncate from "../../util/truncate";
@@ -48,6 +48,8 @@ function ItemList({items} : DataTypeList){
                     {truncate(`${item.title}`,25)}
                 </Title>
                 <Rating>
+                <FontAwesomeIcon icon={faStar} className="star-icon"/>
+
                     {item.score}
                 </Rating>
             </Top>
@@ -162,7 +164,7 @@ const Title = styled.div`
 
 const Rating = styled.div`
     
-    color : #f10000;
+    color : #000000;
 `
 
 
