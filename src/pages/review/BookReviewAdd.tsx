@@ -155,6 +155,7 @@ export default function BookReviewAdd() {
                 </LeftContainer>
 
                     <RightContainer>
+                    게시글 제목
                     <Title 
                         placeholder='게시글 제목'
                         name="title"
@@ -162,7 +163,7 @@ export default function BookReviewAdd() {
                         onChange={onInputChange} 
                         />
                         
-
+                    책 제목
                     <BookTitle placeholder='책 제목을 입력해주세요'
                         value={bookInformation?.title}
                         readOnly
@@ -170,12 +171,14 @@ export default function BookReviewAdd() {
 
                     {viewModal && <SearchBook viewModal={viewModal} setViewModal={setViewModal}/>}
                     {cancelStatus && <Cancel />}
+
+                    저자
                     <BookTitle 
                         placeholder='저자를 입력해주세요'
                         value={bookInformation?.author?.replace('^', ',')}
                         readOnly
                         />
-                    
+                    출판사
                     <BookTitle 
                         placeholder='출판사를 입력해주세요' 
                         value={bookInformation?.publisher}
@@ -188,7 +191,10 @@ export default function BookReviewAdd() {
 
                 </InnerContainer>
 
+                
+
                 <ContentContainer>
+                    내용
                     <input
                         className="content"
                         placeholder='게시글 내용을 입력하세요' 
@@ -223,10 +229,10 @@ const Wrapper = styled.div`
 
 `
 const Container = styled.div`
-width :70vw;
+width :100vw;
 
 font-family: arial;
-font-size: 24px;
+font-size: 20px;
 
 margin: 0 auto;
 padding : 10px;
@@ -246,11 +252,11 @@ top:5vh;
 `
 
 const H3 = styled.h3`
-margin : 5% 10%;
+margin : 50px 10%;
 `
 
 const Hr = styled.hr`
-width : 80%;
+width : 80vw;
 `
 
 const InnerContainer =styled.div`
@@ -271,10 +277,11 @@ const RightContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 30px;
+
     input {
     width: 100%;
     height: 50px;
-    margin-bottom: 20px;
+    margin : 10px 0px;
     border: none;
     border-radius: 2px;
     background-color: #ffffff;
@@ -308,14 +315,15 @@ const BookTitle = styled.input`
 
 const ContentContainer = styled.div`
 display: flex;
-justify-content: center;
-margin: 50px 50px;
 
+flex-direction: column;
+justify-content: center;
+
+margin: 50px 10%;
 
 input {
-    width: 70%;
     height: 50px;
-    margin-bottom: 20px;
+    margin: 10px 0px;
     border: none;
     border-radius: 2px;
     background-color: #ffffff;
