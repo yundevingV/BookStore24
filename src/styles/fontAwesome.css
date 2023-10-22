@@ -4,6 +4,11 @@
   margin-right : 10px;
   }
 
+.star-icon-detail {
+    color: orange;
+    opacity: 1;  font-size : 15px;
+    }
+
 .eye-icon{
     margin-right : 10px;
 }

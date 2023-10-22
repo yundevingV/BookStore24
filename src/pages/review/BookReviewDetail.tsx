@@ -5,6 +5,8 @@ import Login from "./../Login";
 import convertTime from "../../util/convertTime";
 
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { styled } from "styled-components";
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -113,37 +115,28 @@ export default function BookReviewDetail() {
                 {dec?.loginId === data?.loginId ? <EditButton id={data?.id} loginId={data?.loginId} title={data?.title} reviewComment={data?.reviewComments} url='review' /> : <></>}
 
                 <InnerContainer>
-
-                <LeftContainer>
-                    <Picture src={data?.coverImg} alt='x'/>
-                </LeftContainer>
+                <TitleContainer>
+                    <p className="title">{data?.title}</p>
 
 
-                {/* 제목 등등 책 정보 */}
-                <RightContainer>
-                        
-                    <div>
-                        <p className="title">{data?.title}</p>
-                    </div>
+                </TitleContainer>
 
-
-                    <div>
-                    <p className="profile"> 닉네임 : {data?.nickname}</p>
-                    </div>
+                <StatContainer>
+                    <span className='rating'> <FontAwesomeIcon icon={faStar} className="star-icon-detail" size="xs" /> {data?.score}</span>
                     
-                    <div>
-                        <p className="publisher">{convertTime(data?.createdDate)}</p>
+                    <span className='view'> <FontAwesomeIcon icon={faEye} />
+                        {data?.view?.toLocaleString('ko-KR')}</span>
+                </StatContainer>
+                    <Picture src={data?.coverImg} alt='x'/>
 
+                    
+                    <Profile> <FontAwesomeIcon icon={faCircleUser} size="xs" /> {data?.nickname}
+                    <Date>{convertTime(data?.createdDate)}</Date>
+                    </Profile>
+                    
                         <p className="bookTitle">{data?.bookTitle}</p>
-                        <p className="publisher">저자 : {data?.author.replace('^', ',')}</p>
-                        <p className="publisher">출판사 : {data?.publisher}</p>
-                        <p className='view'> <FontAwesomeIcon icon={faEye} />
-                        {data?.view?.toLocaleString('ko-KR')}</p>
-                        <p className='rating'>평점 : {data?.score}</p>
+                        <span className="publisher">저자 : {data?.author.replace('^', ',')} / 출판사 : {data?.publisher}</span>
                         
-                    </div>
-
-                </RightContainer>
 
                 </InnerContainer>
 
@@ -175,7 +168,7 @@ const Wrapper = styled.div`
 
 `
 const Container = styled.div`
-width : 50vw;
+width : 70vw;
 
 font-family: arial;
 font-size: 24px;
@@ -199,72 +192,57 @@ top:5vh;
 
 const InnerContainer =styled.div`
 display : flex;
+flex-direction : column;
 justify-content: space-around;
 
 margin : 50px 0px;
 
-`
-
-const LeftContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    width : 30%;
-`
-
-const RightContainer = styled.div`
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    div {
-    width: 100%;
-    height: auto;
-    border: none;
-    border-radius: 2px;
+span{
+    font-size : 17px;
 }
+`
+const TitleContainer = styled.div`
+
+`
+
+const StatContainer = styled.div`
+display : flex;
+align-items : center;
+
+span {
+    font-size : 17px;
     
-    .bookTitle{
-        font-weight : 700;
-        font-size : 18px;
-
-    }
-
-    .profile {
-        font-size : 14px;
-    }
-
-    .publisher{
-        font-size : 15px;
-        font-bold : 200;
-        color : #4b4d4c;
-    }
-    .rating {
-    }
-
-
+    font-weight : 300;
+    color : #4e4a4a;
+    margin : 10px;
+}
 `
 
 const Picture = styled.img`
 width : 250px;
 height : 350px;
+
+margin : 0 auto;
 `
 
+const Profile = styled.p`
 
-
+`
+const Date = styled.span`
+margin : 20px;
+font-size : 17px;
+`
 const ContentContainer = styled.div`
 display: flex;
 flex-direction: column;
 
 width : 500px;
 
-margin : 50px 50px;
+margin : 50px 0px;
 
 span{
     font-weight : 1000;
     color : yellow;
-
 }
 div{
     font-size : 17px;
