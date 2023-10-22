@@ -190,7 +190,7 @@ export default function CommentList(props: CombinedProps) {
             </ModifyButton>
             </>
             :
-            <p > {comment?.content} </p>
+            <Comment> {comment?.content} </Comment>
             
             }
 
@@ -243,6 +243,9 @@ font-family : tway;
 border-radius : 6px;
 `
 
+const Comment = styled.span`
+font-size : 17px;
+`
 const NoCommentsMessage = styled.p`
   font-style: italic;
   color: #777;
