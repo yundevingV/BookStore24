@@ -101,7 +101,7 @@ const Wrapper = styled.div`
 
 `
 const Container = styled.div`
-width : 80vw;
+width : 90vw;
 
 font-family: arial;
 font-size: 24px;
