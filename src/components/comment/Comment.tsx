@@ -105,7 +105,7 @@ export const CommentInputWrapper = styled.div`
 `
 export const CommentInput = styled.input`
 
-width :50vw;
+width :70vw;
 height: 50px;
 
 
