@@ -180,14 +180,14 @@ export default function CommentList(props: CombinedProps) {
 
             {edit === true && index === idx? 
             <>
-            <input 
+            <ModifyInput 
                 defaultValue={comment?.content}
                 name="content"
                 onChange={onInputChange} 
                 />
-            <button onClick={(e) => editComment(comment,e)}>                
-                완료
-            </button>
+            <ModifyButton onClick={(e: any) => editComment(comment,e)}>                
+                수정하기
+            </ModifyButton>
             </>
             :
             <p > {comment?.content} </p>
@@ -220,6 +220,29 @@ const DateSpan = styled.span`
 font-size : 15px;
 margin : 0px 15px;
 `
+
+const ModifyInput = styled.input`
+width : 30vw;
+height : 30px;
+`
+
+const ModifyButton = styled.button`
+
+width : 80px;
+height : 35px;
+
+margin-left : 10px;
+
+color : #fff;
+background : #567dfc;
+
+border : 0px;
+
+font-family : tway;
+
+border-radius : 6px;
+`
+
 const NoCommentsMessage = styled.p`
   font-style: italic;
   color: #777;

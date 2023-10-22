@@ -20,8 +20,10 @@ export const AddButton = styled.button`
 width: 100px;
 height: 30px;
 
-border-radius : 4px;
-background: #20dba1;
+border-radius : 8px;
+
+color : #ffff;
+background : #567dfc;
 border : 0px solid #ffffff;
 
 font-family: tway, sans-serif, Arial;
