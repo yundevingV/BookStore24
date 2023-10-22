@@ -64,25 +64,25 @@ function ItemList({ items }: DataTypeList) {
 
                                 <RContainer>
                                     <Name>
-                                        {truncate(`${item.bookTitle}`, 15)}
+                                    제목 : {truncate(`${item.bookTitle}`,18)}
                                     </Name>
 
                                     <Price>
-                                        {item?.price?.toLocaleString('ko-KR')} ￦
+                                    가격 : {item?.price?.toLocaleString('ko-KR')} ￦
                                     </Price>
 
                                     <ItemPublisher>
-                                        {item.author.replace('^', ',')}
+                                    저자 : {truncate(item.author.replace('^', ','),18)} 
 
                                     </ItemPublisher>
 
                                     <ItemPublisher>
-                                        {item.publisher}
+                                    출판사 : {truncate(item.publisher,18)}
 
                                     </ItemPublisher>
 
                                     <Writter>
-                                        {item.nickname}
+                                    작성자 : {truncate(item.nickname,18)}
                                     </Writter>
 
                                     <Date>
@@ -120,26 +120,21 @@ const Positioner = styled.div`
 const Frame = styled.div`
 display : inline-block;
 
-width: 30vw;
+width: 40vw;
 height: 300px;
 
 font-size : 16px;
 
-margin: 3vh calc(5vw - 1px);
+/* border를 빼줘야 함! */
+margin : 20px calc(2.5vw - 1px);
 
 border : 1px solid #e2e2e2;
 border-radius : 5px;
 
 //1080px 이하면
-@media (max-width : 1080px){
-    width: 70vw;
-    margin : 3vh 5vw;
-
-}
-//1080px 이하면
-@media (max-width : 810px){
-    width: 500px;
-    margin : 3vh 30px;
+@media (max-width : 1280px){
+    width: 60vw;
+    margin : 3vh calc(15vw - 1px);
 
 }
 
