@@ -40,7 +40,7 @@ export default function Comment({id , loginId, title , number} : CommentProps ){
         };
         
         // Check if the 'content' field is not empty
-        if (!data.content) {
+        if (!data.content || !data.content.trim()) {
             alert('댓글을 입력해주세요.');
             return; // Exit the function to prevent posting an empty comment
         }
@@ -49,7 +49,7 @@ export default function Comment({id , loginId, title , number} : CommentProps ){
             const response = await axios.post(url, data, { headers });
             console.log('Response:', response.data);
             resetInput();
-            alert('Your comment has been successfully written!');
+            alert('댓글을 성공적으로 작성했습니다 !');
             window.location.reload();
         } catch (error) {
             console.error('Error:', error);

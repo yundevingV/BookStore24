@@ -70,7 +70,8 @@ export default function BookReviewAdd() {
             Authorization: token,
             },
         };
-        if (bookRatingData >= 1 && title && content && bookInformation?.title ){
+        if (bookRatingData >= 1 && title.trim() && content.trim() && bookInformation?.title
+            ){
         axios
             .post(`http://bookstore24.shop/review/post/save`, data, config)
             .then((response) => {
@@ -80,7 +81,6 @@ export default function BookReviewAdd() {
             .catch((error) => {
             console.log('Error:', error.response.data);
             });
-        
         }
         else {
             alert('빈칸을 확인해주세요 !');

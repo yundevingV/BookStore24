@@ -73,7 +73,9 @@ export default function BookCommunityAdd() {
             Authorization: token,
             },
         };
-        if (title && talkUrl && price && content && bookInformation?.title){
+        if (title.trim() && talkUrl.trim() && price.trim() && content.trim() && bookInformation?.title
+            
+            ){
         axios
             .post(`http://bookstore24.shop/sell/post/save`, data, config)
             .then((response) => {
@@ -84,7 +86,11 @@ export default function BookCommunityAdd() {
             console.log('Error:', error.response.data);
             });
         
-        };}
+        }
+        else {
+            alert('빈칸을 확인해주세요 !');
+        }
+    }
 
         // 제목 저자 출판사
         const bookInformationData = useSelector(
