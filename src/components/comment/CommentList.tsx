@@ -109,11 +109,14 @@ export default function CommentList(props: CombinedProps) {
 
             setEdit(false);
             alert('댓글을 수정했습니다!');
-            window.location.reload();            
+            window.location.reload();  
+            
             } catch (error) {
+                alert('댓글을 수정했습니다!');
 
             }
             }
+        else {alert('수정하실 댓글을 입력해주세요!')}
         };
 
     interface deleteProps {
@@ -241,6 +244,8 @@ border : 0px;
 font-family : tway;
 
 border-radius : 6px;
+cursor : pointer;
+
 `
 
 const Comment = styled.span`
