@@ -25,7 +25,7 @@ export default function FirstLogin(){
 
   const save_NickNameResidence = (e : React.MouseEvent) => {
 
-    if(nickname.length <= 2 ){
+    if(nickname.length <= 1 ){
       alert('닉네임은 최소 2글자 이상 입력하세요 ! ');
       return;
     }

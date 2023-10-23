@@ -8,13 +8,12 @@ import { openModal } from "../../action/modal";
 import styled from "styled-components";
 import { CurrentLink, StyledLink, StyledLinkBlack } from "../../styles/link";
 import { Space } from "../../styles/Space";
-import { Navigate, useLocation, useNavigate } from "react-router";
+import {  useLocation, useNavigate } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
 import { RootState } from "../../reducer/index";
-import { getCookie, removeCookie, setCookie  } from "./Cookie";
-import base64 from 'base-64';
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
+import ExpiredToken from "../../modal/ExpiredToken";
 
 export default function Header() {
 
@@ -30,7 +29,6 @@ export default function Header() {
     const logout = () =>{
         dispatch(saveloginStatus(false));
         sessionStorage.clear()
-        removeCookie('redirectUrl');
         navigate('/')
     }
     
@@ -42,10 +40,40 @@ export default function Header() {
     // In your React project
         
     let token = sessionStorage.getItem('token')
+    
     let dec = useDecodedJWT(token);
 
-    useEffect(()=>{
+    const calculateMinutes = () => {
+        const date = new Date(dec?.exp * 1000);
+        const curDate = new Date();
+        const timeDifferenceInMilliseconds = date.getTime() - curDate.getTime();
+        return Math.floor(timeDifferenceInMilliseconds / 1000 / 60);
+      }
+    
+      const initialMinutes = calculateMinutes();
+    
+      const [minutes, setMinutes] = useState(initialMinutes);
+    
+      useEffect(() => {
+        const interval = setInterval(() => {
+          const newMinutes = calculateMinutes();
+          setMinutes(newMinutes);
+    
+          if (newMinutes <= 0) {
+            setExp(true);
+          }
+    
+          console.log(newMinutes);
+        }, 60000); // Update every 1000 milliseconds (1 second)
+    
+        return () => {
+          clearInterval(interval); // Clear the interval when the component unmounts
+        };
+      }, []);
 
+    const [exp, setExp] = useState<boolean>(false);
+
+    useEffect(()=>{
         const auth = sessionStorage.getItem("token");
 
         if (auth) {
@@ -54,31 +82,21 @@ export default function Header() {
             axios.get('http://bookstore24.shop/member/nicknameresidence/check'
             ,
             {
-            
+
             headers : {
                 'Authorization' : token
             }
             })
     
-            .then(response => {
-    
-    
-            })
+            .then(response => {})
             .catch(error => {
             console.log(`에러 사유 : ${error}`)
-            
-    
             dispatch(openModal(true));
-    
             });
         } else {
             // 로그인이 안되있을때
         }
-
-    },[dispatch, token])
-    
-
-    
+    },[dispatch,  minutes, token])
     return (
         
         <Positioner>
@@ -86,7 +104,7 @@ export default function Header() {
             {openModalData&&loginStateData&&dec?.nickname===null&&
             <FirstLogin />
             }
-
+            {exp && <ExpiredToken exp={exp} />}
             <Space width={50} height={0} />
             <Logo>
                 <StyledLink to='/'>
@@ -149,6 +167,9 @@ export default function Header() {
                 </>
                 :
                 <>
+                <Token>
+                    {minutes >= 0 ? minutes : 0}분 
+                </Token>
                 <Profile>
                     <StyledLinkBlack to='/profile'>
                     나의 프로필
@@ -230,7 +251,12 @@ const Logout = styled.div`
 
     cursor : pointer;
 `
-
+const Token = styled.div`
+    display: inline-block;
+    margin-left: 20px;
+    padding : 5px; 
+    cursor : pointer;
+`
 const Profile = styled.div`
     display: inline-block;
     margin-left: 20px;
