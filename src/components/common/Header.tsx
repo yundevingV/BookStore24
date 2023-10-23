@@ -3,6 +3,7 @@ import React,{useState,useEffect} from "react";
 import { saveloginStatus } from "../../action/login_status";
 import FirstLogin from "../../modal/FirstLogin";
 import { openModal } from "../../action/modal";
+import logo from "../../assets/imgs/logo.svg";
 
 //외부
 import styled from "styled-components";
@@ -59,7 +60,7 @@ export default function Header() {
           const newMinutes = calculateMinutes();
           setMinutes(newMinutes);
     
-          if (newMinutes <= 4) {
+          if (newMinutes <= 0) {
             setExp(true);
           }
     
@@ -88,7 +89,7 @@ export default function Header() {
             }
             })
     
-            .then(response => {})
+            .then(response => {console.log(response.data)})
             .catch(error => {
             console.log(`에러 사유 : ${error}`)
             dispatch(openModal(true));
@@ -108,7 +109,7 @@ export default function Header() {
             <Space width={50} height={0} />
             <Logo>
                 <StyledLink to='/'>
-                📚                
+                 <Logo>BookStore24</Logo>
                 </StyledLink>
             </Logo>
             
@@ -169,6 +170,7 @@ export default function Header() {
                 <>
                 <Token>
                     {minutes >= 0 ? minutes : 0}분 
+                    {/* {dec?.nickname} */}
                 </Token>
                 <Profile>
                     <StyledLinkBlack to='/profile'>
@@ -193,14 +195,18 @@ const Positioner = styled.div`
   position: relative;
   padding: 10px;
   display: flex;
+  align-items : center;
   color: black;
 `;
 
 //로고
 const Logo = styled.div`
     display: inline-block;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
+
+    font-family : Cooper;
+    color : #4dac27;
     
 `
 
