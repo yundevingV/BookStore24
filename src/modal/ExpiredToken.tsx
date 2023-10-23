@@ -25,8 +25,8 @@ export default function ExpiredToken({exp} : expTypes ){
         <ModalBackground>
             <Container>
                 <Content>
-                    <p>토큰 만료시간이 되었습니다.</p>
-                    <p>다시 로그인 해주세요.</p>
+                    <Font>토큰 만료시간이 되었습니다.</Font>
+                    <Font>다시 로그인 해주세요.</Font>
                     <Button onClick={login}>로그인 하기</Button>
                 </Content>
             </Container>
@@ -50,7 +50,7 @@ const ModalBackground = styled.div`
 const Container = styled.div`
 /* 모달창 크기 */
   width: 600px;
-  height: 300px;
+  height: 250px;
 
   /* 최상단 위치 */
   z-index: 999;
@@ -74,12 +74,29 @@ const Content = styled.div`
 font-family : tway;
 font-size : 24px;
 
+width : 100%;
+
+text-align: center;
+
 position : absolute;
-top : 10px;
+top : 20px;
+
+
 
 `
 
+const Font = styled.p`
+font-family: tway, sans-serif, Arial;
+
+`
+
+
 const Button = styled.button`
+
+  margin-top : 20px;
+
+  text-align: center;
+
 //기본 크기가 input > button
 width : 150px;
 height : 40px;
@@ -94,11 +111,7 @@ border-radius : 8px;
 font-family: tway, sans-serif, Arial;
 
 &:hover {
-    background-color: #567dfc;
-
-    border : 2px solid #ffffff;
-
-    color : #ffffff;    
+  
     cursor : pointer;
     }
 `
