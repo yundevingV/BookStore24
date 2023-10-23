@@ -123,7 +123,7 @@ const MiddleDiv = styled.div`
 
 const ButtonContainer = styled.div`
   position: absolute;
-  top : 100px;
+  top : 110px;
   width : 100%;
   text-align : center;  
 `
@@ -133,13 +133,14 @@ interface ButtonProps {
     color : string
 }
 const Button = styled.button<ButtonProps>`
-    width : 50px;
-    height : 40px;
+    width : 60px;
+    height : 30px;
 
     margin : 20px;
+    padding : 5px;
 
     border-radius : 5px;
-    border : 1px solid #000000;
+    border : 0px;
 
     ${({ bgColor }) =>
         bgColor &&
