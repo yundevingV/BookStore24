@@ -193,9 +193,9 @@ font-size : 12px;
 margin : 10px;
 padding : 5px;
 
-border-radius : 24px;
+border-radius : 8px;
 
-background-color: #033bfa;
+background-color: #567dfc;
 border : 0px solid #ffffff;
 color : #ffffff;
 
@@ -203,9 +203,6 @@ font-family: tway, sans-serif, Arial;
 
 &:hover {
 
-  background-color: #ffffff;
-  border : 2px solid #033bfa;
-  color : #033bfa;
 
     cursor : pointer;
     }

@@ -13,7 +13,7 @@ export default function ExpiredToken({exp} : expTypes ){
   console.log(propsExp)
   const navigate = useNavigate();
   const login = () => {
-    
+
     setPropsExp(false)
 
     navigate('/login')
@@ -66,8 +66,7 @@ const Container = styled.div`
   background-color: #fff;
   border-radius: 12px;
 
-  display : flex;
-  justify-content : center;
+
 
 `
 
@@ -75,9 +74,32 @@ const Content = styled.div`
 font-family : tway;
 font-size : 24px;
 
+position : absolute;
+top : 10px;
+
 `
 
 const Button = styled.button`
+//기본 크기가 input > button
+width : 150px;
+height : 40px;
 
+font-size : 20px;
+color : #ffffff;
+
+background-color: #567dfc;
+
+border : 2px solid #ffffff;
+border-radius : 8px;
+font-family: tway, sans-serif, Arial;
+
+&:hover {
+    background-color: #567dfc;
+
+    border : 2px solid #ffffff;
+
+    color : #ffffff;    
+    cursor : pointer;
+    }
 `
 

@@ -59,7 +59,7 @@ export default function Header() {
           const newMinutes = calculateMinutes();
           setMinutes(newMinutes);
     
-          if (newMinutes <= 0) {
+          if (newMinutes <= 4) {
             setExp(true);
           }
     
