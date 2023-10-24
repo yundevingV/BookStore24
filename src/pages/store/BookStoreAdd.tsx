@@ -84,6 +84,8 @@ export default function BookCommunityAdd() {
             })
             .catch((error) => {
             console.log('Error:', error.response.data);
+            if (error.response.status === 409) {alert(error.response.data)}
+
             });
         
         }

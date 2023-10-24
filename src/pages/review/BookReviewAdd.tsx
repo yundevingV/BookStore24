@@ -79,7 +79,8 @@ export default function BookReviewAdd() {
             navigate(-1);
             })
             .catch((error) => {
-            console.log('Error:', error.response.data);
+            console.log('Error:', error.response);
+            if (error.response.status === 409) {alert(error.response.data)}
             });
         }
         else {
