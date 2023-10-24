@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { saveDropDownValue } from "../../action/dropdown_value";
 import { saveloginStatus } from "../../action/login_status";
 import Check from "../../modal/Check";
+import Toast from "../../components/toast/Toast";
 
 export default function EditProfile() {
 
@@ -44,6 +45,10 @@ export default function EditProfile() {
     
     const token = sessionStorage.getItem('token')
 
+    // 토스트 구현
+    const [toast, setToast] = useState(false);
+
+    
     useEffect(()=>{
         axios.get(`http://bookstore24.shop/member/profile/edit`,
             {
@@ -53,9 +58,8 @@ export default function EditProfile() {
             }
             )
             .then(response =>{
-                console.log(response.data)
                 setData(response.data);
-                dispatch(saveDropDownValue(response.data.residence))            
+                dispatch(saveDropDownValue(response.data.residence));
 
             })
             .catch(error => {
@@ -87,9 +91,7 @@ export default function EditProfile() {
         axios
             .post(`http://bookstore24.shop/member/profile/residence/edit/save`, data, config)
             .then((response) => {
-            console.log(`Response : ${JSON.stringify(data)}`);
-            // window.location.replace("/")
-
+            setToast(true);
             })
             .catch((error) => {
             console.log('Error:', error.response.data);
@@ -120,7 +122,8 @@ export default function EditProfile() {
             axios
                 .post(`http://bookstore24.shop/member/profile/nickname/edit/save`, data, config)
                 .then((response) => {
-                    
+                setToast(true);
+
                 console.log(`Response : ${JSON.stringify(data)}`);
                 })
                 .catch((error) => {
@@ -129,6 +132,7 @@ export default function EditProfile() {
             
             resetInput();
             };}
+
     const [viewCheck,setCheck] = useState<boolean>(false);
 
     const check = () => {
@@ -140,6 +144,9 @@ export default function EditProfile() {
             <Header />
             <Container>
                 {viewCheck ? <Check /> : <></>}
+
+                {toast && <Toast setToast={setToast} text="수정 되었습니다." />}
+
                 <Space width={0} height={5} />
 
                 <PwdButtonContainer>
@@ -252,6 +259,7 @@ const StyledEditButtonLink = styled(StyledButtonLink)`
 
     font-weight : bold;
     background : #cecece;
+    text-decoration : none;
 `
 
 
