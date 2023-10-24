@@ -97,7 +97,7 @@ export default function Header() {
         } else {
             // 로그인이 안되있을때
         }
-    },[dispatch,  minutes, token])
+    },[])
     return (
         
         <Positioner>

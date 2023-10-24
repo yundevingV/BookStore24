@@ -1,8 +1,14 @@
 import axios from 'axios';
 import { timeEnd } from 'console';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { saveAdmitStatus } from '../../action/admit_status';
+import { saveCancelStatus } from '../../action/cancel_status';
 import useInput from '../../hooks/useInput';
+import Delete from '../../modal/Delete';
+import { RootState } from '../../reducer';
 import timeForToday from '../../util/timeForToday';
 import { getCookie } from '../common/Cookie';
 
@@ -125,8 +131,11 @@ export default function CommentList(props: CombinedProps) {
         reviewCommentId : string;
     }
 
-    const deleteComment = async ({reviewCommentId,loginId,reviewId} : deleteProps ) => {
-    
+    useEffect(()=>{
+        saveAdmitStatus(false);
+    })
+
+    const deleteComment = async ({reviewCommentId,loginId,reviewId} : deleteProps ) => {            
             const url = 'http://bookstore24.shop/review/comment/post/delete';
         
             const headers = {
@@ -139,9 +148,9 @@ export default function CommentList(props: CombinedProps) {
                 reviewId: reviewId,
                 loginId: loginId,
                 title: props.title,
-
             };
-            if(!content){
+            
+            if(!content && window.confirm("삭제 ?")){
     
             try {
                 const response = await axios.post(url, data, { headers });
@@ -160,6 +169,21 @@ export default function CommentList(props: CombinedProps) {
         // '내용'을 변경 핸들링
         setContent(event.target.value);
     };
+    const dispatch = useDispatch();
+
+    const cancelStatus = useSelector(
+        (state : RootState) => state.CancelStatusReducer.cancelStatusData
+    )
+
+    const admitStatus = useSelector(
+        (state : RootState) => state.AdmitStatusReducer.admitStatusData
+    )
+
+    const cancle = ( ) => {
+        dispatch(saveCancelStatus(true))
+
+    }
+
 
     return (
         <>
@@ -176,6 +200,7 @@ export default function CommentList(props: CombinedProps) {
                     <>
                     <EditButton onClick={() => doEdit(index)}>수정</EditButton>
                     <EditButton onClick={() => deleteComment(comment)}>삭제</EditButton>
+                    {cancelStatus && <Delete /> }
                     </>
                     : <></>
                     }

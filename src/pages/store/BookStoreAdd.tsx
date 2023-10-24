@@ -105,7 +105,8 @@ export default function BookCommunityAdd() {
         
         useEffect(()=>{
             dispatch(saveBookInformation([]))
-        },[])
+            
+        },[dispatch])
 
         const didMountRef = useRef(false);
 
@@ -119,7 +120,6 @@ export default function BookCommunityAdd() {
 
         const cancel = () => {
             dispatch(saveCancelStatus(true))
-            console.log(cancelStatus)
         }
 
     return(

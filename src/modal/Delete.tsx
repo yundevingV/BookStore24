@@ -7,19 +7,27 @@ import { RootState } from "../reducer/index";
 import axios from "axios";
 import { saveCancelStatus } from "../action/cancel_status";
 import { useNavigate } from "react-router";
+import { saveAdmitStatus } from "../action/admit_status";
 
-export default function Cancel(){
 
+interface Props {
+    onConfirm: () => void;
+}
+
+export default function Delete(){
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const yes = () => {
+        dispatch(saveAdmitStatus(true));
         dispatch(saveCancelStatus(false));
-        navigate(-1);
+
     }
 
     const no = () => {
         dispatch(saveCancelStatus(false));
+        
 
     }
 
@@ -29,13 +37,13 @@ export default function Cancel(){
 
                 <TopDiv>
                 <Font fontSize={25}>
-                    작성을 취소하시겠습니까 ?
+                    정말로 삭제하시겠습니까 ?
                 </Font>
                 </TopDiv>
 
                 <MiddleDiv>
                 <Font fontSize={15}>
-                    작성중인 내용은 저장되지 않습니다.
+                    삭제하신 내용은 복구하실 수 없습니다.
                 </Font>
                 </MiddleDiv>
 
@@ -142,6 +150,7 @@ const Button = styled.button<ButtonProps>`
     border : 0px;
 
     font-family : tway;
+
     ${({ bgColor }) =>
         bgColor &&
         css`

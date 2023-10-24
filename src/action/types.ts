@@ -15,3 +15,5 @@ export const SAVE_TOTAL_PAGING = 'save_total_paging' as const
 
 
 export const SAVE_VIEW_STATUS = 'save_view_status' as const
+
+export const SAVE_ADMIT_STATUS = 'save_admit_status' as const

@@ -11,6 +11,7 @@ import CancelStatusReducer from "./cancel_status_reducer";
 import PagingReducer from "./paging_reducer";
 import TotalPaginReducer from "./totalPaging_reducer";
 import ViewStatusReducer from "./view_status_reducer copy";
+import AdmitStatusReducer from "./admit_status_reducer";
 
 const rootReducer = combineReducers({
   SearchOptionReducer,
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   CancelStatusReducer,
   PagingReducer,
   TotalPaginReducer,
-  ViewStatusReducer  
+  ViewStatusReducer  ,
+  AdmitStatusReducer
 });
 
 export default rootReducer;
