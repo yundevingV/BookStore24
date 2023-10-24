@@ -18,6 +18,7 @@ export default function ProfileReviewList(){
 
         const [word,setWord] = useState<string>('');
         const [text,setText] = useState<string>('');
+        
         const { data, totalPages } = useUserData(token, word);
 
         useEffect(() => {

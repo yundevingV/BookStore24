@@ -80,11 +80,11 @@ const Box = styled.div`
     height : 120px;
     
 
-    background-color : #f1f1f1;
+    background-color : #cacaca;
     border-radius : 8px;
     
     &:hover {
-        background-color : #ffffff;
+        background-color : #e2e2e2;
         border-radius : 8px;
 
         cursor : pointer;
@@ -96,7 +96,7 @@ const Box = styled.div`
 const ItemImg = styled.img`
 
 padding : 7px;
-height :80px;
+height :100px;
 
 `
 
