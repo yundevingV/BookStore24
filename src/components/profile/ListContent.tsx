@@ -2,6 +2,9 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { styled } from "styled-components";
 import truncate from "../../util/truncate";
+import { PLink } from "../../styles/link";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 interface DataType {
   "id": number,
@@ -28,18 +31,29 @@ const Alert = styled.div`
 
     padding : 50px;
 
-    
+
 `
 
 export default function ListContent({ data }: DataTypeList) {
+
+    const [url,setUrl] = useState<String>('');
+
+    const location = useLocation();
+    console.log(location)
+
+    useEffect(()=>{
+        if(location.pathname.includes('review')){setUrl('bookreview')}
+        else {setUrl('bookstore')}
+    },[])
+
   if (!data || data.length === 0) {
     return <Alert>해당하는 도서 목록이 없습니다 !</Alert>;
   }
-
   return (
     <>
       {data.map((book) => (
         <div key={book.id}>
+        <PLink to={`/${url}/detail/?${book.loginId}&${book.title}`}>
           <ItemContainer>
             <Box>
               <ItemImg src={book.coverImg} alt={book.title} />
@@ -65,6 +79,7 @@ export default function ListContent({ data }: DataTypeList) {
               </Content>
             </Box>
           </ItemContainer>
+          </PLink>
         </div>
       ))}
     </>
