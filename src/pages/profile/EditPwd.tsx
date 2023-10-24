@@ -64,11 +64,9 @@ export default function EditPwd(){
             <Header />
             <Container>
                 <EditProfileButtonContainer>
-                    <EditProfileButton>
-                        <StyledButtonLink to='/editprofile'>
+                        <StyledEditButtonLink to='/editprofile'>
                             프로필 수정
-                        </StyledButtonLink>
-                    </EditProfileButton>
+                        </StyledEditButtonLink>
                 </EditProfileButtonContainer>
 
                 {/* 비밀번호 */}
@@ -78,7 +76,7 @@ export default function EditPwd(){
                             <P>현재 비밀번호</P>
                         </Div>
 
-                        <Input password={true}
+                        <Input 
                             type='password'
                             placeholder='비밀번호를 입력해주세요' 
                             name="currentPassword" 
@@ -89,7 +87,7 @@ export default function EditPwd(){
                             <P>변경할 비밀번호</P>
                         </Div>
 
-                        <Input password={true}
+                        <Input 
                             type='password'
                             placeholder='비밀번호를 입력해주세요' 
                             name="password1" 
@@ -100,7 +98,7 @@ export default function EditPwd(){
                             <P>변경할 비밀번호 확인</P>
                         </Div>
 
-                        <Input password={true}
+                        <Input
                             type='password'
                             placeholder='비밀번호를 확인해주세요'
                             name="password2" 
@@ -124,14 +122,13 @@ const Wrapper = styled.div`
 
 `
 const Container = styled.div`
-width : 400px;
+width : 500px;
 
 font-family: arial;
 font-size: 24px;
 
 margin: 0 auto;
 padding : 10px;
-
 
 font-family: tway, sans-serif, Arial;
 
@@ -144,19 +141,18 @@ const EditProfileButtonContainer = styled.div`
 text-align : right;
 `
 
-const EditProfileButton = styled.button`
-font-family: tway, sans-serif, Arial;
-font-weight : bold;
-font-size : 15px;
 
-/* 상 오 하 왼 */
-margin : 0px 0px 0px 0px;
+const StyledEditButtonLink = styled(StyledButtonLink)`
+    padding : 10px;
 
-color : #212221;
+    border-radius : 8px;
 
-background-color : transparent;
+    font-size : 15px;
+    font-family: tway, sans-serif, Arial;
 
-border : 0px;
+    font-weight : bold;
+    background : #cecece;
+    text-decoration: none;
 
 `
 
@@ -172,11 +168,10 @@ border : 0px;
 
 `
 const P = styled.p`
-font-size : 12px;
+font-size : 15px;
 text-align : left;
 
-/* 상 오 하 왼 */
-margin : 0px 0px 0px 40px;
+margin : 20px 100px;
 
 color : #212221;
 
@@ -189,8 +184,9 @@ const Form = styled.form`
 
 `
 
-const Input = styled.input <{password : boolean}>`
-width : 220px;
+const Input = styled.input`
+
+width : 300px;
 height : 30px;
 
 margin : 10px;
@@ -198,11 +194,7 @@ margin : 10px;
 border : 2px solid #e2e2e2;
 padding : 0px;
 
-${(props) =>
-    props.password &&
-    css`
-        width: 300px;
-    `}
+
     
 &::placeholder{
     font-family: tway, sans-serif, Arial;

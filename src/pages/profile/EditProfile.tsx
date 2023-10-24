@@ -251,6 +251,7 @@ const StyledEditButtonLink = styled(StyledButtonLink)`
     font-family: tway, sans-serif, Arial;
 
     font-weight : bold;
+    background : #cecece;
 `
 
 

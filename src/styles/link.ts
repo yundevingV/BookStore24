@@ -31,12 +31,17 @@ export const CurrentLink = styled(Link)`
 
 `
 export const StyledButtonLink = styled(Link)`
-  color:  #000000;
 
-  text-decoration: none;
-  cursor: pointer;    
+padding : 10px;
 
-  font-size : 17px;
+border-radius : 8px;
+
+font-size : 15px;
+font-family: tway, sans-serif, Arial;
+
+font-weight : bold;
+background : #cecece;
+color : #000;
 
   
 `
