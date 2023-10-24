@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { saveAdmitStatus } from '../../action/admit_status';
 import { saveCancelStatus } from '../../action/cancel_status';
-import Delete from '../../modal/Delete';
+import DeleteComment from '../../modal/DeleteComment';
 import { RootState } from '../../reducer';
 import timeForToday from '../../util/timeForToday';
 
@@ -122,8 +122,6 @@ export default function CommentList(props: CombinedProps) {
         else {alert('수정하실 댓글을 입력해주세요!')}
         };
 
-
-
     useEffect(()=>{
         saveAdmitStatus(false);
     })
@@ -146,7 +144,6 @@ export default function CommentList(props: CombinedProps) {
 
     const cancle = ( ) => {
         dispatch(saveCancelStatus(true))
-
     }
 
     return (
@@ -165,7 +162,7 @@ export default function CommentList(props: CombinedProps) {
                     <EditButton onClick={() => doEdit(index)}>수정</EditButton>
                     <EditButton onClick={() => cancle()}>삭제</EditButton>
                     
-                    {cancelStatus && <Delete title={props.title} reviewComments={props.reviewComments} /> }
+                    {cancelStatus && <DeleteComment title={props.title} reviewComments={props.reviewComments} /> }
                     </>
                     : <></>
                     }
@@ -178,7 +175,7 @@ export default function CommentList(props: CombinedProps) {
                 name="content"
                 onChange={onInputChange} 
                 />
-            <ModifyButton onClick={(e: any) => editComment(comment,e)}>                
+            <ModifyButton onClick={(e: any) => editComment(comment,e)}>
                 수정하기
             </ModifyButton>
             </>
@@ -242,7 +239,6 @@ const Comment = styled.span`
 font-size : 17px;
 `
 const NoCommentsMessage = styled.p`
-  font-style: italic;
   color: #777;
 `;
 const EditButton = styled.button`

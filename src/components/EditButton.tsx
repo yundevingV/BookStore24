@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 
 import { css, styled } from "styled-components";
+import DeleteDetail from "../modal/DeleteDetail";
 import { StyledButtonLink } from "../styles/link";
+
 interface ReviewComment {
     id : string;
     reviewCommentId: string;
@@ -28,86 +28,28 @@ interface urlProps {
 interface CombinedProps extends editProps, urlProps {}
 
 export default function EditButton(props : CombinedProps){
+    const [viewCheck,setCheck] = useState<boolean>(false);
 
-    const navigate = useNavigate();
-    
-    const [reviewCommentIds,setReviewCommentIds] = useState<string[] | null>([]);
-
-    useEffect(()=>{
-        
-    if(props.reviewComment){
-        const idsArray = props.reviewComment.map(
-            comment => (comment.reviewCommentId));
-        setReviewCommentIds(idsArray);
+    const check = () => {
+        // console.log('a')
+        setCheck(true);
     } 
-    else{
-        setReviewCommentIds(null);
-    }
 
-    },[])
-
-    const doDelete = () => {
-
-        const token = sessionStorage.getItem('token')
-        
-        // Data to be sent in the request body.
-        const sellData = {
-            sellId : props.id,
-            loginId : props.loginId,
-            title : props.title
-        };
-
-        const reviewData = {
-            id : props.id,
-            loginId : props.loginId,
-            title : props.title,
-            reviewCommentIds : reviewCommentIds
-        }
-        
-        // Axios configuration for the POST request.
-        const config = {
-            headers: {
-            Authorization: token,
-            },
-        };
-
-        if (props.url === 'sell'){
-        axios
-            .post(`https://bookstore24.shop/${props.url}/post/delete`, sellData, config)
-            .then((response) => {
-            navigate('/store');
-            })
-            .catch((error) => {
-            console.log('Error:', error.response.data);
-            });
-        
-        }
-        else{
-        axios
-            .post(`https://bookstore24.shop/${props.url}/post/delete`, reviewData, config)
-            .then((response) => {
-                navigate('/bookreview');
-            })
-            .catch((error) => {
-            console.log('Error:', error.response.data);
-            });
-        
-        }}
     return(
         <Container>
-            <Form>
 
-                <Button onClick={doDelete} bgColor={'#f34747'}>
+                
+            {viewCheck ? <DeleteDetail id={props?.id} loginId={props?.loginId} title={props?.title} reviewComment={props?.reviewComment} url={props?.url}/> : <></>}
+
+            <Button onClick={check} bgColor={'#f34747'}>
                     삭제
-                </Button>
-
+            </Button>
                 <StyledButtonLink to={`./edit/?${props.loginId}&${props.title}`}>
 
                 <Button  marginLeft="10px" bgColor={'#4d4df5'}>
                     수정
                 </Button>
                 </StyledButtonLink>
-            </Form>
         </Container>
     )
 }
@@ -121,11 +63,7 @@ justify-content: flex-end;
 margin: 30px 0px;
 `
 
-const Form = styled.form`
-    display: flex;
-    align-items: center;
-    
-`;
+
 
 interface ButtonProps{
     bgColor : string;

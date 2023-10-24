@@ -1,14 +1,16 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from "react"
+
 
 import styled, { css } from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../reducer/index";
+
 
 import axios from "axios";
 import { saveCancelStatus } from "../action/cancel_status";
 import { useNavigate } from "react-router";
-import { saveAdmitStatus } from "../action/admit_status";
-// props
+import { saveloginStatus } from "../action/login_status";
+import { useDispatch } from "react-redux";
+import { removeCookie } from "../components/common/Cookie";
+
 interface ReviewComment {
     id : string;
     reviewCommentId: string;
@@ -17,82 +19,112 @@ interface ReviewComment {
     nickname: string;
     loginId: string;
     reviewId: string;
+    title : string;
 }
-
-interface TitleProps{
-    title : string | undefined
+interface editProps{
+    id : string | undefined
+    loginId : string | undefined,
+    title : string | undefined,
+    reviewComment? : ReviewComment[] | undefined,
+    
 }
-interface CommentListProps {
-    reviewComments: ReviewComment[] | undefined;
+interface urlProps {
+    url : string,
 }
-interface CombinedProps extends TitleProps, CommentListProps {}
+interface CombinedProps extends editProps, urlProps {}
 
-export default function Delete(props: CombinedProps){
+export default function DeleteDetail(props : CombinedProps){
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    interface deleteProps {
-        reviewId : string;
-        loginId : string;
-        reviewCommentId : string;
-    }
+    const [reviewCommentIds,setReviewCommentIds] = useState<string[] | null>([]);
 
-    const token = sessionStorage.getItem('token');
-
-    const deleteComment = async ({reviewCommentId,loginId,reviewId} : deleteProps ) => {            
-        const url = 'http://bookstore24.shop/review/comment/post/delete';
-    
-        const headers = {
-            Authorization: token,
-            'Content-Type': 'application/json',
-        };
-    
-        const data = {
-            reviewCommentId :reviewCommentId,
-            reviewId: reviewId,
-            loginId: loginId,
-            title: props.title,
-        };
+    useEffect(()=>{
         
-        try {
-            const response = await axios.post(url, data, { headers });
+    if(props.reviewComment){
+        const idsArray = props.reviewComment.map(
+            comment => (comment.reviewCommentId));
+        setReviewCommentIds(idsArray);
+    } 
+    else{
+        setReviewCommentIds(null);
+    }
 
-            alert('댓글을 성공적으로 삭제했습니다!');
-            window.location.reload();
-        } catch (error) {
+    },[])
+    const doDelete = () => {
 
-            }
-            
+        const token = sessionStorage.getItem('token')
+        
+        // Data to be sent in the request body.
+        const sellData = {
+            sellId : props.id,
+            loginId : props.loginId,
+            title : props.title
         };
 
-    const no = () => {
-        dispatch(saveCancelStatus(false));
+        const reviewData = {
+            id : props.id,
+            loginId : props.loginId,
+            title : props.title,
+            reviewCommentIds : reviewCommentIds
+        }
+        
+        // Axios configuration for the POST request.
+        const config = {
+            headers: {
+            Authorization: token,
+            },
+        };
+
+        if (props.url === 'sell'){
+        axios
+            .post(`https://bookstore24.shop/${props.url}/post/delete`, sellData, config)
+            .then((response) => {
+            navigate('/bookstore');
+            })
+            .catch((error) => {
+            console.log('Error:', error.response.data);
+            });
+        
+        }
+        else{
+        axios
+            .post(`https://bookstore24.shop/${props.url}/post/delete`, reviewData, config)
+            .then((response) => {
+                navigate('/bookreview');
+
+            })
+            .catch((error) => {
+            console.log('Error:', error.response.data);
+            });
+        
+        }}
+
+    const no = () => {        window.location.reload();
     }
-    console.log(props?.reviewComments![0].content)
+
     return(
         <ModalBackground>
             <Container>
 
-                <TopDiv>
+                <MiddleDiv>
                 <Font fontSize={25}>
                     정말로 삭제하시겠습니까 ?
                 </Font>
-                </TopDiv>
 
-                <MiddleDiv>
                 <Font fontSize={15}>
                     삭제하신 내용은 복구하실 수 없습니다.
                 </Font>
                 </MiddleDiv>
 
                 <ButtonContainer>
-                    <Button bgColor="#e20154" color="#ffffff" onClick={() => deleteComment(props.reviewComments![0])}>
-                        확인
+                    <Button bgColor="#e20154" color="#ffffff" onClick={doDelete}>
+                        네
                     </Button>
 
                     <Button bgColor="#ffffff" color="#000000" onClick={no}>
-                        취소
+                        아니오
                     </Button>
 
                 </ButtonContainer>
@@ -112,7 +144,7 @@ const ModalBackground = styled.div`
 `;
 const Container = styled.div`
 /* 모달창 크기 */
-  width: 400px;
+    width: 400px;
   height: 200px;
 
   /* 최상단 위치 */
@@ -149,18 +181,9 @@ const Font = styled.p<FontProps>`
         `}
 `;
 
-
-const TopDiv = styled.div`
-  position: absolute;
-  top: 0px;
-  
-  width : 100%;
-
-`
-
 const MiddleDiv = styled.div`
     position: absolute;
-    top: 70px;
+    top: 0px;
 
     width : 100%;
 
@@ -169,7 +192,7 @@ const MiddleDiv = styled.div`
 
 const ButtonContainer = styled.div`
   position: absolute;
-  top : 110px;
+  top : 100px;
   width : 100%;
   text-align : center;  
 `
@@ -179,17 +202,16 @@ interface ButtonProps {
     color : string
 }
 const Button = styled.button<ButtonProps>`
-    width : 60px;
+    width : 100px;
     height : 30px;
 
     margin : 20px;
-    padding : 5px;
 
     border-radius : 5px;
     border : 0px;
 
-    font-family : tway;
-
+    font-family : 'tway';
+    
     ${({ bgColor }) =>
         bgColor &&
         css`
@@ -203,3 +225,4 @@ const Button = styled.button<ButtonProps>`
         `}
 
 `
+
