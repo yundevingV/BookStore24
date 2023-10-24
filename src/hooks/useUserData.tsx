@@ -1,6 +1,8 @@
 // useFetchListData.js
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducer';
 
 interface DataType{
     "id": number,
@@ -21,13 +23,17 @@ function useFetchListData(token :string | null, word  :string) {
 
     const [data, setData] = useState<DataType[]>([]); 
     const [totalPages, setTotalPages] = useState<number | undefined>();
+    
+    const page = useSelector(
+      (state: RootState) => state.PagingReducer.PagingData
+  );
 
   useEffect(() => {
     if (word) {
       axios
         .get(`https://bookstore24.shop/member/profile/${word}/list`, {
           params: {
-            page: 0,
+            page: page | 0,
             size: 10,
           },
           headers: {
@@ -43,7 +49,7 @@ function useFetchListData(token :string | null, word  :string) {
           console.log('에러:', error.response);
         });
     }
-  }, [token, word]);
+  }, [token, word, page]);
 
   return { data, totalPages };
 }
