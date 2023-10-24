@@ -1,4 +1,4 @@
-
+import React,{useState} from 'react';
 
 import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,29 +8,68 @@ import axios from "axios";
 import { saveCancelStatus } from "../action/cancel_status";
 import { useNavigate } from "react-router";
 import { saveAdmitStatus } from "../action/admit_status";
-
-
-interface Props {
-    onConfirm: () => void;
+// props
+interface ReviewComment {
+    id : string;
+    reviewCommentId: string;
+    content: string;
+    createdDate: string;
+    nickname: string;
+    loginId: string;
+    reviewId: string;
 }
 
-export default function Delete(){
-    
+interface TitleProps{
+    title : string | undefined
+}
+interface CommentListProps {
+    reviewComments: ReviewComment[] | undefined;
+}
+interface CombinedProps extends TitleProps, CommentListProps {}
+
+export default function Delete(props: CombinedProps){
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const yes = () => {
-        dispatch(saveAdmitStatus(true));
-        dispatch(saveCancelStatus(false));
-
+    interface deleteProps {
+        reviewId : string;
+        loginId : string;
+        reviewCommentId : string;
     }
+
+    const token = sessionStorage.getItem('token');
+
+    const deleteComment = async ({reviewCommentId,loginId,reviewId} : deleteProps ) => {            
+        const url = 'http://bookstore24.shop/review/comment/post/delete';
+    
+        const headers = {
+            Authorization: token,
+            'Content-Type': 'application/json',
+        };
+    
+        const data = {
+            reviewCommentId :reviewCommentId,
+            reviewId: reviewId,
+            loginId: loginId,
+            title: props.title,
+        };
+        
+        try {
+            const response = await axios.post(url, data, { headers });
+
+            alert('댓글을 성공적으로 삭제했습니다!');
+            window.location.reload();
+        } catch (error) {
+
+            }
+            
+        };
 
     const no = () => {
         dispatch(saveCancelStatus(false));
-        
-
     }
-
+    console.log(props?.reviewComments![0].content)
     return(
         <ModalBackground>
             <Container>
@@ -48,7 +87,7 @@ export default function Delete(){
                 </MiddleDiv>
 
                 <ButtonContainer>
-                    <Button bgColor="#e20154" color="#ffffff" onClick={yes}>
+                    <Button bgColor="#e20154" color="#ffffff" onClick={() => deleteComment(props.reviewComments![0])}>
                         확인
                     </Button>
 

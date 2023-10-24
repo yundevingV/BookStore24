@@ -1,16 +1,13 @@
 import axios from 'axios';
-import { timeEnd } from 'console';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { saveAdmitStatus } from '../../action/admit_status';
 import { saveCancelStatus } from '../../action/cancel_status';
-import useInput from '../../hooks/useInput';
 import Delete from '../../modal/Delete';
 import { RootState } from '../../reducer';
 import timeForToday from '../../util/timeForToday';
-import { getCookie } from '../common/Cookie';
 
 // props
 interface ReviewComment {
@@ -125,43 +122,11 @@ export default function CommentList(props: CombinedProps) {
         else {alert('수정하실 댓글을 입력해주세요!')}
         };
 
-    interface deleteProps {
-        reviewId : string;
-        loginId : string;
-        reviewCommentId : string;
-    }
+
 
     useEffect(()=>{
         saveAdmitStatus(false);
     })
-
-    const deleteComment = async ({reviewCommentId,loginId,reviewId} : deleteProps ) => {            
-            const url = 'http://bookstore24.shop/review/comment/post/delete';
-        
-            const headers = {
-                Authorization: token,
-                'Content-Type': 'application/json',
-            };
-        
-            const data = {
-                reviewCommentId :reviewCommentId,
-                reviewId: reviewId,
-                loginId: loginId,
-                title: props.title,
-            };
-            
-            if(!content && window.confirm("삭제 ?")){
-    
-            try {
-                const response = await axios.post(url, data, { headers });
-
-                alert('댓글을 성공적으로 삭제했습니다!');
-                window.location.reload();
-            } catch (error) {
-    
-                }
-                }
-            };
 
     const [content,setContent] = useState<string>('');
 
@@ -184,7 +149,6 @@ export default function CommentList(props: CombinedProps) {
 
     }
 
-
     return (
         <>
         {props.reviewComments?.map((comment,index) => (
@@ -199,8 +163,9 @@ export default function CommentList(props: CombinedProps) {
                     {editArray[index] ?
                     <>
                     <EditButton onClick={() => doEdit(index)}>수정</EditButton>
-                    <EditButton onClick={() => deleteComment(comment)}>삭제</EditButton>
-                    {cancelStatus && <Delete /> }
+                    <EditButton onClick={() => cancle()}>삭제</EditButton>
+                    
+                    {cancelStatus && <Delete title={props.title} reviewComments={props.reviewComments} /> }
                     </>
                     : <></>
                     }
