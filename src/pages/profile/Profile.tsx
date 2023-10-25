@@ -6,10 +6,11 @@ import SoldList from "../../components/profile/SoldList";
 import ReviewList from "../../components/profile/ReviewList";
 import { StyledButtonLink, StyledLink } from "../../styles/link";
 
-
+import Google from "../../assets/imgs/Google.png";
+import Naver from "../../assets/imgs/Naver.jpg";
+import Kakao from "../../assets/imgs/Kakao.jpg";
 
 import { styled } from "styled-components";
-import base64 from 'base-64';
 import axios from "axios";
 import Login from "../Login";
 import { useSelector } from "react-redux";
@@ -41,18 +42,24 @@ export default function Profile(){
 
     const list = ["서울", "인천", "경기도"];
     const value = ["seoul","incheon","gyeonggi"]
+    
+    const [loginType,setLoginType] = useState<string>('');
+
+
 
     const [residence , setResidence] = useState('');
 
     const token = sessionStorage.getItem('token')
 
+    // 로그인 정보
     useEffect(()=>{
-        axios.get(`http://bookstore24.shop/member/profile/edit`,
+        axios.get(`http://bookstore24.shop/member/profile/my`,
             {
                 headers : {
                     'Authorization' : token
                 }
             }
+
             )
             .then(response =>{
                 console.log(response.data);
@@ -62,14 +69,14 @@ export default function Profile(){
                 setResidence(list[idx])
 
                 console.log(residence)
-                setAuth(true);
-            })
+                setAuth(true); 
+                setLoginType(response.data.provider);
+                })
+
             .catch(error => {
                 console.log('Error : ', error);
-                setAuth(false);
             })
     },[])
-
 
     return(
         <Wrapper>
@@ -116,7 +123,12 @@ export default function Profile(){
                     <NickNameContainer>
                         <NickName>
                             {data?.nickname}
+                            {loginType === Google && <img src={Google} alt ='x'/> }
+                            {loginType === Naver && <img src={Naver} alt ='x'/> }
+                            {loginType === Kakao && <img src={Kakao} alt ='x'/> }
+                                                    
                         </NickName>
+
                     </NickNameContainer>
 
                     <ResidenceContainer>
@@ -255,6 +267,14 @@ const NickNameContainer = styled.div`
 position : absolute;
 top : 50px;
 left : 110px;
+
+display : flex;
+align-items : center;
+img {
+    width : 20px;
+    height : 20px;
+    margin : 0px 20px;
+}
 `
 
 const NickName = styled.span`

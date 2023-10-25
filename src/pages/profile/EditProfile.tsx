@@ -48,7 +48,7 @@ export default function EditProfile() {
     // 토스트 구현
     const [toast, setToast] = useState(false);
 
-    
+    // 프로필수정 접근 권한 부여
     useEffect(()=>{
         axios.get(`http://bookstore24.shop/member/profile/edit`,
             {
@@ -67,9 +67,9 @@ export default function EditProfile() {
                 navigate(-1);
             })
     },[])
+
     
-
-
+    // 거주지 수정
     const modifyResidence = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
 
@@ -100,6 +100,7 @@ export default function EditProfile() {
         resetInput();
         };
     
+        // 닉네임 수정
         const modifyNickname = (e: React.MouseEvent) => {
             e.preventDefault(); // Prevent the default form submission behavior.
     
@@ -133,6 +134,7 @@ export default function EditProfile() {
             resetInput();
             };}
 
+        
     const [viewCheck,setCheck] = useState<boolean>(false);
 
     const check = () => {
@@ -206,6 +208,12 @@ export default function EditProfile() {
                         <DropTest dropValue={dropDownValueData}/>
                     </Box>
 
+                    <Box>
+                        <P>로그인 정보</P>
+                        <Space width={0} height={15} />
+
+
+                    </Box>
                 </ProfileInfoContainer>
 
 
