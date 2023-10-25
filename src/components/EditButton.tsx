@@ -31,7 +31,6 @@ export default function EditButton(props : CombinedProps){
     const [viewCheck,setCheck] = useState<boolean>(false);
 
     const check = () => {
-        // console.log('a')
         setCheck(true);
     } 
 
