@@ -123,9 +123,9 @@ export default function Profile(){
                     <NickNameContainer>
                         <NickName>
                             {data?.nickname}
-                            {loginType === Google && <img src={Google} alt ='x'/> }
-                            {loginType === Naver && <img src={Naver} alt ='x'/> }
-                            {loginType === Kakao && <img src={Kakao} alt ='x'/> }
+                            {loginType === 'google' && <img src={Google} alt ='x'/> }
+                            {loginType === 'naver' && <img src={Naver} alt ='x'/> }
+                            {loginType === 'kakao' && <img src={Kakao} alt ='x'/> }
                                                     
                         </NickName>
 
