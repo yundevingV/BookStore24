@@ -72,30 +72,27 @@ export default function RankingPreview(){
 
                 <RContainer>
 
-                <StyledButtonLink to={`/search/bookreview/result?search_query=${item.title}`} onClick={() => searchType('booktitle')}>
+                    <StyledButtonLink to={`/search/bookreview/result?search_query=${item.title}`} onClick={() => searchType('booktitle')}>
                         <BookTitle>
-                            {truncate(`${item.title}`,15)}
+                            <p>{truncate(`${item.title}`,15)}</p>
                         </BookTitle>
                     </StyledButtonLink>
 
-                    <BookAuthor>
-                        
                 <StyledButtonLink to={`/search/bookreview/result?search_query=${item.author}`} onClick={() => searchType('author')}>
 
-                        <BookAuthor>{item.author.replace('^', ',')} </BookAuthor>
+                    <BookAuthor>{item.author.replace('^', ',')} </BookAuthor>
                 </StyledButtonLink>
 
 
-                        <p>{item.publisher}</p>
-
-                    </BookAuthor>
-                    <Rating>
+                        <BookAuthor>{item.publisher}</BookAuthor>
+                        <Rating>
                         <FontAwesomeIcon icon={faStar} className="star-icon"/>
                         {item.avgScore.toString().length >= 3 ? <span>{decimalDisplay(item.avgScore)}</span>
                         : item.avgScore
                         }
                         
                     </Rating>
+                    
                 </RContainer>
             </ItemContainer>
                 )}
@@ -120,7 +117,7 @@ const Container = styled.div`
     margin : 50px auto;
     padding : 10px;
 
-    border-radius : 4px;
+    border-radius : 8px;
 
 `
 
@@ -135,6 +132,7 @@ const ItemContainer = styled.div`
     display: flex;
     justify-content : flex-start;
     
+    margin : 10px 0px;
 `
 
 const LContainer = styled.div`
@@ -156,16 +154,18 @@ const Ranking = styled.div`
 
 const Img = styled.img`
 width : 100px;
-height : 120px;
-padding : 20px;
+height : 140px;
+padding : 30px;
 `
 
 const RContainer = styled.div`
     display : flex;
     flex-direction : column;
-    justify-content: space-between; /* or other values like flex-start, flex-end, center, etc. */
+    
     margin : 0px;
     padding : 10px 0px;
+
+    height : 80px;
 
 `
 
@@ -176,7 +176,7 @@ color : #ffffff;
 const Rating = styled.span`
 color : #ffffff;
 `
-const BookAuthor = styled.span`
+const BookAuthor = styled.p`
 color : #ffffff;
 
 `

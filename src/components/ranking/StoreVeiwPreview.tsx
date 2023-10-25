@@ -68,19 +68,17 @@ export default function ReviewVeiwPreview(){
             <StyledButtonLink to={`/search/bookstore/result?search_query=${item.title}`} onClick={() => searchType('booktitle')}>
 
                 <BookTitle>
-                {truncate(`${item.title}`,15)}
+                <p>{truncate(`${item.title}`,15)}</p>
                 </BookTitle>
             </StyledButtonLink>
-                <BookAuthor>
 
                 <StyledButtonLink to={`/search/bookstore/result?search_query=${item.author}`} onClick={() => searchType('author')}>
                     <BookAuthor>
                     {item.author.replace('^', ',')} 
                     </BookAuthor>
                 </StyledButtonLink>
-                    <p>{item.publisher}</p>
+                    <BookAuthor>{item.publisher}</BookAuthor>
 
-                </BookAuthor>
                 
             </RContainer>
             </ItemContainer>
@@ -104,8 +102,7 @@ justify-content : center;
 flex-direction : column;
 margin : 50px auto;
 padding : 10px;
-border-radius : 4px;
-
+border-radius : 8px;
 `
 
 
@@ -118,6 +115,7 @@ color : #ffffff;
 const ItemContainer = styled.div`
 display: flex;
 justify-content : flex-start;
+margin : 10px 0px;
 
 `
 
@@ -140,16 +138,16 @@ justify-content : center;
 
 const Img = styled.img`
 width : 100px;
-height : 120px;
-padding : 20px;
+height : 140px;
+padding : 30px;
 `
 
 const RContainer = styled.div`
-display : flex;
-flex-direction : column;
-justify-content:  center; 
-margin : 0px;
-padding : 10px 0px;
+    display : flex;
+    flex-direction : column;
+    justify-content : space-between;
+    margin : 10px;
+    padding : 15px 0px;
 
 `
 
