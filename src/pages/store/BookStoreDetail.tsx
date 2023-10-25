@@ -123,20 +123,38 @@ export default function BookStoreDetail() {
                 </TitleContainer>
 
                 <StatContainer>
-                <span className='price'>₩ {data?.price.toLocaleString('ko-KR')}</span>                    
-                <span className='view'> <FontAwesomeIcon icon={faEye} />
-                        {data?.view?.toLocaleString('ko-KR')}</span>
-                </StatContainer>
-                    <Picture src={data?.coverImg} alt='x'/>
-
-                    
-                    <Profile> <FontAwesomeIcon icon={faCircleUser} size="xs" /> {data?.nickname}
+                    <Profile> 
+                    <FontAwesomeIcon icon={faCircleUser}  /><span> {data?.nickname}</span>
                     <Date>{convertTime(data?.createdDate)}</Date>
                     </Profile>
+
                     
-                        <p className="bookTitle">{data?.bookTitle}</p>
-                        <span className="publisher">저자 : {data?.author.replace('^', ',')} / 출판사 : {data?.publisher}</span>
-                        
+                    <span className='view'> <FontAwesomeIcon icon={faEye} />
+                        {data?.view?.toLocaleString('ko-KR')}</span>
+                </StatContainer>
+
+                <InfoContainer>
+
+                <Left>
+                    <Picture src={data?.coverImg} alt='x'/>
+                </Left>
+
+                <Right>
+                    <Info>[리뷰 도서 정보]</Info>
+                    <p className="bookTitle">제목 : {data?.bookTitle}</p>
+                    <SP>저자 : {data?.author.replace('^', ',')} </SP>
+                    <SP>출판사 : {data?.publisher}</SP>
+
+                </Right>
+
+                </InfoContainer>
+
+                <RatingContainer>
+
+                <span> 
+                판매 가격 : ₩ {data?.price.toLocaleString('ko-KR')}
+                </span>
+                </RatingContainer>
 
                 </InnerContainer>
 
@@ -203,6 +221,47 @@ span{
     font-size : 17px;
 }
 `
+const Profile = styled.div`
+    display: flex;
+
+    align-items : center;
+`
+const InfoContainer = styled.div`
+display : flex;
+
+`
+
+const Left = styled.div`
+display : flex;
+
+width : 30vw;
+
+`
+
+const Right =styled.div`
+
+display : flex;
+justify-content : start;
+flex-direction : column;
+
+padding : 0px 30px;
+width : 30vw;
+
+`
+const Info = styled.div`
+margin : 0px auto 30px;
+p{text-align : center;}
+
+`
+const SP = styled.p`
+font-size : 18px;
+`
+const RatingContainer = styled.div`
+margin : 30px auto 0px;
+span{
+    font-size : 25px;
+}
+`
 const TitleContainer = styled.div`
 
 `
@@ -227,9 +286,6 @@ height : 350px;
 margin : 0 auto;
 `
 
-const Profile = styled.p`
-
-`
 const Date = styled.span`
 margin : 20px;
 font-size : 17px;

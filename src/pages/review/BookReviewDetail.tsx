@@ -122,25 +122,44 @@ export default function BookReviewDetail() {
                 </TitleContainer>
 
                 <StatContainer>
-                    <span className='rating'> <FontAwesomeIcon icon={faStar} className="star-icon-detail" size="xs" /> {data?.score}</span>
+                    <Profile> 
+                    <FontAwesomeIcon icon={faCircleUser}  /><span> {data?.nickname}</span>
+                    <Date>{convertTime(data?.createdDate)}</Date>
+                    </Profile>
+
                     
                     <span className='view'> <FontAwesomeIcon icon={faEye} />
                         {data?.view?.toLocaleString('ko-KR')}</span>
                 </StatContainer>
-                    <Picture src={data?.coverImg} alt='x'/>
 
-                    
-                    <Profile> <FontAwesomeIcon icon={faCircleUser} size="xs" /> {data?.nickname}
-                    <Date>{convertTime(data?.createdDate)}</Date>
-                    </Profile>
-                    
-                        <p className="bookTitle">{data?.bookTitle}</p>
-                        <span className="publisher">저자 : {data?.author.replace('^', ',')} / 출판사 : {data?.publisher}</span>
-                        
+                <InfoContainer>
+
+                <Left>
+                    <Picture src={data?.coverImg} alt='x'/>
+                </Left>
+
+                <Right>
+                    <Info>[리뷰 도서 정보]</Info>
+                    <p className="bookTitle">제목 : {data?.bookTitle}</p>
+                    <SP>저자 : {data?.author.replace('^', ',')} </SP>
+                    <SP>출판사 : {data?.publisher}</SP>
+
+                </Right>
+
+                </InfoContainer>
+
+                <RatingContainer>
+
+                <span className='rating'> 
+                후기 평점 : <FontAwesomeIcon icon={faStar} className="star-icon-detail" /> {data?.score}</span>
+                </RatingContainer>
 
                 </InnerContainer>
 
+
                 <hr />
+
+
                 <ContentContainer>
                     <p>
                         후기
@@ -198,7 +217,7 @@ justify-content: space-around;
 margin : 50px 0px;
 
 span{
-    font-size : 17px;
+    font-size : 16px;
 }
 `
 const TitleContainer = styled.div`
@@ -208,14 +227,51 @@ const TitleContainer = styled.div`
 const StatContainer = styled.div`
 display : flex;
 align-items : center;
-
+margin : 20px 0px;
 span {
     font-size : 17px;
     
     font-weight : 300;
     color : #4e4a4a;
-    margin : 10px;
+    margin : 0px 10px;
+    align-items: center;
+
 }
+`
+const Profile = styled.div`
+    display: flex;
+
+    align-items : center;
+`
+const InfoContainer = styled.div`
+display : flex;
+
+`
+
+const Left = styled.div`
+display : flex;
+
+width : 30vw;
+
+`
+
+const Right =styled.div`
+
+display : flex;
+justify-content : start;
+flex-direction : column;
+
+padding : 0px 30px;
+width : 30vw;
+
+`
+const Info = styled.div`
+margin : 0px auto 30px;
+p{text-align : center;}
+
+`
+const SP = styled.p`
+font-size : 18px;
 `
 
 const Picture = styled.img`
@@ -224,10 +280,14 @@ height : 350px;
 
 margin : 0 auto;
 `
-
-const Profile = styled.p`
-
+const RatingContainer = styled.div`
+margin : 30px auto 0px;
+span{
+    font-size : 25px;
+}
 `
+
+
 const Date = styled.span`
 margin : 20px;
 font-size : 17px;
