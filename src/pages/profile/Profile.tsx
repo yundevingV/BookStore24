@@ -238,6 +238,7 @@ const StyledEditButtonLink = styled(StyledButtonLink)`
     font-weight : bold;
     background : #cecece;
     text-decoration: none;
+    color : #000;
 
 
 `

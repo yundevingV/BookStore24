@@ -275,6 +275,7 @@ const StyledEditButtonLink = styled(StyledButtonLink)`
     background : #cecece;
     text-decoration : none;
 
+    color : #000;
 `
 
 
