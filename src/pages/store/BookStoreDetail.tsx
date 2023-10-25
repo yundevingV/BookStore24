@@ -140,7 +140,7 @@ export default function BookStoreDetail() {
                 </Left>
 
                 <Right>
-                    <Info>[리뷰 도서 정보]</Info>
+                    <Info>[판매 도서 정보]</Info>
                     <p className="bookTitle">제목 : {data?.bookTitle}</p>
                     <SP>저자 : {data?.author.replace('^', ',')} </SP>
                     <SP>출판사 : {data?.publisher}</SP>
@@ -269,6 +269,7 @@ const TitleContainer = styled.div`
 const StatContainer = styled.div`
 display : flex;
 align-items : center;
+margin : 20px 0px;
 
 span {
     font-size : 17px;
