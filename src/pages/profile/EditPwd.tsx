@@ -7,9 +7,11 @@ import { styled,css } from "styled-components"
 import { StyledButtonLink } from "../../styles/link"
 import axios from "axios"
 import { getCookie } from "../../components/common/Cookie"
+import { useLocation } from "react-router"
 
 export default function EditPwd(){
-
+    const location = useLocation();
+    console.log(location)
     //입력창 아이디 비번, 비번확인, 닉네임
     const [ { currentPassword, password1,password2}, onInputChange, resetInput ] = useInput({
         currentPassword : '',
@@ -64,7 +66,7 @@ export default function EditPwd(){
             <Header />
             <Container>
                 <EditProfileButtonContainer>
-                        <StyledEditButtonLink to='/editprofile'>
+                        <StyledEditButtonLink to='/editprofile' state={{loginType : location.state.loginType }}>
                             프로필 수정
                         </StyledEditButtonLink>
                 </EditProfileButtonContainer>

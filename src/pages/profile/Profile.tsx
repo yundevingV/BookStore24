@@ -100,7 +100,7 @@ export default function Profile(){
                         마이페이지
                     </P>
 
-                        <StyledEditButtonLink to='/editprofile'>
+                        <StyledEditButtonLink to='/editprofile' state={{loginType : loginType}}>
                             프로필 수정
                         </StyledEditButtonLink>
 

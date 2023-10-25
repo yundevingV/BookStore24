@@ -18,6 +18,7 @@ import { saveDropDownValue } from "../../action/dropdown_value";
 import { saveloginStatus } from "../../action/login_status";
 import Check from "../../modal/Check";
 import Toast from "../../components/toast/Toast";
+import { useLocation } from "react-router";
 
 export default function EditProfile() {
 
@@ -27,6 +28,7 @@ export default function EditProfile() {
     });
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const dropDownValueData = useSelector(
         (state: RootState) => state.DropDownValueReducer.dropDownValueData
@@ -140,6 +142,7 @@ export default function EditProfile() {
     const check = () => {
         setCheck(true);
     } 
+    console.log(location.state.loginType)
     
     return(
         <Wrapper>
@@ -151,12 +154,15 @@ export default function EditProfile() {
 
                 <Space width={0} height={5} />
 
-                <PwdButtonContainer>
-                        <StyledEditButtonLink to='/editpwd'>
+                {location.state.loginType === 'bookstore24' ?
+                    <PwdButtonContainer>
+                        <StyledEditButtonLink to='/editpwd' state={{loginType : location.state.loginType }}>
                             비밀번호 수정하기
 
                         </StyledEditButtonLink>
-                </PwdButtonContainer>
+                    </PwdButtonContainer>
+                    : <></>
+                }
 
                 {/* 사용자 정보 */}
                 <ProfileInfoContainer>
@@ -268,6 +274,7 @@ const StyledEditButtonLink = styled(StyledButtonLink)`
     font-weight : bold;
     background : #cecece;
     text-decoration : none;
+
 `
 
 
