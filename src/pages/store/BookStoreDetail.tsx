@@ -15,6 +15,7 @@ import { RootState } from "../../reducer/index";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import Toggle from "../../components/store/SetToggle";
+import OpenChat from "../../modal/OpenChat";
 
 export default function BookStoreDetail() {
 
@@ -88,7 +89,11 @@ export default function BookStoreDetail() {
             }
         })
     },[]);
-    
+    const [viewCheck,setCheck] = useState<boolean>(false);
+
+    const check = () => {
+        setCheck(true);
+    } 
     return(
         <Wrapper>
             {/* b   로그인 실패시 & 비로그인 */}
@@ -171,8 +176,9 @@ export default function BookStoreDetail() {
 
 
                 {/* 오픈채팅 */}
+                {viewCheck && <OpenChat url={data?.talkUrl} />}
                 <OpenChatContainer>
-                    <OpenChatButton>
+                    <OpenChatButton onClick={() => check()}>
                         오픈 채팅으로 연락하기
                     </OpenChatButton>
                 </OpenChatContainer>
@@ -341,19 +347,15 @@ font-size : 12px;
 margin : 10px;
 padding : 5px;
 
-background-color: #ffee00;
-border : 2px solid #000000;
+background-color: #faec2b;
+border : 0px solid #000000;
 color : #000000;
 
-border-radius : 4px;
+border-radius : 8px;
 
 font-family: tway, sans-serif, Arial;
 
 &:hover {
-
-    background-color: #000000;
-    border : 2px solid #ffee00;
-    color : #ffee00;
 
     cursor : pointer;
     }
