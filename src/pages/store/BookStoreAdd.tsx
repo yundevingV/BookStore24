@@ -25,7 +25,7 @@ export default function BookCommunityAdd() {
     const [ { title, talkUrl, price, content }, onInputChange, resetInput ] = useInput({
         title: '',
         talkUrl : '',
-        price: '',
+        price: null,
         content: '',
     });
 
@@ -73,6 +73,10 @@ export default function BookCommunityAdd() {
             Authorization: token,
             },
         };
+        if (!/^\d+$/.test(price)) {
+            alert("판매 가격은 숫자로 입력해주세요 ! ");
+            return;
+          }
         if (title.trim() && talkUrl.trim() && price.trim() && content.trim() && bookInformation?.title
             
             ){
