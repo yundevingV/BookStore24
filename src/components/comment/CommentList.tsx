@@ -87,8 +87,8 @@ export default function CommentList(props: CombinedProps) {
         loginId: string;
         reviewId: string;
     }
-
-    const editComment = async ({reviewCommentId,loginId,reviewId} : editCommentProps ,e : any) => {
+    console.log(props)
+    const editComment = async ({reviewCommentId,loginId,reviewId} : editCommentProps ,e : any , curContent : string) => {
         e.preventDefault();
 
         const url = 'http://bookstore24.shop/review/comment/post/edit/save';
@@ -103,9 +103,14 @@ export default function CommentList(props: CombinedProps) {
             loginId: loginId,
             title: props.title,
             reviewCommentId :reviewCommentId,
-            content: content,
+            content: content.trim(),
         };
-        if(content){
+
+        if(curContent === content.trim()){
+            alert('수정하실 댓글을 입력해주세요!')
+            return;
+        }
+        if(content ){
 
         try {
             const response = await axios.post(url, data, { headers });
@@ -138,9 +143,6 @@ export default function CommentList(props: CombinedProps) {
         (state : RootState) => state.CancelStatusReducer.cancelStatusData
     )
 
-    const admitStatus = useSelector(
-        (state : RootState) => state.AdmitStatusReducer.admitStatusData
-    )
 
     const cancle = ( ) => {
         dispatch(saveCancelStatus(true))
@@ -175,7 +177,7 @@ export default function CommentList(props: CombinedProps) {
                 name="content"
                 onChange={onInputChange} 
                 />
-            <ModifyButton onClick={(e: any) => editComment(comment,e)}>
+            <ModifyButton onClick={(e: any) => editComment(comment,e,comment?.content)}>
                 수정하기
             </ModifyButton>
             </>
