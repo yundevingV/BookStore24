@@ -7,6 +7,7 @@ import axios from "axios";
 import StarRating from "../../components/review/Star";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer";
+import EditDetail from "../../modal/EditDetail";
 
 
 export default function BookCommunityEdit() {
@@ -107,7 +108,16 @@ export default function BookCommunityEdit() {
                 });
         }
     };
+    
+    const [view,setView] = useState<boolean>(false);
 
+    const open = () => {
+        setView(true);
+      };
+    
+      const close = () => {
+        setView(false);
+      };
 
     
     return(
@@ -170,6 +180,8 @@ export default function BookCommunityEdit() {
 
                             />
                 </ContentContainer>
+                
+                {view && <EditDetail onClose={close} /> }
 
                 <ButtonContainer>
 
