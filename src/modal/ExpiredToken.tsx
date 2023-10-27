@@ -25,7 +25,7 @@ export default function ExpiredToken({exp} : expTypes ){
         <ModalBackground>
             <Container>
                 <Content>
-                    <Font>토큰 만료시간이 되었습니다.</Font>
+                    <Font>로그인 유효시간이 만료 되었습니다.</Font>
                     <Font>다시 로그인 해주세요.</Font>
                     <Button onClick={login}>로그인 하기</Button>
                 </Content>
