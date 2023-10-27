@@ -16,6 +16,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducer/index";
+import { saveBookRating } from "../../action/book_rating";
 
 export default function BookReviewAdd() {
 
@@ -95,7 +96,8 @@ export default function BookReviewAdd() {
         
 
         useEffect(()=>{
-            dispatch(saveBookInformation([]))
+            dispatch(saveBookInformation([]));
+            dispatch(saveBookRating(0));
         },[])
 
         // 별점

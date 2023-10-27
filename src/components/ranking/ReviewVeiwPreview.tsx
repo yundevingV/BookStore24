@@ -42,7 +42,9 @@ export default function ReviewVeiwPreview(){
     const searchType = (type : string) => {
         dispatch(saveSearchOption(type));
     }
+    
     const selectedData = data?.books.slice(0, 5);
+
     console.log(selectedData)
 
     return(
