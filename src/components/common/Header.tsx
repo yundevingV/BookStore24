@@ -175,14 +175,20 @@ export default function Header() {
                 :
                 <>
                 <Token>
-                    <span>{nickname}     </span>
 
-                    {time.minutes >= 0 ? time.minutes : 0}분 
-                    {time.seconds >= 0 ? time.seconds : 0}초
+                    [로그인 유효시간 :
+                    <span>
+
+                    &nbsp;{time.minutes >= 0 ? time.minutes : 0}분&nbsp;
+                    </span>
+                    
+                    {time.seconds >= 0 ? time.seconds : 0}초]
 
                 </Token>
                 <Profile>
                     <StyledLinkBlack to='/profile'>
+                    <span> {nickname}  -   </span>
+
                     나의 프로필
                     </StyledLinkBlack>
                 </Profile>
