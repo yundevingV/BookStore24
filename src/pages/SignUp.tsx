@@ -5,52 +5,64 @@ import FirstLogin from "../modal/FirstLogin";
 
 import { styled ,css } from "styled-components";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 
 export default function SignUp(){
-
-    //입력창 아이디 비번, 비번확인, 닉네임
-    const [ { id, pwd1,password2,nickname,email,validNumber }, onInputChange, resetInput ] = useInput({
-        id: '',
-        pwd1: '',
-        password2: '',
-        email : '',
-        vaildNumber:'',
-    });
-
-    //회원가입 post
-    type signUpDataType = (
-        id : string,
-        pwd1 : string,
-        email : string
-     ) => void
-
     const navigate = useNavigate();
-
-    const SignUp : signUpDataType = (id,pwd1,email ) => {
-        axios.post('http://bookstore24.shop/local/signup',
-        {
-            "loginId" : id,
-            "loginPassword" : pwd1,
-            "email" : email,
-        }
-        )
-        .then(function (response) {
-            console.log(response);
-            navigate('/login');
-            resetInput();
-        })
-        .catch(function (error) {
-
-            console.log(`error : ${error}`);
-            if(error.response){
-                console.log(error.response);
-                alert(`${error.response.data}`);
-            }
+    const [formData, setFormData] = useState({
+        loginId : "",
+        pwd : "",
+        pwd2 : "",
+        email : "",
+      });
+    
+      const { loginId, pwd, pwd2, email } = formData;
+    
+      const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData({
+          ...formData,
+          [name]: value,
         });
-        
+      };
+  
+      const SignUp = (e: React.MouseEvent) => {
+          e.preventDefault(); // Prevent the default form submission behavior.
+          
+  
+              // 공백 여부 검사
+      if (loginId.trim() === '' || pwd.trim() === '' || pwd2.trim() === ''||email.trim() === '') {
+          alert('빈칸을 모두 채워주세요.'); // 공백인 경우 알람 창을 띄움.
+          return; 
+      } 
+      if (pwd.trim() !== pwd2.trim()) {
+          alert('비밀번호와 비밀번호 확인이 일치하지 않습니다 !');
+          return;
         }
+          
+          const data = {
+              loginId: loginId,
+              loginPassword1 : pwd,
+              loginPassword2 : pwd,
+              email : email,
+          };
+          const config = {};
+          axios
+              .post(`http://bookstore24.shop/local/signup`, data, config)
+              .then((response) => {
+              console.log(`Response : ${response}`);
+              console.log(`Response : ${data}`);
+              alert('회원 가입 성공 ! ');
+              navigate('/login');
+              })
+              .catch((error) => {
+                  console.log(error)
+              console.log('Error:', error.response.data);
+              alert(error.response.data);
+              });
+          
+          };
 
     return(
         <Wrapper>
@@ -69,8 +81,8 @@ export default function SignUp(){
 
                         <Input password={false}
                             placeholder='아이디를 입력해주세요'
-                            name="id" 
-                            value={id}
+                            name="loginId" 
+                            value={loginId}
                             onChange={onInputChange} />
 
                             {/* <Button>
@@ -88,8 +100,8 @@ export default function SignUp(){
 
                         <Input password={true}
                             placeholder='비밀번호를 입력해주세요' 
-                            name="pwd1" 
-                            value={pwd1}
+                            name="pwd" 
+                            value={pwd}
                             onChange={onInputChange} />
 
 
@@ -103,8 +115,8 @@ export default function SignUp(){
 
                         <Input password={true}
                             placeholder='비밀번호를 확인해주세요'
-                            name="password2" 
-                            value={password2}
+                            name="pwd2" 
+                            value={pwd2}
                             onChange={onInputChange} />
                 </InputContainer>
 
@@ -150,7 +162,7 @@ export default function SignUp(){
 
                 <ButtonContainer>
 
-                    <SubmitButton onClick={()=>SignUp(id,pwd1,email)}>
+                    <SubmitButton onClick={SignUp}>
                         제출하기
                     </SubmitButton>
                     
