@@ -301,8 +301,6 @@ const ContentContainer = styled.div`
 display: flex;
 flex-direction: column;
 
-width : 500px;
-
 margin : 50px 0px;
 
 span{
