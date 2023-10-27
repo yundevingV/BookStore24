@@ -288,12 +288,6 @@ const Profile = styled.div`
 
 `
 
-const Join = styled.div`
-    display: inline-block;
-    margin-left: 20px;
-    padding : 5px; 
-    cursor : pointer;
-`
 
 const LogoutButton = styled.button`
     border : 0px;

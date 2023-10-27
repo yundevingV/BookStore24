@@ -2,12 +2,12 @@ import React,{useState} from "react";
 import Header from "../components/common/Header";
 import Carousel from "../components/home/Carousel"
 
-
 import { styled } from "styled-components";
 import RankingPreview from "../components/ranking/RankingPreview";
 import ReviewVeiwPreview from "../components/ranking/ReviewVeiwPreview";
 import StoreVeiwPreview from "../components/ranking/StoreVeiwPreview";
 import BookStore from "../components/home/BookStore";
+import Footer from "../components/common/Footer";
 
 export default function Main(){
 
@@ -24,14 +24,15 @@ export default function Main(){
                 <ReviewVeiwPreview />
                 <StoreVeiwPreview />
             </PreviewContainer>
+            <Footer />
         </Wrapper>  
     )
 }
 
 const Wrapper = styled.div`
-    height  : fit-content;
+    height: auto;
+    min-height: 100%;
 
-    margin-bottom : 500px;
 `
 
 const PreviewContainer = styled.div`
