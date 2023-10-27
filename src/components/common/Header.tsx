@@ -44,28 +44,31 @@ export default function Header() {
     
     let dec = useDecodedJWT(token);
 
-    const calculateMinutes = () => {
+    const calculateTime = () => {
         const date = new Date(dec?.exp * 1000);
         const curDate = new Date();
         const timeDifferenceInMilliseconds = date.getTime() - curDate.getTime();
-        return Math.floor(timeDifferenceInMilliseconds / 1000 / 60);
-      }
+        const totalSeconds = Math.floor(timeDifferenceInMilliseconds / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return { minutes, seconds };
+      };
     
-      const initialMinutes = calculateMinutes();
-    
-      const [minutes, setMinutes] = useState(initialMinutes);
+      const initialTime = calculateTime();
+      const [time, setTime] = useState(initialTime);
     
       useEffect(() => {
         const interval = setInterval(() => {
-          const newMinutes = calculateMinutes();
-          setMinutes(newMinutes);
+          const newTime = calculateTime();
+          setTime(newTime);
     
-          if (newMinutes <= 0) {
+          if (newTime.minutes <= 0 && newTime.seconds <= 0) {
             setExp(true);
+            clearInterval(interval);
           }
     
-          console.log(newMinutes);
-        }, 60000); // Update every 1000 milliseconds (1 second)
+          console.log(newTime);
+        }, 1000); // Update every 1000 milliseconds (1 second)
     
         return () => {
           clearInterval(interval); // Clear the interval when the component unmounts
@@ -73,6 +76,7 @@ export default function Header() {
       }, []);
 
     const [exp, setExp] = useState<boolean>(false);
+    const [nickname,setNickname] = useState<string>('');
 
     useEffect(()=>{
         const auth = sessionStorage.getItem("token");
@@ -89,7 +93,9 @@ export default function Header() {
             }
             })
     
-            .then(response => {console.log(response.data)})
+            .then(response => {
+                setNickname(response.data.nickname);
+            })
             .catch(error => {
             console.log(`에러 사유 : ${error}`)
             dispatch(openModal(true));
@@ -169,8 +175,11 @@ export default function Header() {
                 :
                 <>
                 <Token>
-                    {minutes >= 0 ? minutes : 0}분 
-                    {/* {dec?.nickname} */}
+                    <span>{nickname}     </span>
+
+                    {time.minutes >= 0 ? time.minutes : 0}분 
+                    {time.seconds >= 0 ? time.seconds : 0}초
+
                 </Token>
                 <Profile>
                     <StyledLinkBlack to='/profile'>
@@ -197,6 +206,8 @@ const Positioner = styled.div`
   display: flex;
   align-items : center;
   color: black;
+
+  font-family : tway;
 `;
 
 //로고
@@ -283,4 +294,6 @@ const LogoutButton = styled.button`
     background : transparent;
     cursor : pointer;
     font-size : 17px;
+    font-family : tway;
+
 `
