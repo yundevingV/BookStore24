@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
 import { saveAdmitStatus } from '../../action/admit_status';
 import { saveCancelStatus } from '../../action/cancel_status';
 import DeleteComment from '../../modal/DeleteComment';
@@ -107,7 +108,7 @@ export default function CommentList(props: CombinedProps) {
         };
 
         if(curContent === content.trim()){
-            alert('수정하실 댓글을 입력해주세요!')
+            Swal.fire({html : '수정하실 댓글을 입력해주세요!'})
             return;
         }
         if(content ){
@@ -116,15 +117,14 @@ export default function CommentList(props: CombinedProps) {
             const response = await axios.post(url, data, { headers });
 
             setEdit(false);
-            alert('댓글을 수정했습니다!');
+            Swal.fire({html : '댓글을 수정했습니다!'});
             window.location.reload();  
             
             } catch (error) {
-                alert('댓글을 수정했습니다!');
 
             }
             }
-        else {alert('수정하실 댓글을 입력해주세요!')}
+        else {Swal.fire({html : '수정하실 댓글을 입력해주세요!'})}
         };
 
     useEffect(()=>{

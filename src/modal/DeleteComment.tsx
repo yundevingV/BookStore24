@@ -8,6 +8,7 @@ import axios from "axios";
 import { saveCancelStatus } from "../action/cancel_status";
 import { useNavigate } from "react-router";
 import { saveAdmitStatus } from "../action/admit_status";
+import Swal from 'sweetalert2';
 // props
 interface ReviewComment {
     id : string;
@@ -58,8 +59,10 @@ export default function DeleteComment(props: CombinedProps){
         try {
             const response = await axios.post(url, data, { headers });
 
-            alert('댓글을 성공적으로 삭제했습니다!');
-            window.location.reload();
+            Swal.fire({html : '댓글을 성공적으로 삭제했습니다!'});
+            setTimeout(function() {
+                window.location.reload();
+              }, 1000);            
         } catch (error) {
 
             }
