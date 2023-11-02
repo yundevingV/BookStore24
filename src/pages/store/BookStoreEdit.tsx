@@ -84,7 +84,7 @@ export default function BookStoreEdit() {
         e.preventDefault();
     
         const newData = {
-            "title": data?.title,
+            "title": data?.title.trim(),
             "bookTitle": data?.bookTitle,
             "author": data?.author,
             "publisher": data?.publisher,

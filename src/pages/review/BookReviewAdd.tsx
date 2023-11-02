@@ -56,7 +56,7 @@ export default function BookReviewAdd() {
         
         // Data to be sent in the request body.
         const data = {
-            "title" : title,
+            "title" : title.trim(),
             "isbn" : bookInformation?.isbn,
             "bookTitle" : bookInformation?.title,
             "author" : bookInformation?.author,

@@ -81,7 +81,7 @@ export default function BookCommunityEdit() {
         e.preventDefault();
     
         const newData = {
-            "title" : data?.title,            
+            "title" : data?.title.trim(),            
             "isbn" : data?.isbn,
             "bookTitle" : data?.bookTitle,
             "author" : data?.author,

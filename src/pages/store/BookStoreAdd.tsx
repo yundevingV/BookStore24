@@ -56,7 +56,7 @@ export default function BookCommunityAdd() {
         
         // Data to be sent in the request body.
         const data = {
-            "title" : title,
+            "title" : title.trim(),
             "bookTitle" : bookInformation?.title,
             "author" : bookInformation?.author,
             "publisher" : bookInformation?.publisher,
