@@ -67,7 +67,6 @@ export default function Header() {
             clearInterval(interval);
           }
     
-          console.log(newTime);
         }, 1000); // Update every 1000 milliseconds (1 second)
     
         return () => {

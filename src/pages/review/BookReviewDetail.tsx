@@ -174,7 +174,7 @@ export default function BookReviewDetail() {
                     
                     <Comment id={data?.id} loginId={data?.loginId} title={data?.title} number={data?.reviewComments.length}/>
 
-                    <CommentList title={data?.title} reviewComments={data?.reviewComments} />
+                    <CommentList title={data?.title.trim()} reviewComments={data?.reviewComments} />
 
                 </CommentContainer>
             </Container>

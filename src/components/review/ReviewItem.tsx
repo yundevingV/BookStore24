@@ -45,7 +45,7 @@ function ItemList({items} : DataTypeList){
             <Top>
                 <Title>
                     
-                    {truncate(`${item.title}`,25)}
+                    {truncate(`${item.title.trim()}`,25)}
                 </Title>
                 <Rating>
                 <FontAwesomeIcon icon={faStar} className="star-icon"/>

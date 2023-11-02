@@ -164,7 +164,7 @@ export default function CommentList(props: CombinedProps) {
                     <EditButton onClick={() => doEdit(index)}>수정</EditButton>
                     <EditButton onClick={() => cancle()}>삭제</EditButton>
                     
-                    {cancelStatus && <DeleteComment title={props.title} reviewComments={props.reviewComments} /> }
+                    {cancelStatus && <DeleteComment title={props.title} reviewComments={props.reviewComments} index={index}/> }
                     </>
                     : <></>
                     }

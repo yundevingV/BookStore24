@@ -1,17 +1,16 @@
-import React,{useState} from 'react';
+import React from 'react';
 
 import styled, { css } from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../reducer/index";
+import { useDispatch } from "react-redux";
 
 import axios from "axios";
 import { saveCancelStatus } from "../action/cancel_status";
 import { useNavigate } from "react-router";
-import { saveAdmitStatus } from "../action/admit_status";
 import Swal from 'sweetalert2';
+import useDecodedJWT from '../hooks/useDecodedJWT';
 // props
 interface ReviewComment {
-    id : string;
+    id: string;
     reviewCommentId: string;
     content: string;
     createdDate: string;
@@ -20,77 +19,79 @@ interface ReviewComment {
     reviewId: string;
 }
 
-interface TitleProps{
-    title : string | undefined
+interface TitleProps {
+    title: string | undefined
+}
+interface IndexProps {
+    index : number 
 }
 interface CommentListProps {
     reviewComments: ReviewComment[] | undefined;
 }
-interface CombinedProps extends TitleProps, CommentListProps {}
+interface CombinedProps extends TitleProps, CommentListProps, IndexProps { }
 
-export default function DeleteComment(props: CombinedProps){
+export default function DeleteComment(props: CombinedProps) {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     interface deleteProps {
-        reviewId : string;
-        loginId : string;
-        reviewCommentId : string;
+        reviewId: string;
+        loginId: string;
+        reviewCommentId: string;
     }
 
     const token = sessionStorage.getItem('token');
+    let dec = useDecodedJWT(token);
 
-    const deleteComment = async ({reviewCommentId,loginId,reviewId} : deleteProps ) => {            
+    const deleteComment = async ({ reviewCommentId, loginId, reviewId }: deleteProps) => {
         const url = 'http://bookstore24.shop/review/comment/post/delete';
-    
+
         const headers = {
             Authorization: token,
             'Content-Type': 'application/json',
         };
-    
+
         const data = {
-            reviewCommentId :reviewCommentId,
+            reviewCommentId: reviewCommentId,
             reviewId: reviewId,
             loginId: loginId,
             title: props.title,
         };
-        
+
         try {
             const response = await axios.post(url, data, { headers });
 
-            Swal.fire({html : '댓글을 성공적으로 삭제했습니다!'});
-            setTimeout(function() {
+            Swal.fire({ html: '댓글을 성공적으로 삭제했습니다!' });
+            setTimeout(function () {
                 window.location.reload();
-              }, 1000);            
+            }, 1000);
         } catch (error) {
+            console.log(data);
+        }
 
-            }
-            
-        };
-
+    };
+    console.log(props)
     const no = () => {
         dispatch(saveCancelStatus(false));
     }
-    console.log(props?.reviewComments![0].content)
-    return(
+    return (
         <ModalBackground>
             <Container>
 
                 <TopDiv>
-                <Font fontSize={25}>
-                    정말로 삭제하시겠습니까 ?
-                </Font>
+                    <Font fontSize={25}>
+                        정말로 삭제하시겠습니까 ?
+                    </Font>
                 </TopDiv>
 
                 <MiddleDiv>
-                <Font fontSize={15}>
-                    삭제하신 내용은 복구하실 수 없습니다.
-                </Font>
+                    <Font fontSize={15}>
+                        삭제하신 내용은 복구하실 수 없습니다.
+                    </Font>
                 </MiddleDiv>
 
                 <ButtonContainer>
-                    <Button bgColor="#e20154" color="#ffffff" onClick={() => deleteComment(props.reviewComments![0])}>
+                    <Button bgColor="#e20154" color="#ffffff" onClick={() => deleteComment(props.reviewComments![props.index])}>
                         확인
                     </Button>
 
@@ -178,8 +179,8 @@ const ButtonContainer = styled.div`
 `
 
 interface ButtonProps {
-    bgColor : string,
-    color : string
+    bgColor: string,
+    color: string
 }
 const Button = styled.button<ButtonProps>`
     width : 60px;
