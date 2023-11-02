@@ -10,7 +10,7 @@ import BookStore from "../components/home/BookStore";
 import Footer from "../components/common/Footer";
 
 export default function Main(){
-
+    console.log(window.innerWidth)
     return(
         <Wrapper>
 

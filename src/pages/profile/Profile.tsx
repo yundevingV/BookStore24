@@ -122,7 +122,7 @@ export default function Profile(){
 
                     <NickNameContainer>
                         <NickName>
-                            {data?.nickname}
+                            닉네임 : {data?.nickname}
                             {loginType === 'google' && <img src={Google} alt ='x'/> }
                             {loginType === 'naver' && <img src={Naver} alt ='x'/> }
                             {loginType === 'kakao' && <img src={Kakao} alt ='x'/> }
@@ -133,7 +133,7 @@ export default function Profile(){
 
                     <ResidenceContainer>
                         <Residence>
-                            {residence}
+                            거주지 : {residence}
                         </Residence>
                     </ResidenceContainer>
                 </ProfileInfoContainer>

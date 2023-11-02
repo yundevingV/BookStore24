@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import github from '../../assets/imgs/git.svg';
 
 const StyledFooter = styled.footer`
-  width: 100%;
   height: 280px;
-  padding: 20px;
   background-color: #f2f2f2;
   display: flex;
   flex-flow: row wrap;
