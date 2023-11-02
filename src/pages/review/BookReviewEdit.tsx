@@ -8,6 +8,7 @@ import StarRating from "../../components/review/Star";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer";
 import EditDetail from "../../modal/EditDetail";
+import Swal from "sweetalert2";
 
 
 export default function BookCommunityEdit() {
@@ -101,6 +102,8 @@ export default function BookCommunityEdit() {
                 .post(`http://bookstore24.shop/review/post/edit/save`, newData, config)
                 .then((response) => {
                     console.log(`Response : ${JSON.stringify(newData)}`);
+                    Swal.fire({ html : '수정이 완료 되었습니다 !'})
+
                     navigate(-1);
                 })
                 .catch((error) => {

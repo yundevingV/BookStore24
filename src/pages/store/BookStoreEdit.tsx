@@ -5,6 +5,7 @@ import { styled } from "styled-components";
 import { useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import EditDetail from "../../modal/EditDetail";
+import Swal from "sweetalert2";
 
 
 export default function BookStoreEdit() {
@@ -105,7 +106,7 @@ export default function BookStoreEdit() {
                 .post(`http://bookstore24.shop/sell/post/edit/save`, newData, config)
                 .then((response) => {
                     console.log(`Response : ${JSON.stringify(newData)}`);
-                    alert('수정이 완료 되었습니다 !')
+                    Swal.fire({ html : '수정이 완료 되었습니다 !'})
                     navigate(-1);
                 })
                 .catch((error) => {

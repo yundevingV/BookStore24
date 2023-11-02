@@ -17,6 +17,7 @@ import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducer/index";
 import { saveBookRating } from "../../action/book_rating";
+import Swal from "sweetalert2";
 
 export default function BookReviewAdd() {
 
@@ -81,11 +82,11 @@ export default function BookReviewAdd() {
             })
             .catch((error) => {
             console.log('Error:', error.response);
-            if (error.response.status === 409) {alert(error.response.data)}
+            if (error.response.status === 409) {Swal.fire({ html : error.response.data})}
             });
         }
         else {
-            alert('빈칸을 확인해주세요 !');
+            Swal.fire({ html : '빈칸을 확인해주세요 !'});
         }
         }
 

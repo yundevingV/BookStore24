@@ -12,6 +12,7 @@ import { RootState } from "../../reducer/index";
 import React from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useSearchParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 type NavbarProps = {
     text? : string;
@@ -45,7 +46,7 @@ export default function Navbar({text,url} : NavbarProps ){
         e.preventDefault();
         
         if(searchWord.trim() === '' ){
-            alert('검색어를 입력해주세요.')
+            Swal.fire({ html : '검색어를 입력해주세요.'})
             return;}
 
         setSearchParams({

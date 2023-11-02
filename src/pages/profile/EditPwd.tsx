@@ -8,6 +8,7 @@ import { StyledButtonLink } from "../../styles/link"
 import axios from "axios"
 import { getCookie } from "../../components/common/Cookie"
 import { useLocation } from "react-router"
+import Swal from "sweetalert2"
 
 export default function EditPwd(){
     const location = useLocation();
@@ -26,10 +27,10 @@ export default function EditPwd(){
 
             // 공백 여부 검사
     if (currentPassword.trim() === '' || password1.trim() === '' || password2.trim() === '') {
-        alert('빈칸을 모두 채워주세요.'); // 공백인 경우 알람 창을 띄움.
+        Swal.fire({html : '빈칸을 모두 채워주세요.'}); // 공백인 경우 알람 창을 띄움.
         return; // 더 이상 진행하지 않음.
     } else if (password1 !== password2) {
-        alert('변경할 비밀번호가 일치하지 않습니다.')
+        Swal.fire({html : '변경할 비밀번호가 일치하지 않습니다.'})
     }
         const token = sessionStorage.getItem('token')
         
@@ -50,12 +51,10 @@ export default function EditPwd(){
         axios
             .post(`http://bookstore24.shop/member/password/edit/save`, data, config)
             .then((response) => {
-            console.log(`Response : ${response.status}`);
-            console.log(`Response : ${data}`);
+            
             })
             .catch((error) => {
-                console.log(error)
-            console.log('Error:', error.response.data);
+            
             });
         
         resetInput();

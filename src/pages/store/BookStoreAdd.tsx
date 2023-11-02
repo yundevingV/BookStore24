@@ -15,6 +15,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducer/index";
+import Swal from "sweetalert2";
 
 export default function BookCommunityAdd() {
 
@@ -74,7 +75,7 @@ export default function BookCommunityAdd() {
             },
         };
         if (!/^\d+$/.test(price)) {
-            alert("판매 가격은 숫자로 입력해주세요 ! ");
+            Swal.fire({ html : "판매 가격은 숫자로 입력해주세요 ! "});
             return;
           }
         if (title.trim() && talkUrl.trim() && price.trim() && content.trim() && bookInformation?.title
@@ -88,13 +89,13 @@ export default function BookCommunityAdd() {
             })
             .catch((error) => {
             console.log('Error:', error.response.data);
-            if (error.response.status === 409) {alert(error.response.data)}
+            if (error.response.status === 409) {Swal.fire({ html : error.response.data})}
 
             });
         
         }
         else {
-            alert('빈칸을 확인해주세요 !');
+            Swal.fire({ html : '빈칸을 확인해주세요 !'});
         }
     }
 

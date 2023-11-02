@@ -1,19 +1,19 @@
-import React,{useEffect} from "react";
+import React from "react";
 import Header from "../components/common/Header";
 import {StyledLink} from '../styles/link'
 import useInput from '../hooks/useInput';
 import naver from '../assets/imgs/Naver.jpg'
 import kakao from '../assets/imgs/Kakao.jpg'
 import google from '../assets/imgs/Google.png'
-import { saveloginStatus } from "../action/login_status";
 
 import { styled } from "styled-components";
-import {Link, useNavigate} from 'react-router-dom';
-import { useSelector , useDispatch} from "react-redux";
-import { RootState } from "../reducer/index";
+import { useNavigate} from 'react-router-dom';
+
 import axios from "axios";
 import { getCookie, setCookie } from "../components/common/Cookie";
 import { useLocation } from "react-router";
+
+import Swal from "sweetalert2";
 
 export default function Login() {
 
@@ -34,17 +34,6 @@ export default function Login() {
     const googleLoginLink : string = `https://accounts.google.com/o/oauth2/v2/auth?client_id=766446517759-t82jo5h4vk9rmj30bld1d30su7sqdde1.apps.googleusercontent.com&redirect_uri=${google_redirect_uri}&response_type=code&scope=openid%20email%20profile`;
 
     const navigate = useNavigate();
-    const redirectUrl = getCookie('redirectUrl');
-    
-    const location = useLocation();
-
-    const state = location.state;
-
-    const handleSocialLogin = () => {
-        window.location.assign(
-          `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e435f34295d28879dfabc32de2bd7546&redirect_uri=${kakao_redirect_uri}`
-        );
-    }
 
     type loginTypes =(
         id : string,
@@ -81,7 +70,7 @@ export default function Login() {
             console.log(`error : ${error.response}`);
             if(error.response){
                 console.log(error.response.status);
-                alert(`아이디 비밀번호를 다시 입력해주세요!`);
+                Swal.fire({html : `아이디 비밀번호를 다시 입력해주세요!`});
             }
         });
     }

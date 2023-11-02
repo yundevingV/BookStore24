@@ -6,6 +6,7 @@ import FirstLogin from "../modal/FirstLogin";
 import { styled ,css } from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 
 export default function SignUp(){
@@ -33,11 +34,11 @@ export default function SignUp(){
   
               // 공백 여부 검사
       if (loginId.trim() === '' || pwd.trim() === '' || pwd2.trim() === ''||email.trim() === '') {
-          alert('빈칸을 모두 채워주세요.'); // 공백인 경우 알람 창을 띄움.
+          Swal.fire({html : '빈칸을 모두 채워주세요.'}); // 공백인 경우 알람 창을 띄}움.
           return; 
       } 
       if (pwd.trim() !== pwd2.trim()) {
-          alert('비밀번호와 비밀번호 확인이 일치하지 않습니다 !');
+          Swal.fire({html : '비밀번호와 비밀번호 확인이 일치하지 않습니다 !'});
           return;
         }
           
@@ -53,13 +54,13 @@ export default function SignUp(){
               .then((response) => {
               console.log(`Response : ${response}`);
               console.log(`Response : ${data}`);
-              alert('회원 가입 성공 ! ');
+          Swal.fire({html : '회원 가입 성공 ! '});
               navigate('/login');
               })
               .catch((error) => {
                   console.log(error)
               console.log('Error:', error.response.data);
-              alert(error.response.data);
+              Swal.fire({html : error.response.data});
               });
           
           };
