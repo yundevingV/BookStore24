@@ -137,6 +137,12 @@ border-radius : 5px;
     margin : 3vh calc(15vw - 1px);
 
 }
+//1080px 이하면
+@media (max-width : 810px){
+    width: 500px;
+    margin : 3vh 30px;
+
+}
 
 &:hover{
     background : #e2e2e2;
