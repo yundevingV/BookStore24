@@ -7,13 +7,49 @@ import { getCookie } from "../components/common/Cookie";
 
 import { useDispatch } from "react-redux";
 import { saveBookInformation } from "../action/book_information";
+import Swal from "sweetalert2";
     
+import SearchImg from "../assets/imgs/search.svg";
 
 type ViewProps = {
     viewModal : boolean;
     setViewModal: React.Dispatch<React.SetStateAction<boolean>>;
 
 }
+
+const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 400px;
+  height: 50px;
+  border-radius: 12px;
+  padding : 0px 50px;
+
+  
+`;
+
+const SearchInput = styled.input`
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  border-radius: 12px;
+  ::placeholder{
+      color : #CDCDCD;
+  }
+`;
+
+const SearchIcon = styled.div`
+  width: 30px;
+  height : 30px;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  background: #567dfc;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+`;
 
 export default function SearchBook({viewModal , setViewModal} : ViewProps){
     const token = sessionStorage.getItem('token')
@@ -30,8 +66,8 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
     const [data,setData] = useState<any | null>(null)
 
     const search = (e: React.MouseEvent) => {
-        if(searchWord === '' ){
-            alert('검색어를 입력해주세요 !');
+        if(searchWord.trim() === '' ){
+            Swal.fire('검색어를 입력해주세요 !');
         }
 
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -77,18 +113,11 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
             <SearchResult>
 
             <SearchContainer>
-                <div >
-                <input placeholder='검색어를 입력해주세요.'
-                name="searchWord" 
-                value={searchWord}
-                onChange={onInputChange} />
-                </div>
 
-                <div>
-                <SearchButton onClick={search}>
-                    검색
-                </SearchButton>
-                </div>
+                <SearchInput placeholder="검색어를 입력하세요." />
+                <SearchIcon>
+                    <img src={SearchImg} alt='x' />
+                </SearchIcon>
             </SearchContainer>
 
             <>
@@ -150,44 +179,6 @@ text-align: center;
 font-family: tway, sans-serif, Arial;
 
 `
-
-const SearchContainer = styled.div`
-
-display : flex;
-justify-content: center;
-
-input {
-    width: 250px;
-    height: 25px;
-}
-
-
-`
-const SearchButton = styled.button`
-width: 50px;
-height: 25px;
-
-font-size : 12px;
-
-margin-left : 10px;
-padding : 5px;
-
-background-color: #ffffff;
-border : 1px solid #033bfa;
-border-radius : 2px;
-color : #033bfa;
-
-font-family: tway, sans-serif, Arial;
-
-&:hover {
-
-    background-color: #033bfa;
-    color : #ffffff;
-
-    cursor : pointer;
-    }
-`
-
 const Button = styled.button`
   position: absolute;
   right: 10px;
