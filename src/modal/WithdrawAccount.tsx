@@ -11,10 +11,20 @@ import { saveloginStatus } from "../action/login_status";
 import { useDispatch } from "react-redux";
 import { removeCookie } from "../components/common/Cookie";
 
-export default function Check(){
+interface WithdrawAccountProps {
+    onClose: () => void;
+}
+export default function WithdrawAccount({onClose} : WithdrawAccountProps){
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    // 모달을 닫기 위한 상태
+    const no = (e: React.MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (target === e.currentTarget) {
+        onClose(); 
+        }
+    };
 
     const withdraw = (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent the default form submission behavior.
@@ -44,9 +54,6 @@ export default function Check(){
         
         };
 
-    const no = () => {
-        window.location.reload();
-    }
     return(
         <ModalBackground>
             <Container>

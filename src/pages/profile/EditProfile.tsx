@@ -16,7 +16,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { saveDropDownValue } from "../../action/dropdown_value";
 import { saveloginStatus } from "../../action/login_status";
-import Check from "../../modal/Check";
+import WithdrawAccount from "../../modal/WithdrawAccount";
 import Toast from "../../components/toast/Toast";
 import { useLocation } from "react-router";
 
@@ -137,18 +137,21 @@ export default function EditProfile() {
             };}
 
         
-    const [viewCheck,setCheck] = useState<boolean>(false);
+    const [view,setView] = useState<boolean>(false);
 
-    const check = () => {
-        setCheck(true);
+    const open = () => {
+        setView(true);
     } 
-    console.log(location.state.loginType)
+
+    const close = () => {
+        setView(false);
+    } 
     
     return(
         <Wrapper>
             <Header />
             <Container>
-                {viewCheck ? <Check /> : <></>}
+                {view ? <WithdrawAccount onClose={close}/> : <></>}
 
                 {toast && <Toast setToast={setToast} text="수정 되었습니다." />}
 
@@ -230,7 +233,7 @@ export default function EditProfile() {
                 </SaveButtonContainer>
 
                 <RetireButtonContainer>
-                    <RetireButton onClick={check}>
+                    <RetireButton onClick={open}>
                         회원 탈퇴하기
                     </RetireButton>
                 </RetireButtonContainer>

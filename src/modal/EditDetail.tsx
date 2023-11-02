@@ -20,6 +20,7 @@ export default function EditDetail({onClose} : EditDetailProps){
           onClose(); 
         }
     };
+    
     const navigate = useNavigate();
 
     const yes = () => {navigate(-1);}
