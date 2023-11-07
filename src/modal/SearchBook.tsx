@@ -114,8 +114,11 @@ export default function SearchBook({viewModal , setViewModal} : ViewProps){
 
             <SearchContainer>
 
-                <SearchInput placeholder="검색어를 입력하세요." />
-                <SearchIcon>
+                <SearchInput  placeholder='검색어를 입력해주세요.'
+                name="searchWord" 
+                value={searchWord}
+                onChange={onInputChange} />
+                <SearchIcon onClick={search}>
                     <img src={SearchImg} alt='x' />
                 </SearchIcon>
             </SearchContainer>

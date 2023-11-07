@@ -200,6 +200,10 @@ text-align : center;
 `
 
 const TitleFont = styled.p`
+
+color : #4dac27;
+font-family : Cooper;
+
 `
 
 const SnsContainer = styled.div`

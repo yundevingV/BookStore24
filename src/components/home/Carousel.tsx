@@ -1,7 +1,7 @@
-import Slide1 from '../../assets/imgs/Slide1.jpg';
-import Slide2 from '../../assets/imgs/Slide2.jpg';
-import Slide3 from '../../assets/imgs/Slide3.jpg';
-import Slide4 from '../../assets/imgs/Slide4.jpg';
+import Slide1 from '../../assets/imgs/1.png';
+import Slide2 from '../../assets/imgs/2.png';
+import Slide3 from '../../assets/imgs/3.png';
+import Slide4 from '../../assets/imgs/4.png';
 
 import { styled } from 'styled-components';
 
@@ -56,7 +56,6 @@ overflow : hidden;
 `
 const ImgCover = styled.div`
 /* 임시 */
-background : #e2e2e2;
 
 
 `
@@ -64,6 +63,11 @@ const Img = styled.img`
 
 margin: 0 auto;
 
+width : 100vw;
+
+@media screen and (max-width: 1270px) {
+    width : 1200px;
+  }
 height : 500px;
 
 `
