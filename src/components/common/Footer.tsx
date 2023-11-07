@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import github from '../../assets/imgs/git.svg';
@@ -111,9 +112,9 @@ const Footer = () => {
   return (
     <StyledFooter>
       <SFooterLogo>
-        <a href="/">
+        <Link to="/">
             BookStore24
-        </a>
+        </Link>
       </SFooterLogo>
       <SGitContainer>
         <ul className="githubBox">
