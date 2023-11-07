@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 
 import axios from "axios";
+import Footer from "../../components/common/Footer";
 
 
 export default function SearchReviewResult() {
@@ -92,6 +93,7 @@ export default function SearchReviewResult() {
 
             </Container>
             </>
+            <Footer />
         </Wrapper>
     )
 }

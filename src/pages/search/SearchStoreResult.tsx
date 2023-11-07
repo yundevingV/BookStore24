@@ -11,6 +11,7 @@ import { RootState } from "../../reducer/index";
 
 import axios from "axios";
 import { useParams } from "react-router";
+import Footer from "../../components/common/Footer";
 
 
 export default function SearchStoreResult() {
@@ -94,6 +95,7 @@ export default function SearchStoreResult() {
 
             </Container>
             </>
+            <Footer />
         </Wrapper>
     )
 }

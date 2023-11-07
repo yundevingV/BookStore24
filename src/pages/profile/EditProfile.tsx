@@ -19,6 +19,7 @@ import { saveloginStatus } from "../../action/login_status";
 import WithdrawAccount from "../../modal/WithdrawAccount";
 import Toast from "../../components/toast/Toast";
 import { useLocation } from "react-router";
+import Footer from "../../components/common/Footer";
 
 export default function EditProfile() {
 
@@ -238,6 +239,7 @@ export default function EditProfile() {
                     </RetireButton>
                 </RetireButtonContainer>
             </Container>
+            <Footer />
         </Wrapper>
     )
 }

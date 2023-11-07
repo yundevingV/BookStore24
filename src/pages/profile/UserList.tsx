@@ -9,6 +9,7 @@ import ListContent from "../../components/profile/ListContent";
 import { useLocation } from "react-router";
 import Paging from "../../components/common/Paging";
 import useUserData from "../../hooks/useUserData";
+import Footer from "../../components/common/Footer";
 
 export default function ProfileReviewList(){
 
@@ -69,7 +70,7 @@ export default function ProfileReviewList(){
 
             </Container>
             </>
-
+            <Footer />
         </Wrapper>
         
     )

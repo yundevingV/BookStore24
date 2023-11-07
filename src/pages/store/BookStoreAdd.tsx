@@ -16,6 +16,7 @@ import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducer/index";
 import Swal from "sweetalert2";
+import Footer from "../../components/common/Footer";
 
 export default function BookCommunityAdd() {
 
@@ -232,6 +233,7 @@ export default function BookCommunityAdd() {
             </Container>
             </>
             )}
+            <Footer />
         </Wrapper>
     )
 }

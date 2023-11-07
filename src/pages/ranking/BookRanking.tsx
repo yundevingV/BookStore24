@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import axios from "axios";
 import RankingTitle from "../../components/ranking/RankingTitle";
+import Footer from "../../components/common/Footer";
 
 interface bookInfoProps{
     id : string,
@@ -73,7 +74,7 @@ export default function BookRanking(){
 
             </Container>
             </>
-
+            <Footer />
         </Wrapper>
         
     )

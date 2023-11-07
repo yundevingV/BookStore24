@@ -15,6 +15,7 @@ import axios from "axios";
 import Login from "../Login";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer";
+import Footer from "../../components/common/Footer";
 
 
 interface PProps {
@@ -176,6 +177,7 @@ export default function Profile(){
             </ProfileContainer>
             </>
             )}
+            <Footer />
         </Wrapper>
 
     )

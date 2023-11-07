@@ -6,6 +6,7 @@ import { useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import EditDetail from "../../modal/EditDetail";
 import Swal from "sweetalert2";
+import Footer from "../../components/common/Footer";
 
 
 export default function BookStoreEdit() {
@@ -212,6 +213,7 @@ export default function BookStoreEdit() {
                 <></>}
                 
             </Container>
+            <Footer />
         </Wrapper>
     )
 }

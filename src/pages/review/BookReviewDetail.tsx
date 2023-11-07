@@ -16,6 +16,7 @@ import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import Comment from "../../components/comment/Comment";
 import CommentList from "../../components/comment/CommentList";
+import Footer from "../../components/common/Footer";
 
 
 export default function BookReviewDetail() {
@@ -180,6 +181,7 @@ export default function BookReviewDetail() {
             </Container>
             </>
             )}
+            <Footer />
         </Wrapper>
     )
 }

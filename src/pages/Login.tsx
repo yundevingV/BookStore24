@@ -14,6 +14,7 @@ import { getCookie, setCookie } from "../components/common/Cookie";
 import { useLocation } from "react-router";
 
 import Swal from "sweetalert2";
+import Footer from "../components/common/Footer";
 
 export default function Login() {
 
@@ -165,7 +166,7 @@ export default function Login() {
                 </ButtonContainer>
 
             </LoginContainer>
-
+            <Footer />
         </Wrapper>
     )
 }

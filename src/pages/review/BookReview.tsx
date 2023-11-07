@@ -12,6 +12,7 @@ import { RootState } from "../../reducer/index";
 
 import Login from "../Login";
 import axios from "axios";
+import Footer from "../../components/common/Footer";
 
 
 export default function BookStoreCommunity() {
@@ -85,6 +86,7 @@ export default function BookStoreCommunity() {
 
             </Container>
             </>
+            <Footer />
         </Wrapper>
     )
 }

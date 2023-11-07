@@ -16,6 +16,7 @@ import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import Toggle from "../../components/store/SetToggle";
 import OpenChat from "../../modal/OpenChat";
+import Footer from "../../components/common/Footer";
 
 export default function BookStoreDetail() {
 
@@ -186,6 +187,7 @@ export default function BookStoreDetail() {
             </Container>
             </>
             )}
+            <Footer />
         </Wrapper>
     )
 }

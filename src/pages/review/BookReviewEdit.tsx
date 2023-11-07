@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer";
 import EditDetail from "../../modal/EditDetail";
 import Swal from "sweetalert2";
+import Footer from "../../components/common/Footer";
 
 
 export default function BookCommunityEdit() {
@@ -204,6 +205,7 @@ export default function BookCommunityEdit() {
 
                 
             </Container>
+            <Footer />
         </Wrapper>
     )
 }

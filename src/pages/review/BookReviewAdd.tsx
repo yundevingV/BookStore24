@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducer/index";
 import { saveBookRating } from "../../action/book_rating";
 import Swal from "sweetalert2";
+import Footer from "../../components/common/Footer";
 
 export default function BookReviewAdd() {
 
@@ -225,6 +226,7 @@ export default function BookReviewAdd() {
             </Container>
         </>
         )}
+        <Footer />
         </Wrapper>
 
     )

@@ -7,6 +7,7 @@ import { styled ,css } from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import Footer from "../components/common/Footer";
 
 
 export default function SignUp(){
@@ -169,7 +170,7 @@ export default function SignUp(){
                     
                 </ButtonContainer>
             </JoinContainer>
-
+            <Footer />
         </Wrapper>  
     )
 }

@@ -9,6 +9,7 @@ import axios from "axios"
 import { getCookie } from "../../components/common/Cookie"
 import { useLocation } from "react-router"
 import Swal from "sweetalert2"
+import Footer from "../../components/common/Footer"
 
 export default function EditPwd(){
     const location = useLocation();
@@ -116,6 +117,7 @@ export default function EditPwd(){
                 </SaveButtonContainer>
 
             </Container>
+            <Footer />
         </Wrapper>
     )
 }

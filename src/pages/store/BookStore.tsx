@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducer/index";
 import axios from "axios";
 import { saveViewStatus } from "../../action/view_status";
+import Footer from "../../components/common/Footer";
 
 export default function BookStore() {
     
@@ -89,7 +90,7 @@ export default function BookStore() {
             </PagingContainer>
             </Container>
             </>
-            
+            <Footer />
         </Wrapper>
     )
 }
