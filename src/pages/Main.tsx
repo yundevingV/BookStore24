@@ -1,6 +1,5 @@
 import React,{useState} from "react";
 import Header from "../components/common/Header";
-import Carousel from "../components/home/Carousel"
 
 import { styled } from "styled-components";
 import RankingPreview from "../components/ranking/RankingPreview";
@@ -8,7 +7,7 @@ import ReviewVeiwPreview from "../components/ranking/ReviewVeiwPreview";
 import StoreVeiwPreview from "../components/ranking/StoreVeiwPreview";
 import BookStore from "../components/home/BookStore";
 import Footer from "../components/common/Footer";
-import CarouselForm from "../components/home/CarouselTest";
+import CarouselForm from "../components/home/Carousel";
 
 export default function Main(){
     console.log(window.innerWidth)
