@@ -1,24 +1,19 @@
 {
   "files": {
-    "main.css": "/BookStore24/static/css/main.a3944f63.css",
-    "main.js": "/BookStore24/static/js/main.b0b38e9b.js",
+    "main.css": "/BookStore24/static/css/main.e009c604.css",
+    "main.js": "/BookStore24/static/js/main.98d9bd15.js",
     "static/media/tway.ttf": "/BookStore24/static/media/tway.2ae99103669383455f35.ttf",
-    "static/media/2.png": "/BookStore24/static/media/2.eecd8a9aaa97771f9ec7.png",
-    "static/media/3.png": "/BookStore24/static/media/3.66f209c85dde84f205da.png",
-    "static/media/4.png": "/BookStore24/static/media/4.e3e8b68d73050634a6cd.png",
-    "static/media/1.png": "/BookStore24/static/media/1.1ba1989b506cc933ee68.png",
-    "static/media/slick.svg": "/BookStore24/static/media/slick.2630a3e3eab21c607e21.svg",
-    "static/media/slick.eot": "/BookStore24/static/media/slick.a4e97f5a2a64f0ab1323.eot",
-    "static/media/slick.ttf": "/BookStore24/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/store.png": "/BookStore24/static/media/store.bae05450711962374c89.png",
+    "static/media/review.png": "/BookStore24/static/media/review.0e83274628f6a9323635.png",
+    "static/media/login.png": "/BookStore24/static/media/login.32b37bafed7b0c9301de.png",
     "static/media/git.svg": "/BookStore24/static/media/git.89654d0283dca3d881b344c8a312f88b.svg",
-    "static/media/slick.woff": "/BookStore24/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/BookStore24/index.html",
     "static/media/search.svg": "/BookStore24/static/media/search.b02f390542bf7f29ecbe93fa81f126d7.svg",
-    "main.a3944f63.css.map": "/BookStore24/static/css/main.a3944f63.css.map",
-    "main.b0b38e9b.js.map": "/BookStore24/static/js/main.b0b38e9b.js.map"
+    "main.e009c604.css.map": "/BookStore24/static/css/main.e009c604.css.map",
+    "main.98d9bd15.js.map": "/BookStore24/static/js/main.98d9bd15.js.map"
   },
   "entrypoints": [
-    "static/css/main.a3944f63.css",
-    "static/js/main.b0b38e9b.js"
+    "static/css/main.e009c604.css",
+    "static/js/main.98d9bd15.js"
   ]
 }
