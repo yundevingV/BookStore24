@@ -61,7 +61,6 @@ const ImgCover = styled.div`
 `
 const Img = styled.img`
 
-margin: 0 auto;
 
 width : 100vw;
 

@@ -8,6 +8,7 @@ import ReviewVeiwPreview from "../components/ranking/ReviewVeiwPreview";
 import StoreVeiwPreview from "../components/ranking/StoreVeiwPreview";
 import BookStore from "../components/home/BookStore";
 import Footer from "../components/common/Footer";
+import CarouselForm from "../components/home/CarouselTest";
 
 export default function Main(){
     console.log(window.innerWidth)
@@ -15,7 +16,7 @@ export default function Main(){
         <Wrapper>
 
             <Header />
-            <Carousel />
+            <CarouselForm />
             <BookStore />
 
             <PreviewContainer>
