@@ -147,7 +147,7 @@ export default function Login() {
                             회원 가입 
                         </StyledLink>
                     </Menu>
-                    <Menu>
+                    {/* <Menu>
                         <StyledLink to='/findid'>
                             아이디찾기
                         </StyledLink>
@@ -156,7 +156,7 @@ export default function Login() {
                         <StyledLink to='/findpwd'>
                             비밀번호찾기
                         </StyledLink>
-                    </Menu>
+                    </Menu> */}
                 </MenuContainer>
 
                 <ButtonContainer> 
@@ -183,14 +183,12 @@ width : 600px;
 font-family: arial;
 font-size: 24px;
 
-margin: 0 auto;
+margin: 50px auto 0px;
 padding : 10px;
 
 
 font-family: tway, sans-serif, Arial;
 
-position : relative;
-top:5vh;
 `
 
 const Title = styled.div`

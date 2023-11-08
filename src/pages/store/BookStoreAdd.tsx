@@ -231,9 +231,10 @@ export default function BookCommunityAdd() {
 
                 
             </Container>
+            <Footer />
+
             </>
             )}
-            <Footer />
         </Wrapper>
     )
 }

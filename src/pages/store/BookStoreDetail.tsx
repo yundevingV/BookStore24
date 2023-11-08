@@ -185,9 +185,10 @@ export default function BookStoreDetail() {
                 </OpenChatContainer>
 
             </Container>
+            <Footer />
+
             </>
             )}
-            <Footer />
         </Wrapper>
     )
 }

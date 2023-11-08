@@ -224,9 +224,10 @@ export default function BookReviewAdd() {
 
                 
             </Container>
+            <Footer />
+
         </>
         )}
-        <Footer />
         </Wrapper>
 
     )

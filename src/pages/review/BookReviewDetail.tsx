@@ -178,10 +178,12 @@ export default function BookReviewDetail() {
                     <CommentList title={data?.title.trim()} reviewComments={data?.reviewComments} />
 
                 </CommentContainer>
+                
             </Container>
+            <Footer />
+
             </>
             )}
-            <Footer />
         </Wrapper>
     )
 }
