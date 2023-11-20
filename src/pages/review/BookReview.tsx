@@ -1,67 +1,19 @@
-import React,{useEffect, useState} from "react";
-import useInput from "../../hooks/useInput";
+
 import Header from "../../components/common/Header";
 import Navbar from "../../components/search/Navbar";
 import Item from "../../components/review/ReviewItem";
 import Paging from "../../components/common/Paging";
 
 import { styled } from "styled-components";
-import { useLocation } from 'react-router-dom';
-import { useSelector } from "react-redux";
-import { RootState } from "../../reducer/index";
 
-import Login from "../Login";
-import axios from "axios";
+import useFetchReview from "../../hooks/useFetchReview";
+
+
 import Footer from "../../components/common/Footer";
 
+export default function BookReview() {
+    const { data, totalPages, pathname } = useFetchReview();
 
-export default function BookStoreCommunity() {
-
-
-    interface DataType{
-        "id": number,
-        "title": string,
-        "score": number,
-        "coverImg": string,
-        "bookTitle": string,
-        "author": string,
-        "publisher": string,
-        "nickname": string,
-        "loginId": string,
-        "createdDate": string,
-        "view": number,
-    }
-
-    const [data,setData] = useState<DataType[] | undefined>();
-
-    // 현재 주소
-
-    const { pathname } = useLocation();
-    
-    const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
-
-    const page = useSelector(
-        (state: RootState) => state.PagingReducer.PagingData
-    );
-    
-    useEffect(() => {        
-        axios
-            .get(`http://bookstore24.shop/review/post/list`, {
-                params: {
-                    page : page | 0,
-                    size : 10,
-                },
-            })
-            .then((response) => {
-                setData(response.data.content);
-                setTotalPages(response.data.totalPages);
-                sessionStorage.setItem('url', pathname);
-            })
-            .catch((error) => {
-                console.log('에러:', error.response);
-            });
-    }, [page]);
-    
     return(
 
         <Wrapper>

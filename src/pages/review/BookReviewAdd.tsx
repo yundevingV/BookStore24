@@ -196,8 +196,6 @@ export default function BookReviewAdd() {
 
                 </InnerContainer>
 
-                
-
                 <ContentContainer>
                     내용
                     <input
