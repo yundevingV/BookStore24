@@ -6,7 +6,7 @@ import Paging from "../../components/common/Paging";
 
 import { styled } from "styled-components";
 
-import useFetchReview from "../../hooks/useFetchReview";
+import useFetchReview from "../../components/review/hooks/useFetchReview";
 
 
 import Footer from "../../components/common/Footer";

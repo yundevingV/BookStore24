@@ -1,10 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { RootState } from "../reducer/index";
+import { RootState } from "../../../reducer/index";
 import axios from "axios";
 
-import BookReview from "../pages/review/BookReview";
+interface DataType {
+    "id": number,
+    "title": string,
+    "score": number,
+    "coverImg": string,
+    "bookTitle": string,
+    "author": string,
+    "publisher": string,
+    "nickname": string,
+    "loginId": string,
+    "createdDate": string,
+    "view": number,
+}
 
 export default function useFetchReview() {
     const { pathname } = useLocation();
@@ -35,18 +47,4 @@ export default function useFetchReview() {
         {data, totalPages, pathname}
 
     );
-}
-
-interface DataType {
-    "id": number,
-    "title": string,
-    "score": number,
-    "coverImg": string,
-    "bookTitle": string,
-    "author": string,
-    "publisher": string,
-    "nickname": string,
-    "loginId": string,
-    "createdDate": string,
-    "view": number,
 }
