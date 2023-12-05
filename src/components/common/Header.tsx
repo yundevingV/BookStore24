@@ -15,6 +15,7 @@ import { RootState } from "../../reducer/index";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import ExpiredToken from "../../modal/ExpiredToken";
+import HeaderLink from "./HeaderLink";
 
 export default function Header() {
 
@@ -119,46 +120,19 @@ export default function Header() {
             </Logo>
             
             <Review>
-                {pathname.includes('review') ? 
-                <CurrentLink to='/bookreview'>
-                커뮤니티
-                </CurrentLink>
-                : 
-                <StyledLink to='/bookreview'>
-                    커뮤니티
-                </StyledLink> 
-
-                }
+                <HeaderLink url='bookReview' label='커뮤니티' />
                 
             </Review>
 
             <Store>
-            {pathname.includes('store') ? 
-                <CurrentLink to='/bookstore'>
-                스토어
-                </CurrentLink>
-                : 
-                <StyledLink to='/bookstore'>
-
-                스토어
-                </StyledLink>
-
-                }
+                <HeaderLink url='bookStore' label='스토어' />
 
             </Store>
 
 
             <Ranking>
-            {pathname.includes('ranking') ? 
-                <CurrentLink to='/bookranking'>
-                랭킹
-                </CurrentLink>
-                : 
-                <StyledLink to='/bookranking'>
-                랭킹
-                </StyledLink>
+                <HeaderLink url='bookranking' label='랭킹' />
 
-                }
             </Ranking>
 
             <Menu>
