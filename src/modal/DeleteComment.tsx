@@ -92,11 +92,11 @@ export default function DeleteComment(props: CombinedProps) {
 
                 <ButtonContainer>
                     <Button bgColor="#e20154" color="#ffffff" onClick={() => deleteComment(props.reviewComments![props.index])}>
-                        확인
+                        네
                     </Button>
 
                     <Button bgColor="#ffffff" color="#000000" onClick={no}>
-                        취소
+                        아니오
                     </Button>
 
                 </ButtonContainer>
@@ -183,17 +183,16 @@ interface ButtonProps {
     color: string
 }
 const Button = styled.button<ButtonProps>`
-    width : 60px;
+    width : 100px;
     height : 30px;
 
     margin : 20px;
-    padding : 5px;
 
     border-radius : 5px;
     border : 0px;
 
-    font-family : tway;
-
+    font-family : 'tway';
+    
     ${({ bgColor }) =>
         bgColor &&
         css`

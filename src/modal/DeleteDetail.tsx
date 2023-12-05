@@ -109,13 +109,13 @@ export default function DeleteDetail(props : CombinedProps){
             <Container>
 
                 <MiddleDiv>
-                <Font fontSize={25}>
-                    정말로 삭제하시겠습니까 ?
-                </Font>
+                    <Font fontSize={25}>
+                        정말로 삭제하시겠습니까 ?
+                    </Font>
 
-                <Font fontSize={15}>
-                    삭제하신 내용은 복구하실 수 없습니다.
-                </Font>
+                    <Font fontSize={15}>
+                        삭제하신 내용은 복구하실 수 없습니다.
+                    </Font>
                 </MiddleDiv>
 
                 <ButtonContainer>
@@ -145,7 +145,7 @@ const ModalBackground = styled.div`
 const Container = styled.div`
 /* 모달창 크기 */
     width: 400px;
-  height: 200px;
+    height: 200px;  
 
   /* 최상단 위치 */
   z-index: 999;

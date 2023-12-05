@@ -143,9 +143,11 @@ export default function CommentList(props: CombinedProps) {
         (state : RootState) => state.CancelStatusReducer.cancelStatusData
     )
 
-
-    const cancle = ( ) => {
+    
+    const [delNum, setDelNum] = useState<number>(0);
+    const cancle = (index : number ) => {
         dispatch(saveCancelStatus(true))
+        setDelNum(index);
     }
 
     return (
@@ -162,9 +164,8 @@ export default function CommentList(props: CombinedProps) {
                     {editArray[index] ?
                     <>
                     <EditButton onClick={() => doEdit(index)}>수정</EditButton>
-                    <EditButton onClick={() => cancle()}>삭제</EditButton>
+                    <EditButton onClick={() => cancle(index)}>삭제</EditButton>
                     
-                    {cancelStatus && <DeleteComment title={props.title} reviewComments={props.reviewComments} index={index}/> }
                     </>
                     : <></>
                     }
@@ -189,6 +190,7 @@ export default function CommentList(props: CombinedProps) {
 
             </CommentItem>
         ))}
+        {cancelStatus && <DeleteComment title={props.title} reviewComments={props.reviewComments} index={delNum}/> }
 
         {props.reviewComments?.length === 0 && <NoCommentsMessage>댓글이 없습니다.</NoCommentsMessage>}
         </>
