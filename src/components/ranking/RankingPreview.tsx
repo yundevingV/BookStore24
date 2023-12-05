@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 import truncate from "../../util/truncate";
 import decimalDisplay from "../../util/decimalDisplay";
 
-import styled from "styled-components";
+import styled from "styled-components"
 
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +11,6 @@ import axios from "axios";
 import { StyledButtonLink } from "../../styles/link";
 import { saveSearchOption } from "../../action/search_option";
 import { useDispatch } from "react-redux";
-import useRankingData from "./hooks/useRankingData";
 
 interface bookInfoProps{
     id : string,
@@ -25,18 +24,29 @@ interface bookInfoProps{
 
 interface booksProps{
     books : Array<bookInfoProps>,
+    
 }
 
 export default function RankingPreview(){
-    let apiUrl : string = 'http://bookstore24.shop/book/ranking/score';
-
-    const {data} = useRankingData(apiUrl);
-    console.log(data)
+    
+    const [data,setData] = useState<booksProps | undefined>();
+    const token = sessionStorage.getItem('token');
     const dispatch = useDispatch();
 
-    // const selectedData = data?.books.slice(0, 5);
+    useEffect(()=>{
+        axios.get(`http://bookstore24.shop/book/ranking/score`,
+            
+            )
+            .then(response =>{
+                setData(response.data);
 
-    // 클릭시 검색으로 이동
+            })
+            .catch(error => {
+                console.log('Error : ', error);
+            })
+    },[])
+    const selectedData = data?.books.slice(0, 5);
+
     const searchType = (type : string) => {
         dispatch(saveSearchOption(type));
     }
@@ -74,12 +84,9 @@ export default function RankingPreview(){
                 </StyledButtonLink>
 
 
-                <BookAuthor>{item.publisher}</BookAuthor>
-                
-                    <Rating>
-
+                        <BookAuthor>{item.publisher}</BookAuthor>
+                        <Rating>
                         <FontAwesomeIcon icon={faStar} className="star-icon"/>
-
                         {item.avgScore.toString().length >= 3 ? <span>{decimalDisplay(item.avgScore)}</span>
                         : item.avgScore
                         }

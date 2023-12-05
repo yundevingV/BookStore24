@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/common/Header";
-import Jisoo from '../../assets/imgs/jisoo.jpg'
+import user from '../../assets/imgs/user.svg'
 import SellingList from "../../components/profile/SellingList";
 import SoldList from "../../components/profile/SoldList";
 import ReviewList from "../../components/profile/ReviewList";
@@ -16,6 +16,7 @@ import Login from "../Login";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer";
 import Footer from "../../components/common/Footer";
+
 
 
 interface PProps {
@@ -117,7 +118,7 @@ export default function Profile(){
                 <ProfileInfoContainer>
 
                     <PictureContainer>
-                        <Picture src={Jisoo} />
+                        <Picture src={user} />
                     </PictureContainer>
 
 
