@@ -49,7 +49,7 @@ export default function RankingPreview(){
                     평점 랭킹 🏆
                 </Title>
 
-                {/* {selectedData?.map((item : bookInfoProps , index : number) =>
+                {selectedData?.map((item : bookInfoProps , index : number) =>
                 <ItemContainer>
                 <Ranking>
                         {index + 1} 
@@ -88,7 +88,7 @@ export default function RankingPreview(){
                     
                 </RContainer>
             </ItemContainer>
-                )} */}
+                )}
                 
 
             </Container>
