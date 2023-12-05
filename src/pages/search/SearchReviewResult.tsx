@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from "react";
 import Header from "../../components/common/Header";
 import Navbar from "../../components/search/Navbar";
-import Item from "../../components/review/ReviewItem";
+import Item from "../../components/review/ui/ReviewItem";
 import Paging from "../../components/common/Paging";
 
 import { styled } from "styled-components";

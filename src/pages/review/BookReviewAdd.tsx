@@ -4,7 +4,7 @@ import useInput from "../../hooks/useInput";
 import Header from "../../components/common/Header";
 import init from '../../assets/imgs/initBook.png'
 import SearchBook from "../../modal/SearchBook";
-import StarRating from "../../components/review/Star";
+import StarRating from "../../components/review/ui/Star";
 
 import { saveCancelStatus } from "../../action/cancel_status";
 import { saveBookInformation } from "../../action/book_information";

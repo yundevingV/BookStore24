@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import Header from "../../components/common/Header";
-import RankingContent from "../../components/ranking/RankingContent";
+import RankingContent from "../../components/ranking/ui/RankingContent";
 import { Space } from "../../styles/Space";
 import Login from "../Login";
 

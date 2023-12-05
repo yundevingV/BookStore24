@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Test from '../../assets/imgs/testbookcover.jpg'
-import { StyledLink } from "../../styles/link";
-import timeForToday from '../../util/timeForToday';
+import { StyledLink } from "../../../styles/link";
+import timeForToday from '../../../util/timeForToday';
 
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,9 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import styled from "styled-components";
-import truncate from "../../util/truncate";
-
-
+import truncate from "../../../util/truncate";
 
 interface DataType{
     author:string

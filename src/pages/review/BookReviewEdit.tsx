@@ -4,7 +4,7 @@ import Header from "../../components/common/Header";
 import { styled } from "styled-components";
 import { useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
-import StarRating from "../../components/review/Star";
+import StarRating from "../../components/review/ui/Star";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducer";
 import EditDetail from "../../modal/EditDetail";
@@ -190,7 +190,7 @@ export default function BookCommunityEdit() {
                 <ButtonContainer>
 
 
-                    <CancelButton>
+                    <CancelButton onClick={open}>
                         뒤로가기
                     </CancelButton>
 

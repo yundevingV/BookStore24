@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import truncate from "../../util/truncate";
 import decimalDisplay from "../../util/decimalDisplay";
 
-import styled from "styled-components"
+import styled from "styled-components";
 
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,7 @@ import axios from "axios";
 import { StyledButtonLink } from "../../styles/link";
 import { saveSearchOption } from "../../action/search_option";
 import { useDispatch } from "react-redux";
+import useRankingData from "./hooks/useRankingData";
 
 interface bookInfoProps{
     id : string,
@@ -24,29 +25,18 @@ interface bookInfoProps{
 
 interface booksProps{
     books : Array<bookInfoProps>,
-    
 }
 
 export default function RankingPreview(){
-    
-    const [data,setData] = useState<booksProps | undefined>();
-    const token = sessionStorage.getItem('token');
+    let apiUrl : string = 'http://bookstore24.shop/book/ranking/score';
+
+    const {data} = useRankingData(apiUrl);
+    console.log(data)
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-        axios.get(`http://bookstore24.shop/book/ranking/score`,
-            
-            )
-            .then(response =>{
-                setData(response.data);
+    // const selectedData = data?.books.slice(0, 5);
 
-            })
-            .catch(error => {
-                console.log('Error : ', error);
-            })
-    },[])
-    const selectedData = data?.books.slice(0, 5);
-
+    // 클릭시 검색으로 이동
     const searchType = (type : string) => {
         dispatch(saveSearchOption(type));
     }
@@ -59,7 +49,7 @@ export default function RankingPreview(){
                     평점 랭킹 🏆
                 </Title>
 
-                {selectedData?.map((item : bookInfoProps , index : number) =>
+                {/* {selectedData?.map((item : bookInfoProps , index : number) =>
                 <ItemContainer>
                 <Ranking>
                         {index + 1} 
@@ -84,9 +74,12 @@ export default function RankingPreview(){
                 </StyledButtonLink>
 
 
-                        <BookAuthor>{item.publisher}</BookAuthor>
-                        <Rating>
+                <BookAuthor>{item.publisher}</BookAuthor>
+                
+                    <Rating>
+
                         <FontAwesomeIcon icon={faStar} className="star-icon"/>
+
                         {item.avgScore.toString().length >= 3 ? <span>{decimalDisplay(item.avgScore)}</span>
                         : item.avgScore
                         }
@@ -95,7 +88,7 @@ export default function RankingPreview(){
                     
                 </RContainer>
             </ItemContainer>
-                )}
+                )} */}
                 
 
             </Container>

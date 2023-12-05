@@ -1,9 +1,9 @@
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import '../../styles/fontAwesome.css'
+import '../../../styles/fontAwesome.css'
 
 import { styled } from "styled-components";
-import decimalDisplay from "../../util/decimalDisplay";
+import decimalDisplay from "../../../util/decimalDisplay";
 
 interface BookInfoProps {
     id: string;
@@ -45,7 +45,7 @@ export default function RankingContent({ books }: BooksProps) {
 
                                 {book?.avgScore?.toString().length >= 3 ? <span>{decimalDisplay(book.avgScore)}</span>
                                 : <span>{book.avgScore}</span>
-                                }                        
+                                }                      
                                 </ItemRating>
                             </Content>
                         </Box>
