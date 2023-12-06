@@ -55,6 +55,7 @@ export default function FirstLogin(){
     .catch(error => {
     console.log(`에러 사유 : ${error}`)
     console.log(error.response)
+
     if(error.response.data === 'duplicate Nickname'){
       alert('닉네임이 중복되었습니다!')
     } else {

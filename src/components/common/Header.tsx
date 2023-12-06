@@ -1,8 +1,6 @@
 //내부
 import React, { useState, useEffect } from "react";
-import { saveloginStatus } from "../../action/login_status";
 import FirstLogin from "../../modal/FirstLogin";
-import { openModal } from "../../action/modal";
 import user from '../../assets/imgs/user.svg'
 
 //외부
@@ -11,13 +9,17 @@ import { StyledLink, StyledLinkBlack } from "../../styles/link";
 import { Space } from "../../styles/Space";
 import { useLocation, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
+import { saveloginStatus } from "../../action/login_status";
+import { openModal } from "../../action/modal";
+
 import { RootState } from "../../reducer/index";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import ExpiredToken from "../../modal/ExpiredToken";
-import HeaderLink from "./HeaderLink";
+import HeaderLink from "../header/HeaderLink";
 import useWindowSizeCustom from "../../hooks/useWindowSizeCuston";
 import { CalculateTime } from "../../util/calculateTime";
+import { Check } from "../header/Check";
 
 export default function Header() {
 
@@ -70,33 +72,35 @@ export default function Header() {
     const [exp, setExp] = useState<boolean>(false);
     const [nickname, setNickname] = useState<string>('');
 
-    useEffect(() => {
-        const auth = sessionStorage.getItem("token");
+    // useEffect(() => {
+    //     const auth = sessionStorage.getItem("token");
 
-        if (auth) {
-            dispatch(saveloginStatus(true));
+    //     if (auth) {
+    //         dispatch(saveloginStatus(true));
 
-            axios.get('http://bookstore24.shop/member/nicknameresidence/check'
-                ,
-                {
+    //         axios.get('http://bookstore24.shop/member/nicknameresidence/check'
+    //             ,
+    //             {
 
-                    headers: {
-                        'Authorization': token
-                    }
-                })
+    //                 headers: {
+    //                     'Authorization': token
+    //                 }
+    //             })
 
-                .then(response => {
-                    setNickname(response.data.nickname);
-                })
-                .catch(error => {
-                    console.log(`에러 사유 : ${error}`)
-                    dispatch(openModal(true));
-                });
-        } else {
-            // 로그인이 안되있을때
-        }
-    }, [])
+    //             .then(response => {
+    //                 setNickname(response.data.nickname);
+    //             })
+    //             .catch(error => {
+    //                 console.log(`에러 사유 : ${error}`)
+    //                 dispatch(openModal(true));
+    //             });
+    //     } else {
+    //         // 로그인이 안되있을때
+    //     }
+    // }, [])
 
+    const check = Check();
+    
     const [response, setResponse] = useState<boolean>(false);
 
     const windowSize = useWindowSizeCustom();
