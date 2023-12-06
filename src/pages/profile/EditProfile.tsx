@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import useInput from "../../hooks/useInput";
-import Jisoo from '../../assets/imgs/jisoo.jpg'
+import user from '../../assets/imgs/user.svg'
 import Header from "../../components/common/Header";
 import { Space } from "../../styles/Space";
 import { StyledButtonLink } from "../../styles/link";
@@ -9,7 +9,6 @@ import DropTest from "../../components/common/DropDown";
 
 import { styled } from "styled-components";
 import axios from "axios";
-import { getCookie } from "../../components/common/Cookie";
 import { useSelector} from "react-redux";
 import { RootState } from "../../reducer/index";
 import { useNavigate } from "react-router";
@@ -173,7 +172,7 @@ export default function EditProfile() {
 
                     <PictureContainer>
                         <P>프로필사진</P>
-                        <Picture src={Jisoo} />
+                        <Picture src={user} />
                     </PictureContainer>
                     <Space width={0} height={20} />
 
