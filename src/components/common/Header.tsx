@@ -7,7 +7,7 @@ import user from '../../assets/imgs/user.svg'
 
 //외부
 import styled from "styled-components";
-import { CurrentLink, StyledLink, StyledLinkBlack } from "../../styles/link";
+import { StyledLink, StyledLinkBlack } from "../../styles/link";
 import { Space } from "../../styles/Space";
 import { useLocation, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,6 +17,7 @@ import useDecodedJWT from "../../hooks/useDecodedJWT";
 import ExpiredToken from "../../modal/ExpiredToken";
 import HeaderLink from "./HeaderLink";
 import useWindowSizeCustom from "../../hooks/useWindowSizeCuston";
+import { CalculateTime } from "../../util/calculateTime";
 
 export default function Header() {
 
@@ -46,22 +47,12 @@ export default function Header() {
 
     let dec = useDecodedJWT(token);
 
-    const calculateTime = () => {
-        const date = new Date(dec?.exp * 1000);
-        const curDate = new Date();
-        const timeDifferenceInMilliseconds = date.getTime() - curDate.getTime();
-        const totalSeconds = Math.floor(timeDifferenceInMilliseconds / 1000);
-        const minutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
-        return { minutes, seconds };
-    };
-
-    const initialTime = calculateTime();
+    const initialTime = CalculateTime();
     const [time, setTime] = useState(initialTime);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            const newTime = calculateTime();
+            const newTime = CalculateTime();
             setTime(newTime);
 
             if (newTime.minutes <= 0 && newTime.seconds <= 0) {
@@ -282,3 +273,7 @@ const LogoutButton = styled.button`
     font-family : tway;
 
 `
+
+function calculateTime() {
+    throw new Error("Function not implemented.");
+}
