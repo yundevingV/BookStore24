@@ -1,21 +1,22 @@
 //내부
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { saveloginStatus } from "../../action/login_status";
 import FirstLogin from "../../modal/FirstLogin";
 import { openModal } from "../../action/modal";
-import logo from "../../assets/imgs/logo.svg";
+import user from '../../assets/imgs/user.svg'
 
 //외부
 import styled from "styled-components";
 import { CurrentLink, StyledLink, StyledLinkBlack } from "../../styles/link";
 import { Space } from "../../styles/Space";
-import {  useLocation, useNavigate } from "react-router";
-import { useSelector,useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../reducer/index";
 import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import ExpiredToken from "../../modal/ExpiredToken";
 import HeaderLink from "./HeaderLink";
+import useWindowSizeCustom from "../../hooks/useWindowSizeCuston";
 
 export default function Header() {
 
@@ -25,24 +26,24 @@ export default function Header() {
     const loginStateData = useSelector(
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
-        
+
     const dispatch = useDispatch();
 
-    const logout = () =>{
+    const logout = () => {
         dispatch(saveloginStatus(false));
         sessionStorage.clear()
         navigate('/')
     }
-    
+
     //모달 펼치기
     const openModalData = useSelector(
         (state: RootState) => state.OpenModal.openModalData
     );
 
     // In your React project
-        
+
     let token = sessionStorage.getItem('token')
-    
+
     let dec = useDecodedJWT(token);
 
     const calculateTime = () => {
@@ -53,75 +54,85 @@ export default function Header() {
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
         return { minutes, seconds };
-      };
-    
-      const initialTime = calculateTime();
-      const [time, setTime] = useState(initialTime);
-    
-      useEffect(() => {
+    };
+
+    const initialTime = calculateTime();
+    const [time, setTime] = useState(initialTime);
+
+    useEffect(() => {
         const interval = setInterval(() => {
-          const newTime = calculateTime();
-          setTime(newTime);
-    
-          if (newTime.minutes <= 0 && newTime.seconds <= 0) {
-            setExp(true);
-            clearInterval(interval);
-          }
-    
+            const newTime = calculateTime();
+            setTime(newTime);
+
+            if (newTime.minutes <= 0 && newTime.seconds <= 0) {
+                setExp(true);
+                clearInterval(interval);
+            }
+
         }, 1000); // Update every 1000 milliseconds (1 second)
-    
+
         return () => {
-          clearInterval(interval); // Clear the interval when the component unmounts
+            clearInterval(interval); // Clear the interval when the component unmounts
         };
-      }, []);
+    }, []);
 
     const [exp, setExp] = useState<boolean>(false);
-    const [nickname,setNickname] = useState<string>('');
+    const [nickname, setNickname] = useState<string>('');
 
-    useEffect(()=>{
+    useEffect(() => {
         const auth = sessionStorage.getItem("token");
 
         if (auth) {
             dispatch(saveloginStatus(true));
 
             axios.get('http://bookstore24.shop/member/nicknameresidence/check'
-            ,
-            {
+                ,
+                {
 
-            headers : {
-                'Authorization' : token
-            }
-            })
-    
-            .then(response => {
-                setNickname(response.data.nickname);
-            })
-            .catch(error => {
-            console.log(`에러 사유 : ${error}`)
-            dispatch(openModal(true));
-            });
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+
+                .then(response => {
+                    setNickname(response.data.nickname);
+                })
+                .catch(error => {
+                    console.log(`에러 사유 : ${error}`)
+                    dispatch(openModal(true));
+                });
         } else {
             // 로그인이 안되있을때
         }
-    },[])
+    }, [])
+
+    const [response, setResponse] = useState<boolean>(false);
+
+    const windowSize = useWindowSizeCustom();
+
+    useEffect(() => {
+        if (windowSize.width < 1050) { setResponse(true) }
+        else { setResponse(false) }
+    }, [windowSize.width])
+
     return (
-        
+
         <Positioner>
-            
-            {openModalData&&loginStateData&&dec?.nickname===null&&
-            <FirstLogin />
+
+            {openModalData && loginStateData && dec?.nickname === null &&
+                <FirstLogin />
             }
             {exp && <ExpiredToken exp={exp} />}
             <Space width={50} height={0} />
             <Logo>
                 <StyledLink to='/'>
-                 <Logo>BookStore24</Logo>
+                    <Logo>BookStore24</Logo>
                 </StyledLink>
             </Logo>
-            
+
             <Review>
                 <HeaderLink url='bookReview' label='커뮤니티' />
-                
+
             </Review>
 
             <Store>
@@ -136,42 +147,43 @@ export default function Header() {
             </Ranking>
 
             <Menu>
-                {!loginStateData ? 
-                <>
-                
-                <Login>
-                    <StyledLinkBlack to='/login'>
-                    로그인
-                    </StyledLinkBlack>  
-                </Login>  
-                </>
-                :
-                <>
-                <Token>
+                {!loginStateData ? (
+                    <>
+                        <Login>
+                            <StyledLinkBlack to="/login">로그인</StyledLinkBlack>
+                        </Login>
+                    </>
+                ) : (
+                    <>
+                        {response ? (
+                            <>
+                                <div>
+                                    <img src={user} alt='x' />
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <Token>
+                                    [로그인 유효시간 :
+                                    <span>
+                                        {time.minutes >= 0 ? time.minutes : 0} 분
+                                    </span>
+                                    {time.seconds >= 0 ? time.seconds : 0} 초]
+                                </Token>
+                                <Profile>
+                                    <StyledLinkBlack to="/profile">
+                                        <span>{nickname} - </span>
+                                        프로필
+                                    </StyledLinkBlack>
+                                </Profile>
+                                <Logout>
+                                    <LogoutButton onClick={() => logout()}>로그아웃</LogoutButton>
+                                </Logout>
+                            </>
+                        )}
+                    </>
+                )}
 
-                    [로그인 유효시간 :
-                    <span>
-
-                    &nbsp;{time.minutes >= 0 ? time.minutes : 0}분&nbsp;
-                    </span>
-                    
-                    {time.seconds >= 0 ? time.seconds : 0}초]
-
-                </Token>
-                <Profile>
-                    <StyledLinkBlack to='/profile'>
-                    <span> {nickname}  -   </span>
-
-                    나의 프로필
-                    </StyledLinkBlack>
-                </Profile>
-                <Logout>
-                <LogoutButton onClick={()=>logout()}>
-                    로그아웃
-                </LogoutButton>
-                </Logout>
-                </>
-            }
             </Menu>
             <Space width={50} height={0} />
         </Positioner>
