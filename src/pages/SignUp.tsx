@@ -102,6 +102,7 @@ export default function SignUp(){
 
                         <Input password={true}
                             placeholder='비밀번호를 입력해주세요' 
+                            type="password"
                             name="pwd" 
                             value={pwd}
                             onChange={onInputChange} />
@@ -117,6 +118,7 @@ export default function SignUp(){
 
                         <Input password={true}
                             placeholder='비밀번호를 확인해주세요'
+                            type="password"
                             name="pwd2" 
                             value={pwd2}
                             onChange={onInputChange} />
