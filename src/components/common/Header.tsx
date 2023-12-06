@@ -10,10 +10,8 @@ import { Space } from "../../styles/Space";
 import { useLocation, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { saveloginStatus } from "../../action/login_status";
-import { openModal } from "../../action/modal";
 
 import { RootState } from "../../reducer/index";
-import axios from "axios";
 import useDecodedJWT from "../../hooks/useDecodedJWT";
 import ExpiredToken from "../../modal/ExpiredToken";
 import HeaderLink from "../header/HeaderLink";
@@ -24,7 +22,6 @@ import { Check } from "../header/Check";
 export default function Header() {
 
     const navigate = useNavigate();
-    const { pathname } = useLocation();
 
     const loginStateData = useSelector(
         (state: RootState) => state.LoginStatusReducer.loginStatusData
@@ -43,9 +40,7 @@ export default function Header() {
         (state: RootState) => state.OpenModal.openModalData
     );
 
-    // In your React project
-
-    let token = sessionStorage.getItem('token')
+    let token = sessionStorage.getItem('token');
 
     let dec = useDecodedJWT(token);
 
@@ -70,37 +65,11 @@ export default function Header() {
     }, []);
 
     const [exp, setExp] = useState<boolean>(false);
-    const [nickname, setNickname] = useState<string>('');
 
-    // useEffect(() => {
-    //     const auth = sessionStorage.getItem("token");
-
-    //     if (auth) {
-    //         dispatch(saveloginStatus(true));
-
-    //         axios.get('http://bookstore24.shop/member/nicknameresidence/check'
-    //             ,
-    //             {
-
-    //                 headers: {
-    //                     'Authorization': token
-    //                 }
-    //             })
-
-    //             .then(response => {
-    //                 setNickname(response.data.nickname);
-    //             })
-    //             .catch(error => {
-    //                 console.log(`에러 사유 : ${error}`)
-    //                 dispatch(openModal(true));
-    //             });
-    //     } else {
-    //         // 로그인이 안되있을때
-    //     }
-    // }, [])
-
+    // 닉네임 거주지 체크
     const check = Check();
-    
+
+    // 반응형 헤더
     const [response, setResponse] = useState<boolean>(false);
 
     const windowSize = useWindowSizeCustom();
@@ -109,6 +78,7 @@ export default function Header() {
         if (windowSize.width < 1050) { setResponse(true) }
         else { setResponse(false) }
     }, [windowSize.width])
+
 
     return (
 
@@ -167,7 +137,7 @@ export default function Header() {
                                 </Token>
                                 <Profile>
                                     <StyledLinkBlack to="/profile">
-                                        <span>{nickname} - </span>
+                                        <span>{check.nickname} - </span>
                                         프로필
                                     </StyledLinkBlack>
                                 </Profile>
@@ -277,7 +247,3 @@ const LogoutButton = styled.button`
     font-family : tway;
 
 `
-
-function calculateTime() {
-    throw new Error("Function not implemented.");
-}

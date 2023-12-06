@@ -8,12 +8,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../reducer/index";
 
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 export default function FirstLogin(){
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const token = sessionStorage.getItem('token')
-
 
     const [ { nickname}, onInputChange, resetInput ] = useInput({
       nickname : '',
@@ -48,6 +48,8 @@ export default function FirstLogin(){
     )
 
       .then(response => {
+        console.log(navigate);
+        navigate(0)
         dispatch(openModal(false));
         console.log(response.status);
         

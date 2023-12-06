@@ -8,7 +8,7 @@ import { openModal } from "../../action/modal";
 export const Check = () =>{
 
     const dispatch = useDispatch();
-    
+
     const loginStateData = useSelector(
         (state: RootState) => state.LoginStatusReducer.loginStatusData
     );
@@ -40,7 +40,8 @@ export const Check = () =>{
         } else {
             // 로그인이 안되있을때
         }
-    }, [])
+    }, [dispatch])
+    
     return{nickname}
 
 }
