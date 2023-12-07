@@ -8,6 +8,7 @@ import login from '../../assets/imgs/login.png';
 import { useNavigate } from 'react-router-dom';
 
 const StyledCarousel = styled.div`
+  z-index : 0;
   .Form1 {
     height: 600px;
     background-color: aliceblue;

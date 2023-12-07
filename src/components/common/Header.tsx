@@ -18,6 +18,7 @@ import HeaderLink from "../header/HeaderLink";
 import useWindowSizeCustom from "../../hooks/useWindowSizeCuston";
 import { CalculateTime } from "../../util/calculateTime";
 import { Check } from "../header/Check";
+import User from "../../modal/User";
 
 export default function Header() {
 
@@ -80,6 +81,9 @@ export default function Header() {
     }, [windowSize.width])
 
 
+    const [view,setView]= useState<boolean>(false);
+    const open = () => {setView(true)}
+    const close = () => {setView(false)}
     return (
 
         <Positioner>
@@ -112,6 +116,7 @@ export default function Header() {
             </Ranking>
 
             <Menu>
+
                 {!loginStateData ? (
                     <>
                         <Login>
@@ -122,9 +127,11 @@ export default function Header() {
                     <>
                         {response ? (
                             <>
-                                <div>
+                                <div onClick={open}>
                                     <img src={user} alt='x' />
                                 </div>
+                                {view && <User onClose={close} logout={logout} time={time} nickname={check.nickname}/>}
+
                             </>
                         ) : (
                             <>
