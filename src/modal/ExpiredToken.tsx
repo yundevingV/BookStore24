@@ -1,9 +1,10 @@
 import React,{useState} from "react"
-import useInput from "../hooks/useInput";
-import Dropdown from "../components/common/DropDown";
 
 import styled from "styled-components";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+
+import { saveloginStatus } from "../action/login_status";
 
 interface expTypes{
   exp : boolean
@@ -12,11 +13,15 @@ export default function ExpiredToken({exp} : expTypes ){
   const [propsExp,setPropsExp] = useState<boolean>(exp);
   console.log(propsExp)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
   const login = () => {
 
     setPropsExp(false)
 
     navigate('/login')
+    dispatch(saveloginStatus(false));
+    sessionStorage.clear();
 
   }
     return(
