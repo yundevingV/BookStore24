@@ -29,6 +29,7 @@ import { Route , Routes } from 'react-router';
 import SearchReviewResult from './pages/search/SearchReviewResult';
 import SearchStoreResult from './pages/search/SearchStoreResult';
 import UserList from './pages/profile/UserList';
+import Policy from './pages/Policy';
 
 function App() {
 
@@ -37,6 +38,8 @@ function App() {
       <Routes>
 
         <Route path='/' element={<Main />} />
+        <Route path='/policy' element={<Policy />} />
+
         <Route path='/login' element={<Login />} />
         <Route path='/SignUp' element={<SignUp />} />
         <Route path='/findid' element={<FindId />} />

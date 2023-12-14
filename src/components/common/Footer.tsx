@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import github from '../../assets/imgs/git.svg';
+import { StyledLink } from '../../styles/link';
 
 const StyledFooter = styled.footer`
   height: 280px;
@@ -108,6 +109,12 @@ const SDescription = styled.div`
   }
 `;
 
+const Policy = styled(StyledLink)`
+font-size : 12px;
+color: #7a7a7a;
+
+margin-top : 10px;
+`
 const Footer = () => {
   return (
     <StyledFooter>
@@ -145,7 +152,10 @@ const Footer = () => {
         도서 거래 24 프로젝트는 책을 좋아하는 모든 사람들에게 추천할 만한 플랫폼입니다. 안전하고 편리한 거래를 위해 이용해보세요!
           </p>
           <div className="copyright">copyright ⓒ 2023 MGYO & YundevingV</div>
-
+          <div className="copyright">
+            <Policy to='policy'>개인정보 처리방침
+            </Policy>
+          </div>
         </SDescription>
       </SGitContainer>
     </StyledFooter>
