@@ -89,9 +89,9 @@ const SDescription = styled.div`
     font-weight: 600;
     font-size  : 14px;
     margin : 15px 0px;
-    @media screen and (max-width: 822px) {
+    /* @media screen and (max-width: 822px) {
       display: none;
-    }
+    } */
   }
 
   .copyright {
@@ -100,12 +100,12 @@ const SDescription = styled.div`
     display: flex;
     justify-content: flex-end;
 
-    @media screen and (max-width: 822px) {
+    /* @media screen and (max-width: 822px) {
       position: relative;
       bottom: -35%;
       right: -16%;
       font-size: 11px;
-    }
+    } */
   }
 `;
 
